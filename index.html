@@ -1,0 +1,1209 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XNET VPN — Plans</title>
+
+  <style>
+    :root{
+      --bg: #070b12;
+      --card: rgba(255,255,255,.04);
+      --card2: rgba(255,255,255,.03);
+      --border: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.65);
+      --btn: rgba(255,255,255,.07);
+      --btn2: rgba(255,255,255,.11);
+      --accent: rgba(59,130,246,.35);
+      --green: rgba(34,197,94,.35);
+      --pink: rgba(236,72,153,.18);
+      --amber: rgba(245,158,11,.22);
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 30% -10%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(900px 500px at 80% 0%, rgba(236,72,153,.12), transparent 50%),
+        radial-gradient(900px 500px at 60% 120%, rgba(34,197,94,.10), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      padding: 28px;
+      overflow-x: hidden;
+    }
+
+    .wrap{ max-width: 1050px; margin: 0 auto; position: relative; z-index: 1; }
+
+    /* =========================
+       Hacker / HUD background
+       ========================= */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .085;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+    }
+    body::after{
+      content:"";
+      position: fixed;
+      inset: -120px;
+      pointer-events: none;
+      background:
+        radial-gradient(900px 420px at 20% 20%, rgba(59,130,246,.10), transparent 60%),
+        radial-gradient(900px 420px at 80% 30%, rgba(236,72,153,.07), transparent 62%),
+        radial-gradient(900px 420px at 40% 85%, rgba(34,197,94,.08), transparent 62%);
+      filter: blur(10px);
+      opacity: .9;
+    }
+
+    /* Subtle scanlines */
+    .scanlines{
+      position: fixed;
+      inset: 0;
+      pointer-events:none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.03),
+        rgba(255,255,255,.03) 1px,
+        transparent 2px,
+        transparent 7px
+      );
+      opacity: .06;
+      mix-blend-mode: overlay;
+      z-index: 0;
+    }
+
+    /* Banner */
+    .banner{
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      padding: 18px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow:hidden;
+    }
+    .banner::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(400px 140px at 12% 20%, rgba(34,197,94,.12), transparent 60%),
+        radial-gradient(420px 160px at 82% 10%, rgba(59,130,246,.14), transparent 60%),
+        radial-gradient(380px 150px at 70% 80%, rgba(236,72,153,.10), transparent 60%);
+      filter: blur(8px);
+      opacity: .95;
+      pointer-events:none;
+    }
+    .brand{ display:flex; flex-direction:column; gap: 6px; position: relative; z-index: 1; }
+    .brand h1{ margin:0; font-size: 20px; letter-spacing:.4px; }
+    .brand p{ margin:0; color: var(--muted); font-size: 13px; }
+    .pill{
+      position: relative;
+      z-index: 1;
+      font-size: 12px;
+      color: rgba(255,255,255,.88);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      padding: 8px 12px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    /* Banner subline */
+    .subline{
+      margin-top: 12px;
+      border: 1px solid rgba(34,197,94,.18);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(34,197,94,.06), rgba(255,255,255,.02));
+      box-shadow: 0 18px 50px rgba(0,0,0,.30);
+      padding: 12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      backdrop-filter: blur(10px);
+      flex-wrap: wrap;
+    }
+    .sublineLeft{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+      min-width: 0;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      font-size: 12px;
+      color: rgba(255,255,255,.85);
+      white-space: nowrap;
+    }
+    .chip strong{ font-weight: 900; letter-spacing:.2px; }
+    .chip.green{
+      border-color: rgba(34,197,94,.22);
+      background: rgba(34,197,94,.08);
+    }
+    .chip.amber{
+      border-color: rgba(245,158,11,.22);
+      background: rgba(245,158,11,.07);
+    }
+
+    /* Top nav */
+    .nav{
+      margin-top: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+      padding: 12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      backdrop-filter: blur(10px);
+      flex-wrap: wrap;
+    }
+    .navLinks{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .navLinks a{
+      text-decoration:none;
+      font-size: 12px;
+      color: rgba(255,255,255,.78);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      transition: .15s ease;
+    }
+    .navLinks a:hover{
+      color: rgba(255,255,255,.95);
+      border-color: rgba(255,255,255,.18);
+      transform: translateY(-1px);
+      box-shadow: 0 0 0 6px rgba(34,197,94,.06);
+    }
+    .navRight{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+    }
+    .status{
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      color: rgba(255,255,255,.82);
+      white-space: nowrap;
+      display:flex;
+      gap: 8px;
+      align-items:center;
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: rgba(34,197,94,.85);
+      box-shadow: 0 0 0 4px rgba(34,197,94,.18);
+    }
+
+    .cta{
+      text-decoration:none;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .4px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(34,197,94,.30);
+      background:
+        radial-gradient(120px 80px at 30% 20%, rgba(34,197,94,.22), transparent 60%),
+        rgba(34,197,94,.10);
+      color: rgba(255,255,255,.92);
+      transition: .15s ease;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      white-space: nowrap;
+      cursor:pointer;
+    }
+    .cta:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 0 0 6px rgba(34,197,94,.07);
+    }
+
+    /* Grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+    @media (max-width: 750px){
+      .grid{ grid-template-columns: 1fr; }
+      .nav{ align-items:flex-start; }
+    }
+
+    .card{
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      box-shadow: 0 18px 50px rgba(0,0,0,.45);
+      padding: 16px;
+      overflow:hidden;
+      position: relative;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Premium gradient border */
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius: 18px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(34,197,94,.28), rgba(59,130,246,.22), rgba(236,72,153,.14), rgba(255,255,255,.06));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events:none;
+      opacity: .6;
+    }
+
+    /* Shine hover */
+    .card:not(.soon)::after{
+      content:"";
+      position:absolute;
+      inset:-60px -120px;
+      background: radial-gradient(260px 120px at var(--mx, 20%) var(--my, 20%), rgba(255,255,255,.11), transparent 60%);
+      opacity: 0;
+      transition: opacity .15s ease;
+      pointer-events:none;
+    }
+    .card:not(.soon):hover::after{ opacity: 1; }
+
+    .top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .title{
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing:.4px;
+      text-transform: uppercase;
+    }
+    .loc{
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .prices{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap: wrap;
+      min-height: 34px;
+    }
+    .priceTag{
+      border: 1px solid rgba(34,197,94,.20);
+      background: rgba(0,0,0,.22);
+      padding: 8px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,.90);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+    .priceTag b{ font-size: 14px; }
+
+    /* KPI row */
+    .kpis{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .kpi{
+      font-size: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: rgba(255,255,255,.84);
+      white-space: nowrap;
+    }
+    .kpi.green{ border-color: rgba(34,197,94,.22); background: rgba(34,197,94,.08); }
+    .kpi.amber{ border-color: rgba(245,158,11,.24); background: rgba(245,158,11,.08); }
+
+    .section{
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .section h3{
+      margin: 0 0 10px;
+      font-size: 12px;
+      letter-spacing: .8px;
+      color: rgba(255,255,255,.82);
+      text-transform: uppercase;
+    }
+
+    .list{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.16);
+      border-radius: 12px;
+      position: relative;
+      overflow:hidden;
+    }
+    .item::before{
+      content:"";
+      position:absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(34,197,94,.08), transparent 55%);
+      opacity: .0;
+      transition: opacity .15s ease;
+      pointer-events:none;
+    }
+    .item:hover::before{ opacity: 1; }
+
+    .left{
+      display:flex;
+      flex-direction:column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .left span{
+      font-size: 13px;
+      color: rgba(255,255,255,.90);
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .left small{
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .badge{
+      font-size: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .btn{
+      width: 100%;
+      margin-top: 14px;
+      border: 1px solid rgba(34,197,94,.20);
+      background: linear-gradient(180deg, rgba(34,197,94,.12), rgba(0,0,0,.18));
+      color: rgba(255,255,255,.94);
+      padding: 12px 14px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight: 900;
+      letter-spacing: .3px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap: 8px;
+      transition: .15s ease;
+      text-transform: uppercase;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 0 0 6px rgba(34,197,94,.07);
+      border-color: rgba(34,197,94,.30);
+    }
+
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+    }
+    .card.soon:hover{ transform:none; }
+
+    /* Coming soon */
+    .card.soon{
+      opacity: .65;
+      filter: grayscale(1);
+    }
+    .card.soon::after{
+      content: "COMING SOON";
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 11px;
+      letter-spacing: .9px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px dashed rgba(255,255,255,.28);
+      color: rgba(255,255,255,.78);
+      background: rgba(255,255,255,.05);
+      pointer-events:none;
+      opacity: 1;
+    }
+    .btn[disabled]{
+      opacity: .6;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Best seller */
+    .card.best .titleRow{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .card.best .bestTag{
+      font-size: 11px;
+      letter-spacing: .8px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(34,197,94,.25);
+      background: rgba(34,197,94,.08);
+      color: rgba(255,255,255,.90);
+      white-space: nowrap;
+    }
+
+    /* Blocks */
+    .block{
+      margin-top: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: 0 18px 50px rgba(0,0,0,.30);
+      padding: 16px;
+      backdrop-filter: blur(10px);
+    }
+    .block h2{
+      margin: 0 0 10px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.82);
+    }
+    .howGrid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    @media (max-width: 750px){
+      .howGrid{ grid-template-columns: 1fr; }
+    }
+    .how{
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.16);
+      border-radius: 16px;
+      padding: 12px;
+      position: relative;
+      overflow:hidden;
+    }
+    .how::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, rgba(34,197,94,.08), transparent 55%);
+      opacity:.0;
+      transition:.15s ease;
+      pointer-events:none;
+    }
+    .how:hover::before{ opacity:1; }
+    .how b{ font-size: 13px; }
+    .how p{ margin: 6px 0 0; color: rgba(255,255,255,.68); font-size: 12px; line-height: 1.35; }
+
+    /* Compare */
+    .compare{
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow:hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.14);
+    }
+    .compare th, .compare td{
+      padding: 12px 12px;
+      font-size: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      vertical-align: top;
+    }
+    .compare th{
+      text-align:left;
+      color: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.03);
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+    .compare td{ color: rgba(255,255,255,.76); }
+    .compare tr:last-child td{ border-bottom: none; }
+    .tagOk{
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.84);
+      white-space: nowrap;
+      font-size: 12px;
+    }
+
+    /* FAQ */
+    details{
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.16);
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+    details summary{
+      cursor:pointer;
+      font-weight: 900;
+      color: rgba(255,255,255,.90);
+      font-size: 13px;
+    }
+    details p{
+      margin: 8px 0 0;
+      color: rgba(255,255,255,.68);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .faqGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 750px){
+      .faqGrid{ grid-template-columns: 1fr; }
+    }
+
+    /* Footer */
+    .footer{
+      margin-top: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      background: rgba(255,255,255,.03);
+      box-shadow: 0 18px 50px rgba(0,0,0,.30);
+      padding: 16px;
+      backdrop-filter: blur(10px);
+    }
+    .footerTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .trust{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .footer small{
+      display:block;
+      margin-top: 10px;
+      color: rgba(255,255,255,.58);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .footer a{
+      color: rgba(255,255,255,.90);
+      text-decoration:none;
+      border-bottom: 1px solid rgba(34,197,94,.25);
+    }
+    .footer a:hover{ border-bottom-color: rgba(34,197,94,.45); }
+
+    /* Admin contact card */
+    .contactCard{
+      margin-top: 14px;
+      border: 1px solid rgba(34,197,94,.18);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(34,197,94,.07), rgba(255,255,255,.02));
+      box-shadow: 0 18px 50px rgba(0,0,0,.30);
+      padding: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow:hidden;
+    }
+    .contactCard::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(420px 160px at 10% 20%, rgba(34,197,94,.10), transparent 60%);
+      opacity: .95;
+      pointer-events:none;
+    }
+    .contactLeft{
+      position: relative;
+      z-index: 1;
+      display:flex;
+      flex-direction:column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .contactLeft b{
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(255,255,255,.86);
+    }
+    .contactLeft .handle{
+      font-weight: 900;
+      letter-spacing: .3px;
+      font-size: 14px;
+      color: rgba(255,255,255,.95);
+    }
+    .contactLeft small{
+      color: rgba(255,255,255,.62);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+    .contactBtns{
+      position: relative;
+      z-index: 1;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+    }
+    .copyBtn{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.16);
+      color: rgba(255,255,255,.90);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight: 900;
+      letter-spacing: .3px;
+      transition: .15s ease;
+    }
+    .copyBtn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 0 0 6px rgba(34,197,94,.06);
+    }
+
+    /* Toast */
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,.65);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 10px 12px;
+      border-radius: 999px;
+      color: rgba(255,255,255,.88);
+      font-size: 12px;
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 9999;
+      backdrop-filter: blur(10px);
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="scanlines"></div>
+
+  <div class="wrap">
+
+    <!-- Banner -->
+    <div class="banner">
+      <div class="brand">
+        <h1>XNET VPN 🔐 — Planes</h1>
+        <p>Selecciona una ubicación y compra tu plan mensual.</p>
+      </div>
+      <div class="pill">Premium • Private Network</div>
+    </div>
+
+    <!-- ✅ Added: Anti-DDoS + Best for games + Payment methods -->
+    <div class="subline">
+      <div class="sublineLeft">
+        <div class="chip green">🛡️ <strong>Anti-DDoS Protection</strong></div>
+        <div class="chip">🎮 One of the best VPNs for <strong>GTA Online</strong> & <strong>RDR Online</strong></div>
+        <div class="chip">🕹️ Great for <strong>many games</strong> (stable routing + privacy)</div>
+        <div class="chip amber">💳 Payments: <strong>PayPal</strong> • <strong>Cash App</strong></div>
+      </div>
+      <a class="cta" href="https://discord.gg/ZSg4CrbEXR" target="_blank" rel="noopener">Join ↗</a>
+    </div>
+
+    <!-- NAV + STATUS + CTA -->
+    <div class="nav">
+      <div class="navLinks">
+        <a href="#plans">💳 Planes</a>
+        <a href="#compare">📊 Comparación</a>
+        <a href="#addons">➕ Add-ons</a>
+        <a href="#faq">❓ FAQ</a>
+        <a href="#contact">🧑‍💻 Admin</a>
+      </div>
+
+      <div class="navRight">
+        <div class="status"><span class="dot"></span>Support: Online</div>
+        <a class="cta" href="https://discord.gg/ZSg4CrbEXR" target="_blank" rel="noopener">Open Ticket ↗</a>
+      </div>
+    </div>
+
+    <!-- ADMIN CONTACT (Discord) -->
+    <section class="contactCard" id="contact">
+      <div class="contactLeft">
+        <b>Admin Contact</b>
+        <div class="handle">@xnetvpn</div>
+        <small>Mándame solicitud en Discord y te respondo. <br>Si quieres comprar, abre ticket también.</small>
+      </div>
+      <div class="contactBtns">
+        <button class="copyBtn" type="button" onclick="copyHandle()">Copy @xnetvpn</button>
+        <a class="cta" href="https://discord.gg/ZSg4CrbEXR" target="_blank" rel="noopener">Join Discord ↗</a>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="block" id="plans">
+      <h2>How it works</h2>
+      <div class="howGrid">
+        <div class="how">
+          <b>1) Join Discord</b>
+          <p>Entra a NetLab y selecciona tu ubicación disponible.</p>
+        </div>
+        <div class="how">
+          <b>2) Open a Ticket</b>
+          <p>Compra tu plan (PayPal o Cash App) y define users / add-ons si ocupas extra.</p>
+        </div>
+        <div class="how">
+          <b>3) Activate</b>
+          <p>Te mandamos acceso y soporte rápido para GTA Online / RDR Online y más.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+
+      <!-- Dallas -->
+      <article class="card">
+        <div class="top">
+          <div>
+            <div class="title">VPN Plan — Dallas</div>
+            <div class="loc">📍 Dallas, Texas</div>
+          </div>
+
+          <div class="prices">
+            <div class="priceTag"><b>$15</b> / Monthly</div>
+          </div>
+        </div>
+
+        <div class="kpis">
+          <div class="kpi green">🛡️ Anti-DDoS</div>
+          <div class="kpi">🎮 GTA / RDR</div>
+          <div class="kpi">🔒 Private routing</div>
+          <div class="kpi amber">💳 PayPal / Cash App</div>
+        </div>
+
+        <div class="section">
+          <h3>VPN Plan Details</h3>
+          <ul class="list">
+            <li class="item">
+              <div class="left">
+                <span>👨🏻‍💻 Users</span>
+                <small>2 users included</small>
+              </div>
+              <div class="badge">Included</div>
+            </li>
+
+            <li class="item">
+              <div class="left">
+                <span>🔄 Location Change</span>
+                <small>1 location change allowed during the active plan</small>
+              </div>
+              <div class="badge">1x</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section" id="addons">
+          <h3>Add-ons</h3>
+          <ul class="list">
+            <li class="item">
+              <div class="left">
+                <span>👤 Extra User</span>
+                <small>per additional user</small>
+              </div>
+              <div class="badge">+$3</div>
+            </li>
+
+            <li class="item">
+              <div class="left">
+                <span>📌 Extra Location</span>
+                <small>per additional location</small>
+              </div>
+              <div class="badge">+$5</div>
+            </li>
+          </ul>
+        </div>
+
+        <button class="btn" onclick="window.open('https://discord.gg/ZSg4CrbEXR','_blank')">🛒 Purchase Dallas</button>
+      </article>
+
+      <!-- Los Angeles -->
+      <article class="card best">
+        <div class="top">
+          <div>
+            <div class="titleRow">
+              <div class="title">VPN Plan — Los Angeles</div>
+              <div class="bestTag">🔥 BEST SELLER</div>
+            </div>
+            <div class="loc">📍 Los Angeles, CA</div>
+          </div>
+
+          <div class="prices">
+            <div class="priceTag"><b>$15</b> / Monthly</div>
+          </div>
+        </div>
+
+        <div class="kpis">
+          <div class="kpi green">🛡️ Anti-DDoS</div>
+          <div class="kpi">🎮 GTA / RDR</div>
+          <div class="kpi">🛡️ Stable routing</div>
+          <div class="kpi amber">💳 PayPal / Cash App</div>
+        </div>
+
+        <div class="section">
+          <h3>VPN Plan Details</h3>
+          <ul class="list">
+            <li class="item">
+              <div class="left">
+                <span>👨🏻‍💻 Users</span>
+                <small>2 users included</small>
+              </div>
+              <div class="badge">Included</div>
+            </li>
+
+            <li class="item">
+              <div class="left">
+                <span>🔄 Location Change</span>
+                <small>1 location change allowed during the active plan</small>
+              </div>
+              <div class="badge">1x</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h3>Add-ons</h3>
+          <ul class="list">
+            <li class="item">
+              <div class="left">
+                <span>👤 Extra User</span>
+                <small>per additional user</small>
+              </div>
+              <div class="badge">+$3</div>
+            </li>
+
+            <li class="item">
+              <div class="left">
+                <span>📌 Extra Location</span>
+                <small>per additional location</small>
+              </div>
+              <div class="badge">+$5</div>
+            </li>
+          </ul>
+        </div>
+
+        <button class="btn" onclick="window.open('https://discord.gg/ZSg4CrbEXR','_blank')">🛒 Purchase Los Angeles</button>
+      </article>
+
+      <!-- Chicago (Coming Soon) -->
+      <article class="card soon">
+        <div class="top">
+          <div>
+            <div class="title">VPN Plan — Chicago</div>
+            <div class="loc">📍 Chicago, Illinois</div>
+          </div>
+          <div class="prices"></div>
+        </div>
+
+        <div class="kpis">
+          <div class="kpi">⏳ Coming soon</div>
+          <div class="kpi">🛡️ Anti-DDoS</div>
+          <div class="kpi amber">💳 PayPal / Cash App</div>
+        </div>
+
+        <div class="section">
+          <h3>VPN Plan Details</h3>
+          <ul class="list">
+            <li class="item">
+              <div class="left">
+                <span>👨🏻‍💻 Users</span>
+                <small>2 users included</small>
+              </div>
+              <div class="badge">Included</div>
+            </li>
+
+            <li class="item">
+              <div class="left">
+                <span>🔄 Location Change</span>
+                <small>1 location change allowed during the active plan</small>
+              </div>
+              <div class="badge">1x</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h3>Add-ons</h3>
+          <ul class="list">
+            <li class="item">
+              <div class="left">
+                <span>👤 Extra User</span>
+                <small>per additional user</small>
+              </div>
+              <div class="badge">+$3</div>
+            </li>
+
+            <li class="item">
+              <div class="left">
+                <span>📌 Extra Location</span>
+                <small>per additional location</small>
+              </div>
+              <div class="badge">+$5</div>
+            </li>
+          </ul>
+        </div>
+
+        <button class="btn" disabled>⏳ Coming Soon</button>
+      </article>
+
+      <!-- Paris (Coming Soon) -->
+      <article class="card soon">
+        <div class="top">
+          <div>
+            <div class="title">VPN Plan — Paris</div>
+            <div class="loc">📍 Paris, France</div>
+          </div>
+          <div class="prices"></div>
+        </div>
+
+        <div class="kpis">
+          <div class="kpi">⏳ Coming soon</div>
+          <div class="kpi">🛡️ Anti-DDoS</div>
+          <div class="kpi amber">💳 PayPal / Cash App</div>
+        </div>
+
+        <div class="section">
+          <h3>VPN Plan Details</h3>
+          <ul class="list">
+            <li class="item">
+              <div class="left">
+                <span>👨🏻‍💻 Users</span>
+                <small>2 users included</small>
+              </div>
+              <div class="badge">Included</div>
+            </li>
+
+            <li class="item">
+              <div class="left">
+                <span>🔄 Location Change</span>
+                <small>1 location change allowed during the active plan</small>
+              </div>
+              <div class="badge">1x</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h3>Add-ons</h3>
+          <ul class="list">
+            <li class="item">
+              <div class="left">
+                <span>👤 Extra User</span>
+                <small>per additional user</small>
+              </div>
+              <div class="badge">+$3</div>
+            </li>
+
+            <li class="item">
+              <div class="left">
+                <span>📌 Extra Location</span>
+                <small>per additional location</small>
+              </div>
+              <div class="badge">+$5</div>
+            </li>
+          </ul>
+        </div>
+
+        <button class="btn" disabled>⏳ Coming Soon</button>
+      </article>
+
+    </div>
+
+    <!-- COMPARACIÓN RÁPIDA -->
+    <section class="block" id="compare">
+      <h2>Comparación rápida</h2>
+
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Precio</th>
+            <th>Users</th>
+            <th>Location Change</th>
+            <th>Add-ons</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tagOk">📍 Dallas</span> <span class="tagOk">🛡️ Anti-DDoS</span> <span class="tagOk">💳 PayPal/Cash App</span></td>
+            <td><span class="tagOk"><b>$15</b> / Monthly</span></td>
+            <td><span class="tagOk">👨🏻‍💻 2 included</span></td>
+            <td><span class="tagOk">🔄 1x</span></td>
+            <td><span class="tagOk">👤 +$3</span> <span class="tagOk">📌 +$5</span></td>
+          </tr>
+
+          <tr>
+            <td><span class="tagOk">📍 Los Angeles</span> <span class="tagOk">🔥 Best Seller</span> <span class="tagOk">🛡️ Anti-DDoS</span> <span class="tagOk">💳 PayPal/Cash App</span></td>
+            <td><span class="tagOk"><b>$15</b> / Monthly</span></td>
+            <td><span class="tagOk">👨🏻‍💻 2 included</span></td>
+            <td><span class="tagOk">🔄 1x</span></td>
+            <td><span class="tagOk">👤 +$3</span> <span class="tagOk">📌 +$5</span></td>
+          </tr>
+
+          <tr>
+            <td><span class="tagOk">⏳ Chicago</span> <span class="tagOk">🛡️ Anti-DDoS</span> <span class="tagOk">💳 PayPal/Cash App</span></td>
+            <td><span class="tagOk">Coming Soon</span></td>
+            <td><span class="tagOk">👨🏻‍💻 2 included</span></td>
+            <td><span class="tagOk">🔄 1x</span></td>
+            <td><span class="tagOk">👤 +$3</span> <span class="tagOk">📌 +$5</span></td>
+          </tr>
+
+          <tr>
+            <td><span class="tagOk">⏳ Paris</span> <span class="tagOk">🛡️ Anti-DDoS</span> <span class="tagOk">💳 PayPal/Cash App</span></td>
+            <td><span class="tagOk">Coming Soon</span></td>
+            <td><span class="tagOk">👨🏻‍💻 2 included</span></td>
+            <td><span class="tagOk">🔄 1x</span></td>
+            <td><span class="tagOk">👤 +$3</span> <span class="tagOk">📌 +$5</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FAQ -->
+    <section class="block" id="faq">
+      <h2>FAQ</h2>
+      <div class="faqGrid">
+        <details>
+          <summary>¿Qué métodos de pago aceptan?</summary>
+          <p>Aceptamos <b>PayPal</b> y <b>Cash App</b>.</p>
+        </details>
+
+        <details>
+          <summary>¿Tiene protección anti DDoS?</summary>
+          <p>Sí, incluye <b>protección anti DDoS</b> para mejorar estabilidad y privacidad.</p>
+        </details>
+
+        <details>
+          <summary>¿Es buena para GTA Online y RDR Online?</summary>
+          <p>Sí. XNET VPN está optimizada para <b>GTA Online</b>, <b>RDR Online</b> y muchos juegos más (rutas estables + privacidad).</p>
+        </details>
+
+        <details>
+          <summary>¿Cómo compro?</summary>
+          <p>Entra al Discord, abre ticket, selecciona ubicación y listo.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footerTop">
+        <div>
+          <div class="title" style="font-size:13px;">XNET VPN 🔐 — Premium • Private Network</div>
+          <div class="loc" style="margin-top:6px;">Discord: <a href="https://discord.gg/ZSg4CrbEXR" target="_blank" rel="noopener">discord.gg/ZSg4CrbEXR</a> • Admin: <span style="color:rgba(255,255,255,.92); font-weight:900;">@xnetvpn</span></div>
+          <div class="trust">
+            <div class="kpi">🛡️ Anti-DDoS</div>
+            <div class="kpi">⚡ Optimized routing</div>
+            <div class="kpi">🎮 GTA / RDR + More Games</div>
+            <div class="kpi">💳 PayPal / Cash App</div>
+          </div>
+          <small>
+            Para contacto directo: manda solicitud a <b>@xnetvpn</b>. Para comprar: abre ticket en Discord.
+          </small>
+        </div>
+        <a class="cta" href="https://discord.gg/ZSg4CrbEXR" target="_blank" rel="noopener">Open Ticket ↗</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <div class="toast" id="toast">Copied: @xnetvpn</div>
+
+  <script>
+    // Shine tracking (mouse follow)
+    document.querySelectorAll(".card:not(.soon)").forEach(card => {
+      card.addEventListener("mousemove", (e) => {
+        const r = card.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width) * 100;
+        const y = ((e.clientY - r.top) / r.height) * 100;
+        card.style.setProperty("--mx", x + "%");
+        card.style.setProperty("--my", y + "%");
+      });
+    });
+
+    function copyHandle(){
+      const text = "@xnetvpn";
+      navigator.clipboard.writeText(text).then(() => {
+        const t = document.getElementById("toast");
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 1400);
+      });
+    }
+  </script>
+</body>
+</html>
