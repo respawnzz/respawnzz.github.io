@@ -5,2095 +5,2910 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#070b12" />
-  <title>XNET VPN — Plans</title>
+  <title>SecureNET  Secure Network Solutions</title>
 
   <style>
     :root{
-      --bg: #070b12;
-      --card: rgba(255,255,255,.04);
-      --card2: rgba(255,255,255,.03);
-      --border: rgba(255,255,255,.10);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.65);
-      --btn: rgba(255,255,255,.07);
-      --btn2: rgba(255,255,255,.11);
-      --accent: rgba(59,130,246,.35);
-      --green: rgba(34,197,94,.35);
-      --pink: rgba(236,72,153,.18);
-      --amber: rgba(245,158,11,.22);
+      --bg: #0a0e17;
+      --bg-gradient: linear-gradient(135deg, #0a0e17 0%, #0d1525 50%, #0a1422 100%);
+      --card: rgba(16, 42, 67, 0.7);
+      --card2: rgba(10, 30, 50, 0.5);
+      --border: rgba(64, 224, 208, 0.3);
+      --text: rgba(255,255,255,.95);
+      --muted: rgba(200, 230, 255, 0.7);
+      --btn: rgba(32, 150, 200, 0.15);
+      --btn2: rgba(32, 180, 220, 0.25);
+      --accent: rgba(0, 200, 255, 0.6);
+      --accent-glow: rgba(0, 200, 255, 0.2);
+      --green: rgba(64, 224, 208, 0.5);
+      --green-glow: rgba(64, 224, 208, 0.15);
+      --blue: rgba(32, 150, 200, 0.5);
+      --blue-glow: rgba(32, 150, 200, 0.15);
+      --cyan: rgba(0, 220, 255, 0.6);
+      --cyan-glow: rgba(0, 220, 255, 0.15);
+      --purple: rgba(140, 85, 255, 0.3);
+      --gold: rgba(255, 200, 50, 0.3);
 
-      /* NEW: hacker neon + 3D */
-      --neonG: rgba(34,197,94,.65);
-      --neonB: rgba(59,130,246,.65);
-      --neonP: rgba(236,72,153,.55);
-      --shadowDeep: 0 22px 70px rgba(0,0,0,.62);
-      --shadowCard: 0 18px 50px rgba(0,0,0,.45);
-      --glass: rgba(0,0,0,.18);
-      --glass2: rgba(0,0,0,.26);
-      --gridLine: rgba(255,255,255,.06);
-      --hud: rgba(34,197,94,.16);
+      --neonCyan: rgba(64, 224, 208, 0.8);
+      --neonBlue: rgba(0, 180, 255, 0.8);
+      --neonAqua: rgba(0, 220, 255, 0.7);
+      --shadowDeep: 0 25px 80px rgba(0, 50, 100, 0.4);
+      --shadowCard: 0 20px 60px rgba(0, 40, 80, 0.3);
+      --glass: rgba(0, 30, 60, 0.3);
+      --glass2: rgba(0, 40, 80, 0.4);
+      --gridLine: rgba(64, 224, 208, 0.1);
+      --hud: rgba(64, 224, 208, 0.25);
 
-      /* Price box sizing */
       --priceW: 165px;
       --priceH: 38px;
       --priceRadius: 14px;
 
-      /* Motion */
-      --dur: 160ms;
+      --dur: 180ms;
       --ease: cubic-bezier(.2,.8,.2,1);
     }
 
-    *{ box-sizing:border-box; }
+    *{ box-sizing:border-box; margin: 0; padding: 0; }
     html{ scroll-behavior: smooth; }
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(1200px 600px at 30% -10%, rgba(59,130,246,.18), transparent 55%),
-        radial-gradient(900px 500px at 80% 0%, rgba(236,72,153,.12), transparent 50%),
-        radial-gradient(900px 500px at 60% 120%, rgba(34,197,94,.10), transparent 55%),
-        var(--bg);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg-gradient);
       color: var(--text);
       padding: 28px;
       overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
     }
 
-    .wrap{ max-width: 1050px; margin: 0 auto; position: relative; z-index: 5; }
-
-    /* =========================
-       NEW: FX CANVASES (back)
-       ========================= */
-    .fxLayer{
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 1;
-    }
-    canvas.fx{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      display:block;
-    }
-
-    /* =========================
-       Hacker / HUD background
-       ========================= */
+    /* Nuevo fondo futurista */
     body::before{
       content:"";
       position: fixed;
       inset: 0;
-      pointer-events: none;
-      opacity: .085;
-      mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
-      z-index: 1;
-    }
-    body::after{
-      content:"";
-      position: fixed;
-      inset: -120px;
-      pointer-events: none;
-      background:
-        radial-gradient(900px 420px at 20% 20%, rgba(59,130,246,.10), transparent 60%),
-        radial-gradient(900px 420px at 80% 30%, rgba(236,72,153,.07), transparent 62%),
-        radial-gradient(900px 420px at 40% 85%, rgba(34,197,94,.08), transparent 62%);
-      filter: blur(10px);
-      opacity: .9;
-      z-index: 1;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 100, 200, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(64, 224, 208, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 40% 80%, rgba(0, 180, 255, 0.05) 0%, transparent 40%),
+        var(--bg-gradient);
+      z-index: -3;
     }
 
-    /* NEW: HUD grid */
-    .hudGrid{
+    /* Efecto de líneas de conexión */
+    .circuit-lines{
       position: fixed;
       inset: 0;
-      pointer-events:none;
-      z-index: 2;
-      opacity: .22;
-      background:
-        linear-gradient(to right, var(--gridLine) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--gridLine) 1px, transparent 1px);
-      background-size: 54px 54px;
-      mask-image: radial-gradient(60% 50% at 50% 50%, black 65%, transparent 100%);
-      filter: drop-shadow(0 0 18px rgba(34,197,94,.08));
+      background-image: 
+        linear-gradient(90deg, transparent 50%, var(--gridLine) 50%),
+        linear-gradient(var(--gridLine) 1px, transparent 1px);
+      background-size: 60px 60px, 100% 60px;
+      opacity: 0.08;
+      z-index: -2;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
     }
 
-    /* NEW: vignette + hacker glow */
-    .vignette{
-      position: fixed;
-      inset: -60px;
-      pointer-events:none;
-      z-index: 2;
-      background:
-        radial-gradient(900px 520px at 20% 10%, rgba(34,197,94,.08), transparent 62%),
-        radial-gradient(900px 520px at 80% 25%, rgba(59,130,246,.08), transparent 62%),
-        radial-gradient(900px 520px at 55% 90%, rgba(236,72,153,.06), transparent 62%),
-        radial-gradient(900px 520px at 50% 50%, transparent 55%, rgba(0,0,0,.45) 100%);
-      opacity: .9;
-      filter: blur(4px);
-    }
-
-    /* Subtle scanlines */
-    .scanlines{
+    /* Partículas flotantes */
+    .floating-particles{
       position: fixed;
       inset: 0;
-      pointer-events:none;
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,.03),
-        rgba(255,255,255,.03) 1px,
-        transparent 2px,
-        transparent 7px
-      );
-      opacity: .06;
-      mix-blend-mode: overlay;
-      z-index: 3;
+      z-index: -1;
+      opacity: 0.4;
+    }
+    .particle{
+      position: absolute;
+      background: var(--neonCyan);
+      border-radius: 50%;
+      filter: blur(2px);
+      animation: float 15s infinite linear;
+    }
+    @keyframes float{
+      0%, 100%{ transform: translate(0, 0) rotate(0deg); }
+      25%{ transform: translate(20px, 20px) rotate(90deg); }
+      50%{ transform: translate(0, 40px) rotate(180deg); }
+      75%{ transform: translate(-20px, 20px) rotate(270deg); }
     }
 
-    /* NEW: corner HUD brackets */
-    .hudCorners{
-      position: fixed;
-      inset: 0;
-      pointer-events:none;
-      z-index: 3;
-      opacity: .55;
-    }
-    .hudCorners::before,
-    .hudCorners::after{
-      content:"";
-      position:absolute;
-      inset: 18px;
-      border-radius: 18px;
-      border: 1px solid rgba(34,197,94,.10);
-      box-shadow:
-        0 0 0 1px rgba(59,130,246,.06) inset,
-        0 0 30px rgba(34,197,94,.06);
-      mask-image: radial-gradient(120% 90% at 50% 50%, black 55%, transparent 92%);
-    }
-    .hudCorners::after{
-      inset: 38px;
-      border-color: rgba(59,130,246,.10);
-      opacity: .55;
-      box-shadow:
-        0 0 0 1px rgba(236,72,153,.05) inset,
-        0 0 32px rgba(59,130,246,.06);
+    .wrap{ 
+      max-width: 1300px; 
+      margin: 0 auto; 
+      position: relative; 
+      z-index: 5;
     }
 
-    /* Banner */
-    .banner{
+    /* Banner principal mejorado */
+    .cyber-banner{
       border: 1px solid var(--border);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      padding: 18px 18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 14px;
-      box-shadow: var(--shadowDeep);
-      backdrop-filter: blur(12px);
-      position: relative;
-      overflow:hidden;
-      transform: translateZ(0);
-    }
-    .banner::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(400px 140px at 12% 20%, rgba(34,197,94,.12), transparent 60%),
-        radial-gradient(420px 160px at 82% 10%, rgba(59,130,246,.14), transparent 60%),
-        radial-gradient(380px 150px at 70% 80%, rgba(236,72,153,.10), transparent 60%);
-      filter: blur(8px);
-      opacity: .95;
-      pointer-events:none;
-    }
-    .banner::after{
-      content:"";
-      position:absolute;
-      inset:-40px;
-      background:
-        conic-gradient(from 210deg at 50% 50%,
-          rgba(34,197,94,.00),
-          rgba(34,197,94,.10),
-          rgba(59,130,246,.08),
-          rgba(236,72,153,.06),
-          rgba(34,197,94,.00)
-        );
-      opacity:.35;
-      filter: blur(18px);
-      pointer-events:none;
-      mix-blend-mode: screen;
-    }
-
-    .brand{ display:flex; flex-direction:column; gap: 6px; position: relative; z-index: 1; }
-    .brand h1{
-      margin:0;
-      font-size: 20px;
-      letter-spacing:.4px;
-      text-shadow: 0 0 18px rgba(34,197,94,.10);
-    }
-    .brand p{ margin:0; color: var(--muted); font-size: 13px; }
-    .pill{
-      position: relative;
-      z-index: 1;
-      font-size: 12px;
-      color: rgba(255,255,255,.88);
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.22);
-      padding: 8px 12px;
-      border-radius: 999px;
-      white-space: nowrap;
-      box-shadow: 0 0 0 1px rgba(34,197,94,.06) inset;
-    }
-
-    /* Banner subline */
-    .subline{
-      margin-top: 12px;
-      border: 1px solid rgba(34,197,94,.18);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(34,197,94,.06), rgba(255,255,255,.02));
-      box-shadow: 0 18px 50px rgba(0,0,0,.30);
-      padding: 12px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      backdrop-filter: blur(12px);
-      flex-wrap: wrap;
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(16, 42, 67, 0.8), rgba(10, 30, 50, 0.6));
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      box-shadow: var(--shadowDeep), inset 0 0 0 1px rgba(255,255,255,0.05);
+      backdrop-filter: blur(20px);
       position: relative;
       overflow: hidden;
+      margin-bottom: 24px;
+      border-image: linear-gradient(45deg, var(--neonCyan), var(--neonBlue)) 1;
     }
-    .subline::before{
+
+    .cyber-banner::before{
       content:"";
       position:absolute;
       inset:-2px;
-      background:
-        radial-gradient(520px 220px at 12% 20%, rgba(34,197,94,.10), transparent 55%),
-        radial-gradient(520px 220px at 82% 20%, rgba(59,130,246,.08), transparent 58%);
-      opacity: .9;
-      filter: blur(10px);
+      background: linear-gradient(45deg, 
+        var(--neonCyan) 0%,
+        transparent 20%,
+        transparent 80%,
+        var(--neonBlue) 100%);
+      opacity: 0.3;
+      filter: blur(15px);
       pointer-events:none;
-    }
-    .sublineLeft{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items:center;
-      min-width: 0;
-      position: relative;
-      z-index: 1;
-    }
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      font-size: 12px;
-      color: rgba(255,255,255,.85);
-      white-space: nowrap;
-      box-shadow: 0 0 0 1px rgba(255,255,255,.03) inset;
-    }
-    .chip strong{ font-weight: 900; letter-spacing:.2px; }
-    .chip.green{
-      border-color: rgba(34,197,94,.22);
-      background: rgba(34,197,94,.08);
-    }
-    .chip.amber{
-      border-color: rgba(245,158,11,.22);
-      background: rgba(245,158,11,.07);
+      z-index: -1;
     }
 
-    /* Top nav */
-    .nav{
-      margin-top: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow: 0 18px 50px rgba(0,0,0,.35);
-      padding: 12px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      backdrop-filter: blur(12px);
-      flex-wrap: wrap;
-      position: sticky;
-      top: 16px;
-      z-index: 10;
-    }
-    .navLinks{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items:center;
-    }
-    .navLinks a{
-      text-decoration:none;
-      font-size: 12px;
-      color: rgba(255,255,255,.78);
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.16);
-      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
-      outline: none;
-    }
-    .navLinks a:hover{
-      color: rgba(255,255,255,.95);
-      border-color: rgba(255,255,255,.18);
-      transform: translateY(-1px);
-      box-shadow: 0 0 0 6px rgba(34,197,94,.06);
-    }
-    .navLinks a.active{
-      border-color: rgba(34,197,94,.28);
-      box-shadow: 0 0 0 6px rgba(34,197,94,.08), 0 0 22px rgba(34,197,94,.08);
-      color: rgba(255,255,255,.96);
-      background: rgba(34,197,94,.06);
-    }
-    .navRight{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content:flex-end;
-    }
-    .status{
-      font-size: 12px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.16);
-      color: rgba(255,255,255,.82);
-      white-space: nowrap;
-      display:flex;
-      gap: 8px;
-      align-items:center;
-      position: relative;
-    }
-    .dot{
-      width: 8px; height: 8px; border-radius: 999px;
-      background: rgba(34,197,94,.85);
-      box-shadow: 0 0 0 4px rgba(34,197,94,.18), 0 0 18px rgba(34,197,94,.20);
-    }
-
-    .cta{
-      text-decoration:none;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .4px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(34,197,94,.30);
-      background:
-        radial-gradient(120px 80px at 30% 20%, rgba(34,197,94,.22), transparent 60%),
-        rgba(34,197,94,.10);
-      color: rgba(255,255,255,.92);
-      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
-      display:flex;
-      align-items:center;
-      gap: 8px;
-      white-space: nowrap;
-      cursor:pointer;
-      position: relative;
-      overflow:hidden;
-      outline: none;
-    }
-    .cta::after{
+    .cyber-banner::after{
       content:"";
       position:absolute;
-      inset:-40px;
-      background: radial-gradient(160px 90px at var(--mx, 30%) var(--my, 30%), rgba(255,255,255,.16), transparent 55%);
-      opacity: .0;
-      transition: opacity var(--dur) var(--ease);
+      inset:0;
+      background: 
+        radial-gradient(500px 200px at 10% 20%, var(--neonCyan), transparent 50%),
+        radial-gradient(500px 200px at 90% 80%, var(--neonBlue), transparent 50%);
+      opacity: 0.15;
+      filter: blur(30px);
       pointer-events:none;
-    }
-    .cta:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 0 0 6px rgba(34,197,94,.07), 0 0 18px rgba(34,197,94,.08);
-      border-color: rgba(34,197,94,.40);
-    }
-    .cta:hover::after{ opacity: 1; }
-
-    /* Grid */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 18px;
-    }
-    @media (max-width: 750px){
-      .grid{ grid-template-columns: 1fr; }
-      .nav{ align-items:flex-start; }
+      z-index: -1;
     }
 
-    .card{
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: linear-gradient(180deg, var(--card), var(--card2));
-      box-shadow: var(--shadowCard);
-      padding: 16px;
-      overflow:hidden;
+    .brand-glitch{
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
       position: relative;
-      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease), filter var(--dur) var(--ease);
-      backdrop-filter: blur(12px);
-      transform-style: preserve-3d;
-      will-change: transform;
+      z-index: 2;
     }
 
-    /* NEW: depth shadow layer */
-    .card::marker{ content:""; }
-    .card .depthShadow{
+    .brand-glitch h1{
+      margin:0;
+      font-size: 28px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 30px var(--neonCyan), 0 0 60px var(--neonBlue);
+      background: linear-gradient(45deg, #fff, var(--neonCyan), var(--neonBlue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      animation: glitch 5s infinite;
+    }
+
+    @keyframes glitch{
+      0%, 100%{ transform: translate(0); }
+      1%{ transform: translate(-1px, 1px); }
+      2%{ transform: translate(1px, -1px); }
+    }
+
+    .brand-glitch p{
+      margin:0;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 600px;
+      line-height: 1.5;
+    }
+
+    .status-pill{
+      position: relative;
+      z-index: 2;
+      font-size: 14px;
+      color: var(--text);
+      border: 1px solid rgba(64, 224, 208, 0.4);
+      background: rgba(16, 42, 67, 0.6);
+      padding: 10px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+      box-shadow: 0 0 20px var(--neonCyan-glow);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-pill::before{
+      content:"";
+      width: 10px;
+      height: 10px;
+      background: var(--neonCyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--neonCyan), 0 0 20px var(--neonCyan);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse{
+      0%, 100%{ opacity: 1; }
+      50%{ opacity: 0.5; }
+    }
+
+    /* Tarjetas de planes mejoradas - ARREGLADO */
+    .plan-card{
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(16, 42, 67, 0.7), rgba(10, 30, 50, 0.5));
+      padding: 24px;
+      position: relative;
+      overflow: visible; /* Cambiado de hidden a visible */
+      transition: all 0.3s var(--ease);
+      backdrop-filter: blur(15px);
+      box-shadow: var(--shadowCard);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .plan-card::before{
+      content:"";
       position:absolute;
-      inset: 10px 14px 14px 14px;
-      border-radius: 18px;
-      background: radial-gradient(420px 220px at 20% 10%, rgba(34,197,94,.07), transparent 55%),
-                  radial-gradient(420px 220px at 85% 30%, rgba(59,130,246,.06), transparent 58%),
-                  radial-gradient(420px 220px at 55% 95%, rgba(236,72,153,.05), transparent 60%);
-      filter: blur(10px);
-      opacity: .95;
-      pointer-events:none;
-      transform: translateZ(-20px);
+      inset:0;
+      background: linear-gradient(135deg, 
+        rgba(64, 224, 208, 0.1) 0%,
+        rgba(0, 180, 255, 0.05) 50%,
+        transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s var(--ease);
     }
 
-    /* Premium gradient border */
-    .card::before{
+    .plan-card:hover::before{
+      opacity: 1;
+    }
+
+    .plan-card::after{
       content:"";
       position:absolute;
       inset:-1px;
-      border-radius: 18px;
+      border-radius: 24px;
       padding: 1px;
-      background: linear-gradient(135deg, rgba(34,197,94,.28), rgba(59,130,246,.22), rgba(236,72,153,.14), rgba(255,255,255,.06));
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      background: linear-gradient(135deg, var(--neonCyan), var(--neonBlue));
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
-      pointer-events:none;
-      opacity: .6;
-    }
-
-    /* Shine hover */
-    .card:not(.soon)::after{
-      content:"";
-      position:absolute;
-      inset:-60px -120px;
-      background: radial-gradient(260px 120px at var(--mx, 20%) var(--my, 20%), rgba(255,255,255,.11), transparent 60%);
-      opacity: 0;
-      transition: opacity var(--dur) var(--ease);
+      opacity: 0.5;
       pointer-events:none;
     }
-    .card:not(.soon):hover::after{ opacity: 1; }
 
-    .top{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 12px;
-      margin-bottom: 10px;
+    .plan-card.basic{ border-color: rgba(32, 150, 200, 0.4); }
+    .plan-card.standard{ border-color: rgba(64, 224, 208, 0.4); }
+    .plan-card.premium{ border-color: rgba(0, 220, 255, 0.4); }
+    .plan-card.dual{ border-color: rgba(140, 85, 255, 0.4); }
+
+    .plan-card:hover{
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 30px 90px rgba(0, 100, 200, 0.4), 
+                  inset 0 0 0 1px rgba(255,255,255,0.1);
+      border-color: var(--neonCyan);
+    }
+
+    .plan-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
       position: relative;
-      z-index: 1;
-      transform: translateZ(18px);
-    }
-    .title{
-      font-weight: 900;
-      font-size: 14px;
-      letter-spacing:.4px;
-      text-transform: uppercase;
-    }
-    .loc{
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 4px;
+      z-index: 2;
+      padding-right: 0;
     }
 
-    /* ✅ PRICE BOXES: same size ALWAYS */
-    .prices{
-      display:flex;
-      gap: 10px;
-      align-items:center;
-      flex-wrap: wrap;
-      min-height: var(--priceH);
+    .plan-title{
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .priceTag{
-      border: 1px solid rgba(34,197,94,.20);
-      background: rgba(0,0,0,.24);
-      padding: 0 10px;
-      border-radius: var(--priceRadius);
+
+    .plan-name{
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .plan-name.basic{ color: var(--neonBlue); }
+    .plan-name.standard{ color: var(--neonCyan); }
+    .plan-name.premium{ color: var(--cyan); }
+    .plan-name.dual{ color: #8c55ff; }
+
+    .plan-location{
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .plan-price{
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(64, 224, 208, 0.3);
+      border-radius: 16px;
+      padding: 12px 20px;
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+      text-shadow: 0 0 10px var(--neonCyan);
+      box-shadow: 0 0 20px rgba(64, 224, 208, 0.2);
+      min-width: 140px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    /* ETIQUETA MÁS VENDIDO REMOVIDA COMPLETAMENTE */
+    .plan-badge{
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      position: absolute !important;
+      top: -9999px !important;
+      left: -9999px !important;
+    }
+
+    .plan-features{
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .feature-item{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(0, 20, 40, 0.3);
+      border-radius: 12px;
+      border: 1px solid rgba(64, 224, 208, 0.1);
+      transition: all 0.2s var(--ease);
+    }
+
+    .feature-item:hover{
+      background: rgba(64, 224, 208, 0.1);
+      border-color: rgba(64, 224, 208, 0.3);
+      transform: translateX(5px);
+    }
+
+    .feature-icon{
+      font-size: 20px;
+      min-width: 30px;
+    }
+
+    .feature-text{
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .feature-label{
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .feature-desc{
       font-size: 12px;
-      color: rgba(255,255,255,.90);
-      box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.04),
-        0 10px 18px rgba(0,0,0,.35);
-      min-width: var(--priceW);
-      height: var(--priceH);
-      display: inline-flex;
+      color: var(--muted);
+    }
+
+    .plan-button{
+      margin-top: auto;
+      background: linear-gradient(45deg, var(--neonBlue), var(--neonCyan));
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      white-space: nowrap;
-      position: relative;
-      overflow: hidden;
-      transform: translateZ(20px);
-    }
-    .priceTag::before{
-      content:"";
-      position:absolute;
-      inset:-30px;
-      background:
-        radial-gradient(140px 70px at 30% 20%, rgba(34,197,94,.18), transparent 55%),
-        radial-gradient(140px 70px at 70% 80%, rgba(59,130,246,.10), transparent 60%);
-      opacity: .9;
-      filter: blur(8px);
-      pointer-events:none;
-    }
-    .priceTag b{
-      font-size: 14px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* KPI row */
-    .kpis{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-      position: relative;
-      z-index: 1;
-      transform: translateZ(16px);
-    }
-    .kpi{
-      font-size: 12px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.16);
-      padding: 7px 10px;
-      border-radius: 999px;
-      color: rgba(255,255,255,.84);
-      white-space: nowrap;
-    }
-    .kpi.green{ border-color: rgba(34,197,94,.22); background: rgba(34,197,94,.08); }
-    .kpi.amber{ border-color: rgba(245,158,11,.24); background: rgba(245,158,11,.08); }
-
-    .section{
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,.08);
-      position: relative;
-      z-index: 1;
-      transform: translateZ(14px);
-    }
-    .section h3{
-      margin: 0 0 10px;
-      font-size: 12px;
-      letter-spacing: .8px;
-      color: rgba(255,255,255,.82);
-      text-transform: uppercase;
-    }
-
-    .list{
-      list-style:none;
-      padding:0;
-      margin:0;
-      display:flex;
-      flex-direction:column;
       gap: 10px;
     }
-    .item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      padding: 10px 12px;
-      border: 1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.16);
-      border-radius: 12px;
-      position: relative;
-      overflow:hidden;
-    }
-    .item::before{
+
+    .plan-button::before{
       content:"";
       position:absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(34,197,94,.08), transparent 55%);
-      opacity: .0;
-      transition: opacity var(--dur) var(--ease);
-      pointer-events:none;
-    }
-    .item:hover::before{ opacity: 1; }
-
-    .left{
-      display:flex;
-      flex-direction:column;
-      gap: 2px;
-      min-width: 0;
-    }
-    .left span{
-      font-size: 13px;
-      color: rgba(255,255,255,.90);
-      white-space: nowrap;
-      overflow:hidden;
-      text-overflow: ellipsis;
-    }
-    .left small{
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .badge{
-      font-size: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      padding: 6px 10px;
-      border-radius: 999px;
-      white-space: nowrap;
-      box-shadow: 0 0 0 1px rgba(255,255,255,.02) inset;
+      inset:0;
+      background: linear-gradient(45deg, var(--neonCyan), var(--neonBlue));
+      opacity:0;
+      transition: opacity 0.3s var(--ease);
     }
 
-    .btn{
-      width: 100%;
-      margin-top: 14px;
-      border: 1px solid rgba(34,197,94,.20);
-      background: linear-gradient(180deg, rgba(34,197,94,.12), rgba(0,0,0,.18));
-      color: rgba(255,255,255,.94);
-      padding: 12px 14px;
-      border-radius: 12px;
-      cursor:pointer;
-      font-weight: 900;
-      letter-spacing: .3px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      gap: 8px;
-      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease), filter var(--dur) var(--ease);
-      text-transform: uppercase;
-      position: relative;
-      overflow:hidden;
-      transform: translateZ(14px);
-    }
-    .btn::after{
-      content:"";
-      position:absolute;
-      inset:-50px;
-      background: radial-gradient(220px 110px at var(--mx, 30%) var(--my, 30%), rgba(255,255,255,.12), transparent 60%);
-      opacity: 0;
-      transition: opacity var(--dur) var(--ease);
-      pointer-events:none;
-    }
-    .btn:hover::after{ opacity: 1; }
-    .btn:hover{
-      transform: translateY(-1px) translateZ(14px);
-      box-shadow: 0 0 0 6px rgba(34,197,94,.07), 0 0 22px rgba(34,197,94,.08);
-      border-color: rgba(34,197,94,.30);
+    .plan-button:hover::before{
+      opacity:1;
     }
 
-    .card:hover{
-      border-color: rgba(255,255,255,.18);
-      box-shadow: 0 26px 85px rgba(0,0,0,.62);
-      filter: saturate(1.05);
+    .plan-button:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(64, 224, 208, 0.4);
+      letter-spacing: 2px;
     }
-    .card.soon:hover{ transform:none !important; }
 
-    /* Coming soon */
-    .card.soon{
-      opacity: .65;
-      filter: grayscale(1);
-    }
-    .card.soon::after{
-      content: "COMING SOON";
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      font-size: 11px;
-      letter-spacing: .9px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px dashed rgba(255,255,255,.28);
-      color: rgba(255,255,255,.78);
-      background: rgba(255,255,255,.05);
-      pointer-events:none;
-      opacity: 1;
-      transform: translateZ(24px);
-    }
-    .btn[disabled]{
-      opacity: .6;
+    .plan-button:disabled{
+      opacity: 0.6;
       cursor: not-allowed;
-      transform: none !important;
-      box-shadow: none !important;
+      background: linear-gradient(45deg, #666, #888);
     }
 
-    /* Best seller */
-    .card.best .titleRow{
-      display:flex;
-      align-items:center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .card.best .bestTag{
-      font-size: 11px;
-      letter-spacing: .8px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(34,197,94,.25);
-      background: rgba(34,197,94,.08);
-      color: rgba(255,255,255,.90);
-      white-space: nowrap;
-      box-shadow: 0 0 16px rgba(34,197,94,.06);
+    .plan-button:disabled:hover{
+      transform: none;
+      box-shadow: none;
+      letter-spacing: 1px;
     }
 
-    /* Blocks */
-    .block{
-      margin-top: 18px;
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow: 0 18px 50px rgba(0,0,0,.30);
-      padding: 16px;
-      backdrop-filter: blur(12px);
+    /* Grid de planes */
+    .plans-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin: 30px 0;
+    }
+
+    /* Encabezados de ubicación mejorados */
+    .location-header{
+      background: linear-gradient(90deg, 
+        rgba(16, 42, 67, 0.8) 0%,
+        rgba(10, 30, 50, 0.6) 100%);
+      border-radius: 20px;
+      padding: 24px 30px;
+      margin: 40px 0 20px;
+      border: 1px solid rgba(64, 224, 208, 0.2);
       position: relative;
       overflow: hidden;
-      z-index: 4;
+      backdrop-filter: blur(10px);
     }
-    .block::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(520px 220px at 10% 20%, rgba(34,197,94,.06), transparent 55%),
-        radial-gradient(520px 220px at 90% 20%, rgba(59,130,246,.05), transparent 58%);
-      opacity:.9;
-      filter: blur(10px);
-      pointer-events:none;
-    }
-    .block h2{
-      margin: 0 0 10px;
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.82);
-      position: relative;
-      z-index: 1;
-    }
-    .howGrid{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      position: relative;
-      z-index: 1;
-    }
-    @media (max-width: 750px){
-      .howGrid{ grid-template-columns: 1fr; }
-    }
-    .how{
-      border: 1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.16);
-      border-radius: 16px;
-      padding: 12px;
-      position: relative;
-      overflow:hidden;
-    }
-    .how::before{
+
+    .location-header::before{
       content:"";
       position:absolute;
       inset:0;
-      background: linear-gradient(90deg, rgba(34,197,94,.08), transparent 55%);
-      opacity:.0;
-      transition: opacity var(--dur) var(--ease);
-      pointer-events:none;
-    }
-    .how:hover::before{ opacity:1; }
-    .how b{ font-size: 13px; }
-    .how p{ margin: 6px 0 0; color: rgba(255,255,255,.68); font-size: 12px; line-height: 1.35; }
-
-    /* Compare */
-    .compare{
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      overflow:hidden;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.14);
-      position: relative;
-      z-index: 1;
-    }
-    .compare th, .compare td{
-      padding: 12px 12px;
-      font-size: 12px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      vertical-align: top;
-    }
-    .compare th{
-      text-align:left;
-      color: rgba(255,255,255,.82);
-      background: rgba(255,255,255,.03);
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      font-size: 11px;
-    }
-    .compare td{ color: rgba(255,255,255,.76); }
-    .compare tr:last-child td{ border-bottom: none; }
-    .tagOk{
-      display:inline-flex;
-      align-items:center;
-      gap: 6px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.84);
-      white-space: nowrap;
-      font-size: 12px;
-      box-shadow: 0 0 0 1px rgba(255,255,255,.02) inset;
-    }
-    /* ✅ TABLE PRICE BOXES: same size */
-    .compare td:nth-child(2) .tagOk{
-      min-width: var(--priceW);
-      height: var(--priceH);
-      border-radius: var(--priceRadius);
-      justify-content:center;
-      background: rgba(0,0,0,.22);
-      border-color: rgba(34,197,94,.18);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.04), 0 10px 18px rgba(0,0,0,.28);
+      background: linear-gradient(45deg, 
+        transparent 0%,
+        rgba(64, 224, 208, 0.1) 50%,
+        transparent 100%);
+      animation: scan 3s linear infinite;
     }
 
-    /* FAQ */
-    details{
-      border: 1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.16);
-      border-radius: 14px;
-      padding: 10px 12px;
-      position: relative;
-      z-index: 1;
+    @keyframes scan{
+      0%{ transform: translateX(-100%); }
+      100%{ transform: translateX(100%); }
     }
-    details summary{
-      cursor:pointer;
-      font-weight: 900;
-      color: rgba(255,255,255,.90);
-      font-size: 13px;
+
+    .location-title{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
     }
-    details p{
-      margin: 8px 0 0;
-      color: rgba(255,255,255,.68);
-      font-size: 12px;
-      line-height: 1.4;
-    }
-    .faqGrid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
+
+    .location-info h2{
+      font-size: 24px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
       gap: 12px;
-      position: relative;
-      z-index: 1;
-    }
-    @media (max-width: 750px){
-      .faqGrid{ grid-template-columns: 1fr; }
     }
 
-    /* Footer */
-    .footer{
-      margin-top: 18px;
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 18px;
-      background: rgba(255,255,255,.03);
-      box-shadow: 0 18px 50px rgba(0,0,0,.30);
-      padding: 16px;
-      backdrop-filter: blur(12px);
-      position: relative;
-      overflow:hidden;
-      z-index: 4;
-    }
-    .footer::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(520px 220px at 12% 20%, rgba(34,197,94,.06), transparent 55%),
-        radial-gradient(520px 220px at 88% 20%, rgba(59,130,246,.05), transparent 58%);
-      opacity:.9;
-      filter: blur(10px);
-      pointer-events:none;
-    }
-    .footerTop{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-    }
-    .trust{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-    .footer small{
-      display:block;
-      margin-top: 10px;
-      color: rgba(255,255,255,.58);
-      font-size: 12px;
-      line-height: 1.35;
-    }
-    .footer a{
-      color: rgba(255,255,255,.90);
-      text-decoration:none;
-      border-bottom: 1px solid rgba(34,197,94,.25);
-    }
-    .footer a:hover{ border-bottom-color: rgba(34,197,94,.45); }
-
-    /* Admin contact card */
-    .contactCard{
-      margin-top: 14px;
-      border: 1px solid rgba(34,197,94,.18);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(34,197,94,.07), rgba(255,255,255,.02));
-      box-shadow: 0 18px 50px rgba(0,0,0,.30);
-      padding: 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      backdrop-filter: blur(12px);
-      position: relative;
-      overflow:hidden;
-      z-index: 4;
-    }
-    .contactCard::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(420px 160px at 10% 20%, rgba(34,197,94,.10), transparent 60%),
-        radial-gradient(420px 160px at 90% 20%, rgba(59,130,246,.06), transparent 62%);
-      opacity: .95;
-      pointer-events:none;
-      filter: blur(10px);
-    }
-    .contactLeft{
-      position: relative;
-      z-index: 1;
-      display:flex;
-      flex-direction:column;
-      gap: 4px;
-      min-width: 0;
-    }
-    .contactLeft b{
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      font-size: 12px;
-      color: rgba(255,255,255,.86);
-    }
-    .contactLeft .handle{
-      font-weight: 900;
-      letter-spacing: .3px;
+    .location-info p{
+      color: var(--muted);
       font-size: 14px;
-      color: rgba(255,255,255,.95);
-    }
-    .contactLeft small{
-      color: rgba(255,255,255,.62);
-      font-size: 12px;
-      line-height: 1.3;
-    }
-    .contactBtns{
-      position: relative;
-      z-index: 1;
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content:flex-end;
-    }
-    .copyBtn{
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.16);
-      color: rgba(255,255,255,.90);
-      padding: 10px 12px;
-      border-radius: 12px;
-      cursor:pointer;
-      font-weight: 900;
-      letter-spacing: .3px;
-      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
-      outline: none;
-    }
-    .copyBtn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(255,255,255,.18);
-      box-shadow: 0 0 0 6px rgba(34,197,94,.06), 0 0 18px rgba(34,197,94,.06);
+      max-width: 600px;
     }
 
-    /* Toast */
+    .location-status{
+      background: rgba(64, 224, 208, 0.1);
+      border: 1px solid rgba(64, 224, 208, 0.3);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--neonCyan);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Navegación mejorada */
+    .cyber-nav{
+      background: rgba(16, 42, 67, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 16px 24px;
+      margin: 24px 0;
+      backdrop-filter: blur(15px);
+      position: sticky;
+      top: 20px;
+      z-index: 100;
+      box-shadow: var(--shadowDeep);
+    }
+
+    .nav-container{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links{
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link{
+      color: var(--muted);
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s var(--ease);
+      border: 1px solid transparent;
+    }
+
+    .nav-link:hover{
+      color: var(--text);
+      background: rgba(64, 224, 208, 0.1);
+      border-color: rgba(64, 224, 208, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .nav-link.active{
+      background: rgba(64, 224, 208, 0.15);
+      color: var(--neonCyan);
+      border-color: rgba(64, 224, 208, 0.3);
+      box-shadow: 0 0 20px rgba(64, 224, 208, 0.2);
+    }
+
+    /* Sección de características */
+    .features-section{
+      background: linear-gradient(145deg, rgba(16, 42, 67, 0.8), rgba(10, 30, 50, 0.6));
+      border-radius: 24px;
+      padding: 40px;
+      margin: 40px 0;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    .features-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 30px;
+    }
+
+    .feature-card{
+      background: rgba(0, 20, 40, 0.3);
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid rgba(64, 224, 208, 0.2);
+      transition: all 0.3s var(--ease);
+    }
+
+    .feature-card:hover{
+      transform: translateY(-5px);
+      border-color: var(--neonCyan);
+      box-shadow: 0 20px 40px rgba(64, 224, 208, 0.2);
+    }
+
+    .feature-icon-large{
+      font-size: 40px;
+      margin-bottom: 16px;
+      display: inline-block;
+      animation: float-icon 3s ease-in-out infinite;
+    }
+
+    @keyframes float-icon{
+      0%, 100%{ transform: translateY(0); }
+      50%{ transform: translateY(-10px); }
+    }
+
+    /* Tabla de comparación */
+    .comparison-section{
+      background: linear-gradient(145deg, rgba(16, 42, 67, 0.8), rgba(10, 30, 50, 0.6));
+      border-radius: 24px;
+      padding: 40px;
+      margin: 40px 0;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    .comparison-table{
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(0, 20, 40, 0.3);
+      border: 1px solid rgba(64, 224, 208, 0.2);
+    }
+
+    .comparison-table th{
+      background: linear-gradient(90deg, rgba(32, 150, 200, 0.3), rgba(64, 224, 208, 0.3));
+      padding: 20px;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--neonCyan);
+      border-bottom: 2px solid rgba(64, 224, 208, 0.3);
+    }
+
+    .comparison-table td{
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(64, 224, 208, 0.1);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .comparison-table tr:last-child td{
+      border-bottom: none;
+    }
+
+    .comparison-table tr:hover{
+      background: rgba(64, 224, 208, 0.05);
+    }
+
+    .comparison-badge{
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 8px;
+      margin-bottom: 5px;
+    }
+
+    .badge-basic{
+      background: rgba(32, 150, 200, 0.2);
+      color: var(--neonBlue);
+      border: 1px solid rgba(32, 150, 200, 0.3);
+    }
+
+    .badge-standard{
+      background: rgba(64, 224, 208, 0.2);
+      color: var(--neonCyan);
+      border: 1px solid rgba(64, 224, 208, 0.3);
+    }
+
+    .badge-premium{
+      background: rgba(0, 220, 255, 0.2);
+      color: var(--cyan);
+      border: 1px solid rgba(0, 220, 255, 0.3);
+    }
+
+    .badge-dual{
+      background: rgba(140, 85, 255, 0.2);
+      color: #a37aff;
+      border: 1px solid rgba(140, 85, 255, 0.3);
+    }
+
+    /* Sección de contacto admin */
+    .contact-section{
+      background: linear-gradient(145deg, rgba(16, 42, 67, 0.8), rgba(10, 30, 50, 0.6));
+      border-radius: 24px;
+      padding: 40px;
+      margin: 40px 0;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-section::before{
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--neonBlue), var(--neonCyan));
+      z-index: 1;
+    }
+
+    .contact-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 768px){
+      .contact-grid{
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-info{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .admin-card{
+      background: rgba(0, 20, 40, 0.4);
+      border-radius: 20px;
+      padding: 30px;
+      border: 1px solid rgba(64, 224, 208, 0.2);
+      transition: all 0.3s var(--ease);
+    }
+
+    .admin-card:hover{
+      border-color: var(--neonCyan);
+      box-shadow: 0 20px 40px rgba(64, 224, 208, 0.2);
+      transform: translateY(-5px);
+    }
+
+    .admin-header{
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .admin-avatar{
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, var(--neonBlue), var(--neonCyan));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      box-shadow: 0 0 20px rgba(64, 224, 208, 0.4);
+    }
+
+    .admin-details h3{
+      font-size: 20px;
+      color: var(--neonCyan);
+      margin-bottom: 5px;
+    }
+
+    .admin-details p{
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .username-box{
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid rgba(64, 224, 208, 0.3);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 20px 0;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+    }
+
+    .username-box:hover{
+      background: rgba(64, 224, 208, 0.1);
+      border-color: var(--neonCyan);
+      transform: translateY(-3px);
+    }
+
+    .username-label{
+      font-size: 12px;
+      color: var(--neonBlue);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .username-value{
+      font-size: 24px;
+      font-weight: 800;
+      color: white;
+      font-family: 'Courier New', monospace;
+      text-shadow: 0 0 10px var(--neonCyan);
+      user-select: all;
+    }
+
+    .copy-button{
+      background: linear-gradient(45deg, var(--neonBlue), var(--neonCyan));
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .copy-button:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(64, 224, 208, 0.4);
+      letter-spacing: 1px;
+    }
+
+    .discord-card{
+      background: rgba(88, 101, 242, 0.1);
+      border: 1px solid rgba(88, 101, 242, 0.3);
+      border-radius: 20px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 20px;
+      transition: all 0.3s var(--ease);
+    }
+
+    .discord-card:hover{
+      background: rgba(88, 101, 242, 0.15);
+      border-color: #5865F2;
+      transform: translateY(-5px);
+    }
+
+    .discord-icon{
+      font-size: 60px;
+      color: #5865F2;
+    }
+
+    .discord-button{
+      background: #5865F2;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .discord-button:hover{
+      background: #4752C4;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(88, 101, 242, 0.4);
+    }
+
+    /* Toast notification */
     .toast{
       position: fixed;
+      bottom: 30px;
       left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,.68);
-      border: 1px solid rgba(255,255,255,.12);
-      padding: 10px 12px;
-      border-radius: 999px;
-      color: rgba(255,255,255,.88);
-      font-size: 12px;
+      transform: translateX(-50%) translateY(100px);
+      background: linear-gradient(45deg, rgba(16, 42, 67, 0.9), rgba(10, 30, 50, 0.9));
+      border: 1px solid var(--neonCyan);
+      border-radius: 16px;
+      padding: 20px 30px;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
       opacity: 0;
-      pointer-events:none;
-      transition: opacity .18s ease, transform .18s ease;
-      z-index: 9999;
-      backdrop-filter: blur(12px);
-      white-space: nowrap;
-      box-shadow: 0 18px 60px rgba(0,0,0,.45);
-    }
-    .toast.show{
-      opacity: 1;
-      transform: translateX(-50%) translateY(-2px);
+      transition: all 0.4s var(--ease);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      max-width: 90%;
     }
 
-    /* NEW: performance + motion guard */
-    @media (prefers-reduced-motion: reduce){
-      html{ scroll-behavior: auto; }
-      .card, .btn, .cta, .navLinks a{ transition: none !important; }
-      .scanlines, .hudGrid, .vignette{ opacity: .12; }
+    .toast.show{
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast-icon{
+      font-size: 24px;
+      color: var(--neonCyan);
+    }
+
+    /* Footer mejorado */
+    .cyber-footer{
+      background: rgba(10, 30, 50, 0.8);
+      border-radius: 24px;
+      padding: 40px;
+      margin-top: 40px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Responsive - ARREGLADO */
+    @media (max-width: 768px){
+      body{ padding: 15px; }
+      .plans-grid{ grid-template-columns: 1fr; }
+      .cyber-banner, .location-header, .features-section, .comparison-section, .contact-section{ padding: 20px; }
+      .nav-container{ flex-direction: column; }
+      .nav-links{ justify-content: center; }
+      .brand-glitch h1{ font-size: 22px; }
+      .plan-name{ font-size: 18px; }
+      .plan-price{ font-size: 18px; padding: 10px 16px; min-width: 120px; }
+      .comparison-table{ display: block; overflow-x: auto; }
+      .cyber-banner{ flex-direction: column; text-align: center; gap: 15px; }
+      .status-pill{ font-size: 12px; padding: 8px 12px; }
+    }
+
+    /* Efectos de scroll suave */
+    html{ scroll-behavior: smooth; }
+    
+    /* Ocultar scrollbar pero mantener funcionalidad */
+    ::-webkit-scrollbar{ width: 8px; }
+    ::-webkit-scrollbar-track{ background: rgba(0, 20, 40, 0.3); }
+    ::-webkit-scrollbar-thumb{ 
+      background: linear-gradient(var(--neonCyan), var(--neonBlue)); 
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover{ background: linear-gradient(var(--neonBlue), var(--neonCyan)); }
+
+    /* ARREGLOS ADICIONALES PARA BUGS */
+    .location-status .status-indicator {
+      width: 10px;
+      height: 10px;
+      background: var(--neonCyan);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    .plan-card * {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Fix para que las tarjetas no se corten */
+    .plan-card {
+      min-height: 500px;
+    }
+
+    /* Asegurar que todo el contenido sea visible */
+    .plan-features {
+      min-height: 300px;
+    }
+
+    /* Fix para botones en móviles */
+    @media (max-width: 480px) {
+      .plan-button {
+        padding: 14px;
+        font-size: 14px;
+      }
+    }
+
+    /* Corrección para el texto del toast */
+    #toast-message {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Mejora para el glitch effect */
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      1% { transform: translate(-1px, 1px); }
+      2% { transform: translate(1px, -1px); }
+      3% { transform: translate(0); }
+      100% { transform: translate(0); }
     }
   </style>
 </head>
-
 <body>
-  <!-- NEW: deeper hacker FX background -->
-  <div class="fxLayer" aria-hidden="true">
-    <canvas class="fx" id="fxMatrix"></canvas>
-    <canvas class="fx" id="fxParticles"></canvas>
+  <!-- Partículas flotantes -->
+  <div class="floating-particles" id="particles"></div>
+  <div class="circuit-lines"></div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast">
+    <span class="toast-icon">✓</span>
+    <span id="toast-message">Copiado al portapapeles!</span>
   </div>
-  <div class="hudGrid" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
-  <div class="hudCorners" aria-hidden="true"></div>
-  <div class="scanlines" aria-hidden="true"></div>
 
   <div class="wrap">
-
-    <!-- Banner -->
-    <div class="banner">
-      <div class="brand">
-        <h1>XNET VPN 🔐 — Planes</h1>
-        <p>Selecciona una ubicación y compra tu plan mensual.</p>
+    <!-- Banner principal -->
+    <header class="cyber-banner">
+      <div class="brand-glitch">
+        <h1>🔐 SecureNET  Secure Network Solutions</h1>
+        <p>Seguridad total • 🛡️ Anti-DDoS • ⚡ Baja latencia • 🎮 Gaming VPN • 6 ubicaciones globales</p>
       </div>
-      <div class="pill">Premium • Private Network</div>
-    </div>
-
-    <!-- ✅ Added: Anti-DDoS + Best for games + Payment methods -->
-    <div class="subline">
-      <div class="sublineLeft">
-        <div class="chip green">🛡️ <strong>Anti-DDoS Protection</strong></div>
-        <div class="chip">🎮 One of the best VPNs for <strong>GTA Online</strong> & <strong>RDR Online</strong></div>
-        <div class="chip">🕹️ Great for <strong>many games</strong> (stable routing + privacy)</div>
-        <div class="chip amber">💳 Payments: <strong>PayPal</strong> • <strong>Cash App</strong></div>
+      <div class="status-pill">
+        <span>🌍 CONECTADO</span>
+        <span>•</span>
+        <span>⚡ 99.9% UPTIME</span>
       </div>
-      <a class="cta" href="https://discord.gg/ZSg4CrbEXR" target="_blank" rel="noopener">Join ↗</a>
-    </div>
+    </header>
 
-    <!-- NAV + STATUS + CTA -->
-    <div class="nav">
-      <div class="navLinks">
-        <a href="#plans">💳 Planes</a>
-        <a href="#compare">📊 Comparación</a>
-        <a href="#addons">➕ Add-ons</a>
-        <a href="#faq">❓ FAQ</a>
-        <a href="#contact">🧑‍💻 Admin</a>
-      </div>
-
-      <div class="navRight">
-        <div class="status"><span class="dot"></span>Support: Online</div>
-        <a class="cta" href="https://discord.gg/ZSg4CrbEXR" target="_blank" rel="noopener">Open Ticket ↗</a>
-      </div>
-    </div>
-
-    <!-- ADMIN CONTACT (Discord) -->
-    <section class="contactCard" id="contact">
-      <div class="contactLeft">
-        <b>Admin Contact</b>
-        <div class="handle">@xnetvpn</div>
-        <small>Mándame solicitud en Discord y te respondo. <br>Si quieres comprar, abre ticket también.</small>
-      </div>
-      <div class="contactBtns">
-        <button class="copyBtn" type="button" onclick="copyHandle()">Copy @xnetvpn</button>
-        <a class="cta" href="https://discord.gg/ZSg4CrbEXR" target="_blank" rel="noopener">Join Discord ↗</a>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="block" id="plans">
-      <h2>How it works</h2>
-      <div class="howGrid">
-        <div class="how">
-          <b>1) Join Discord</b>
-          <p>Entra a NetLab y selecciona tu ubicación disponible.</p>
+    <!-- Navegación -->
+    <nav class="cyber-nav">
+      <div class="nav-container">
+        <div class="nav-links">
+          <a href="#los-angeles" class="nav-link">🌴 LOS ANGELES</a>
+          <a href="#dallas" class="nav-link">🤠 DALLAS</a>
+          <a href="#miami" class="nav-link">🏖️ MIAMI</a>
+          <a href="#paris" class="nav-link">🗼 PARIS</a>
+          <a href="#new-york" class="nav-link">🗽 NEW YORK</a>
+          <a href="#chicago" class="nav-link">🏙️ CHICAGO</a>
+          <a href="#comparison" class="nav-link">📊 COMPARATIVA</a>
+          <a href="#contact" class="nav-link">👤 CONTACTO ADMIN</a>
+          <a href="#features" class="nav-link">🚀 CARACTERÍSTICAS</a>
         </div>
-        <div class="how">
-          <b>2) Open a Ticket</b>
-          <p>Compra tu plan (PayPal o Cash App) y define users / add-ons si ocupas extra.</p>
+        <a href="https://discord.gg/M98jSVn5vB" target="_blank" class="plan-button" style="padding: 10px 20px; font-size: 14px;">
+          🚀 UNIRSE A DISCORD
+        </a>
+      </div>
+    </nav>
+
+    <!-- Los Angeles -->
+    <section id="los-angeles" class="location-header">
+      <div class="location-title">
+        <div class="location-info">
+          <h2>📍 LOS ANGELES, CA 🇺🇸</h2>
+          <p>Costa Oeste USA - Ideal para gaming, streaming y acceso a servicios de LA con baja latencia</p>
         </div>
-        <div class="how">
-          <b>3) Activate</b>
-          <p>Te mandamos acceso y soporte rápido para GTA Online / RDR Online y más.</p>
+        <div class="location-status">
+          <span>✅ DISPONIBLE</span>
+          <div class="status-indicator"></div>
         </div>
       </div>
     </section>
 
-    <div class="grid">
-
-      <!-- Dallas -->
-      <article class="card">
-        <i class="depthShadow" aria-hidden="true"></i>
-
-        <div class="top">
-          <div>
-            <div class="title">VPN Plan — Dallas</div>
-            <div class="loc">📍 Dallas, Texas</div>
+    <div class="plans-grid">
+      <!-- Basic LA -->
+      <div class="plan-card basic">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name basic">🟦 BASIC</div>
+            <div class="plan-location">📍 Los Angeles, CA</div>
           </div>
-
-          <div class="prices">
-            <div class="priceTag"><b>$15</b> / Monthly</div>
-          </div>
+          <div class="plan-price">$5.99</div>
         </div>
-
-        <div class="kpis">
-          <div class="kpi green">🛡️ Anti-DDoS</div>
-          <div class="kpi">🎮 GTA / RDR</div>
-          <div class="kpi">🔒 Private routing</div>
-          <div class="kpi amber">💳 PayPal / Cash App</div>
-        </div>
-
-        <div class="section">
-          <h3>VPN Plan Details</h3>
-          <ul class="list">
-            <li class="item">
-              <div class="left">
-                <span>👨🏻‍💻 Users</span>
-                <small>2 users included</small>
-              </div>
-              <div class="badge">Included</div>
-            </li>
-
-            <li class="item">
-              <div class="left">
-                <span>🔄 Location Change</span>
-                <small>1 location change allowed during the active plan</small>
-              </div>
-              <div class="badge">1x</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="section" id="addons">
-          <h3>Add-ons</h3>
-          <ul class="list">
-            <li class="item">
-              <div class="left">
-                <span>👤 Extra User</span>
-                <small>per additional user</small>
-              </div>
-              <div class="badge">+$3</div>
-            </li>
-
-            <li class="item">
-              <div class="left">
-                <span>📌 Extra Location</span>
-                <small>per additional location</small>
-              </div>
-              <div class="badge">+$5</div>
-            </li>
-          </ul>
-        </div>
-
-        <button class="btn" onclick="window.open('https://discord.gg/ZSg4CrbEXR','_blank')">🛒 Purchase Dallas</button>
-      </article>
-
-      <!-- Los Angeles -->
-      <article class="card best">
-        <i class="depthShadow" aria-hidden="true"></i>
-
-        <div class="top">
-          <div>
-            <div class="titleRow">
-              <div class="title">VPN Plan — Los Angeles</div>
-              <div class="bestTag">🔥 BEST SELLER</div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">1 conexión simultánea</span>
             </div>
-            <div class="loc">📍 Los Angeles, CA</div>
           </div>
-
-          <div class="prices">
-            <div class="priceTag"><b>$15</b> / Monthly</div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Los Angeles)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">COD / RDR / GTA friendly</span>
+            </div>
           </div>
         </div>
+        <button class="plan-button" onclick="window.open('https://discord.gg/M98jSVn5vB','_blank')">
+          🛒 COMPRAR BASIC
+        </button>
+      </div>
 
-        <div class="kpis">
-          <div class="kpi green">🛡️ Anti-DDoS</div>
-          <div class="kpi">🎮 GTA / RDR</div>
-          <div class="kpi">🛡️ Stable routing</div>
-          <div class="kpi amber">💳 PayPal / Cash App</div>
-        </div>
-
-        <div class="section">
-          <h3>VPN Plan Details</h3>
-          <ul class="list">
-            <li class="item">
-              <div class="left">
-                <span>👨🏻‍💻 Users</span>
-                <small>2 users included</small>
-              </div>
-              <div class="badge">Included</div>
-            </li>
-
-            <li class="item">
-              <div class="left">
-                <span>🔄 Location Change</span>
-                <small>1 location change allowed during the active plan</small>
-              </div>
-              <div class="badge">1x</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="section">
-          <h3>Add-ons</h3>
-          <ul class="list">
-            <li class="item">
-              <div class="left">
-                <span>👤 Extra User</span>
-                <small>per additional user</small>
-              </div>
-              <div class="badge">+$3</div>
-            </li>
-
-            <li class="item">
-              <div class="left">
-                <span>📌 Extra Location</span>
-                <small>per additional location</small>
-              </div>
-              <div class="badge">+$5</div>
-            </li>
-          </ul>
-        </div>
-
-        <button class="btn" onclick="window.open('https://discord.gg/ZSg4CrbEXR','_blank')">🛒 Purchase Los Angeles</button>
-      </article>
-
-      <!-- Chicago (Coming Soon) -->
-      <article class="card soon">
-        <i class="depthShadow" aria-hidden="true"></i>
-
-        <div class="top">
-          <div>
-            <div class="title">VPN Plan — Chicago</div>
-            <div class="loc">📍 Chicago, Illinois</div>
+      <!-- Standard LA -->
+      <div class="plan-card standard">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name standard">⭐ STANDARD</div>
+            <div class="plan-location">📍 Los Angeles, CA</div>
           </div>
-          <div class="prices"></div>
+          <div class="plan-price">$12.99</div>
         </div>
-
-        <div class="kpis">
-          <div class="kpi">⏳ Coming soon</div>
-          <div class="kpi">🛡️ Anti-DDoS</div>
-          <div class="kpi amber">💳 PayPal / Cash App</div>
-        </div>
-
-        <div class="section">
-          <h3>VPN Plan Details</h3>
-          <ul class="list">
-            <li class="item">
-              <div class="left">
-                <span>👨🏻‍💻 Users</span>
-                <small>2 users included</small>
-              </div>
-              <div class="badge">Included</div>
-            </li>
-
-            <li class="item">
-              <div class="left">
-                <span>🔄 Location Change</span>
-                <small>1 location change allowed during the active plan</small>
-              </div>
-              <div class="badge">1x</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="section">
-          <h3>Add-ons</h3>
-          <ul class="list">
-            <li class="item">
-              <div class="left">
-                <span>👤 Extra User</span>
-                <small>per additional user</small>
-              </div>
-              <div class="badge">+$3</div>
-            </li>
-
-            <li class="item">
-              <div class="left">
-                <span>📌 Extra Location</span>
-                <small>per additional location</small>
-              </div>
-              <div class="badge">+$5</div>
-            </li>
-          </ul>
-        </div>
-
-        <button class="btn" disabled>⏳ Coming Soon</button>
-      </article>
-
-      <!-- Paris (Coming Soon) -->
-      <article class="card soon">
-        <i class="depthShadow" aria-hidden="true"></i>
-
-        <div class="top">
-          <div>
-            <div class="title">VPN Plan — Paris</div>
-            <div class="loc">📍 Paris, France</div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 3 conexiones</span>
+            </div>
           </div>
-          <div class="prices"></div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Los Angeles)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Optimizado para gaming</span>
+            </div>
+          </div>
         </div>
+        <button class="plan-button" onclick="window.open('https://discord.gg/M98jSVn5vB','_blank')">
+          🛒 COMPRAR STANDARD
+        </button>
+      </div>
 
-        <div class="kpis">
-          <div class="kpi">⏳ Coming soon</div>
-          <div class="kpi">🛡️ Anti-DDoS</div>
-          <div class="kpi amber">💳 PayPal / Cash App</div>
+      <!-- Premium LA -->
+      <div class="plan-card premium">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name premium">💎 PREMIUM</div>
+            <div class="plan-location">📍 Los Angeles, CA</div>
+          </div>
+          <div class="plan-price">$19.99</div>
         </div>
-
-        <div class="section">
-          <h3>VPN Plan Details</h3>
-          <ul class="list">
-            <li class="item">
-              <div class="left">
-                <span>👨🏻‍💻 Users</span>
-                <small>2 users included</small>
-              </div>
-              <div class="badge">Included</div>
-            </li>
-
-            <li class="item">
-              <div class="left">
-                <span>🔄 Location Change</span>
-                <small>1 location change allowed during the active plan</small>
-              </div>
-              <div class="badge">1x</div>
-            </li>
-          </ul>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 6 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Los Angeles)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Máximo rendimiento</span>
+            </div>
+          </div>
         </div>
+        <button class="plan-button" onclick="window.open('https://discord.gg/M98jSVn5vB','_blank')">
+          🛒 COMPRAR PREMIUM
+        </button>
+      </div>
 
-        <div class="section">
-          <h3>Add-ons</h3>
-          <ul class="list">
-            <li class="item">
-              <div class="left">
-                <span>👤 Extra User</span>
-                <small>per additional user</small>
-              </div>
-              <div class="badge">+$3</div>
-            </li>
-
-            <li class="item">
-              <div class="left">
-                <span>📌 Extra Location</span>
-                <small>per additional location</small>
-              </div>
-              <div class="badge">+$5</div>
-            </li>
-          </ul>
+      <!-- Dual Location LA -->
+      <div class="plan-card dual">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name dual">🌐 DUAL LOCATION</div>
+            <div class="plan-location">📍 Los Angeles + otra ciudad</div>
+          </div>
+          <div class="plan-price">$24.99</div>
         </div>
-
-        <button class="btn" disabled>⏳ Coming Soon</button>
-      </article>
-
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 4 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">2 (LA + otra ciudad)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">No incluido</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Doble ubicación gaming</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" onclick="window.open('https://discord.gg/M98jSVn5vB','_blank')">
+          🛒 COMPRAR DUAL
+        </button>
+      </div>
     </div>
 
-    <!-- COMPARACIÓN RÁPIDA -->
-    <section class="block" id="compare">
-      <h2>Comparación rápida</h2>
+    <!-- Dallas -->
+    <section id="dallas" class="location-header">
+      <div class="location-title">
+        <div class="location-info">
+          <h2>📍 DALLAS, TEXAS 🇺🇸</h2>
+          <p>Centro USA - Latencia ultra baja para servidores centrales, ideal para gaming competitivo</p>
+        </div>
+        <div class="location-status">
+          <span>✅ DISPONIBLE</span>
+          <div class="status-indicator"></div>
+        </div>
+      </div>
+    </section>
 
-      <table class="compare">
+    <div class="plans-grid">
+      <!-- Basic Dallas -->
+      <div class="plan-card basic">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name basic">🟦 BASIC</div>
+            <div class="plan-location">📍 Dallas, Texas</div>
+          </div>
+          <div class="plan-price">$5.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">1 conexión simultánea</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Dallas)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Optimizado para Texas</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" onclick="window.open('https://discord.gg/M98jSVn5vB','_blank')">
+          🛒 COMPRAR BASIC
+        </button>
+      </div>
+
+      <!-- Standard Dallas -->
+      <div class="plan-card standard">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name standard">⭐ STANDARD</div>
+            <div class="plan-location">📍 Dallas, Texas</div>
+          </div>
+          <div class="plan-price">$12.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 3 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Dallas)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Máxima velocidad</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" onclick="window.open('https://discord.gg/M98jSVn5vB','_blank')">
+          🛒 COMPRAR STANDARD
+        </button>
+      </div>
+
+      <!-- Premium Dallas -->
+      <div class="plan-card premium">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name premium">💎 PREMIUM</div>
+            <div class="plan-location">📍 Dallas, Texas</div>
+          </div>
+          <div class="plan-price">$19.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 6 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Dallas)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Rendimiento premium</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" onclick="window.open('https://discord.gg/M98jSVn5vB','_blank')">
+          🛒 COMPRAR PREMIUM
+        </button>
+      </div>
+
+      <!-- Dual Location Dallas -->
+      <div class="plan-card dual">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name dual">🌐 DUAL LOCATION</div>
+            <div class="plan-location">📍 Dallas + otra ciudad</div>
+          </div>
+          <div class="plan-price">$24.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 4 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">2 (Dallas + otra ciudad)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">No incluido</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Flexibilidad total</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" onclick="window.open('https://discord.gg/M98jSVn5vB','_blank')">
+          🛒 COMPRAR DUAL
+        </button>
+      </div>
+    </div>
+
+    <!-- Miami (Coming Soon) -->
+    <section id="miami" class="location-header">
+      <div class="location-title">
+        <div class="location-info">
+          <h2>📍 MIAMI 🇺🇸</h2>
+          <p>Sureste USA - Conectividad con América Latina y contenido local de Florida</p>
+        </div>
+        <div class="location-status">
+          <span>⏳ COMING SOON</span>
+          <div class="status-indicator" style="background: #ffaa00;"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="plans-grid">
+      <!-- Basic Miami -->
+      <div class="plan-card basic">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name basic">🟦 BASIC</div>
+            <div class="plan-location">📍 Miami, Florida</div>
+          </div>
+          <div class="plan-price">$5.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">1 conexión simultánea</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Miami)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">COD / RDR / GTA friendly</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+
+      <!-- Standard Miami -->
+      <div class="plan-card standard">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name standard">⭐ STANDARD</div>
+            <div class="plan-location">📍 Miami, Florida</div>
+          </div>
+          <div class="plan-price">$12.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 3 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Miami)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Optimizado para gaming</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+
+      <!-- Premium Miami -->
+      <div class="plan-card premium">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name premium">💎 PREMIUM</div>
+            <div class="plan-location">📍 Miami, Florida</div>
+          </div>
+          <div class="plan-price">$19.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 6 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Miami)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Máximo rendimiento</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+
+      <!-- Dual Location Miami -->
+      <div class="plan-card dual">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name dual">🌐 DUAL LOCATION</div>
+            <div class="plan-location">📍 Miami + otra ciudad</div>
+          </div>
+          <div class="plan-price">$24.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 4 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">2 (Miami + otra ciudad)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">No incluido</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Doble ubicación gaming</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+    </div>
+
+    <!-- Paris (Coming Soon) -->
+    <section id="paris" class="location-header">
+      <div class="location-title">
+        <div class="location-info">
+          <h2>📍 PARIS 🇫🇷</h2>
+          <p>Europa - Primera ubicación internacional, perfecta para contenido europeo y gaming en EU</p>
+        </div>
+        <div class="location-status">
+          <span>⏳ COMING SOON</span>
+          <div class="status-indicator" style="background: #ffaa00;"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="plans-grid">
+      <!-- Basic Paris -->
+      <div class="plan-card basic">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name basic">🟦 BASIC</div>
+            <div class="plan-location">📍 Paris, Francia</div>
+          </div>
+          <div class="plan-price">$5.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">1 conexión simultánea</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Paris)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Optimizado para EU</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+
+      <!-- Standard Paris -->
+      <div class="plan-card standard">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name standard">⭐ STANDARD</div>
+            <div class="plan-location">📍 Paris, Francia</div>
+          </div>
+          <div class="plan-price">$12.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 3 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Paris)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Servidores europeos</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+
+      <!-- Premium Paris -->
+      <div class="plan-card premium">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name premium">💎 PREMIUM</div>
+            <div class="plan-location">📍 Paris, Francia</div>
+          </div>
+          <div class="plan-price">$19.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 6 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Paris)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Rendimiento premium EU</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+
+      <!-- Dual Location Paris -->
+      <div class="plan-card dual">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name dual">🌐 DUAL LOCATION</div>
+            <div class="plan-location">📍 Paris + otra ciudad</div>
+          </div>
+          <div class="plan-price">$24.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 4 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">2 (Paris + otra ciudad)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">No incluido</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Internacional gaming</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+    </div>
+
+    <!-- New York (Coming Soon) -->
+    <section id="new-york" class="location-header">
+      <div class="location-title">
+        <div class="location-info">
+          <h2>📍 NEW YORK 🇺🇸</h2>
+          <p>Costa Este USA - La mayor ciudad de Estados Unidos, ideal para negocios y entretenimiento</p>
+        </div>
+        <div class="location-status">
+          <span>⏳ COMING SOON</span>
+          <div class="status-indicator" style="background: #ffaa00;"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="plans-grid">
+      <!-- Basic New York -->
+      <div class="plan-card basic">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name basic">🟦 BASIC</div>
+            <div class="plan-location">📍 New York, NY</div>
+          </div>
+          <div class="plan-price">$5.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">1 conexión simultánea</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (New York)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Optimizado para NYC</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+
+      <!-- Standard New York -->
+      <div class="plan-card standard">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name standard">⭐ STANDARD</div>
+            <div class="plan-location">📍 New York, NY</div>
+          </div>
+          <div class="plan-price">$12.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 3 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (New York)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Servidores East Coast</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+
+      <!-- Premium New York -->
+      <div class="plan-card premium">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name premium">💎 PREMIUM</div>
+            <div class="plan-location">📍 New York, NY</div>
+          </div>
+          <div class="plan-price">$19.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 6 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (New York)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Máximo rendimiento NYC</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+
+      <!-- Dual Location New York -->
+      <div class="plan-card dual">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name dual">🌐 DUAL LOCATION</div>
+            <div class="plan-location">📍 New York + otra ciudad</div>
+          </div>
+          <div class="plan-price">$24.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 4 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">2 (New York + otra ciudad)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">No incluido</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Flexibilidad East Coast</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+    </div>
+
+    <!-- Chicago (Coming Soon) -->
+    <section id="chicago" class="location-header">
+      <div class="location-title">
+        <div class="location-info">
+          <h2>📍 CHICAGO 🇺🇸</h2>
+          <p>Centro USA - Ideal para contenido regional del medio oeste y gaming con baja latencia</p>
+        </div>
+        <div class="location-status">
+          <span>⏳ COMING SOON</span>
+          <div class="status-indicator" style="background: #ffaa00;"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="plans-grid">
+      <!-- Basic Chicago -->
+      <div class="plan-card basic">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name basic">🟦 BASIC</div>
+            <div class="plan-location">📍 Chicago, Illinois</div>
+          </div>
+          <div class="plan-price">$5.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">1 conexión simultánea</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Chicago)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Midwest gaming optimizado</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+
+      <!-- Standard Chicago -->
+      <div class="plan-card standard">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name standard">⭐ STANDARD</div>
+            <div class="plan-location">📍 Chicago, Illinois</div>
+          </div>
+          <div class="plan-price">$12.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 3 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Chicago)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Servidores centrales USA</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+
+      <!-- Premium Chicago -->
+      <div class="plan-card premium">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name premium">💎 PREMIUM</div>
+            <div class="plan-location">📍 Chicago, Illinois</div>
+          </div>
+          <div class="plan-price">$19.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 6 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">1 (Chicago)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">1 al mes (GRATIS)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Rendimiento premium Midwest</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+
+      <!-- Dual Location Chicago -->
+      <div class="plan-card dual">
+        <div class="plan-header">
+          <div class="plan-title">
+            <div class="plan-name dual">🌐 DUAL LOCATION</div>
+            <div class="plan-location">📍 Chicago + otra ciudad</div>
+          </div>
+          <div class="plan-price">$24.99</div>
+        </div>
+        <div class="plan-features">
+          <div class="feature-item">
+            <span class="feature-icon">👥</span>
+            <div class="feature-text">
+              <span class="feature-label">Usuarios</span>
+              <span class="feature-desc">Hasta 4 conexiones</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🌍</span>
+            <div class="feature-text">
+              <span class="feature-label">Ubicaciones</span>
+              <span class="feature-desc">2 (Chicago + otra ciudad)</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🔁</span>
+            <div class="feature-text">
+              <span class="feature-label">Cambio de servidor</span>
+              <span class="feature-desc">No incluido</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🛡️</span>
+            <div class="feature-text">
+              <span class="feature-label">Protección</span>
+              <span class="feature-desc">Anti-DDoS completo</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎮</span>
+            <div class="feature-text">
+              <span class="feature-label">Gaming VPN</span>
+              <span class="feature-desc">Central + otra ubicación</span>
+            </div>
+          </div>
+        </div>
+        <button class="plan-button" disabled>
+          ⏳ PRÓXIMAMENTE
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabla de comparación -->
+    <section id="comparison" class="comparison-section">
+      <h2 style="font-size: 32px; margin-bottom: 10px; text-align: center; background: linear-gradient(45deg, var(--neonCyan), var(--neonBlue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">📊 TABLA COMPARATIVA</h2>
+      <p style="text-align: center; color: var(--muted); margin-bottom: 40px; font-size: 16px;">Compara todos los planes y elige el que mejor se adapte a tus necesidades</p>
+      
+      <table class="comparison-table">
         <thead>
           <tr>
-            <th>Plan</th>
-            <th>Precio</th>
-            <th>Users</th>
-            <th>Location Change</th>
-            <th>Add-ons</th>
+            <th>Característica</th>
+            <th>🟦 BASIC</th>
+            <th>⭐ STANDARD</th>
+            <th>💎 PREMIUM</th>
+            <th>🌐 DUAL LOCATION</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><span class="tagOk">📍 Dallas</span> <span class="tagOk">🛡️ Anti-DDoS</span> <span class="tagOk">💳 PayPal/Cash App</span></td>
-            <td><span class="tagOk"><b>$15</b> / Monthly</span></td>
-            <td><span class="tagOk">👨🏻‍💻 2 included</span></td>
-            <td><span class="tagOk">🔄 1x</span></td>
-            <td><span class="tagOk">👤 +$3</span> <span class="tagOk">📌 +$5</span></td>
+            <td><strong>Precio Mensual</strong></td>
+            <td><span class="comparison-badge badge-basic">$5.99</span></td>
+            <td><span class="comparison-badge badge-standard">$12.99</span></td>
+            <td><span class="comparison-badge badge-premium">$19.99</span></td>
+            <td><span class="comparison-badge badge-dual">$24.99</span></td>
           </tr>
-
           <tr>
-            <td><span class="tagOk">📍 Los Angeles</span> <span class="tagOk">🔥 Best Seller</span> <span class="tagOk">🛡️ Anti-DDoS</span> <span class="tagOk">💳 PayPal/Cash App</span></td>
-            <td><span class="tagOk"><b>$15</b> / Monthly</span></td>
-            <td><span class="tagOk">👨🏻‍💻 2 included</span></td>
-            <td><span class="tagOk">🔄 1x</span></td>
-            <td><span class="tagOk">👤 +$3</span> <span class="tagOk">📌 +$5</span></td>
+            <td><strong>Usuarios Simultáneos</strong></td>
+            <td>👤 1</td>
+            <td>👥 3</td>
+            <td>👥 6</td>
+            <td>👥 4</td>
           </tr>
-
           <tr>
-            <td><span class="tagOk">⏳ Chicago</span> <span class="tagOk">🛡️ Anti-DDoS</span> <span class="tagOk">💳 PayPal/Cash App</span></td>
-            <td><span class="tagOk">Coming Soon</span></td>
-            <td><span class="tagOk">👨🏻‍💻 2 included</span></td>
-            <td><span class="tagOk">🔄 1x</span></td>
-            <td><span class="tagOk">👤 +$3</span> <span class="tagOk">📌 +$5</span></td>
+            <td><strong>Ubicaciones Incluidas</strong></td>
+            <td>📍 1 Ciudad</td>
+            <td>📍 1 Ciudad</td>
+            <td>📍 1 Ciudad</td>
+            <td>📍 2 Ciudades</td>
           </tr>
-
           <tr>
-            <td><span class="tagOk">⏳ Paris</span> <span class="tagOk">🛡️ Anti-DDoS</span> <span class="tagOk">💳 PayPal/Cash App</span></td>
-            <td><span class="tagOk">Coming Soon</span></td>
-            <td><span class="tagOk">👨🏻‍💻 2 included</span></td>
-            <td><span class="tagOk">🔄 1x</span></td>
-            <td><span class="tagOk">👤 +$3</span> <span class="tagOk">📌 +$5</span></td>
+            <td><strong>Cambios de Servidor</strong></td>
+            <td>🔁 1 al mes (GRATIS)</td>
+            <td>🔁 1 al mes (GRATIS)</td>
+            <td>🔁 1 al mes (GRATIS)</td>
+            <td>🔁 No incluido</td>
+          </tr>
+          <tr>
+            <td><strong>Protección Anti-DDoS</strong></td>
+            <td>🛡️ COMPLETA</td>
+            <td>🛡️ COMPLETA</td>
+            <td>🛡️ COMPLETA</td>
+            <td>🛡️ COMPLETA</td>
+          </tr>
+          <tr>
+            <td><strong>Gaming VPN</strong></td>
+            <td>🎮 Optimizado</td>
+            <td>🎮 Optimizado</td>
+            <td>🎮 Optimizado</td>
+            <td>🎮 Optimizado</td>
+          </tr>
+          <tr>
+            <td><strong>Velocidad</strong></td>
+            <td>⚡ Alta</td>
+            <td>⚡ Muy Alta</td>
+            <td>⚡ Máxima</td>
+            <td>⚡ Máxima</td>
+          </tr>
+          <tr>
+            <td><strong>Recomendado para</strong></td>
+            <td>Persona individual</td>
+            <td>Parejas / Amigos</td>
+            <td>Familias / Equipos</td>
+            <td>Usuarios que viajan</td>
+          </tr>
+          <tr>
+            <td><strong>Costo por Usuario</strong></td>
+            <td>$3 c/u</td>
+            <td>$3 c/u</td>
+            <td>$3 c/u</td>
+            <td>$3 c/u</td>
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <!-- FAQ -->
-    <section class="block" id="faq">
-      <h2>FAQ</h2>
-      <div class="faqGrid">
-        <details>
-          <summary>¿Qué métodos de pago aceptan?</summary>
-          <p>Aceptamos <b>PayPal</b> y <b>Cash App</b>.</p>
-        </details>
-
-        <details>
-          <summary>¿Tiene protección anti DDoS?</summary>
-          <p>Sí, incluye <b>protección anti DDoS</b> para mejorar estabilidad y privacidad.</p>
-        </details>
-
-        <details>
-          <summary>¿Es buena para GTA Online y RDR Online?</summary>
-          <p>Sí. XNET VPN está optimizada para <b>GTA Online</b>, <b>RDR Online</b> y muchos juegos más (rutas estables + privacidad).</p>
-        </details>
-
-        <details>
-          <summary>¿Cómo compro?</summary>
-          <p>Entra al Discord, abre ticket, selecciona ubicación y listo.</p>
-        </details>
+      
+      <div style="margin-top: 40px; background: rgba(0, 20, 40, 0.3); padding: 20px; border-radius: 16px; border: 1px solid rgba(64, 224, 208, 0.2);">
+        <h3 style="color: var(--neonCyan); margin-bottom: 15px; font-size: 18px;">💡 Recomendación</h3>
+        <p style="color: var(--muted); line-height: 1.6;">
+          <strong>⭐ STANDARD</strong> es el plan más vendido por su excelente relación calidad-precio. 
+          Perfecto para hasta 3 usuarios con todas las funciones premium. 
+          <strong>💎 PREMIUM</strong> es ideal para familias o grupos de gaming. 
+          <strong>🌐 DUAL LOCATION</strong> ofrece máxima flexibilidad para quienes necesitan acceso a dos ubicaciones diferentes.
+        </p>
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="footerTop">
-        <div>
-          <div class="title" style="font-size:13px;">XNET VPN 🔐 — Premium • Private Network</div>
-          <div class="loc" style="margin-top:6px;">Discord: <a href="https://discord.gg/ZSg4CrbEXR" target="_blank" rel="noopener">discord.gg/ZSg4CrbEXR</a> • Admin: <span style="color:rgba(255,255,255,.92); font-weight:900;">@xnetvpn</span></div>
-          <div class="trust">
-            <div class="kpi">🛡️ Anti-DDoS</div>
-            <div class="kpi">⚡ Optimized routing</div>
-            <div class="kpi">🎮 GTA / RDR + More Games</div>
-            <div class="kpi">💳 PayPal / Cash App</div>
+    <!-- Sección de contacto admin -->
+    <section id="contact" class="contact-section">
+      <h2 style="font-size: 32px; margin-bottom: 10px; text-align: center; background: linear-gradient(45deg, var(--neonCyan), var(--neonBlue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">👤 CONTACTO ADMINISTRADOR</h2>
+      <p style="text-align: center; color: var(--muted); margin-bottom: 40px; font-size: 16px;">Contacto directo para consultas, soporte técnico y compras</p>
+      
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="admin-card">
+            <div class="admin-header">
+              <div class="admin-avatar">X</div>
+              <div class="admin-details">
+                <h3>Administrador @xnetvpn</h3>
+                <p>Soporte 24/7 • Respuesta rápida</p>
+              </div>
+            </div>
+            
+            <div style="margin-bottom: 25px;">
+              <h4 style="color: var(--neonCyan); margin-bottom: 10px; font-size: 16px;">📞 Información de Contacto</h4>
+              <p style="color: var(--muted); font-size: 14px; line-height: 1.6;">
+                Para consultas, soporte técnico, compras o cualquier pregunta sobre los planes de VPN.
+                Resuelvo rápido a través de Discord.
+              </p>
+            </div>
+            
+            <div style="margin-bottom: 25px;">
+              <h4 style="color: var(--neonCyan); margin-bottom: 10px; font-size: 16px;">⏱️ Tiempos de Respuesta</h4>
+              <ul style="color: var(--muted); font-size: 14px; padding-left: 20px; line-height: 1.8;">
+                <li>Soporte técnico: <strong>5-15 minutos</strong></li>
+                <li>Consultas de compra: <strong>2-10 minutos</strong></li>
+                <li>Activación de servicio: <strong>Inmediata</strong></li>
+                <li>Disponibilidad: <strong>24/7</strong></li>
+              </ul>
+            </div>
           </div>
-          <small>
-            Para contacto directo: manda solicitud a <b>@xnetvpn</b>. Para comprar: abre ticket en Discord.
-          </small>
         </div>
-        <a class="cta" href="https://discord.gg/ZSg4CrbEXR" target="_blank" rel="noopener">Open Ticket ↗</a>
+        
+        <div class="contact-info">
+          <div class="admin-card">
+            <h4 style="color: var(--neonCyan); margin-bottom: 20px; font-size: 18px;">📋 Copiar Usuario de Discord</h4>
+            
+            <div class="username-box" id="usernameBox" onclick="copyUsername()">
+              <span class="username-label">Usuario de Discord</span>
+              <div class="username-value">@xnetvpn</div>
+              <div style="margin-top: 10px; font-size: 12px; color: var(--neonBlue);">
+                👆 Haz clic para copiar al portapapeles
+              </div>
+            </div>
+            
+            <button class="copy-button" onclick="copyUsername()">
+              📋 Copiar @xnetvpn
+            </button>
+            
+            <div style="margin-top: 30px; padding: 20px; background: rgba(0, 20, 40, 0.2); border-radius: 12px; border: 1px solid rgba(64, 224, 208, 0.1);">
+              <h4 style="color: var(--neonCyan); margin-bottom: 10px; font-size: 16px;">📝 Pasos para contactar</h4>
+              <ol style="color: var(--muted); font-size: 14px; padding-left: 20px; line-height: 1.8;">
+                <li>Únete a nuestro Discord</li>
+                <li>Abre un ticket de soporte</li>
+                <li>Menciona @xnetvpn en el ticket</li>
+                <li>Especifica qué plan deseas</li>
+              </ol>
+            </div>
+          </div>
+          
+          <div class="discord-card">
+            <div class="discord-icon">🎮</div>
+            <h3 style="color: white; margin-bottom: 10px; font-size: 20px;">Únete a nuestro Discord</h3>
+            <p style="color: var(--muted); text-align: center; margin-bottom: 20px; font-size: 14px;">
+              Comunidad activa, soporte rápido, anuncios de nuevas ubicaciones y ofertas exclusivas.
+            </p>
+            <a href="https://discord.gg/M98jSVn5vB" target="_blank" class="discord-button">
+              <span>🚀 Unirse a Discord</span>
+              <span style="font-size: 12px; opacity: 0.8;">(discord.gg/M98jSVn5vB)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Características -->
+    <section id="features" class="features-section">
+      <h2 style="font-size: 32px; margin-bottom: 10px; text-align: center; background: linear-gradient(45deg, var(--neonCyan), var(--neonBlue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🚀 CARACTERÍSTICAS PREMIUM</h2>
+      <p style="text-align: center; color: var(--muted); margin-bottom: 40px; font-size: 16px;">Todo lo que necesitas para una experiencia VPN de primera clase</p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-large">🛡️</div>
+          <h3 style="font-size: 20px; margin-bottom: 10px; color: var(--neonCyan);">Protección Anti-DDoS</h3>
+          <p style="color: var(--muted); line-height: 1.6;">Defensa activa contra ataques DDoS. Navegación segura y estable incluso bajo presión máxima.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon-large">⚡</div>
+          <h3 style="font-size: 20px; margin-bottom: 10px; color: var(--neonCyan);">Baja Latencia</h3>
+          <p style="color: var(--muted); line-height: 1.6;">Conectividad ultra rápida optimizada para gaming competitivo y streaming en 4K sin buffers.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon-large">🎮</div>
+          <h3 style="font-size: 20px; margin-bottom: 10px; color: var(--neonCyan);">Gaming VPN</h3>
+          <p style="color: var(--muted); line-height: 1.6;">Optimizado para COD, RDR2, GTA Online y más juegos populares. Reduce lag y mejora experiencia.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon-large">🔒</div>
+          <h3 style="font-size: 20px; margin-bottom: 10px; color: var(--neonCyan);">Privacidad Total</h3>
+          <p style="color: var(--muted); line-height: 1.6;">No logs policy. Tu actividad nunca es registrada ni compartida. Cifrado militar AES-256.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon-large">🌍</div>
+          <h3 style="font-size: 20px; margin-bottom: 10px; color: var(--neonCyan);">6 Ubicaciones</h3>
+          <p style="color: var(--muted); line-height: 1.6;">USA y Europa cubiertos. Más ubicaciones en camino para cobertura global completa.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon-large">👨‍💻</div>
+          <h3 style="font-size: 20px; margin-bottom: 10px; color: var(--neonCyan);">Soporte 24/7</h3>
+          <p style="color: var(--muted); line-height: 1.6;">Soporte técnico en Discord por tickets. Resolvemos problemas rápidamente en tiempo real.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="cyber-footer">
+      <div style="text-align: center;">
+        <h3 style="font-size: 24px; margin-bottom: 20px; color: var(--neonCyan);">🔐 SecureNET  Secure Network Solutions</h3>
+        <p style="color: var(--muted); margin-bottom: 30px; line-height: 1.6;">
+          Seguridad total • 🛡️ Anti-DDoS • ⚡ Baja latencia • 🎮 Gaming VPN<br>
+          Discord: <a href="https://discord.gg/M98jSVn5vB" target="_blank" style="color: var(--neonCyan); text-decoration: none; font-weight: 600;">discord.gg/M98jSVn5vB</a> • 
+          Admin: <span style="color: var(--neonCyan); font-weight: 600;">@xnetvpn</span>
+        </p>
+        
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;">
+          <div style="background: rgba(0, 20, 40, 0.3); padding: 12px 24px; border-radius: 12px; border: 1px solid rgba(64, 224, 208, 0.2);">
+            <span style="color: var(--neonCyan); font-weight: 600;">💳 Pagos</span>
+            <span style="color: var(--muted);"> PayPal • Cash App</span>
+          </div>
+          <div style="background: rgba(0, 20, 40, 0.3); padding: 12px 24px; border-radius: 12px; border: 1px solid rgba(64, 224, 208, 0.2);">
+            <span style="color: var(--neonCyan); font-weight: 600;">⚡ Velocidad</span>
+            <span style="color: var(--muted);"> Sin throttling</span>
+          </div>
+          <div style="background: rgba(0, 20, 40, 0.3); padding: 12px 24px; border-radius: 12px; border: 1px solid rgba(64, 224, 208, 0.2);">
+            <span style="color: var(--neonCyan); font-weight: 600;">🛡️ Seguridad</span>
+            <span style="color: var(--muted);"> Anti-DDoS completo</span>
+          </div>
+        </div>
+        
+        <div style="margin: 30px 0; padding: 20px; background: rgba(0, 20, 40, 0.2); border-radius: 16px; border: 1px solid rgba(64, 224, 208, 0.1);">
+          <h4 style="color: var(--neonCyan); margin-bottom: 10px; font-size: 16px;">📞 Contacto Rápido</h4>
+          <p style="color: var(--muted); font-size: 14px;">
+            Copia y pega en Discord: <code style="background: rgba(0, 0, 0, 0.3); padding: 5px 10px; border-radius: 6px; font-family: monospace; color: var(--neonCyan);">@xnetvpn</code>
+          </p>
+        </div>
+        
+        <p style="color: rgba(200, 230, 255, 0.5); font-size: 14px;">
+          © 2024 XNET VPN. Todos los derechos reservados.<br>
+          Este servicio es para uso personal y legal. No permitimos actividades ilegales.
+        </p>
+        
+        <a href="https://discord.gg/M98jSVn5vB" target="_blank" class="plan-button" style="margin-top: 30px; display: inline-block; text-decoration: none;">
+          🚀 UNIRSE A DISCORD PARA COMPRAR
+        </a>
       </div>
     </footer>
-
   </div>
 
-  <div class="toast" id="toast">Copied: @xnetvpn</div>
-
   <script>
-    /***********************************************************************
-     * ROBUST PAGE UPGRADE (300+ lines of code)
-     * - 3D tilt cards + buttons
-     * - Matrix background + particles
-     * - Smooth scroll + active nav
-     * - Safe clipboard copy (fallback)
-     * - Toast queue + accessibility helpers
-     * - Performance guards + resize handling
-     ***********************************************************************/
-
-    "use strict";
-
-    // =========================
-    // Utilities
-    // =========================
-    const $ = (sel, root = document) => root.querySelector(sel);
-    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-
-    const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-    const lerp = (a, b, t) => a + (b - a) * t;
-
-    const prefersReducedMotion = () =>
-      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    function rafThrottle(fn){
-      let ticking = false;
-      let lastArgs = null;
-      return function(...args){
-        lastArgs = args;
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          ticking = false;
-          fn.apply(this, lastArgs);
-        });
-      };
-    }
-
-    function safeOpen(url){
-      try{
-        window.open(url, "_blank", "noopener,noreferrer");
-      }catch(e){
-        // Fallback: same tab
-        window.location.href = url;
+    // Crear partículas flotantes
+    function createParticles() {
+      const container = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Tamaño aleatorio
+        const size = Math.random() * 4 + 1;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Posición aleatoria
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        // Opacidad aleatoria
+        particle.style.opacity = Math.random() * 0.3 + 0.1;
+        
+        // Velocidad de animación aleatoria
+        const duration = Math.random() * 20 + 10;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        container.appendChild(particle);
       }
     }
-
-    // =========================
-    // CTA / Button shine tracking
-    // =========================
-    function bindShine(el){
-      const onMove = (e) => {
-        const r = el.getBoundingClientRect();
-        const x = ((e.clientX - r.left) / r.width) * 100;
-        const y = ((e.clientY - r.top) / r.height) * 100;
-        el.style.setProperty("--mx", x + "%");
-        el.style.setProperty("--my", y + "%");
-      };
-      el.addEventListener("mousemove", onMove, { passive: true });
-    }
-
-    $$(".cta, .btn").forEach(bindShine);
-
-    // =========================
-    // 3D Tilt for cards (Hacker 3D)
-    // =========================
-    const TILT = {
-      maxRotate: 10,     // degrees
-      maxLift: 8,        // px
-      perspective: 900,  // px
-      glowBoost: 1.0
-    };
-
-    function setCard3D(card, rx, ry, lift){
-      card.style.transform =
-        `perspective(${TILT.perspective}px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(${lift}px)`;
-    }
-
-    function resetCard3D(card){
-      card.style.transform = "";
-    }
-
-    function bindCardTilt(card){
-      if (card.classList.contains("soon")) return;
-
-      const onMove = rafThrottle((e) => {
-        const r = card.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width;   // 0..1
-        const py = (e.clientY - r.top) / r.height;  // 0..1
-
-        const ry = lerp(-TILT.maxRotate, TILT.maxRotate, px);
-        const rx = lerp(TILT.maxRotate, -TILT.maxRotate, py);
-        const lift = -TILT.maxLift;
-
-        // Update shine origin too
-        card.style.setProperty("--mx", (px * 100).toFixed(2) + "%");
-        card.style.setProperty("--my", (py * 100).toFixed(2) + "%");
-
-        setCard3D(card, rx, ry, lift);
-      });
-
-      const onLeave = () => resetCard3D(card);
-
-      card.addEventListener("mousemove", onMove, { passive: true });
-      card.addEventListener("mouseleave", onLeave);
-    }
-
-    if (!prefersReducedMotion()){
-      $$(".card").forEach(bindCardTilt);
-    }
-
-    // =========================
-    // Active nav highlight (robust)
-    // =========================
-    const navLinks = $$(".navLinks a");
-    const sections = navLinks
-      .map(a => {
-        const id = (a.getAttribute("href") || "").trim();
-        if (!id.startsWith("#")) return null;
-        const el = $(id);
-        return el ? { a, el, id } : null;
-      })
-      .filter(Boolean);
-
-    function setActiveNav(id){
-      navLinks.forEach(a => a.classList.remove("active"));
-      const match = sections.find(s => s.id === id);
-      if (match) match.a.classList.add("active");
-    }
-
-    function observeSections(){
-      if (!("IntersectionObserver" in window)){
-        // fallback: activate based on scroll position
-        window.addEventListener("scroll", rafThrottle(() => {
-          const y = window.scrollY + 130;
-          let current = sections[0]?.id || "#plans";
-          for (const s of sections){
-            const top = s.el.getBoundingClientRect().top + window.scrollY;
-            if (top <= y) current = s.id;
-          }
-          setActiveNav(current);
-        }), { passive: true });
-        return;
-      }
-
-      const io = new IntersectionObserver((entries) => {
-        // Pick the entry with highest intersection ratio
-        const visible = entries
-          .filter(en => en.isIntersecting)
-          .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
-
-        if (visible){
-          const id = "#" + visible.target.id;
-          setActiveNav(id);
-        }
-      }, {
-        root: null,
-        threshold: [0.12, 0.22, 0.32, 0.44, 0.56, 0.68],
-        rootMargin: "-20% 0px -65% 0px"
-      });
-
-      sections.forEach(s => io.observe(s.el));
-    }
-
-    observeSections();
-
-    // =========================
-    // Toast system (queue)
-    // =========================
-    const toastEl = $("#toast");
-    const Toast = (() => {
-      const queue = [];
-      let showing = false;
-
-      function show(msg, ms = 1400){
-        queue.push({ msg, ms });
-        if (!showing) drain();
-      }
-
-      function drain(){
-        if (queue.length === 0){
-          showing = false;
-          return;
-        }
-        showing = true;
-        const { msg, ms } = queue.shift();
-        toastEl.textContent = msg;
-        toastEl.classList.add("show");
-
-        window.setTimeout(() => {
-          toastEl.classList.remove("show");
-          window.setTimeout(drain, 140);
-        }, ms);
-      }
-
-      return { show };
-    })();
-
-    // =========================
-    // Clipboard copy (fallback)
-    // =========================
-    async function writeClipboard(text){
-      // Modern
-      if (navigator.clipboard && navigator.clipboard.writeText){
-        await navigator.clipboard.writeText(text);
-        return true;
-      }
-
-      // Fallback using hidden textarea
-      try{
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.setAttribute("readonly", "");
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        ta.style.top = "0";
-        document.body.appendChild(ta);
-        ta.select();
-        ta.setSelectionRange(0, ta.value.length);
-
-        const ok = document.execCommand("copy");
-        document.body.removeChild(ta);
-        return ok;
-      }catch(e){
-        return false;
-      }
-    }
-
-    // Keep your original function name (requested)
-    async function copyHandle(){
-      const text = "@xnetvpn";
-      const ok = await writeClipboard(text);
-      if (ok) Toast.show("Copied: @xnetvpn");
-      else Toast.show("Copy failed — select & copy manually");
-    }
-    window.copyHandle = copyHandle;
-
-    // =========================
-    // Safer external links open
-    // =========================
-    function bindExternalButtons(){
-      // Keep existing onclicks but also guard from blocked popups
-      $$(".btn").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-          // If it already has inline onclick, let it run first.
-          // This ensures your current behavior is preserved.
-        });
-      });
-
-      // If needed, you can use this helper:
-      // safeOpen("https://discord.gg/ZSg4CrbEXR");
-    }
-    bindExternalButtons();
-
-    // =========================
-    // FX: Matrix background (canvas)
-    // =========================
-    const MatrixFX = (() => {
-      const canvas = $("#fxMatrix");
-      const ctx = canvas.getContext("2d", { alpha: true });
-
-      let w = 0, h = 0, dpr = 1;
-      let cols = 0;
-      let y = [];
-      let running = true;
-
-      const chars =
-        "アイウエオカキクケコサシスセソタチツテトナニヌネノ" +
-        "0123456789" +
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
-        "░▒▓<>/\\|{}[]$#@";
-
-      function resize(){
-        dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-        w = Math.floor(window.innerWidth);
-        h = Math.floor(window.innerHeight);
-        canvas.width = Math.floor(w * dpr);
-        canvas.height = Math.floor(h * dpr);
-        canvas.style.width = w + "px";
-        canvas.style.height = h + "px";
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        const fontSize = 14;
-        cols = Math.floor(w / fontSize);
-        y = new Array(cols).fill(0).map(() => Math.random() * h);
-      }
-
-      function draw(){
-        if (!running) return;
-
-        // Fade
-        ctx.fillStyle = "rgba(7, 11, 18, 0.08)";
-        ctx.fillRect(0, 0, w, h);
-
-        const fontSize = 14;
-        ctx.font = `600 ${fontSize}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
-
-        for (let i = 0; i < cols; i++){
-          const ch = chars[(Math.random() * chars.length) | 0];
-          const x = i * fontSize;
-          const yy = y[i];
-
-          // Neon-ish mix (keep it subtle)
-          ctx.fillStyle = `rgba(34, 197, 94, ${0.10 + Math.random() * 0.16})`;
-          ctx.fillText(ch, x, yy);
-
-          y[i] += fontSize * (0.8 + Math.random() * 1.4);
-
-          if (y[i] > h + Math.random() * 200){
-            y[i] = -Math.random() * 200;
-          }
-        }
-
-        requestAnimationFrame(draw);
-      }
-
-      function start(){
-        resize();
-        running = true;
-        draw();
-      }
-
-      function stop(){
-        running = false;
-      }
-
-      return { start, stop, resize };
-    })();
-
-    // =========================
-    // FX: Particles / HUD sparks (canvas)
-    // =========================
-    const ParticlesFX = (() => {
-      const canvas = $("#fxParticles");
-      const ctx = canvas.getContext("2d", { alpha: true });
-
-      let w = 0, h = 0, dpr = 1;
-      let particles = [];
-      let running = true;
-
-      function rand(min, max){ return min + Math.random() * (max - min); }
-
-      function resize(){
-        dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-        w = Math.floor(window.innerWidth);
-        h = Math.floor(window.innerHeight);
-        canvas.width = Math.floor(w * dpr);
-        canvas.height = Math.floor(h * dpr);
-        canvas.style.width = w + "px";
-        canvas.style.height = h + "px";
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        const target = clamp(Math.floor((w * h) / 42000), 22, 70);
-        particles = new Array(target).fill(0).map(() => makeParticle(true));
-      }
-
-      function makeParticle(initial){
-        const p = {
-          x: rand(0, w),
-          y: initial ? rand(0, h) : h + rand(10, 220),
-          r: rand(0.8, 2.2),
-          vx: rand(-0.12, 0.12),
-          vy: rand(-0.55, -0.18),
-          a: rand(0.08, 0.22),
-          t: rand(0, Math.PI * 2),
-          tw: rand(0.004, 0.012)
-        };
-        return p;
-      }
-
-      function draw(){
-        if (!running) return;
-
-        ctx.clearRect(0, 0, w, h);
-
-        // Lines grid (very subtle)
-        ctx.globalAlpha = 1;
-        ctx.lineWidth = 1;
-
-        // Particles
-        for (const p of particles){
-          p.t += p.tw;
-          p.x += p.vx + Math.cos(p.t) * 0.08;
-          p.y += p.vy;
-
-          if (p.y < -220 || p.x < -220 || p.x > w + 220){
-            Object.assign(p, makeParticle(false));
-          }
-
-          // glow dot
-          ctx.beginPath();
-          ctx.fillStyle = `rgba(59, 130, 246, ${p.a})`;
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fill();
-
-          // small trail
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(34, 197, 94, ${p.a * 0.7})`;
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p.x - p.vx * 22, p.y - p.vy * 22);
-          ctx.stroke();
-        }
-
-        requestAnimationFrame(draw);
-      }
-
-      function start(){
-        resize();
-        running = true;
-        draw();
-      }
-
-      function stop(){
-        running = false;
-      }
-
-      return { start, stop, resize };
-    })();
-
-    // =========================
-    // Performance / state control
-    // =========================
-    function onVisibility(){
-      const hidden = document.hidden;
-      if (hidden){
-        MatrixFX.stop();
-        ParticlesFX.stop();
-      }else{
-        if (!prefersReducedMotion()){
-          MatrixFX.start();
-          ParticlesFX.start();
-        }
-      }
-    }
-
-    document.addEventListener("visibilitychange", onVisibility);
-
-    // =========================
-    // Resize handling
-    // =========================
-    const onResize = rafThrottle(() => {
-      MatrixFX.resize();
-      ParticlesFX.resize();
-    });
-    window.addEventListener("resize", onResize);
-
-    // =========================
-    // Start FX (respect reduced motion)
-    // =========================
-    if (!prefersReducedMotion()){
-      MatrixFX.start();
-      ParticlesFX.start();
-    }
-
-    // =========================
-    // Extra robustness: smooth anchor offset for sticky nav
-    // =========================
-    function scrollToHash(hash){
-      const el = $(hash);
-      if (!el) return;
-
-      const top = el.getBoundingClientRect().top + window.scrollY;
-      const offset = 110; // sticky nav offset
-      window.scrollTo({ top: Math.max(0, top - offset), behavior: prefersReducedMotion() ? "auto" : "smooth" });
-    }
-
-    // Intercept nav clicks to avoid heading hidden under sticky nav
-    navLinks.forEach(a => {
-      a.addEventListener("click", (e) => {
-        const href = a.getAttribute("href") || "";
-        if (!href.startsWith("#")) return;
+    
+    // Navegación suave
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        history.pushState(null, "", href);
-        scrollToHash(href);
+        const targetId = this.getAttribute('href');
+        if(targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if(targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 100,
+            behavior: 'smooth'
+          });
+          
+          // Actualizar navegación activa
+          document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+          });
+          this.classList.add('active');
+        }
       });
     });
-
-    // If page loads with hash, align it
-    window.addEventListener("load", () => {
-      if (location.hash) scrollToHash(location.hash);
+    
+    // Efecto hover en tarjetas
+    document.querySelectorAll('.plan-card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.zIndex = '10';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.zIndex = '1';
+      });
     });
-
-    // =========================
-    // Harden: prevent layout shift on missing fonts
-    // =========================
-    (function(){
-      // If you add custom fonts later, preload them.
-      // This placeholder keeps the codebase ready.
-      const ok = true;
-      if (!ok) console.warn("Font preload disabled.");
-    })();
-
-    // =========================
-    // Error boundary (front-end)
-    // =========================
-    window.addEventListener("error", (ev) => {
-      // Don't spam user; just minimal toast
-      Toast.show("UI warning: minor script error");
-      // console.error(ev.error || ev.message);
-    });
-
-    window.addEventListener("unhandledrejection", (ev) => {
-      Toast.show("UI warning: async error");
-      // console.error(ev.reason);
-    });
-
-    // =========================
-    // Keep original shine tracking for cards (compat)
-    // =========================
-    document.querySelectorAll(".card:not(.soon)").forEach(card => {
-      card.addEventListener("mousemove", (e) => {
-        const r = card.getBoundingClientRect();
-        const x = ((e.clientX - r.left) / r.width) * 100;
-        const y = ((e.clientY - r.top) / r.height) * 100;
-        card.style.setProperty("--mx", x + "%");
-        card.style.setProperty("--my", y + "%");
-      }, { passive: true });
-    });
-
-    // =========================
-    // Nice-to-have: keyboard focus ring
-    // =========================
-    (function focusVisible(){
-      let usingKeyboard = false;
-
-      function onKeyDown(e){
-        if (e.key === "Tab") usingKeyboard = true;
-      }
-      function onMouseDown(){
-        usingKeyboard = false;
-      }
-      function onFocusIn(e){
-        if (!usingKeyboard) return;
-        const t = e.target;
-        if (t && (t.classList?.contains("cta") || t.classList?.contains("copyBtn") || t.classList?.contains("btn") || t.matches?.(".navLinks a"))){
-          t.style.boxShadow = "0 0 0 6px rgba(34,197,94,.10), 0 0 0 2px rgba(34,197,94,.24) inset";
-          t.style.borderColor = "rgba(34,197,94,.35)";
-        }
-      }
-      function onFocusOut(e){
-        const t = e.target;
-        if (t) {
-          t.style.boxShadow = "";
-          t.style.borderColor = "";
-        }
-      }
-
-      document.addEventListener("keydown", onKeyDown);
-      document.addEventListener("mousedown", onMouseDown, { passive: true });
-      document.addEventListener("focusin", onFocusIn);
-      document.addEventListener("focusout", onFocusOut);
-    })();
-
-    // =========================
-    // Extra: telemetry placeholder (OFF by default)
-    // =========================
-    const Telemetry = (() => {
-      const enabled = false; // keep OFF
-      const events = [];
-
-      function track(type, payload){
-        if (!enabled) return;
-        events.push({
-          type,
-          payload: payload || {},
-          ts: Date.now()
+    
+    // Actualizar navegación al scroll - MEJORADO
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        const scrollPosition = window.scrollY + 150;
+        let currentSection = null;
+        
+        document.querySelectorAll('section[id]').forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          const sectionId = section.getAttribute('id');
+          
+          if(scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            currentSection = sectionId;
+          }
         });
+        
+        if (currentSection) {
+          document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href') === `#${currentSection}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      }, 100);
+    });
+    
+    // Efecto de escritura en el título
+    const title = document.querySelector('.brand-glitch h1');
+    const originalText = title.textContent;
+    
+    function glitchEffect() {
+      const chars = '!@#$%^&*()_+-=[]{}|;:,.<>?';
+      let glitchedText = '';
+      
+      for(let i = 0; i < originalText.length; i++) {
+        if(Math.random() < 0.05) {
+          glitchedText += chars[Math.floor(Math.random() * chars.length)];
+        } else {
+          glitchedText += originalText[i];
+        }
       }
-
-      // Example hooks (disabled)
-      if (enabled){
-        $$(".btn").forEach(b => b.addEventListener("click", () => track("purchase_click", { text: b.textContent.trim() })));
-        $$(".cta").forEach(c => c.addEventListener("click", () => track("cta_click", { text: c.textContent.trim() })));
+      
+      title.textContent = glitchedText;
+      
+      setTimeout(() => {
+        title.textContent = originalText;
+      }, 50);
+    }
+    
+    // Función para copiar nombre de usuario - MEJORADA
+    function copyUsername() {
+      const username = '@xnetvpn';
+      
+      // Usar la API del portapapeles moderna
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(username)
+          .then(() => {
+            showToast('✅ Copiado: @xnetvpn');
+          })
+          .catch(err => {
+            console.error('Error al copiar:', err);
+            fallbackCopy(username);
+          });
+      } else {
+        // Fallback para navegadores antiguos
+        fallbackCopy(username);
       }
-
-      return { track, events };
-    })();
-
-    // =========================
-    // Micro-optimizations: mark heavy layers
-    // =========================
-    (function(){
-      // Ensure canvases stay behind without forcing repaints
-      const fx = $$(".fx");
-      fx.forEach(c => {
-        c.style.transform = "translateZ(0)";
-        c.style.willChange = "transform";
+    }
+    
+    // Método fallback para copiar
+    function fallbackCopy(text) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          showToast('✅ Copiado: @xnetvpn');
+        } else {
+          showToast('❌ Error al copiar');
+        }
+      } catch (err) {
+        console.error('Error al copiar:', err);
+        showToast('❌ Error al copiar');
+      }
+      
+      document.body.removeChild(textArea);
+    }
+    
+    // Mostrar toast notification
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      
+      toastMessage.textContent = message;
+      toast.classList.add('show');
+      
+      // Efecto visual en la caja de usuario
+      const usernameBox = document.getElementById('usernameBox');
+      if (usernameBox) {
+        usernameBox.style.transform = 'scale(0.98)';
+        usernameBox.style.boxShadow = '0 0 30px rgba(64, 224, 208, 0.4)';
+        
+        setTimeout(() => {
+          usernameBox.style.transform = '';
+          usernameBox.style.boxShadow = '';
+        }, 300);
+      }
+      
+      // Ocultar toast después de 3 segundos
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+    
+    // Efecto de brillo al pasar cursor sobre botones
+    document.querySelectorAll('.plan-button, .copy-button, .discord-button').forEach(button => {
+      if (!button) return;
+      
+      button.addEventListener('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        
+        if(this.classList.contains('plan-button')) {
+          this.style.background = `radial-gradient(circle at ${x}% ${y}%, var(--neonCyan), var(--neonBlue))`;
+        }
       });
-    })();
+      
+      button.addEventListener('mouseleave', function() {
+        if(this.classList.contains('plan-button')) {
+          this.style.background = 'linear-gradient(45deg, var(--neonBlue), var(--neonCyan))';
+        }
+      });
+    });
+    
+    // Inicializar efectos
+    window.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      setInterval(glitchEffect, 3000);
+      
+      // Resaltar primer enlace de navegación
+      if(window.location.hash) {
+        const activeLink = document.querySelector(`a[href="${window.location.hash}"]`);
+        if(activeLink) {
+          activeLink.classList.add('active');
+        }
+      } else {
+        const firstNavLink = document.querySelector('.nav-link');
+        if (firstNavLink) {
+          firstNavLink.classList.add('active');
+        }
+      }
+      
+      
+      const usernameBox = document.getElementById('usernameBox');
+      if (usernameBox) {
+        usernameBox.addEventListener('click', copyUsername);
+      }
+      
+      
+      document.querySelectorAll('.comparison-table tr').forEach(row => {
+        row.addEventListener('mouseenter', function() {
+          this.style.backgroundColor = 'rgba(64, 224, 208, 0.05)';
+        });
+        
+        row.addEventListener('mouseleave', function() {
+          this.style.backgroundColor = '';
+        });
+      });
+      
+      
+      document.querySelectorAll('.plan-badge').forEach(badge => {
+        badge.remove();
+      });
+      
+      
+      document.querySelectorAll('.plan-card').forEach(card => {
+        if (card.offsetHeight < 500) {
+          card.style.minHeight = '500px';
+        }
+      });
+    });
+    
+    // Fix para el problema de scroll en móviles
+    window.addEventListener('touchmove', function(e) {
+      if (e.target.classList.contains('plan-button') || 
+          e.target.classList.contains('copy-button') || 
+          e.target.classList.contains('discord-button')) {
+        e.preventDefault();
+      }
+    }, { passive: false });
   </script>
 </body>
 </html>
