@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>SecureNET | VPN de Alto Rendimiento</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SecureNET VPN - Gaming VPN con Anti-DDoS y baja latencia">
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#070b12" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHsSURBVHgB7VdLUhtBEH1dCiU+xiHYBhu8Ihdw7AuYq7AiyQ1wbpBwA3MDcgNwA3MDcgNwA+QGhC9gK5w9M1I1X6m7p4eR0CReqVZTUz3T/fq9HuB/giQG/G8A/tw+eL14fP2ZEpbXj4/vr/bn01eccA6T0Nk9/z34+Xj3+U2A2QPdA3jP9Y+7396eHq4/rYqA42SNN2c/XgIAIPgJZLK2+qbLwE1xH/C09Qj3dH1zCW0JAIlJEQDLFwFIygoAvCQAkD6Izz9W12ZNi+bxW+PcCAAVq0gWpBEAJEsJAMksjYAkmSVlS2ZxXgYg3v0qAiDJFwFIMk8EgFciE5enJp4qjQYgSc4TASi/JwJQfE8EoPSeiL8AvKcCkFp3CyjX3YoANM8lAkB+kAhAfiERgPxKIgD5rUQA8j4RgHxIBCD3RADyP4kA5EMiALknApCfSAQg90QA8p4IQO6JAORHIgC5JwKQeyIAeU8EIPdEAPJDBPCeu0p2EfkRAshu5b2n7iZ1K+89Wzcq+T4CeJ4EMl3d83zrA34g+fHlA7wN0J7n2x1wD/7Fe54PTYC2PN/uAB/Aw/v8jYl2PqANz7c7wJ9AAK15vu2BvuH5dgc8/7pzZ9uugW14vt2R7Rq2AUyGzw8f9eZqAAAAAElFTkSuQmCC" />
+  <style>
+    /* ===== Mismo CSS de tu index maestro ===== */
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --bg:#0a0e17;
+      --bg-gradient:linear-gradient(135deg,#0a0e17 0%,#0d1525 50%,#0a1422 100%);
+      --card:rgba(16,42,67,0.7);
+      --border:rgba(64,224,208,0.3);
+      --text:rgba(255,255,255,.95);
+      --muted:#b0d0ff;
+      --neonCyan:#40e0d0;
+      --neonBlue:#00b4ff;
+      --neonPurple:#8c55ff;
+      --neonPink:#ff55ff;
+      --shadowDeep:0 25px 80px rgba(0,50,100,0.4);
+      --glass:rgba(255,255,255,0.05);
+      --ease:cubic-bezier(.2,.8,.2,1);
+    }
+    [data-theme=light]{
+      --bg:#f0f4ff;
+      --bg-gradient:linear-gradient(135deg,#f0f4ff 0%,#fff 50%,#e6f0ff 100%);
+      --card:rgba(255,255,255,0.9);
+      --border:rgba(0,150,200,0.3);
+      --text:#0a0e17;
+      --muted:#1a2a3a;
+      --neonCyan:#0096c8;
+      --neonBlue:#0066ff;
+      --neonPurple:#6633cc;
+      --neonPink:#cc33cc;
+    }
+    [data-theme=hacker]{
+      --bg:#0f0f0f;
+      --bg-gradient:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 50%,#0a0a0a 100%);
+      --card:#0a0a0a;
+      --border:#0f0;
+      --text:#0f0;
+      --muted:#0c0;
+      --neonCyan:#0f0;
+      --neonBlue:#0d0;
+      --neonPurple:#0c0;
+      --neonPink:#0e0;
+      font-family:'Courier New',monospace;
+    }
+    [data-theme=hacker] button{background:#0f0!important;color:#000!important;box-shadow:0 0 20px #0f0;}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg-gradient);
+      color:var(--text);
+      min-height:100vh;
+      transition:.3s;
+      overflow-x:hidden;
+    }
+    #canvas-3d{
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      z-index:-1;
+      pointer-events:none;
+    }
+    .app{min-height:100vh;display:flex;flex-direction:column;}
+
+    /* HEADER FIJO */
+    .main-header{
+      background:rgba(10,20,30,0.95);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:9999;
+      padding:12px 0;
+    }
+    .header-spacer{height:100px;}
+
+    /* MENU HAMBURGUESA */
+    .menu-container{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 20px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .logo-icon{
+      font-size:32px;
+      color:var(--neonCyan);
+      filter:drop-shadow(0 0 10px var(--neonCyan));
+    }
+    .logo-text h1{
+      font-size:20px;
+      font-weight:700;
+      background:linear-gradient(45deg,#fff,var(--neonCyan),var(--neonBlue));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .logo-text span{font-size:12px;color:var(--muted);}
+
+    /* BOTON HAMBURGUESA */
+    .hamburger{
+      width:45px;height:45px;
+      background:rgba(64,224,208,0.1);
+      border:1px solid var(--border);
+      border-radius:12px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:6px;
+      cursor:pointer;
+      transition:.3s;
+      z-index:10000;
+    }
+    .hamburger:hover{
+      background:rgba(64,224,208,0.2);
+      border-color:var(--neonCyan);
+    }
+    .hamburger span{
+      width:25px;height:2px;
+      background:var(--neonCyan);
+      border-radius:2px;
+      transition:.3s;
+    }
+    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(6px,6px);}
+    .hamburger.active span:nth-child(2){opacity:0;}
+    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
+
+    /* DASHBOARD MENU LATERAL */
+    .dashboard-menu{
+      position:fixed;
+      top:80px;right:-300px;
+      width:280px;
+      height:calc(100vh - 80px);
+      background:rgba(10,20,30,0.95);
+      backdrop-filter:blur(20px);
+      border-left:1px solid var(--border);
+      padding:30px 20px;
+      transition:right 0.4s var(--ease);
+      z-index:9998;
+      box-shadow:-5px 0 30px rgba(0,0,0,0.5);
+    }
+    .dashboard-menu.open{right:0;}
+    .dashboard-header{
+      font-size:18px;
+      color:var(--neonCyan);
+      margin-bottom:30px;
+      padding-bottom:15px;
+      border-bottom:1px solid var(--border);
+      text-transform:uppercase;
+      letter-spacing:2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .dashboard-header i{
+      font-size:20px;
+    }
+    .dashboard-item{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      padding:15px;
+      color:var(--muted);
+      text-decoration:none;
+      border-radius:12px;
+      margin-bottom:5px;
+      transition:.2s;
+      cursor:pointer;
+      font-size:15px;
+    }
+    .dashboard-item i{
+      width:20px;
+      text-align:center;
+    }
+    .dashboard-item:hover{
+      background:rgba(64,224,208,0.1);
+      color:var(--neonCyan);
+    }
+    .dashboard-item.active{
+      background:linear-gradient(45deg,var(--neonBlue),var(--neonCyan));
+      color:white;
+    }
+    .dashboard-footer{
+      position:absolute;
+      bottom:30px;
+      left:20px;
+      right:20px;
+    }
+    .theme-selector-dashboard{
+      display:flex;
+      gap:5px;
+      background:rgba(0,0,0,0.3);
+      padding:4px;
+      border-radius:50px;
+      border:1px solid var(--border);
+      margin-top:15px;
+    }
+    .theme-btn-dashboard{
+      flex:1;
+      padding:8px;
+      border:none;
+      background:transparent;
+      color:var(--muted);
+      border-radius:50px;
+      cursor:pointer;
+      font-size:14px;
+      transition:.2s;
+    }
+    .theme-btn-dashboard.active{
+      background:var(--neonCyan);
+      color:var(--bg);
+    }
+
+    /* MAIN CONTENT */
+    .container{
+      max-width:1400px;
+      margin:0 auto;
+      padding:0 20px;
+      width:100%;
+    }
+    .tab-content{display:none;animation:fadeIn .4s;}
+    .tab-content.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .section-title{
+      font-size:32px;
+      margin:30px 0 20px;
+      text-align:center;
+      background:linear-gradient(45deg,var(--neonCyan),var(--neonBlue),var(--neonPurple));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    /* WELCOME SECTION */
+    .welcome-section{
+      min-height:80vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+    .hero-content{
+      text-align:center;
+      max-width:900px;
+      padding:50px;
+      background:rgba(20,30,50,0.4);
+      backdrop-filter:blur(10px);
+      border:1px solid var(--border);
+      border-radius:40px;
+      box-shadow:0 30px 60px rgba(0,0,0,0.4);
+    }
+    .hero-badge{
+      display:inline-block;
+      background:linear-gradient(45deg,var(--neonCyan),var(--neonBlue));
+      padding:8px 20px;
+      border-radius:50px;
+      color:white;
+      margin-bottom:30px;
+      font-weight:600;
+      letter-spacing:1px;
+    }
+    .hero-title{
+      font-size:clamp(40px,8vw,72px);
+      font-weight:800;
+      line-height:1.1;
+      margin-bottom:30px;
+    }
+    .gradient-text{
+      background:linear-gradient(45deg,var(--neonCyan),var(--neonBlue),var(--neonPurple),var(--neonPink));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-size:300%;
+      animation:gradient 8s ease infinite;
+    }
+    @keyframes gradient{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
+    .hero-description{
+      font-size:18px;
+      color:var(--muted);
+      margin-bottom:40px;
+      line-height:1.6;
+    }
+    .hero-stats{
+      display:flex;
+      justify-content:center;
+      gap:40px;
+      margin:40px 0;
+      flex-wrap:wrap;
+    }
+    .stat-item{
+      text-align:center;
+      padding:20px 30px;
+      background:rgba(0,0,0,0.3);
+      border-radius:20px;
+      border:1px solid var(--border);
+    }
+    .stat-number{
+      font-size:42px;
+      font-weight:800;
+      color:var(--neonCyan);
+      text-shadow:0 0 20px var(--neonCyan);
+    }
+    .btn-primary{
+      background:linear-gradient(45deg,var(--neonBlue),var(--neonCyan),var(--neonPurple));
+      background-size:200%;
+      animation:btnGradient 3s ease infinite;
+      color:white;
+      border:none;
+      padding:16px 40px;
+      border-radius:50px;
+      font-size:16px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.3s;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+    }
+    .btn-primary i{
+      font-size:18px;
+    }
+    @keyframes btnGradient{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(64,224,208,0.4);}
+
+    /* PROMO BANNER */
+    .promo-banner{
+      background:linear-gradient(45deg,var(--neonPurple),var(--neonPink));
+      border-radius:20px;
+      padding:20px 30px;
+      margin:30px 0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:20px;
+      animation:pulse 2s infinite;
+    }
+    @keyframes pulse{0%{opacity:1}50%{opacity:0.9}100%{opacity:1}}
+    .promo-text{
+      color:white;
+      font-size:20px;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .promo-text i{
+      font-size:24px;
+    }
+    .promo-code{
+      background:rgba(0,0,0,0.3);
+      padding:12px 25px;
+      border-radius:50px;
+      font-family:'Courier New',monospace;
+      font-size:24px;
+      font-weight:800;
+      color:white;
+      border:2px dashed white;
+    }
+
+    /* PAYMENT METHODS BANNER */
+    .payment-banner{
+      background:rgba(64,224,208,0.1);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:15px 25px;
+      margin:30px 0;
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+      justify-content:center;
+      align-items:center;
+    }
+    .payment-banner span{
+      color:var(--muted);
+      font-size:14px;
+    }
+    .payment-icons{
+      display:flex;
+      gap:15px;
+    }
+    .payment-icons i{
+      font-size:24px;
+      color:var(--neonCyan);
+      transition:.3s;
+    }
+    .payment-icons i:hover{
+      transform:translateY(-3px);
+      color:var(--neonBlue);
+    }
+
+    /* FOOTER */
+    .main-footer{
+      background:rgba(10,20,30,0.8);
+      backdrop-filter:blur(10px);
+      border-top:1px solid var(--border);
+      padding:60px 0 30px;
+      margin-top:60px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:40px;
+      margin-bottom:40px;
+    }
+    .footer-col h4{
+      color:var(--neonCyan);
+      margin-bottom:20px;
+      font-size:18px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .footer-col ul li{
+      list-style:none;
+      margin-bottom:12px;
+    }
+    .footer-col ul li a{
+      color:var(--muted);
+      text-decoration:none;
+      cursor:pointer;
+      transition:.2s;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .footer-col ul li a i{
+      width:16px;
+    }
+    .footer-col ul li a:hover{
+      color:var(--neonCyan);
+      padding-left:5px;
+    }
+    .footer-bottom{
+      text-align:center;
+      padding-top:30px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* TOAST */
+    .toast{
+      position:fixed;
+      bottom:30px;left:50%;
+      transform:translateX(-50%) translateY(100px);
+      background:linear-gradient(45deg,rgba(16,42,67,0.9),rgba(10,30,50,0.9));
+      border:1px solid var(--neonCyan);
+      border-radius:20px;
+      padding:16px 30px;
+      color:white;
+      z-index:10000;
+      opacity:0;
+      transition:.4s;
+      backdrop-filter:blur(10px);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .toast i{
+      color:var(--neonCyan);
+    }
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+    @media (max-width:768px){
+      .contact-grid{grid-template-columns:1fr;}
+      .discord-card{grid-column:span 1;}
+      .dashboard-menu{width:250px;}
+      .hero-content{padding:30px;}
+      .plan-header{flex-direction:column;align-items:flex-start;}
+      .plan-price{width:100%;}
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <canvas id="canvas-3d"></canvas>
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span></span>
+  </div>
+
+  <div class="app">
+    <header class="main-header">
+      <div class="menu-container">
+        <div class="logo">
+          <span class="logo-icon"><i class="fas fa-shield-halos"></i></span>
+          <div class="logo-text">
+            <h1>SecureNET</h1>
+            <span>VPN Solutions</span>
+          </div>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD MENU -->
+    <div class="dashboard-menu" id="dashboardMenu">
+      <div class="dashboard-header"><i class="fas fa-bars"></i> MENÚ PRINCIPAL</div>
+      
+      <a href="index.html" class="dashboard-item active">
+        <i class="fas fa-home"></i> Inicio
+      </a>
+      <a href="about.html" class="dashboard-item">
+        <i class="fas fa-users"></i> Sobre Nosotros
+      </a>
+      <a href="locations.html" class="dashboard-item">
+        <i class="fas fa-globe-americas"></i> Ubicaciones
+      </a>
+      <a href="plans.html" class="dashboard-item">
+        <i class="fas fa-tags"></i> Planes
+      </a>
+      <a href="map.html" class="dashboard-item">
+        <i class="fas fa-map-marked-alt"></i> Mapa
+      </a>
+      <a href="faq.html" class="dashboard-item">
+        <i class="fas fa-question-circle"></i> FAQ
+      </a>
+      <a href="tools.html" class="dashboard-item">
+        <i class="fas fa-tools"></i> Herramientas
+      </a>
+      <a href="social.html" class="dashboard-item">
+        <i class="fas fa-share-alt"></i> Redes Sociales
+      </a>
+      <a href="comparison.html" class="dashboard-item">
+        <i class="fas fa-chart-bar"></i> Comparativa
+      </a>
+      <a href="contact.html" class="dashboard-item">
+        <i class="fas fa-envelope"></i> Contacto
+      </a>
+      <a href="privacy-policy.html" class="dashboard-item">
+        <i class="fas fa-lock"></i> Privacidad
+      </a>
+      <a href="terms.html" class="dashboard-item">
+        <i class="fas fa-file-contract"></i> Términos
+      </a>
+
+      <div class="dashboard-footer">
+        <a href="https://discord.gg/ZSg4CrbEXR" target="_blank" class="dashboard-item" style="margin-bottom:10px;">
+          <i class="fab fa-discord"></i> Discord
+        </a>
+        <div class="theme-selector-dashboard">
+          <button class="theme-btn-dashboard active" onclick="setTheme('dark')"><i class="fas fa-moon"></i></button>
+          <button class="theme-btn-dashboard" onclick="setTheme('light')"><i class="fas fa-sun"></i></button>
+          <button class="theme-btn-dashboard" onclick="setTheme('hacker')"><i class="fas fa-code"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-spacer"></div>
+
+    <main class="container">
+      <!-- WELCOME TAB - SIEMPRE ACTIVO EN INDEX -->
+      <div class="tab-content active">
+        <section class="welcome-section">
+          <div class="hero-content">
+            <span class="hero-badge"><i class="fas fa-bolt"></i> NEXT GEN VPN</span>
+            <h1 class="hero-title">Conecta con <span class="gradient-text">seguridad total</span></h1>
+            <p class="hero-description">
+              <i class="fas fa-shield-virus"></i> Protección Anti-DDoS • 
+              <i class="fas fa-tachometer-alt"></i> Baja latencia • 
+              <i class="fas fa-gamepad"></i> Gaming VPN • 
+              <i class="fas fa-globe"></i> 6 ubicaciones globales
+            </p>
+            
+            <!-- PROMO BANNER -->
+            <div class="promo-banner">
+              <span class="promo-text"><i class="fas fa-gift"></i> OFERTA ESPECIAL 20% EN PLANES DUAL</span>
+              <span class="promo-code">DUAL20</span>
+            </div>
+
+            <!-- MÉTODOS DE PAGO -->
+            <div class="payment-banner">
+              <span><i class="fas fa-credit-card"></i> Aceptamos:</span>
+              <div class="payment-icons">
+                <i class="fab fa-paypal" title="PayPal"></i>
+                <i class="fas fa-dollar-sign" title="Cash App"></i>
+                <i class="fab fa-apple-pay" title="Apple Pay"></i>
+                <i class="fab fa-bitcoin" title="Bitcoin"></i>
+              </div>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-number"><i class="fas fa-map-pin"></i> 6</div>
+                <div>Ubicaciones</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number"><i class="fas fa-chart-line"></i> 99.9%</div>
+                <div>Uptime</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number"><i class="fas fa-headset"></i> 24/7</div>
+                <div>Soporte</div>
+              </div>
+            </div>
+            <a href="locations.html" class="btn-primary">
+              Comenzar ahora <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4><i class="fas fa-shield-halos"></i> SecureNET</h4>
+            <ul>
+              <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+              <li><a href="about.html"><i class="fas fa-users"></i> Sobre Nosotros</a></li>
+              <li><a href="locations.html"><i class="fas fa-globe-americas"></i> Ubicaciones</a></li>
+              <li><a href="plans.html"><i class="fas fa-tags"></i> Planes</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4><i class="fas fa-link"></i> Recursos</h4>
+            <ul>
+              <li><a href="map.html"><i class="fas fa-map-marked-alt"></i> Mapa</a></li>
+              <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+              <li><a href="tools.html"><i class="fas fa-tools"></i> Herramientas</a></li>
+              <li><a href="comparison.html"><i class="fas fa-chart-bar"></i> Comparativa</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4><i class="fas fa-share-alt"></i> Redes</h4>
+            <ul>
+              <li><a href="social.html"><i class="fab fa-instagram"></i> Instagram</a></li>
+              <li><a href="https://discord.gg/ZSg4CrbEXR" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+              <li><a href="contact.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+              <li><a href="privacy-policy.html"><i class="fas fa-lock"></i> Privacidad</a></li>
+              <li><a href="terms.html"><i class="fas fa-file-contract"></i> Términos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2024 SecureNET • <i class="fas fa-bolt"></i> VPN de alto rendimiento • <i class="fas fa-credit-card"></i> PayPal, Cash App, Apple Pay, Bitcoin</p>
+          <p style="margin-top:10px;font-size:12px;">Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx • <i class="fas fa-tag"></i> 20% OFF en DUAL</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const DISCORD_LINK='https://discord.gg/ZSg4CrbEXR';
+    const planTypes=[
+      {name:'BASIC',class:'basic',icon:'🟦',price:'$5.99',users:'1 conexión',gaming:'COD/RDR/GTA friendly'},
+      {name:'STANDARD',class:'standard',icon:'⭐',price:'$12.99',users:'Hasta 3',gaming:'Optimizado gaming'},
+      {name:'PREMIUM',class:'premium',icon:'💎',price:'$19.99',users:'Hasta 6',gaming:'Máximo rendimiento'},
+      {name:'DUAL',class:'dual',icon:'🌐',price:'$24.99',users:'Hasta 4',gaming:'Doble ubicación'}
+    ];
+    const locations=[
+      {id:'los-angeles',name:'Los Angeles, CA',displayName:'LOS ANGELES',flag:'🇺🇸',description:'Costa Oeste USA - Ideal para gaming',status:'available',ping:45,comingSoon:false},
+      {id:'dallas',name:'Dallas, Texas',displayName:'DALLAS',flag:'🇺🇸',description:'Centro USA - Latencia ultra baja',status:'available',ping:35,comingSoon:false},
+      {id:'miami',name:'Miami, Florida',displayName:'MIAMI',flag:'🇺🇸',description:'Conectividad con Latinoamérica',status:'soon',ping:60,comingSoon:true},
+      {id:'paris',name:'Paris, Francia',displayName:'PARIS',flag:'🇫🇷',description:'Primera ubicación europea',status:'soon',ping:90,comingSoon:true},
+      {id:'new-york',name:'New York, NY',displayName:'NEW YORK',flag:'🇺🇸',description:'Costa Este - Negocios',status:'soon',ping:50,comingSoon:true},
+      {id:'chicago',name:'Chicago, Illinois',displayName:'CHICAGO',flag:'🇺🇸',description:'Medio Oeste - Gaming',status:'soon',ping:40,comingSoon:true}
+    ];
+    let selectedLocation=null;
+
+    // 3D ANIMATION
+    const canvas=document.getElementById('canvas-3d'),ctx=canvas.getContext('2d');
+    canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+    const particles=[];
+    for(let i=0;i<70;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,z:Math.random()*1000,size:Math.random()*2+1,speed:Math.random()*2+1});
+    function animate3D(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      const theme=document.body.dataset.theme,color=theme==='hacker'?'#0f0':theme==='light'?'#06f':'#0ff';
+      particles.forEach(p=>{
+        p.z-=p.speed;if(p.z<=0){p.z=1000;p.x=Math.random()*canvas.width;p.y=Math.random()*canvas.height;}
+        const scale=500/p.z,x2d=(p.x-canvas.width/2)*scale+canvas.width/2,y2d=(p.y-canvas.height/2)*scale+canvas.height/2;
+        ctx.beginPath();ctx.arc(x2d,y2d,p.size*scale,0,Math.PI*2);ctx.fillStyle=color;ctx.shadowColor=color;ctx.shadowBlur=10;ctx.fill();
+      });requestAnimationFrame(animate3D);
+    }
+    animate3D();
+    window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+    function toggleMenu(){
+      document.getElementById('hamburger').classList.toggle('active');
+      document.getElementById('dashboardMenu').classList.toggle('open');
+    }
+    
+    function setTheme(theme){
+      document.body.dataset.theme = theme;
+      localStorage.setItem('securenet-theme', theme);
+      document.querySelectorAll('.theme-btn-dashboard').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.theme-btn-dashboard[onclick*="${theme}"]`).classList.add('active');
+    }
+    
+    function renderLocationsGrid(){
+      const grid = document.getElementById('locations-grid');
+      if(!grid) return;
+      grid.innerHTML=locations.map(l=>`
+        <div class="location-card ${selectedLocation===l.id?'selected':''}" onclick="selectLocation('${l.id}')">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+            <h3>${l.flag} ${l.displayName}</h3>
+            <span class="status-badge ${l.status==='available'?'status-available':'status-soon'}">${l.status==='available'?'✅ DISPONIBLE':'⏳ PRÓXIMAMENTE'}</span>
+          </div>
+          <p style="color:var(--muted);margin-bottom:20px;">${l.description}</p>
+          <div style="display:flex;align-items:center;gap:8px;"><span>📡 ${l.ping}ms</span><div style="flex:1;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;"><div style="width:${Math.min(100,100-l.ping/2)}%;height:100%;background:linear-gradient(90deg,var(--neonCyan),var(--neonBlue));border-radius:2px;"></div></div></div>
+        </div>`).join('');
+    }
+
+    function selectLocation(id){
+      selectedLocation=id;const l=locations.find(l=>l.id===id);
+      document.getElementById('selected-location-plans').style.display='block';
+      document.getElementById('selected-location-name').textContent=`${l.flag} ${l.displayName}`;
+      document.getElementById('location-plans-grid').innerHTML=planTypes.map(p=>`
+        <div class="plan-card ${p.class} ${p.name==='STANDARD'?'recommended':''}">
+          <div class="plan-header">
+            <div class="plan-name">${p.icon} ${p.name}</div>
+            <div class="plan-price">${p.price}</div>
+          </div>
+          <div class="plan-features">
+            <div class="feature-item"><span>👥</span><div><div>Usuarios</div><small>${p.users}</small></div></div>
+            <div class="feature-item"><span>🌍</span><div><div>Ubicación</div><small>${l.displayName}</small></div></div>
+            <div class="feature-item"><span>🛡️</span><div><div>Protección</div><small>Anti-DDoS</small></div></div>
+            <div class="feature-item"><span>🎮</span><div><div>Gaming</div><small>${p.gaming}</small></div></div>
+          </div>
+          ${!l.comingSoon?`<a href="${DISCORD_LINK}" target="_blank" class="plan-button">COMPRAR ${p.name}</a>`:'<button class="plan-button" disabled>PRÓXIMAMENTE</button>'}
+        </div>`).join('');
+      renderLocationsGrid();
+    }
+
+    function clearSelectedLocation(){selectedLocation=null;document.getElementById('selected-location-plans').style.display='none';renderLocationsGrid();}
+    
+    function renderAllLocationsPlans(){
+      const container = document.getElementById('all-locations-plans');
+      if(!container) return;
+      container.innerHTML=locations.map(l=>`
+        <div style="margin:50px 0 30px;"><h2 style="color:var(--neonCyan);font-size:28px;">${l.flag} ${l.displayName}</h2><p style="color:var(--muted);">${l.description}</p></div>
+        <div class="plans-grid">${planTypes.map(p=>`
+          <div class="plan-card ${p.class} ${p.name==='STANDARD'?'recommended':''}">
+            <div class="plan-header">
+              <div class="plan-name">${p.icon} ${p.name}</div>
+              <div class="plan-price">${p.price}</div>
+            </div>
+            <div class="plan-features">
+              <div class="feature-item"><span>👥</span><div><div>Usuarios</div><small>${p.users}</small></div></div>
+              <div class="feature-item"><span>🌍</span><div><div>Ubicación</div><small>${l.displayName}</small></div></div>
+              <div class="feature-item"><span>🛡️</span><div><div>Protección</div><small>Anti-DDoS</small></div></div>
+              <div class="feature-item"><span>🎮</span><div><div>Gaming</div><small>${p.gaming}</small></div></div>
+            </div>
+            ${!l.comingSoon?`<a href="${DISCORD_LINK}" target="_blank" class="plan-button">COMPRAR ${p.name}</a>`:'<button class="plan-button" disabled>PRÓXIMAMENTE</button>'}
+          </div>`).join('')}</div>`).join('');
+    }
+
+    function switchTab(tabId){
+      document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+      document.getElementById(tabId+'-tab').classList.add('active');
+      document.querySelectorAll('.dashboard-item').forEach(i=>i.classList.remove('active'));
+      document.querySelector(`.dashboard-item[onclick*="${tabId}"]`).classList.add('active');
+      if(tabId==='locations')renderLocationsGrid();
+      if(tabId==='plans')renderAllLocationsPlans();
+      if(window.innerWidth<768)toggleMenu();
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+    function copyUsername(username){
+      navigator.clipboard.writeText(username).then(()=>showToast(`Copiado: ${username}`));
+    }
+    function showToast(m){
+      const t=document.getElementById('toast');
+      t.querySelector('span').textContent = m;
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'),2000);
+    }
+
+    window.onload=()=>{
+      // Cargar tema guardado
+      const savedTheme = localStorage.getItem('securenet-theme') || 'dark';
+      document.body.dataset.theme = savedTheme;
+      
+      // Actualizar botones activos
+      document.querySelectorAll('.theme-btn-dashboard').forEach(b => {
+        b.classList.remove('active');
+        if(b.textContent.toLowerCase().includes(savedTheme) || 
+           (savedTheme==='dark' && b.innerHTML.includes('moon')) ||
+           (savedTheme==='light' && b.innerHTML.includes('sun')) ||
+           (savedTheme==='hacker' && b.innerHTML.includes('code'))) {
+          b.classList.add('active');
+        }
+      });
+
+      renderLocationsGrid();
+      document.querySelectorAll('.dashboard-item').forEach(i=>i.addEventListener('click',()=>{if(window.innerWidth<768)toggleMenu();}));
+      window.toggleMenu=toggleMenu;window.setTheme=setTheme;window.switchTab=switchTab;
+      window.selectLocation=selectLocation;window.clearSelectedLocation=clearSelectedLocation;
+      window.copyUsername=copyUsername;
+    };
+  </script>
+</body>
+</html>

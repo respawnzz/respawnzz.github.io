@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ubicaciones | SecureNET VPN</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Servidores SecureNET VPN alrededor del mundo">
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#070b12" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHsSURBVHgB7VdLUhtBEH1dCiU+xiHYBhu8Ihdw7AuYq7AiyQ1wbpBwA3MDcgNwA3MDcgNwA+QGhC9gK5w9M1I1X6m7p4eR0CReqVZTUz3T/fq9HuB/giQG/G8A/tw+eL14fP2ZEpbXj4/vr/bn01eccA6T0Nk9/z34+Xj3+U2A2QPdA3jP9Y+7396eHq4/rYqA42SNN2c/XgIAIPgJZLK2+qbLwE1xH/C09Qj3dH1zCW0JAIlJEQDLFwFIygoAvCQAkD6Izz9W12ZNi+bxW+PcCAAVq0gWpBEAJEsJAMksjYAkmSVlS2ZxXgYg3v0qAiDJFwFIMk8EgFciE5enJp4qjQYgSc4TASi/JwJQfE8EoPSeiL8AvKcCkFp3CyjX3YoANM8lAkB+kAhAfiERgPxKIgD5rUQA8j4RgHxIBCD3RADyP4kA5EMiALknApCfSAQg90QA8p4IQO6JAORHIgC5JwKQeyIAeU8EIPdEAPJDBPCeu0p2EfkRAshu5b2n7iZ1K+89Wzcq+T4CeJ4EMl3d83zrA34g+fHlA7wN0J7n2x1wD/7Fe54PTYC2PN/uAB/Aw/v8jYl2PqANz7c7wJ9AAK15vu2BvuH5dgc8/7pzZ9uugW14vt2R7Rq2AUyGzw8f9eZqAAAAAElFTkSuQmCC" />
+  <style>
+    /* ===== Mismo CSS del index ===== */
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --bg:#0a0e17;
+      --bg-gradient:linear-gradient(135deg,#0a0e17 0%,#0d1525 50%,#0a1422 100%);
+      --card:rgba(16,42,67,0.7);
+      --border:rgba(64,224,208,0.3);
+      --text:rgba(255,255,255,.95);
+      --muted:#b0d0ff;
+      --neonCyan:#40e0d0;
+      --neonBlue:#00b4ff;
+      --neonPurple:#8c55ff;
+      --neonPink:#ff55ff;
+      --shadowDeep:0 25px 80px rgba(0,50,100,0.4);
+      --glass:rgba(255,255,255,0.05);
+      --ease:cubic-bezier(.2,.8,.2,1);
+    }
+    [data-theme=light]{
+      --bg:#f0f4ff;
+      --bg-gradient:linear-gradient(135deg,#f0f4ff 0%,#fff 50%,#e6f0ff 100%);
+      --card:rgba(255,255,255,0.9);
+      --border:rgba(0,150,200,0.3);
+      --text:#0a0e17;
+      --muted:#1a2a3a;
+      --neonCyan:#0096c8;
+      --neonBlue:#0066ff;
+      --neonPurple:#6633cc;
+      --neonPink:#cc33cc;
+    }
+    [data-theme=hacker]{
+      --bg:#0f0f0f;
+      --bg-gradient:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 50%,#0a0a0a 100%);
+      --card:#0a0a0a;
+      --border:#0f0;
+      --text:#0f0;
+      --muted:#0c0;
+      --neonCyan:#0f0;
+      --neonBlue:#0d0;
+      --neonPurple:#0c0;
+      --neonPink:#0e0;
+      font-family:'Courier New',monospace;
+    }
+    [data-theme=hacker] button{background:#0f0!important;color:#000!important;box-shadow:0 0 20px #0f0;}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg-gradient);
+      color:var(--text);
+      min-height:100vh;
+      transition:.3s;
+      overflow-x:hidden;
+    }
+    #canvas-3d{
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      z-index:-1;
+      pointer-events:none;
+    }
+    .app{min-height:100vh;display:flex;flex-direction:column;}
+
+    /* HEADER FIJO */
+    .main-header{
+      background:rgba(10,20,30,0.95);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:9999;
+      padding:12px 0;
+    }
+    .header-spacer{height:100px;}
+
+    /* MENU HAMBURGUESA */
+    .menu-container{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 20px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .logo-icon{
+      font-size:32px;
+      color:var(--neonCyan);
+      filter:drop-shadow(0 0 10px var(--neonCyan));
+    }
+    .logo-text h1{
+      font-size:20px;
+      font-weight:700;
+      background:linear-gradient(45deg,#fff,var(--neonCyan),var(--neonBlue));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .logo-text span{font-size:12px;color:var(--muted);}
+
+    /* BOTON HAMBURGUESA */
+    .hamburger{
+      width:45px;height:45px;
+      background:rgba(64,224,208,0.1);
+      border:1px solid var(--border);
+      border-radius:12px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:6px;
+      cursor:pointer;
+      transition:.3s;
+      z-index:10000;
+    }
+    .hamburger:hover{
+      background:rgba(64,224,208,0.2);
+      border-color:var(--neonCyan);
+    }
+    .hamburger span{
+      width:25px;height:2px;
+      background:var(--neonCyan);
+      border-radius:2px;
+      transition:.3s;
+    }
+    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(6px,6px);}
+    .hamburger.active span:nth-child(2){opacity:0;}
+    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
+
+    /* DASHBOARD MENU LATERAL */
+    .dashboard-menu{
+      position:fixed;
+      top:80px;right:-300px;
+      width:280px;
+      height:calc(100vh - 80px);
+      background:rgba(10,20,30,0.95);
+      backdrop-filter:blur(20px);
+      border-left:1px solid var(--border);
+      padding:30px 20px;
+      transition:right 0.4s var(--ease);
+      z-index:9998;
+      box-shadow:-5px 0 30px rgba(0,0,0,0.5);
+    }
+    .dashboard-menu.open{right:0;}
+    .dashboard-header{
+      font-size:18px;
+      color:var(--neonCyan);
+      margin-bottom:30px;
+      padding-bottom:15px;
+      border-bottom:1px solid var(--border);
+      text-transform:uppercase;
+      letter-spacing:2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .dashboard-header i{
+      font-size:20px;
+    }
+    .dashboard-item{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      padding:15px;
+      color:var(--muted);
+      text-decoration:none;
+      border-radius:12px;
+      margin-bottom:5px;
+      transition:.2s;
+      cursor:pointer;
+      font-size:15px;
+    }
+    .dashboard-item i{
+      width:20px;
+      text-align:center;
+    }
+    .dashboard-item:hover{
+      background:rgba(64,224,208,0.1);
+      color:var(--neonCyan);
+    }
+    .dashboard-item.active{
+      background:linear-gradient(45deg,var(--neonBlue),var(--neonCyan));
+      color:white;
+    }
+    .dashboard-footer{
+      position:absolute;
+      bottom:30px;
+      left:20px;
+      right:20px;
+    }
+    .theme-selector-dashboard{
+      display:flex;
+      gap:5px;
+      background:rgba(0,0,0,0.3);
+      padding:4px;
+      border-radius:50px;
+      border:1px solid var(--border);
+      margin-top:15px;
+    }
+    .theme-btn-dashboard{
+      flex:1;
+      padding:8px;
+      border:none;
+      background:transparent;
+      color:var(--muted);
+      border-radius:50px;
+      cursor:pointer;
+      font-size:14px;
+      transition:.2s;
+    }
+    .theme-btn-dashboard.active{
+      background:var(--neonCyan);
+      color:var(--bg);
+    }
+
+    /* MAIN CONTENT */
+    .container{
+      max-width:1400px;
+      margin:0 auto;
+      padding:0 20px;
+      width:100%;
+    }
+    .section-title{
+      font-size:32px;
+      margin:30px 0 20px;
+      text-align:center;
+      background:linear-gradient(45deg,var(--neonCyan),var(--neonBlue),var(--neonPurple));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .section-subtitle{
+      text-align:center;
+      color:var(--muted);
+      margin-bottom:30px;
+      font-size:16px;
+    }
+
+    /* PAYMENT METHODS BANNER */
+    .payment-banner{
+      background:rgba(64,224,208,0.1);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:15px 25px;
+      margin:30px 0;
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+      justify-content:center;
+      align-items:center;
+    }
+    .payment-banner span{
+      color:var(--muted);
+      font-size:14px;
+    }
+    .payment-icons{
+      display:flex;
+      gap:15px;
+    }
+    .payment-icons i{
+      font-size:24px;
+      color:var(--neonCyan);
+      transition:.3s;
+    }
+    .payment-icons i:hover{
+      transform:translateY(-3px);
+      color:var(--neonBlue);
+    }
+
+    /* LOCATIONS GRID */
+    .locations-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:25px;
+      margin:40px 0;
+    }
+    .location-card{
+      background:rgba(20,30,50,0.6);
+      backdrop-filter:blur(10px);
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:25px;
+      cursor:pointer;
+      transition:.3s;
+    }
+    .location-card:hover{
+      transform:translateY(-8px);
+      border-color:var(--neonCyan);
+      box-shadow:0 20px 40px rgba(64,224,208,0.2);
+    }
+    .location-card.selected{
+      border-color:var(--neonCyan);
+      background:rgba(64,224,208,0.1);
+      box-shadow:0 0 30px rgba(64,224,208,0.3);
+    }
+    .location-card h3{
+      font-size:22px;
+      color:var(--neonCyan);
+      margin-bottom:10px;
+      display:flex;
+      align-items:center;
+      gap:5px;
+    }
+
+    /* STATUS BADGES */
+    .status-badge{
+      padding:6px 16px;
+      border-radius:50px;
+      font-size:13px;
+      font-weight:600;
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      white-space:nowrap;
+    }
+    .status-available{
+      background:rgba(64,224,208,0.2);
+      color:var(--neonCyan);
+      border:1px solid rgba(64,224,208,0.3);
+    }
+    .status-soon{
+      background:rgba(255,170,0,0.2);
+      color:#ffaa00;
+      border:1px solid rgba(255,170,0,0.3);
+    }
+
+    /* PERIOD SELECTOR */
+    .period-selector{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      margin:30px 0;
+      flex-wrap:wrap;
+    }
+    .period-btn{
+      padding:12px 25px;
+      background:transparent;
+      border:1px solid var(--border);
+      border-radius:50px;
+      color:var(--muted);
+      cursor:pointer;
+      transition:.3s;
+      font-size:14px;
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .period-btn i{
+      font-size:16px;
+    }
+    .period-btn:hover{
+      background:rgba(64,224,208,0.1);
+      color:var(--neonCyan);
+    }
+    .period-btn.active{
+      background:linear-gradient(45deg,var(--neonBlue),var(--neonCyan));
+      color:white;
+      border-color:transparent;
+    }
+
+    /* PLANS GRID (para los planes seleccionados) */
+    .plans-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:30px;
+      margin:40px 0;
+    }
+    .plan-card{
+      background:rgba(20,30,50,0.7);
+      backdrop-filter:blur(10px);
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:30px;
+      transition:.3s;
+      display:flex;
+      flex-direction:column;
+    }
+    .plan-card:hover{
+      transform:translateY(-10px);
+      border-color:var(--neonCyan);
+      box-shadow:0 30px 50px rgba(64,224,208,0.2);
+    }
+    .plan-card.recommended{
+      border:2px solid var(--neonPurple);
+      position:relative;
+    }
+    .plan-card.recommended::before{
+      content:'⭐ RECOMENDADO';
+      position:absolute;
+      top:-12px;left:50%;
+      transform:translateX(-50%);
+      background:linear-gradient(45deg,var(--neonPurple),var(--neonPink));
+      color:white;
+      padding:5px 20px;
+      border-radius:50px;
+      font-size:12px;
+      font-weight:700;
+    }
+    .plan-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:25px;
+      gap:15px;
+    }
+    .plan-name{
+      font-size:24px;
+      font-weight:800;
+      flex:1;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .plan-card.basic .plan-name{color:var(--neonBlue);}
+    .plan-card.standard .plan-name{color:var(--neonCyan);}
+    .plan-card.premium .plan-name{color:var(--neonPurple);}
+    .plan-card.dual .plan-name{color:var(--neonPink);}
+    .plan-price{
+      background:rgba(0,0,0,0.4);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:12px 20px;
+      font-size:24px;
+      font-weight:800;
+      color:white;
+      text-shadow:0 0 10px var(--neonCyan);
+      white-space:nowrap;
+      min-width:120px;
+      text-align:center;
+    }
+    .price-cell{
+      font-weight:700;
+    }
+    .price-monthly{color:var(--neonBlue);}
+    .price-quarterly{color:var(--neonCyan);}
+    .price-semesterly{color:var(--neonPurple);}
+    .price-yearly{color:var(--neonPink);}
+    .dual-discount{
+      background:rgba(255,85,255,0.2);
+      border-radius:20px;
+      padding:2px 8px;
+      font-size:12px;
+      margin-left:5px;
+      color:var(--neonPink);
+      font-weight:600;
+    }
+    .feature-item{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      padding:12px 15px;
+      background:rgba(0,0,0,0.2);
+      border-radius:16px;
+      margin:8px 0;
+    }
+    .feature-item i{
+      width:20px;
+      color:var(--neonCyan);
+    }
+    .plan-button{
+      background:linear-gradient(45deg,var(--neonBlue),var(--neonCyan));
+      color:white;
+      border:none;
+      padding:16px;
+      border-radius:20px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.3s;
+      text-align:center;
+      text-decoration:none;
+      margin-top:20px;
+      font-size:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+    .plan-button:hover:not(:disabled){
+      transform:translateY(-3px);
+      box-shadow:0 10px 30px rgba(64,224,208,0.4);
+    }
+    .plan-button:disabled{
+      opacity:0.5;
+      cursor:not-allowed;
+      background:#666;
+    }
+    .plan-button i{
+      font-size:18px;
+    }
+
+    /* SELECTED LOCATION TITLE */
+    .selected-location-title{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      margin-bottom:30px;
+      padding:20px;
+      background:rgba(16,42,67,0.5);
+      border-radius:16px;
+    }
+    .back-button{
+      background:transparent;
+      border:1px solid var(--border);
+      color:var(--muted);
+      padding:8px 16px;
+      border-radius:50px;
+      cursor:pointer;
+      transition:.2s;
+      display:flex;
+      align-items:center;
+      gap:5px;
+    }
+    .back-button i{
+      font-size:14px;
+    }
+    .back-button:hover{
+      background:rgba(64,224,208,0.1);
+      color:var(--neonCyan);
+    }
+
+    /* DISCOUNT NOTE */
+    .discount-note{
+      display:flex;
+      gap:20px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:30px;
+    }
+    .discount-item{
+      background:rgba(0,0,0,0.3);
+      padding:15px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .discount-item i{
+      color:var(--neonCyan);
+    }
+
+    /* FOOTER */
+    .main-footer{
+      background:rgba(10,20,30,0.8);
+      backdrop-filter:blur(10px);
+      border-top:1px solid var(--border);
+      padding:60px 0 30px;
+      margin-top:60px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:40px;
+      margin-bottom:40px;
+    }
+    .footer-col h4{
+      color:var(--neonCyan);
+      margin-bottom:20px;
+      font-size:18px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .footer-col ul li{
+      list-style:none;
+      margin-bottom:12px;
+    }
+    .footer-col ul li a{
+      color:var(--muted);
+      text-decoration:none;
+      cursor:pointer;
+      transition:.2s;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .footer-col ul li a i{
+      width:16px;
+    }
+    .footer-col ul li a:hover{
+      color:var(--neonCyan);
+      padding-left:5px;
+    }
+    .footer-bottom{
+      text-align:center;
+      padding-top:30px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* TOAST */
+    .toast{
+      position:fixed;
+      bottom:30px;left:50%;
+      transform:translateX(-50%) translateY(100px);
+      background:linear-gradient(45deg,rgba(16,42,67,0.9),rgba(10,30,50,0.9));
+      border:1px solid var(--neonCyan);
+      border-radius:20px;
+      padding:16px 30px;
+      color:white;
+      z-index:10000;
+      opacity:0;
+      transition:.4s;
+      backdrop-filter:blur(10px);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .toast i{
+      color:var(--neonCyan);
+    }
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+    @media (max-width:768px){
+      .dashboard-menu{width:250px;}
+      .plan-header{flex-direction:column;align-items:flex-start;}
+      .plan-price{width:100%;}
+      .period-selector{gap:5px;}
+      .period-btn{padding:10px 15px;}
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <canvas id="canvas-3d"></canvas>
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span></span>
+  </div>
+
+  <div class="app">
+    <header class="main-header">
+      <div class="menu-container">
+        <div class="logo">
+          <span class="logo-icon"><i class="fas fa-shield-halos"></i></span>
+          <div class="logo-text">
+            <h1>SecureNET</h1>
+            <span>VPN Solutions</span>
+          </div>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD MENU -->
+    <div class="dashboard-menu" id="dashboardMenu">
+      <div class="dashboard-header"><i class="fas fa-bars"></i> MENÚ PRINCIPAL</div>
+      
+      <a href="index.html" class="dashboard-item">
+        <i class="fas fa-home"></i> Inicio
+      </a>
+      <a href="about.html" class="dashboard-item">
+        <i class="fas fa-users"></i> Sobre Nosotros
+      </a>
+      <a href="locations.html" class="dashboard-item active">
+        <i class="fas fa-globe-americas"></i> Ubicaciones
+      </a>
+      <a href="plans.html" class="dashboard-item">
+        <i class="fas fa-tags"></i> Planes
+      </a>
+      <a href="map.html" class="dashboard-item">
+        <i class="fas fa-map-marked-alt"></i> Mapa
+      </a>
+      <a href="faq.html" class="dashboard-item">
+        <i class="fas fa-question-circle"></i> FAQ
+      </a>
+      <a href="tools.html" class="dashboard-item">
+        <i class="fas fa-tools"></i> Herramientas
+      </a>
+      <a href="social.html" class="dashboard-item">
+        <i class="fas fa-share-alt"></i> Redes Sociales
+      </a>
+      <a href="comparison.html" class="dashboard-item">
+        <i class="fas fa-chart-bar"></i> Comparativa
+      </a>
+      <a href="contact.html" class="dashboard-item">
+        <i class="fas fa-envelope"></i> Contacto
+      </a>
+      <a href="privacy-policy.html" class="dashboard-item">
+        <i class="fas fa-lock"></i> Privacidad
+      </a>
+      <a href="terms.html" class="dashboard-item">
+        <i class="fas fa-file-contract"></i> Términos
+      </a>
+
+      <div class="dashboard-footer">
+        <a href="https://discord.gg/ZSg4CrbEXR" target="_blank" class="dashboard-item" style="margin-bottom:10px;">
+          <i class="fab fa-discord"></i> Discord
+        </a>
+        <div class="theme-selector-dashboard">
+          <button class="theme-btn-dashboard active" onclick="setTheme('dark')"><i class="fas fa-moon"></i></button>
+          <button class="theme-btn-dashboard" onclick="setTheme('light')"><i class="fas fa-sun"></i></button>
+          <button class="theme-btn-dashboard" onclick="setTheme('hacker')"><i class="fas fa-code"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-spacer"></div>
+
+    <main class="container">
+      <h2 class="section-title"><i class="fas fa-globe-americas"></i> Nuestras Ubicaciones</h2>
+      <p class="section-subtitle"><i class="fas fa-map-pin"></i> Selecciona una ubicación para ver sus planes</p>
+
+      <!-- BANNER MÉTODOS DE PAGO -->
+      <div class="payment-banner">
+        <span><i class="fas fa-credit-card"></i> Métodos de pago aceptados:</span>
+        <div class="payment-icons">
+          <i class="fab fa-paypal" title="PayPal"></i>
+          <i class="fas fa-dollar-sign" title="Cash App"></i>
+          <i class="fab fa-apple-pay" title="Apple Pay"></i>
+          <i class="fab fa-bitcoin" title="Bitcoin"></i>
+        </div>
+      </div>
+      
+      <div id="locations-grid" class="locations-grid"></div>
+      
+      <div id="selected-location-plans" class="plans-showcase" style="display:none;">
+        <div class="selected-location-title">
+          <button class="back-button" onclick="clearSelectedLocation()"><i class="fas fa-arrow-left"></i> Volver</button>
+          <h3 id="selected-location-name" style="color:var(--neonCyan); display:flex; align-items:center; gap:8px;"></h3>
+        </div>
+
+        <!-- SELECTOR DE PERÍODO -->
+        <div class="period-selector">
+          <button class="period-btn active" onclick="setPeriod('monthly', this)"><i class="fas fa-calendar-alt"></i> Mensual</button>
+          <button class="period-btn" onclick="setPeriod('quarterly', this)"><i class="fas fa-calendar-plus"></i> Trimestral</button>
+          <button class="period-btn" onclick="setPeriod('semesterly', this)"><i class="fas fa-calendar-check"></i> Semestral</button>
+          <button class="period-btn" onclick="setPeriod('yearly', this)"><i class="fas fa-calendar-star"></i> Anual</button>
+        </div>
+        
+        <div id="location-plans-grid" class="plans-grid"></div>
+
+        <!-- NOTA DESCUENTOS -->
+        <div class="discount-note">
+          <div class="discount-item"><i class="fas fa-calendar-alt"></i> Mensual: Regular</div>
+          <div class="discount-item"><i class="fas fa-calendar-plus" style="color:var(--neonCyan);"></i> Trimestral: -10%</div>
+          <div class="discount-item"><i class="fas fa-calendar-check" style="color:var(--neonPurple);"></i> Semestral: -20%</div>
+          <div class="discount-item"><i class="fas fa-calendar-star" style="color:var(--neonPink);"></i> Anual: -30%</div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4><i class="fas fa-shield-halos"></i> SecureNET</h4>
+            <ul>
+              <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+              <li><a href="about.html"><i class="fas fa-users"></i> Sobre Nosotros</a></li>
+              <li><a href="locations.html"><i class="fas fa-globe-americas"></i> Ubicaciones</a></li>
+              <li><a href="plans.html"><i class="fas fa-tags"></i> Planes</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4><i class="fas fa-link"></i> Recursos</h4>
+            <ul>
+              <li><a href="map.html"><i class="fas fa-map-marked-alt"></i> Mapa</a></li>
+              <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+              <li><a href="tools.html"><i class="fas fa-tools"></i> Herramientas</a></li>
+              <li><a href="comparison.html"><i class="fas fa-chart-bar"></i> Comparativa</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4><i class="fas fa-share-alt"></i> Redes</h4>
+            <ul>
+              <li><a href="social.html"><i class="fab fa-instagram"></i> Instagram</a></li>
+              <li><a href="https://discord.gg/ZSg4CrbEXR" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+              <li><a href="contact.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+              <li><a href="privacy-policy.html"><i class="fas fa-lock"></i> Privacidad</a></li>
+              <li><a href="terms.html"><i class="fas fa-file-contract"></i> Términos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2024 SecureNET • <i class="fas fa-bolt"></i> VPN de alto rendimiento • <i class="fas fa-credit-card"></i> PayPal, Cash App, Apple Pay, Bitcoin</p>
+          <p style="margin-top:10px;font-size:12px;">Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx • <i class="fas fa-tag"></i> 20% OFF en DUAL</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const DISCORD_LINK='https://discord.gg/ZSg4CrbEXR';
+    const planTypes=[
+      {name:'BASIC',class:'basic',icon:'🟦',price:'$5.99',users:'1 conexión',gaming:'COD/RDR/GTA friendly'},
+      {name:'STANDARD',class:'standard',icon:'⭐',price:'$12.99',users:'Hasta 3',gaming:'Optimizado gaming'},
+      {name:'PREMIUM',class:'premium',icon:'💎',price:'$19.99',users:'Hasta 6',gaming:'Máximo rendimiento'},
+      {name:'DUAL',class:'dual',icon:'🌐',price:'$24.99',users:'Hasta 4',gaming:'Doble ubicación'}
+    ];
+    const locations=[
+      {id:'los-angeles',name:'Los Angeles, CA',displayName:'LOS ANGELES',flag:'🇺🇸',description:'Costa Oeste USA - Ideal para gaming',status:'available',ping:45,comingSoon:false},
+      {id:'dallas',name:'Dallas, Texas',displayName:'DALLAS',flag:'🇺🇸',description:'Centro USA - Latencia ultra baja',status:'available',ping:35,comingSoon:false},
+      {id:'miami',name:'Miami, Florida',displayName:'MIAMI',flag:'🇺🇸',description:'Conectividad con Latinoamérica',status:'soon',ping:60,comingSoon:true},
+      {id:'paris',name:'Paris, Francia',displayName:'PARIS',flag:'🇫🇷',description:'Primera ubicación europea',status:'soon',ping:90,comingSoon:true},
+      {id:'new-york',name:'New York, NY',displayName:'NEW YORK',flag:'🇺🇸',description:'Costa Este - Negocios',status:'soon',ping:50,comingSoon:true},
+      {id:'chicago',name:'Chicago, Illinois',displayName:'CHICAGO',flag:'🇺🇸',description:'Medio Oeste - Gaming',status:'soon',ping:40,comingSoon:true}
+    ];
+    let selectedLocation=null;
+    let currentPeriod = 'monthly';
+
+    // 3D ANIMATION
+    const canvas=document.getElementById('canvas-3d'),ctx=canvas.getContext('2d');
+    canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+    const particles=[];
+    for(let i=0;i<70;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,z:Math.random()*1000,size:Math.random()*2+1,speed:Math.random()*2+1});
+    function animate3D(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      const theme=document.body.dataset.theme,color=theme==='hacker'?'#0f0':theme==='light'?'#06f':'#0ff';
+      particles.forEach(p=>{
+        p.z-=p.speed;if(p.z<=0){p.z=1000;p.x=Math.random()*canvas.width;p.y=Math.random()*canvas.height;}
+        const scale=500/p.z,x2d=(p.x-canvas.width/2)*scale+canvas.width/2,y2d=(p.y-canvas.height/2)*scale+canvas.height/2;
+        ctx.beginPath();ctx.arc(x2d,y2d,p.size*scale,0,Math.PI*2);ctx.fillStyle=color;ctx.shadowColor=color;ctx.shadowBlur=10;ctx.fill();
+      });requestAnimationFrame(animate3D);
+    }
+    animate3D();
+    window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+    function toggleMenu(){
+      document.getElementById('hamburger').classList.toggle('active');
+      document.getElementById('dashboardMenu').classList.toggle('open');
+    }
+    
+    function setTheme(theme){
+      document.body.dataset.theme = theme;
+      localStorage.setItem('securenet-theme', theme);
+      document.querySelectorAll('.theme-btn-dashboard').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.theme-btn-dashboard[onclick*="${theme}"]`).classList.add('active');
+    }
+    
+    function renderLocationsGrid(){
+      document.getElementById('locations-grid').innerHTML=locations.map(l=>`
+        <div class="location-card ${selectedLocation===l.id?'selected':''}" onclick="selectLocation('${l.id}')">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+            <h3><i class="fas fa-map-pin"></i> ${l.flag} ${l.displayName}</h3>
+            <span class="status-badge ${l.status==='available'?'status-available':'status-soon'}">
+              <i class="fas ${l.status==='available'?'fa-check-circle':'fa-clock'}"></i>
+              ${l.status==='available'?'DISPONIBLE':'PRÓXIMAMENTE'}
+            </span>
+          </div>
+          <p style="color:var(--muted);margin-bottom:20px;"><i class="fas fa-info-circle"></i> ${l.description}</p>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span><i class="fas fa-signal"></i> ${l.ping}ms</span>
+            <div style="flex:1;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;">
+              <div style="width:${Math.min(100,100-l.ping/2)}%;height:100%;background:linear-gradient(90deg,var(--neonCyan),var(--neonBlue));border-radius:2px;"></div>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+
+    function getPriceForPeriod(basePrice, period){
+      const prices = {
+        monthly: basePrice,
+        quarterly: basePrice * 0.9,
+        semesterly: basePrice * 0.8,
+        yearly: basePrice * 0.7
+      };
+      return '$' + prices[period].toFixed(2);
+    }
+
+    function selectLocation(id){
+      selectedLocation=id;
+      const l=locations.find(l=>l.id===id);
+      document.getElementById('selected-location-plans').style.display='block';
+      document.getElementById('selected-location-name').innerHTML = `<i class="fas fa-map-pin"></i> ${l.flag} ${l.displayName}`;
+      renderPlansForLocation(l);
+    }
+
+    function renderPlansForLocation(l){
+      document.getElementById('location-plans-grid').innerHTML=planTypes.map(p=>{
+        let price = p.price.replace('$','');
+        let displayPrice = getPriceForPeriod(parseFloat(price), currentPeriod);
+        return `
+        <div class="plan-card ${p.class} ${p.name==='STANDARD'?'recommended':''}">
+          <div class="plan-header">
+            <div class="plan-name"><i class="fas ${p.name==='BASIC'?'fa-circle':p.name==='STANDARD'?'fa-star':p.name==='PREMIUM'?'fa-gem':'fa-globe'}"></i> ${p.name}</div>
+            <div class="plan-price price-${currentPeriod}">${displayPrice}</div>
+          </div>
+          <div class="plan-features">
+            <div class="feature-item"><i class="fas fa-users"></i><div><div>Usuarios</div><small>${p.users}</small></div></div>
+            <div class="feature-item"><i class="fas fa-map-pin"></i><div><div>Ubicación</div><small>${l.displayName}</small></div></div>
+            <div class="feature-item"><i class="fas fa-shield-virus"></i><div><div>Protección</div><small>Anti-DDoS</small></div></div>
+            <div class="feature-item"><i class="fas fa-gamepad"></i><div><div>Gaming</div><small>${p.gaming}</small></div></div>
+          </div>
+          ${!l.comingSoon?`<a href="${DISCORD_LINK}" target="_blank" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR ${p.name}</a>`:'<button class="plan-button" disabled><i class="fas fa-clock"></i> PRÓXIMAMENTE</button>'}
+        </div>`}).join('');
+    }
+
+    function setPeriod(period, btn){
+      currentPeriod = period;
+      document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      if(selectedLocation){
+        const l = locations.find(l => l.id === selectedLocation);
+        renderPlansForLocation(l);
+      }
+    }
+
+    function clearSelectedLocation(){
+      selectedLocation=null;
+      document.getElementById('selected-location-plans').style.display='none';
+      renderLocationsGrid();
+    }
+
+    function copyUsername(username){
+      navigator.clipboard.writeText(username).then(()=>showToast(`Copiado: ${username}`));
+    }
+    function showToast(m){
+      const t=document.getElementById('toast');
+      t.querySelector('span').textContent = m;
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'),2000);
+    }
+
+    window.onload=()=>{
+      // Cargar tema guardado
+      const savedTheme = localStorage.getItem('securenet-theme') || 'dark';
+      document.body.dataset.theme = savedTheme;
+      
+      // Actualizar botones activos
+      document.querySelectorAll('.theme-btn-dashboard').forEach(b => {
+        b.classList.remove('active');
+        if(b.textContent.toLowerCase().includes(savedTheme) || 
+           (savedTheme==='dark' && b.innerHTML.includes('moon')) ||
+           (savedTheme==='light' && b.innerHTML.includes('sun')) ||
+           (savedTheme==='hacker' && b.innerHTML.includes('code'))) {
+          b.classList.add('active');
+        }
+      });
+
+      renderLocationsGrid();
+      document.querySelectorAll('.dashboard-item').forEach(i=>i.addEventListener('click',()=>{if(window.innerWidth<768)toggleMenu();}));
+      window.toggleMenu=toggleMenu;window.setTheme=setTheme;
+      window.selectLocation=selectLocation;window.clearSelectedLocation=clearSelectedLocation;
+      window.setPeriod=setPeriod;window.copyUsername=copyUsername;
+    };
+  </script>
+</body>
+</html>

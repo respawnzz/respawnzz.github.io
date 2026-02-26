@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Redes Sociales | SecureNET VPN</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Redes sociales de SecureNET VPN">
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#070b12" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHsSURBVHgB7VdLUhtBEH1dCiU+xiHYBhu8Ihdw7AuYq7AiyQ1wbpBwA3MDcgNwA3MDcgNwA+QGhC9gK5w9M1I1X6m7p4eR0CReqVZTUz3T/fq9HuB/giQG/G8A/tw+eL14fP2ZEpbXj4/vr/bn01eccA6T0Nk9/z34+Xj3+U2A2QPdA3jP9Y+7396eHq4/rYqA42SNN2c/XgIAIPgJZLK2+qbLwE1xH/C09Qj3dH1zCW0JAIlJEQDLFwFIygoAvCQAkD6Izz9W12ZNi+bxW+PcCAAVq0gWpBEAJEsJAMksjYAkmSVlS2ZxXgYg3v0qAiDJFwFIMk8EgFciE5enJp4qjQYgSc4TASi/JwJQfE8EoPSeiL8AvKcCkFp3CyjX3YoANM8lAkB+kAhAfiERgPxKIgD5rUQA8j4RgHxIBCD3RADyP4kA5EMiALknApCfSAQg90QA8p4IQO6JAORHIgC5JwKQeyIAeU8EIPdEAPJDBPCeu0p2EfkRAshu5b2n7iZ1K+89Wzcq+T4CeJ4EMl3d83zrA34g+fHlA7wN0J7n2x1wD/7Fe54PTYC2PN/uAB/Aw/v8jYl2PqANz7c7wJ9AAK15vu2BvuH5dgc8/7pzZ9uugW14vt2R7Rq2AUyGzw8f9eZqAAAAAElFTkSuQmCC" />
+  <style>
+    /* ===== Mismo CSS del index ===== */
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --bg:#0a0e17;
+      --bg-gradient:linear-gradient(135deg,#0a0e17 0%,#0d1525 50%,#0a1422 100%);
+      --card:rgba(16,42,67,0.7);
+      --border:rgba(64,224,208,0.3);
+      --text:rgba(255,255,255,.95);
+      --muted:#b0d0ff;
+      --neonCyan:#40e0d0;
+      --neonBlue:#00b4ff;
+      --neonPurple:#8c55ff;
+      --neonPink:#ff55ff;
+      --shadowDeep:0 25px 80px rgba(0,50,100,0.4);
+      --glass:rgba(255,255,255,0.05);
+      --ease:cubic-bezier(.2,.8,.2,1);
+    }
+    [data-theme=light]{
+      --bg:#f0f4ff;
+      --bg-gradient:linear-gradient(135deg,#f0f4ff 0%,#fff 50%,#e6f0ff 100%);
+      --card:rgba(255,255,255,0.9);
+      --border:rgba(0,150,200,0.3);
+      --text:#0a0e17;
+      --muted:#1a2a3a;
+      --neonCyan:#0096c8;
+      --neonBlue:#0066ff;
+      --neonPurple:#6633cc;
+      --neonPink:#cc33cc;
+    }
+    [data-theme=hacker]{
+      --bg:#0f0f0f;
+      --bg-gradient:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 50%,#0a0a0a 100%);
+      --card:#0a0a0a;
+      --border:#0f0;
+      --text:#0f0;
+      --muted:#0c0;
+      --neonCyan:#0f0;
+      --neonBlue:#0d0;
+      --neonPurple:#0c0;
+      --neonPink:#0e0;
+      font-family:'Courier New',monospace;
+    }
+    [data-theme=hacker] button{background:#0f0!important;color:#000!important;box-shadow:0 0 20px #0f0;}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg-gradient);
+      color:var(--text);
+      min-height:100vh;
+      transition:.3s;
+      overflow-x:hidden;
+    }
+    #canvas-3d{
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      z-index:-1;
+      pointer-events:none;
+    }
+    .app{min-height:100vh;display:flex;flex-direction:column;}
+
+    /* HEADER FIJO */
+    .main-header{
+      background:rgba(10,20,30,0.95);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:9999;
+      padding:12px 0;
+    }
+    .header-spacer{height:100px;}
+
+    /* MENU HAMBURGUESA */
+    .menu-container{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 20px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .logo-icon{
+      font-size:32px;
+      color:var(--neonCyan);
+      filter:drop-shadow(0 0 10px var(--neonCyan));
+    }
+    .logo-text h1{
+      font-size:20px;
+      font-weight:700;
+      background:linear-gradient(45deg,#fff,var(--neonCyan),var(--neonBlue));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .logo-text span{font-size:12px;color:var(--muted);}
+
+    /* BOTON HAMBURGUESA */
+    .hamburger{
+      width:45px;height:45px;
+      background:rgba(64,224,208,0.1);
+      border:1px solid var(--border);
+      border-radius:12px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:6px;
+      cursor:pointer;
+      transition:.3s;
+      z-index:10000;
+    }
+    .hamburger:hover{
+      background:rgba(64,224,208,0.2);
+      border-color:var(--neonCyan);
+    }
+    .hamburger span{
+      width:25px;height:2px;
+      background:var(--neonCyan);
+      border-radius:2px;
+      transition:.3s;
+    }
+    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(6px,6px);}
+    .hamburger.active span:nth-child(2){opacity:0;}
+    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
+
+    /* DASHBOARD MENU LATERAL */
+    .dashboard-menu{
+      position:fixed;
+      top:80px;right:-300px;
+      width:280px;
+      height:calc(100vh - 80px);
+      background:rgba(10,20,30,0.95);
+      backdrop-filter:blur(20px);
+      border-left:1px solid var(--border);
+      padding:30px 20px;
+      transition:right 0.4s var(--ease);
+      z-index:9998;
+      box-shadow:-5px 0 30px rgba(0,0,0,0.5);
+    }
+    .dashboard-menu.open{right:0;}
+    .dashboard-header{
+      font-size:18px;
+      color:var(--neonCyan);
+      margin-bottom:30px;
+      padding-bottom:15px;
+      border-bottom:1px solid var(--border);
+      text-transform:uppercase;
+      letter-spacing:2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .dashboard-header i{
+      font-size:20px;
+    }
+    .dashboard-item{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      padding:15px;
+      color:var(--muted);
+      text-decoration:none;
+      border-radius:12px;
+      margin-bottom:5px;
+      transition:.2s;
+      cursor:pointer;
+      font-size:15px;
+    }
+    .dashboard-item i{
+      width:20px;
+      text-align:center;
+    }
+    .dashboard-item:hover{
+      background:rgba(64,224,208,0.1);
+      color:var(--neonCyan);
+    }
+    .dashboard-item.active{
+      background:linear-gradient(45deg,var(--neonBlue),var(--neonCyan));
+      color:white;
+    }
+    .dashboard-footer{
+      position:absolute;
+      bottom:30px;
+      left:20px;
+      right:20px;
+    }
+    .theme-selector-dashboard{
+      display:flex;
+      gap:5px;
+      background:rgba(0,0,0,0.3);
+      padding:4px;
+      border-radius:50px;
+      border:1px solid var(--border);
+      margin-top:15px;
+    }
+    .theme-btn-dashboard{
+      flex:1;
+      padding:8px;
+      border:none;
+      background:transparent;
+      color:var(--muted);
+      border-radius:50px;
+      cursor:pointer;
+      font-size:14px;
+      transition:.2s;
+    }
+    .theme-btn-dashboard.active{
+      background:var(--neonCyan);
+      color:var(--bg);
+    }
+
+    /* MAIN CONTENT */
+    .container{
+      max-width:1400px;
+      margin:0 auto;
+      padding:0 20px;
+      width:100%;
+    }
+    .section-title{
+      font-size:32px;
+      margin:30px 0 20px;
+      text-align:center;
+      background:linear-gradient(45deg,var(--neonCyan),var(--neonBlue),var(--neonPurple));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .section-subtitle{
+      text-align:center;
+      color:var(--muted);
+      margin-bottom:30px;
+      font-size:16px;
+    }
+
+    /* PAYMENT METHODS BANNER */
+    .payment-banner{
+      background:rgba(64,224,208,0.1);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:15px 25px;
+      margin:30px 0;
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+      justify-content:center;
+      align-items:center;
+    }
+    .payment-banner span{
+      color:var(--muted);
+      font-size:14px;
+    }
+    .payment-icons{
+      display:flex;
+      gap:15px;
+    }
+    .payment-icons i{
+      font-size:24px;
+      color:var(--neonCyan);
+      transition:.3s;
+    }
+    .payment-icons i:hover{
+      transform:translateY(-3px);
+      color:var(--neonBlue);
+    }
+
+    /* SOCIAL MEDIA SECTION */
+    .social-section{
+      background:rgba(20,30,50,0.6);
+      backdrop-filter:blur(10px);
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:40px;
+      margin:40px 0;
+    }
+    .social-header{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:15px;
+      margin-bottom:20px;
+    }
+    .social-header i{
+      font-size:40px;
+      color:var(--neonCyan);
+      animation:pulse 2s infinite;
+    }
+    .social-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:25px;
+      margin-top:30px;
+    }
+    .social-card{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      padding:25px;
+      background:rgba(0,0,0,0.3);
+      border:1px solid var(--border);
+      border-radius:20px;
+      text-decoration:none;
+      transition:all 0.3s var(--ease);
+    }
+    .social-card:hover{
+      transform:translateY(-5px);
+      border-color:var(--neonCyan);
+      box-shadow:0 10px 30px rgba(64,224,208,0.2);
+    }
+    .social-icon{
+      width:60px;
+      height:60px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:32px;
+      transition:.3s;
+    }
+    .instagram{
+      background:linear-gradient(45deg,#f09433 0%,#d62976 50%,#962fbf 100%);
+      box-shadow:0 0 20px #d62976;
+    }
+    .youtube{
+      background:#ff0000;
+      box-shadow:0 0 20px #ff0000;
+    }
+    .tiktok{
+      background:#000000;
+      border:2px solid #ff0050;
+      box-shadow:0 0 20px #ff0050;
+    }
+    .social-info{
+      flex:1;
+    }
+    .social-name{
+      color:white;
+      font-size:20px;
+      font-weight:700;
+      margin-bottom:5px;
+    }
+    .social-handle{
+      color:var(--muted);
+      font-size:14px;
+    }
+    .social-stats{
+      display:flex;
+      gap:15px;
+      margin-top:5px;
+    }
+    .social-stat{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .social-stat i{
+      margin-right:3px;
+    }
+    .social-arrow{
+      color:var(--neonCyan);
+      font-size:20px;
+      opacity:0.7;
+      transition:.3s;
+    }
+    .social-card:hover .social-arrow{
+      opacity:1;
+      transform:translateX(5px);
+    }
+
+    /* DISCORD CARD */
+    .discord-card{
+      background:rgba(88,101,242,0.15);
+      border:1px solid #5865F2;
+      border-radius:30px;
+      padding:40px;
+      margin:40px 0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:20px;
+      text-align:center;
+    }
+    .discord-icon{
+      font-size:64px;
+      color:#5865F2;
+      filter:drop-shadow(0 0 20px #5865F2);
+      animation:discordPulse 2s infinite;
+    }
+    @keyframes discordPulse{
+      0%{transform:scale(1);}
+      50%{transform:scale(1.1);}
+      100%{transform:scale(1);}
+    }
+    .discord-title{
+      color:white;
+      font-size:28px;
+      font-weight:700;
+    }
+    .discord-description{
+      color:#b0d0ff;
+      font-size:16px;
+      max-width:500px;
+      line-height:1.6;
+    }
+    .discord-stats{
+      display:flex;
+      gap:30px;
+      margin:20px 0;
+    }
+    .discord-stat{
+      text-align:center;
+    }
+    .discord-stat-number{
+      font-size:28px;
+      font-weight:800;
+      color:#5865F2;
+    }
+    .discord-stat-label{
+      font-size:12px;
+      color:var(--muted);
+    }
+    .discord-button{
+      background:#5865F2;
+      color:white;
+      border:none;
+      padding:18px 40px;
+      border-radius:50px;
+      font-size:18px;
+      font-weight:700;
+      text-decoration:none;
+      transition:.3s;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .discord-button i{
+      font-size:20px;
+    }
+    .discord-button:hover{
+      background:#4752C4;
+      transform:translateY(-3px);
+      box-shadow:0 10px 30px #5865F2;
+    }
+
+    /* FOOTER */
+    .main-footer{
+      background:rgba(10,20,30,0.8);
+      backdrop-filter:blur(10px);
+      border-top:1px solid var(--border);
+      padding:60px 0 30px;
+      margin-top:60px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:40px;
+      margin-bottom:40px;
+    }
+    .footer-col h4{
+      color:var(--neonCyan);
+      margin-bottom:20px;
+      font-size:18px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .footer-col ul li{
+      list-style:none;
+      margin-bottom:12px;
+    }
+    .footer-col ul li a{
+      color:var(--muted);
+      text-decoration:none;
+      cursor:pointer;
+      transition:.2s;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .footer-col ul li a i{
+      width:16px;
+    }
+    .footer-col ul li a:hover{
+      color:var(--neonCyan);
+      padding-left:5px;
+    }
+    .footer-bottom{
+      text-align:center;
+      padding-top:30px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* TOAST */
+    .toast{
+      position:fixed;
+      bottom:30px;left:50%;
+      transform:translateX(-50%) translateY(100px);
+      background:linear-gradient(45deg,rgba(16,42,67,0.9),rgba(10,30,50,0.9));
+      border:1px solid var(--neonCyan);
+      border-radius:20px;
+      padding:16px 30px;
+      color:white;
+      z-index:10000;
+      opacity:0;
+      transition:.4s;
+      backdrop-filter:blur(10px);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .toast i{
+      color:var(--neonCyan);
+    }
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+    @media (max-width:768px){
+      .dashboard-menu{width:250px;}
+      .social-grid{grid-template-columns:1fr;}
+      .discord-stats{flex-direction:column; gap:15px;}
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <canvas id="canvas-3d"></canvas>
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span></span>
+  </div>
+
+  <div class="app">
+    <header class="main-header">
+      <div class="menu-container">
+        <div class="logo">
+          <span class="logo-icon"><i class="fas fa-shield-halos"></i></span>
+          <div class="logo-text">
+            <h1>SecureNET</h1>
+            <span>VPN Solutions</span>
+          </div>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD MENU -->
+    <div class="dashboard-menu" id="dashboardMenu">
+      <div class="dashboard-header"><i class="fas fa-bars"></i> MENÚ PRINCIPAL</div>
+      
+      <a href="index.html" class="dashboard-item">
+        <i class="fas fa-home"></i> Inicio
+      </a>
+      <a href="about.html" class="dashboard-item">
+        <i class="fas fa-users"></i> Sobre Nosotros
+      </a>
+      <a href="locations.html" class="dashboard-item">
+        <i class="fas fa-globe-americas"></i> Ubicaciones
+      </a>
+      <a href="plans.html" class="dashboard-item">
+        <i class="fas fa-tags"></i> Planes
+      </a>
+      <a href="map.html" class="dashboard-item">
+        <i class="fas fa-map-marked-alt"></i> Mapa
+      </a>
+      <a href="faq.html" class="dashboard-item">
+        <i class="fas fa-question-circle"></i> FAQ
+      </a>
+      <a href="tools.html" class="dashboard-item">
+        <i class="fas fa-tools"></i> Herramientas
+      </a>
+      <a href="social.html" class="dashboard-item active">
+        <i class="fas fa-share-alt"></i> Redes Sociales
+      </a>
+      <a href="comparison.html" class="dashboard-item">
+        <i class="fas fa-chart-bar"></i> Comparativa
+      </a>
+      <a href="contact.html" class="dashboard-item">
+        <i class="fas fa-envelope"></i> Contacto
+      </a>
+      <a href="privacy-policy.html" class="dashboard-item">
+        <i class="fas fa-lock"></i> Privacidad
+      </a>
+      <a href="terms.html" class="dashboard-item">
+        <i class="fas fa-file-contract"></i> Términos
+      </a>
+
+      <div class="dashboard-footer">
+        <a href="https://discord.gg/ZSg4CrbEXR" target="_blank" class="dashboard-item" style="margin-bottom:10px;">
+          <i class="fab fa-discord"></i> Discord
+        </a>
+        <div class="theme-selector-dashboard">
+          <button class="theme-btn-dashboard active" onclick="setTheme('dark')"><i class="fas fa-moon"></i></button>
+          <button class="theme-btn-dashboard" onclick="setTheme('light')"><i class="fas fa-sun"></i></button>
+          <button class="theme-btn-dashboard" onclick="setTheme('hacker')"><i class="fas fa-code"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-spacer"></div>
+
+    <main class="container">
+      <!-- BANNER MÉTODOS DE PAGO -->
+      <div class="payment-banner">
+        <span><i class="fas fa-credit-card"></i> Métodos de pago aceptados:</span>
+        <div class="payment-icons">
+          <i class="fab fa-paypal" title="PayPal"></i>
+          <i class="fas fa-dollar-sign" title="Cash App"></i>
+          <i class="fab fa-apple-pay" title="Apple Pay"></i>
+          <i class="fab fa-bitcoin" title="Bitcoin"></i>
+        </div>
+      </div>
+
+      <div class="social-section">
+        <div class="social-header">
+          <i class="fas fa-share-alt"></i>
+          <h2 class="section-title" style="margin:0;">Redes Sociales</h2>
+          <i class="fas fa-hashtag"></i>
+        </div>
+        <p class="section-subtitle"><i class="fas fa-user-plus"></i> Síguenos en todas nuestras plataformas</p>
+        
+        <div class="social-grid">
+          <!-- INSTAGRAM -->
+          <a href="https://www.instagram.com/legionfreeze" target="_blank" class="social-card">
+            <div class="social-icon instagram"><i class="fab fa-instagram"></i></div>
+            <div class="social-info">
+              <div class="social-name">Instagram</div>
+              <div class="social-handle">@legionfreeze</div>
+              <div class="social-stats">
+                <span class="social-stat"><i class="fas fa-users"></i> 2.5K</span>
+                <span class="social-stat"><i class="fas fa-image"></i> 120+</span>
+              </div>
+            </div>
+            <span class="social-arrow"><i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <!-- YOUTUBE -->
+          <a href="https://www.youtube.com/@Bestxlagger/videos" target="_blank" class="social-card">
+            <div class="social-icon youtube"><i class="fab fa-youtube"></i></div>
+            <div class="social-info">
+              <div class="social-name">YouTube</div>
+              <div class="social-handle">@Bestxlagger</div>
+              <div class="social-stats">
+                <span class="social-stat"><i class="fas fa-users"></i> 1.2K</span>
+                <span class="social-stat"><i class="fas fa-video"></i> 45+</span>
+              </div>
+            </div>
+            <span class="social-arrow"><i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <!-- TIKTOK -->
+          <a href="https://www.tiktok.com/@legionfreeze" target="_blank" class="social-card">
+            <div class="social-icon tiktok"><i class="fab fa-tiktok"></i></div>
+            <div class="social-info">
+              <div class="social-name">TikTok</div>
+              <div class="social-handle">@legionfreeze</div>
+              <div class="social-stats">
+                <span class="social-stat"><i class="fas fa-users"></i> 3.8K</span>
+                <span class="social-stat"><i class="fas fa-play"></i> 200+</span>
+              </div>
+            </div>
+            <span class="social-arrow"><i class="fas fa-arrow-right"></i></span>
+          </a>
+        </div>
+
+        <!-- DISCORD CARD DESTACADA -->
+        <div class="discord-card">
+          <div class="discord-icon"><i class="fab fa-discord"></i></div>
+          <div class="discord-title">Comunidad Discord</div>
+          <div class="discord-description">
+            Únete a nuestro servidor de Discord para soporte 24/7, noticias, eventos y comunidad gaming
+          </div>
+          
+          <div class="discord-stats">
+            <div class="discord-stat">
+              <div class="discord-stat-number">500+</div>
+              <div class="discord-stat-label">Miembros</div>
+            </div>
+            <div class="discord-stat">
+              <div class="discord-stat-number">24/7</div>
+              <div class="discord-stat-label">Soporte</div>
+            </div>
+            <div class="discord-stat">
+              <div class="discord-stat-number">50+</div>
+              <div class="discord-stat-label">Online</div>
+            </div>
+          </div>
+
+          <a href="https://discord.gg/ZSg4CrbEXR" target="_blank" class="discord-button">
+            <i class="fab fa-discord"></i> UNIRSE AL SERVIDOR
+          </a>
+        </div>
+
+        <!-- ESTADÍSTICAS GENERALES -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:20px; margin-top:30px;">
+          <div style="background:rgba(20,30,50,0.5); border-radius:20px; padding:20px; text-align:center;">
+            <i class="fas fa-users" style="color:var(--neonCyan); font-size:32px;"></i>
+            <h3 style="color:white; margin:10px 0;">7.5K+</h3>
+            <p style="color:var(--muted);">Seguidores totales</p>
+          </div>
+          <div style="background:rgba(20,30,50,0.5); border-radius:20px; padding:20px; text-align:center;">
+            <i class="fas fa-calendar-alt" style="color:var(--neonCyan); font-size:32px;"></i>
+            <h3 style="color:white; margin:10px 0;">2023</h3>
+            <p style="color:var(--muted);">Año de fundación</p>
+          </div>
+          <div style="background:rgba(20,30,50,0.5); border-radius:20px; padding:20px; text-align:center;">
+            <i class="fas fa-video" style="color:var(--neonCyan); font-size:32px;"></i>
+            <h3 style="color:white; margin:10px 0;">365+</h3>
+            <p style="color:var(--muted);">Videos/publicaciones</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4><i class="fas fa-shield-halos"></i> SecureNET</h4>
+            <ul>
+              <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+              <li><a href="about.html"><i class="fas fa-users"></i> Sobre Nosotros</a></li>
+              <li><a href="locations.html"><i class="fas fa-globe-americas"></i> Ubicaciones</a></li>
+              <li><a href="plans.html"><i class="fas fa-tags"></i> Planes</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4><i class="fas fa-link"></i> Recursos</h4>
+            <ul>
+              <li><a href="map.html"><i class="fas fa-map-marked-alt"></i> Mapa</a></li>
+              <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+              <li><a href="tools.html"><i class="fas fa-tools"></i> Herramientas</a></li>
+              <li><a href="comparison.html"><i class="fas fa-chart-bar"></i> Comparativa</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4><i class="fas fa-share-alt"></i> Redes</h4>
+            <ul>
+              <li><a href="social.html"><i class="fab fa-instagram"></i> Instagram</a></li>
+              <li><a href="https://discord.gg/ZSg4CrbEXR" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+              <li><a href="contact.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+              <li><a href="privacy-policy.html"><i class="fas fa-lock"></i> Privacidad</a></li>
+              <li><a href="terms.html"><i class="fas fa-file-contract"></i> Términos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2024 SecureNET • <i class="fas fa-bolt"></i> VPN de alto rendimiento • <i class="fas fa-share-alt"></i> @legionfreeze</p>
+          <p style="margin-top:10px;font-size:12px;">Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // 3D ANIMATION
+    const canvas=document.getElementById('canvas-3d'),ctx=canvas.getContext('2d');
+    canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+    const particles=[];
+    for(let i=0;i<70;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,z:Math.random()*1000,size:Math.random()*2+1,speed:Math.random()*2+1});
+    function animate3D(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      const theme=document.body.dataset.theme,color=theme==='hacker'?'#0f0':theme==='light'?'#06f':'#0ff';
+      particles.forEach(p=>{
+        p.z-=p.speed;if(p.z<=0){p.z=1000;p.x=Math.random()*canvas.width;p.y=Math.random()*canvas.height;}
+        const scale=500/p.z,x2d=(p.x-canvas.width/2)*scale+canvas.width/2,y2d=(p.y-canvas.height/2)*scale+canvas.height/2;
+        ctx.beginPath();ctx.arc(x2d,y2d,p.size*scale,0,Math.PI*2);ctx.fillStyle=color;ctx.shadowColor=color;ctx.shadowBlur=10;ctx.fill();
+      });requestAnimationFrame(animate3D);
+    }
+    animate3D();
+    window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+    function toggleMenu(){
+      document.getElementById('hamburger').classList.toggle('active');
+      document.getElementById('dashboardMenu').classList.toggle('open');
+    }
+    
+    function setTheme(theme){
+      document.body.dataset.theme = theme;
+      localStorage.setItem('securenet-theme', theme);
+      document.querySelectorAll('.theme-btn-dashboard').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.theme-btn-dashboard[onclick*="${theme}"]`).classList.add('active');
+    }
+    
+    function copyUsername(username){
+      navigator.clipboard.writeText(username).then(()=>showToast(`Copiado: ${username}`));
+    }
+    
+    function showToast(m){
+      const t=document.getElementById('toast');
+      t.querySelector('span').textContent = m;
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'),2000);
+    }
+
+    window.onload=()=>{
+      // Cargar tema guardado
+      const savedTheme = localStorage.getItem('securenet-theme') || 'dark';
+      document.body.dataset.theme = savedTheme;
+      
+      // Actualizar botones activos
+      document.querySelectorAll('.theme-btn-dashboard').forEach(b => {
+        b.classList.remove('active');
+        if(b.textContent.toLowerCase().includes(savedTheme) || 
+           (savedTheme==='dark' && b.innerHTML.includes('moon')) ||
+           (savedTheme==='light' && b.innerHTML.includes('sun')) ||
+           (savedTheme==='hacker' && b.innerHTML.includes('code'))) {
+          b.classList.add('active');
+        }
+      });
+
+      document.querySelectorAll('.dashboard-item').forEach(i => {
+        i.addEventListener('click', ()=>{ if(window.innerWidth<768) toggleMenu(); });
+      });
+      
+      window.toggleMenu = toggleMenu;
+      window.setTheme = setTheme;
+      window.copyUsername = copyUsername;
+    };
+  </script>
+</body>
+</html>

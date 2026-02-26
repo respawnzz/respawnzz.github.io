@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Términos y Condiciones | SecureNET</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Términos del servicio SecureNET VPN">
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#070b12" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHsSURBVHgB7VdLUhtBEH1dCiU+xiHYBhu8Ihdw7AuYq7AiyQ1wbpBwA3MDcgNwA3MDcgNwA+QGhC9gK5w9M1I1X6m7p4eR0CReqVZTUz3T/fq9HuB/giQG/G8A/tw+eL14fP2ZEpbXj4/vr/bn01eccA6T0Nk9/z34+Xj3+U2A2QPdA3jP9Y+7396eHq4/rYqA42SNN2c/XgIAIPgJZLK2+qbLwE1xH/C09Qj3dH1zCW0JAIlJEQDLFwFIygoAvCQAkD6Izz9W12ZNi+bxW+PcCAAVq0gWpBEAJEsJAMksjYAkmSVlS2ZxXgYg3v0qAiDJFwFIMk8EgFciE5enJp4qjQYgSc4TASi/JwJQfE8EoPSeiL8AvKcCkFp3CyjX3YoANM8lAkB+kAhAfiERgPxKIgD5rUQA8j4RgHxIBCD3RADyP4kA5EMiALknApCfSAQg90QA8p4IQO6JAORHIgC5JwKQeyIAeU8EIPdEAPJDBPCeu0p2EfkRAshu5b2n7iZ1K+89Wzcq+T4CeJ4EMl3d83zrA34g+fHlA7wN0J7n2x1wD/7Fe54PTYC2PN/uAB/Aw/v8jYl2PqANz7c7wJ9AAK15vu2BvuH5dgc8/7pzZ9uugW14vt2R7Rq2AUyGzw8f9eZqAAAAAElFTkSuQmCC" />
+  <style>
+    /* ===== Mismo CSS del index ===== */
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --bg:#0a0e17;
+      --bg-gradient:linear-gradient(135deg,#0a0e17 0%,#0d1525 50%,#0a1422 100%);
+      --card:rgba(16,42,67,0.7);
+      --border:rgba(64,224,208,0.3);
+      --text:rgba(255,255,255,.95);
+      --muted:#b0d0ff;
+      --neonCyan:#40e0d0;
+      --neonBlue:#00b4ff;
+      --neonPurple:#8c55ff;
+      --neonPink:#ff55ff;
+      --shadowDeep:0 25px 80px rgba(0,50,100,0.4);
+      --glass:rgba(255,255,255,0.05);
+      --ease:cubic-bezier(.2,.8,.2,1);
+    }
+    [data-theme=light]{
+      --bg:#f0f4ff;
+      --bg-gradient:linear-gradient(135deg,#f0f4ff 0%,#fff 50%,#e6f0ff 100%);
+      --card:rgba(255,255,255,0.9);
+      --border:rgba(0,150,200,0.3);
+      --text:#0a0e17;
+      --muted:#1a2a3a;
+      --neonCyan:#0096c8;
+      --neonBlue:#0066ff;
+      --neonPurple:#6633cc;
+      --neonPink:#cc33cc;
+    }
+    [data-theme=hacker]{
+      --bg:#0f0f0f;
+      --bg-gradient:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 50%,#0a0a0a 100%);
+      --card:#0a0a0a;
+      --border:#0f0;
+      --text:#0f0;
+      --muted:#0c0;
+      --neonCyan:#0f0;
+      --neonBlue:#0d0;
+      --neonPurple:#0c0;
+      --neonPink:#0e0;
+      font-family:'Courier New',monospace;
+    }
+    [data-theme=hacker] button{background:#0f0!important;color:#000!important;box-shadow:0 0 20px #0f0;}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg-gradient);
+      color:var(--text);
+      min-height:100vh;
+      transition:.3s;
+      overflow-x:hidden;
+    }
+    #canvas-3d{
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      z-index:-1;
+      pointer-events:none;
+    }
+    .app{min-height:100vh;display:flex;flex-direction:column;}
+
+    /* HEADER FIJO */
+    .main-header{
+      background:rgba(10,20,30,0.95);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:9999;
+      padding:12px 0;
+    }
+    .header-spacer{height:100px;}
+
+    /* MENU HAMBURGUESA */
+    .menu-container{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 20px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .logo-icon{
+      font-size:32px;
+      color:var(--neonCyan);
+      filter:drop-shadow(0 0 10px var(--neonCyan));
+    }
+    .logo-text h1{
+      font-size:20px;
+      font-weight:700;
+      background:linear-gradient(45deg,#fff,var(--neonCyan),var(--neonBlue));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .logo-text span{font-size:12px;color:var(--muted);}
+
+    /* BOTON HAMBURGUESA */
+    .hamburger{
+      width:45px;height:45px;
+      background:rgba(64,224,208,0.1);
+      border:1px solid var(--border);
+      border-radius:12px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:6px;
+      cursor:pointer;
+      transition:.3s;
+      z-index:10000;
+    }
+    .hamburger:hover{
+      background:rgba(64,224,208,0.2);
+      border-color:var(--neonCyan);
+    }
+    .hamburger span{
+      width:25px;height:2px;
+      background:var(--neonCyan);
+      border-radius:2px;
+      transition:.3s;
+    }
+    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(6px,6px);}
+    .hamburger.active span:nth-child(2){opacity:0;}
+    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
+
+    /* DASHBOARD MENU LATERAL */
+    .dashboard-menu{
+      position:fixed;
+      top:80px;right:-300px;
+      width:280px;
+      height:calc(100vh - 80px);
+      background:rgba(10,20,30,0.95);
+      backdrop-filter:blur(20px);
+      border-left:1px solid var(--border);
+      padding:30px 20px;
+      transition:right 0.4s var(--ease);
+      z-index:9998;
+      box-shadow:-5px 0 30px rgba(0,0,0,0.5);
+    }
+    .dashboard-menu.open{right:0;}
+    .dashboard-header{
+      font-size:18px;
+      color:var(--neonCyan);
+      margin-bottom:30px;
+      padding-bottom:15px;
+      border-bottom:1px solid var(--border);
+      text-transform:uppercase;
+      letter-spacing:2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .dashboard-header i{
+      font-size:20px;
+    }
+    .dashboard-item{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      padding:15px;
+      color:var(--muted);
+      text-decoration:none;
+      border-radius:12px;
+      margin-bottom:5px;
+      transition:.2s;
+      cursor:pointer;
+      font-size:15px;
+    }
+    .dashboard-item i{
+      width:20px;
+      text-align:center;
+    }
+    .dashboard-item:hover{
+      background:rgba(64,224,208,0.1);
+      color:var(--neonCyan);
+    }
+    .dashboard-item.active{
+      background:linear-gradient(45deg,var(--neonBlue),var(--neonCyan));
+      color:white;
+    }
+    .dashboard-footer{
+      position:absolute;
+      bottom:30px;
+      left:20px;
+      right:20px;
+    }
+    .theme-selector-dashboard{
+      display:flex;
+      gap:5px;
+      background:rgba(0,0,0,0.3);
+      padding:4px;
+      border-radius:50px;
+      border:1px solid var(--border);
+      margin-top:15px;
+    }
+    .theme-btn-dashboard{
+      flex:1;
+      padding:8px;
+      border:none;
+      background:transparent;
+      color:var(--muted);
+      border-radius:50px;
+      cursor:pointer;
+      font-size:14px;
+      transition:.2s;
+    }
+    .theme-btn-dashboard.active{
+      background:var(--neonCyan);
+      color:var(--bg);
+    }
+
+    /* MAIN CONTENT */
+    .container{
+      max-width:1400px;
+      margin:0 auto;
+      padding:0 20px;
+      width:100%;
+    }
+    .section-title{
+      font-size:32px;
+      margin:30px 0 20px;
+      text-align:center;
+      background:linear-gradient(45deg,var(--neonCyan),var(--neonBlue),var(--neonPurple));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    /* PAYMENT METHODS */
+    .payment-methods{
+      display:flex;
+      flex-wrap:wrap;
+      gap:15px;
+      margin:20px 0;
+      justify-content:center;
+    }
+    .payment-badge{
+      background:rgba(64,224,208,0.1);
+      border:1px solid var(--border);
+      padding:10px 25px;
+      border-radius:50px;
+      color:var(--neonCyan);
+      font-weight:600;
+      font-size:16px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .payment-badge i{
+      font-size:18px;
+    }
+
+    /* TERMS CONTENT */
+    .terms-content{
+      background:rgba(20,30,50,0.7);
+      backdrop-filter:blur(10px);
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:40px;
+      margin:40px 0;
+    }
+    .terms-section{
+      margin-bottom:40px;
+      padding-bottom:30px;
+      border-bottom:1px solid var(--border);
+    }
+    .terms-section:last-child{
+      border-bottom:none;
+      margin-bottom:0;
+      padding-bottom:0;
+    }
+    .terms-section h3{
+      color:var(--neonCyan);
+      margin-bottom:20px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:22px;
+    }
+    .terms-section h3 i{
+      font-size:24px;
+    }
+    .terms-section p{
+      color:var(--muted);
+      line-height:1.8;
+      margin-bottom:15px;
+    }
+    .terms-section ul{
+      color:var(--muted);
+      margin-left:20px;
+      line-height:1.8;
+    }
+    .terms-section ul li{
+      margin-bottom:10px;
+    }
+    .terms-section ul li i{
+      color:var(--neonCyan);
+      margin-right:8px;
+    }
+    .no-refund{
+      background:rgba(255,85,85,0.1);
+      border:1px solid #ff5555;
+      border-radius:20px;
+      padding:20px;
+      margin:20px 0;
+      text-align:center;
+    }
+    .no-refund i{
+      color:#ff5555;
+      font-size:24px;
+      margin-bottom:10px;
+    }
+    .no-refund p{
+      color:#ff5555;
+      font-weight:700;
+      margin-bottom:5px;
+    }
+    .no-refund small{
+      color:var(--muted);
+    }
+
+    /* FOOTER */
+    .main-footer{
+      background:rgba(10,20,30,0.8);
+      backdrop-filter:blur(10px);
+      border-top:1px solid var(--border);
+      padding:60px 0 30px;
+      margin-top:60px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:40px;
+      margin-bottom:40px;
+    }
+    .footer-col h4{
+      color:var(--neonCyan);
+      margin-bottom:20px;
+      font-size:18px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .footer-col ul li{
+      list-style:none;
+      margin-bottom:12px;
+    }
+    .footer-col ul li a{
+      color:var(--muted);
+      text-decoration:none;
+      cursor:pointer;
+      transition:.2s;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .footer-col ul li a i{
+      width:16px;
+    }
+    .footer-col ul li a:hover{
+      color:var(--neonCyan);
+      padding-left:5px;
+    }
+    .footer-bottom{
+      text-align:center;
+      padding-top:30px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* TOAST */
+    .toast{
+      position:fixed;
+      bottom:30px;left:50%;
+      transform:translateX(-50%) translateY(100px);
+      background:linear-gradient(45deg,rgba(16,42,67,0.9),rgba(10,30,50,0.9));
+      border:1px solid var(--neonCyan);
+      border-radius:20px;
+      padding:16px 30px;
+      color:white;
+      z-index:10000;
+      opacity:0;
+      transition:.4s;
+      backdrop-filter:blur(10px);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .toast i{
+      color:var(--neonCyan);
+    }
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+    @media (max-width:768px){
+      .dashboard-menu{width:250px;}
+      .terms-content{padding:25px;}
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <canvas id="canvas-3d"></canvas>
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span></span>
+  </div>
+
+  <div class="app">
+    <header class="main-header">
+      <div class="menu-container">
+        <div class="logo">
+          <span class="logo-icon"><i class="fas fa-shield-halos"></i></span>
+          <div class="logo-text">
+            <h1>SecureNET</h1>
+            <span>VPN Solutions</span>
+          </div>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-menu" id="dashboardMenu">
+      <div class="dashboard-header"><i class="fas fa-bars"></i> MENÚ PRINCIPAL</div>
+      <a href="index.html" class="dashboard-item"><i class="fas fa-home"></i> Inicio</a>
+      <a href="about.html" class="dashboard-item"><i class="fas fa-users"></i> Sobre Nosotros</a>
+      <a href="locations.html" class="dashboard-item"><i class="fas fa-globe-americas"></i> Ubicaciones</a>
+      <a href="plans.html" class="dashboard-item"><i class="fas fa-tags"></i> Planes</a>
+      <a href="map.html" class="dashboard-item"><i class="fas fa-map-marked-alt"></i> Mapa</a>
+      <a href="faq.html" class="dashboard-item"><i class="fas fa-question-circle"></i> FAQ</a>
+      <a href="tools.html" class="dashboard-item"><i class="fas fa-tools"></i> Herramientas</a>
+      <a href="social.html" class="dashboard-item"><i class="fas fa-share-alt"></i> Redes Sociales</a>
+      <a href="comparison.html" class="dashboard-item"><i class="fas fa-chart-bar"></i> Comparativa</a>
+      <a href="contact.html" class="dashboard-item"><i class="fas fa-envelope"></i> Contacto</a>
+      <a href="privacy-policy.html" class="dashboard-item"><i class="fas fa-lock"></i> Privacidad</a>
+      <a href="terms.html" class="dashboard-item active"><i class="fas fa-file-contract"></i> Términos</a>
+
+      <div class="dashboard-footer">
+        <a href="https://discord.gg/ZSg4CrbEXR" target="_blank" class="dashboard-item"><i class="fab fa-discord"></i> Discord</a>
+        <div class="theme-selector-dashboard">
+          <button class="theme-btn-dashboard active" onclick="setTheme('dark')"><i class="fas fa-moon"></i></button>
+          <button class="theme-btn-dashboard" onclick="setTheme('light')"><i class="fas fa-sun"></i></button>
+          <button class="theme-btn-dashboard" onclick="setTheme('hacker')"><i class="fas fa-code"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-spacer"></div>
+
+    <main class="container">
+      <h2 class="section-title"><i class="fas fa-file-contract"></i> Términos y Condiciones</h2>
+      
+      <div class="terms-content">
+        
+        <!-- MÉTODOS DE PAGO DESTACADOS -->
+        <div style="text-align:center; margin-bottom:40px;">
+          <h3 style="color:var(--neonCyan); margin-bottom:20px;"><i class="fas fa-credit-card"></i> Métodos de Pago Aceptados</h3>
+          <div class="payment-methods">
+            <span class="payment-badge"><i class="fab fa-paypal"></i> PayPal</span>
+            <span class="payment-badge"><i class="fas fa-dollar-sign"></i> Cash App</span>
+            <span class="payment-badge"><i class="fab fa-apple-pay"></i> Apple Pay</span>
+            <span class="payment-badge"><i class="fab fa-bitcoin"></i> Bitcoin</span>
+          </div>
+        </div>
+
+        <!-- NO REFUND HIGHLIGHT -->
+        <div class="no-refund">
+          <i class="fas fa-exclamation-triangle"></i>
+          <p><i class="fas fa-ban"></i> NO SE REALIZAN REEMBOLSOS</p>
+          <small>Todos los pagos son definitivos. El servicio es digital y no reembolsable.</small>
+        </div>
+
+        <div class="terms-section">
+          <h3><i class="fas fa-globe"></i> 1. Uso del Servicio</h3>
+          <p>El usuario se compromete a utilizar SecureNET únicamente para actividades legales. Está prohibido el uso del servicio para:</p>
+          <ul>
+            <li><i class="fas fa-skull-crosswalk"></i> Actividades ilegales</li>
+            <li><i class="fas fa-hacker"></i> Hacking o ciberataques</li>
+            <li><i class="fas fa-fraud"></i> Fraude o estafas</li>
+            <li><i class="fas fa-file-video"></i> Distribución de contenido ilegal</li>
+            <li><i class="fas fa-envelope"></i> Spam o phishing</li>
+          </ul>
+        </div>
+        
+        <div class="terms-section">
+          <h3><i class="fas fa-money-bill-wave"></i> 2. Política de Reembolsos</h3>
+          <div style="background:rgba(255,85,85,0.05); border-radius:16px; padding:20px;">
+            <p style="color:#ff5555; font-weight:700; display:flex; align-items:center; gap:10px;">
+              <i class="fas fa-ban"></i> NO SE REALIZAN REEMBOLSOS
+            </p>
+            <p>Todos los pagos son definitivos. Al realizar una compra, aceptas que el servicio es digital y no reembolsable.</p>
+            <p style="margin-top:10px;"><i class="fas fa-info-circle" style="color:var(--neonCyan);"></i> Recomendamos probar primero nuestros servidores gratuitos o de prueba antes de comprar.</p>
+          </div>
+        </div>
+        
+        <div class="terms-section">
+          <h3><i class="fas fa-balance-scale"></i> 3. Responsabilidad</h3>
+          <p>SecureNET no se responsabiliza del uso indebido del servicio por parte de los usuarios. El usuario es el único responsable de sus actividades mientras utiliza nuestra VPN.</p>
+          <p><i class="fas fa-check-circle" style="color:var(--neonCyan);"></i> Nos comprometemos a mantener el servicio funcionando 24/7, pero no garantizamos disponibilidad absoluta debido a mantenimientos o fuerza mayor.</p>
+        </div>
+
+        <div class="terms-section">
+          <h3><i class="fas fa-sync-alt"></i> 4. Modificaciones</h3>
+          <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios serán notificados a través de:</p>
+          <ul>
+            <li><i class="fab fa-discord"></i> Nuestro servidor de Discord</li>
+            <li><i class="fas fa-envelope"></i> Correo electrónico registrado</li>
+            <li><i class="fas fa-globe"></i> Aviso en la página web</li>
+          </ul>
+        </div>
+
+        <div class="terms-section">
+          <h3><i class="fas fa-clock"></i> 5. Cancelación del Servicio</h3>
+          <p>El usuario puede cancelar su servicio en cualquier momento. La cancelación no genera reembolso del período restante.</p>
+          <p>SecureNET se reserva el derecho de cancelar cuentas que violen estos términos sin previo aviso.</p>
+        </div>
+
+        <!-- FECHA DE ACTUALIZACIÓN -->
+        <div style="text-align:center; margin-top:40px; padding:20px; background:rgba(0,0,0,0.2); border-radius:20px;">
+          <i class="fas fa-calendar-alt" style="color:var(--neonCyan);"></i>
+          <span style="color:var(--muted); margin-left:10px;">Última actualización: 15 de marzo, 2024</span>
+        </div>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4><i class="fas fa-shield-halos"></i> SecureNET</h4>
+            <ul>
+              <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+              <li><a href="about.html"><i class="fas fa-users"></i> Sobre Nosotros</a></li>
+              <li><a href="locations.html"><i class="fas fa-globe-americas"></i> Ubicaciones</a></li>
+              <li><a href="plans.html"><i class="fas fa-tags"></i> Planes</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4><i class="fas fa-link"></i> Legal</h4>
+            <ul>
+              <li><a href="privacy-policy.html"><i class="fas fa-lock"></i> Privacidad</a></li>
+              <li><a href="terms.html"><i class="fas fa-file-contract"></i> Términos</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4><i class="fas fa-share-alt"></i> Redes</h4>
+            <ul>
+              <li><a href="social.html"><i class="fab fa-instagram"></i> Instagram</a></li>
+              <li><a href="https://discord.gg/ZSg4CrbEXR" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+              <li><a href="contact.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 SecureNET VPN • <i class="fas fa-ban" style="color:#ff5555;"></i> Sin reembolsos • <i class="fas fa-credit-card"></i> PayPal, Cash App, Apple Pay, Bitcoin</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // 3D ANIMATION
+    const canvas=document.getElementById('canvas-3d'),ctx=canvas.getContext('2d');
+    canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+    const particles=[];
+    for(let i=0;i<70;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,z:Math.random()*1000,size:Math.random()*2+1,speed:Math.random()*2+1});
+    function animate3D(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      const theme=document.body.dataset.theme,color=theme==='hacker'?'#0f0':theme==='light'?'#06f':'#0ff';
+      particles.forEach(p=>{
+        p.z-=p.speed;if(p.z<=0){p.z=1000;p.x=Math.random()*canvas.width;p.y=Math.random()*canvas.height;}
+        const scale=500/p.z,x2d=(p.x-canvas.width/2)*scale+canvas.width/2,y2d=(p.y-canvas.height/2)*scale+canvas.height/2;
+        ctx.beginPath();ctx.arc(x2d,y2d,p.size*scale,0,Math.PI*2);ctx.fillStyle=color;ctx.shadowColor=color;ctx.shadowBlur=10;ctx.fill();
+      });requestAnimationFrame(animate3D);
+    }
+    animate3D();
+    window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+    function toggleMenu(){
+      document.getElementById('hamburger').classList.toggle('active');
+      document.getElementById('dashboardMenu').classList.toggle('open');
+    }
+    
+    function setTheme(theme){
+      document.body.dataset.theme = theme;
+      localStorage.setItem('securenet-theme', theme);
+      document.querySelectorAll('.theme-btn-dashboard').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.theme-btn-dashboard[onclick*="${theme}"]`).classList.add('active');
+    }
+
+    function copyUsername(username){
+      navigator.clipboard.writeText(username).then(()=>showToast(`Copiado: ${username}`));
+    }
+    function showToast(m){
+      const t=document.getElementById('toast');
+      t.querySelector('span').textContent = m;
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'),2000);
+    }
+
+    window.onload=()=>{
+      // Cargar tema guardado
+      const savedTheme = localStorage.getItem('securenet-theme') || 'dark';
+      document.body.dataset.theme = savedTheme;
+      
+      // Actualizar botones activos
+      document.querySelectorAll('.theme-btn-dashboard').forEach(b => {
+        b.classList.remove('active');
+        if(b.textContent.toLowerCase().includes(savedTheme) || 
+           (savedTheme==='dark' && b.innerHTML.includes('moon')) ||
+           (savedTheme==='light' && b.innerHTML.includes('sun')) ||
+           (savedTheme==='hacker' && b.innerHTML.includes('code'))) {
+          b.classList.add('active');
+        }
+      });
+
+      document.querySelectorAll('.dashboard-item').forEach(i=>i.addEventListener('click',()=>{if(window.innerWidth<768)toggleMenu();}));
+      window.toggleMenu=toggleMenu;window.setTheme=setTheme;
+      window.copyUsername=copyUsername;
+    };
+  </script>
+</body>
+</html>

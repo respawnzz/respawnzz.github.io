@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>FAQ | SecureNET VPN</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Preguntas frecuentes sobre SecureNET VPN">
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" content="#070b12" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHsSURBVHgB7VdLUhtBEH1dCiU+xiHYBhu8Ihdw7AuYq7AiyQ1wbpBwA3MDcgNwA3MDcgNwA+QGhC9gK5w9M1I1X6m7p4eR0CReqVZTUz3T/fq9HuB/giQG/G8A/tw+eL14fP2ZEpbXj4/vr/bn01eccA6T0Nk9/z34+Xj3+U2A2QPdA3jP9Y+7396eHq4/rYqA42SNN2c/XgIAIPgJZLK2+qbLwE1xH/C09Qj3dH1zCW0JAIlJEQDLFwFIygoAvCQAkD6Izz9W12ZNi+bxW+PcCAAVq0gWpBEAJEsJAMksjYAkmSVlS2ZxXgYg3v0qAiDJFwFIMk8EgFciE5enJp4qjQYgSc4TASi/JwJQfE8EoPSeiL8AvKcCkFp3CyjX3YoANM8lAkB+kAhAfiERgPxKIgD5rUQA8j4RgHxIBCD3RADyP4kA5EMiALknApCfSAQg90QA8p4IQO6JAORHIgC5JwKQeyIAeU8EIPdEAPJDBPCeu0p2EfkRAshu5b2n7iZ1K+89Wzcq+T4CeJ4EMl3d83zrA34g+fHlA7wN0J7n2x1wD/7Fe54PTYC2PN/uAB/Aw/v8jYl2PqANz7c7wJ9AAK15vu2BvuH5dgc8/7pzZ9uugW14vt2R7Rq2AUyGzw8f9eZqAAAAAElFTkSuQmCC" />
+  <style>
+    /* ===== Mismo CSS del index ===== */
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --bg:#0a0e17;
+      --bg-gradient:linear-gradient(135deg,#0a0e17 0%,#0d1525 50%,#0a1422 100%);
+      --card:rgba(16,42,67,0.7);
+      --border:rgba(64,224,208,0.3);
+      --text:rgba(255,255,255,.95);
+      --muted:#b0d0ff;
+      --neonCyan:#40e0d0;
+      --neonBlue:#00b4ff;
+      --neonPurple:#8c55ff;
+      --neonPink:#ff55ff;
+      --shadowDeep:0 25px 80px rgba(0,50,100,0.4);
+      --glass:rgba(255,255,255,0.05);
+      --ease:cubic-bezier(.2,.8,.2,1);
+    }
+    [data-theme=light]{
+      --bg:#f0f4ff;
+      --bg-gradient:linear-gradient(135deg,#f0f4ff 0%,#fff 50%,#e6f0ff 100%);
+      --card:rgba(255,255,255,0.9);
+      --border:rgba(0,150,200,0.3);
+      --text:#0a0e17;
+      --muted:#1a2a3a;
+      --neonCyan:#0096c8;
+      --neonBlue:#0066ff;
+      --neonPurple:#6633cc;
+      --neonPink:#cc33cc;
+    }
+    [data-theme=hacker]{
+      --bg:#0f0f0f;
+      --bg-gradient:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 50%,#0a0a0a 100%);
+      --card:#0a0a0a;
+      --border:#0f0;
+      --text:#0f0;
+      --muted:#0c0;
+      --neonCyan:#0f0;
+      --neonBlue:#0d0;
+      --neonPurple:#0c0;
+      --neonPink:#0e0;
+      font-family:'Courier New',monospace;
+    }
+    [data-theme=hacker] button{background:#0f0!important;color:#000!important;box-shadow:0 0 20px #0f0;}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg-gradient);
+      color:var(--text);
+      min-height:100vh;
+      transition:.3s;
+      overflow-x:hidden;
+    }
+    #canvas-3d{
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      z-index:-1;
+      pointer-events:none;
+    }
+    .app{min-height:100vh;display:flex;flex-direction:column;}
+
+    /* HEADER FIJO */
+    .main-header{
+      background:rgba(10,20,30,0.95);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:9999;
+      padding:12px 0;
+    }
+    .header-spacer{height:100px;}
+
+    /* MENU HAMBURGUESA */
+    .menu-container{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 20px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .logo-icon{
+      font-size:32px;
+      color:var(--neonCyan);
+      filter:drop-shadow(0 0 10px var(--neonCyan));
+    }
+    .logo-text h1{
+      font-size:20px;
+      font-weight:700;
+      background:linear-gradient(45deg,#fff,var(--neonCyan),var(--neonBlue));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .logo-text span{font-size:12px;color:var(--muted);}
+
+    /* BOTON HAMBURGUESA */
+    .hamburger{
+      width:45px;height:45px;
+      background:rgba(64,224,208,0.1);
+      border:1px solid var(--border);
+      border-radius:12px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:6px;
+      cursor:pointer;
+      transition:.3s;
+      z-index:10000;
+    }
+    .hamburger:hover{
+      background:rgba(64,224,208,0.2);
+      border-color:var(--neonCyan);
+    }
+    .hamburger span{
+      width:25px;height:2px;
+      background:var(--neonCyan);
+      border-radius:2px;
+      transition:.3s;
+    }
+    .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(6px,6px);}
+    .hamburger.active span:nth-child(2){opacity:0;}
+    .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
+
+    /* DASHBOARD MENU LATERAL */
+    .dashboard-menu{
+      position:fixed;
+      top:80px;right:-300px;
+      width:280px;
+      height:calc(100vh - 80px);
+      background:rgba(10,20,30,0.95);
+      backdrop-filter:blur(20px);
+      border-left:1px solid var(--border);
+      padding:30px 20px;
+      transition:right 0.4s var(--ease);
+      z-index:9998;
+      box-shadow:-5px 0 30px rgba(0,0,0,0.5);
+    }
+    .dashboard-menu.open{right:0;}
+    .dashboard-header{
+      font-size:18px;
+      color:var(--neonCyan);
+      margin-bottom:30px;
+      padding-bottom:15px;
+      border-bottom:1px solid var(--border);
+      text-transform:uppercase;
+      letter-spacing:2px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .dashboard-header i{
+      font-size:20px;
+    }
+    .dashboard-item{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      padding:15px;
+      color:var(--muted);
+      text-decoration:none;
+      border-radius:12px;
+      margin-bottom:5px;
+      transition:.2s;
+      cursor:pointer;
+      font-size:15px;
+    }
+    .dashboard-item i{
+      width:20px;
+      text-align:center;
+    }
+    .dashboard-item:hover{
+      background:rgba(64,224,208,0.1);
+      color:var(--neonCyan);
+    }
+    .dashboard-item.active{
+      background:linear-gradient(45deg,var(--neonBlue),var(--neonCyan));
+      color:white;
+    }
+    .dashboard-footer{
+      position:absolute;
+      bottom:30px;
+      left:20px;
+      right:20px;
+    }
+    .theme-selector-dashboard{
+      display:flex;
+      gap:5px;
+      background:rgba(0,0,0,0.3);
+      padding:4px;
+      border-radius:50px;
+      border:1px solid var(--border);
+      margin-top:15px;
+    }
+    .theme-btn-dashboard{
+      flex:1;
+      padding:8px;
+      border:none;
+      background:transparent;
+      color:var(--muted);
+      border-radius:50px;
+      cursor:pointer;
+      font-size:14px;
+      transition:.2s;
+    }
+    .theme-btn-dashboard.active{
+      background:var(--neonCyan);
+      color:var(--bg);
+    }
+
+    /* MAIN CONTENT */
+    .container{
+      max-width:1400px;
+      margin:0 auto;
+      padding:0 20px;
+      width:100%;
+    }
+    .section-title{
+      font-size:32px;
+      margin:30px 0 20px;
+      text-align:center;
+      background:linear-gradient(45deg,var(--neonCyan),var(--neonBlue),var(--neonPurple));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+    .section-subtitle{
+      text-align:center;
+      color:var(--muted);
+      margin-bottom:30px;
+      font-size:16px;
+    }
+
+    /* PAYMENT METHODS */
+    .payment-methods{
+      display:flex;
+      flex-wrap:wrap;
+      gap:15px;
+      margin:20px 0 30px;
+      justify-content:center;
+    }
+    .payment-badge{
+      background:rgba(64,224,208,0.1);
+      border:1px solid var(--border);
+      padding:10px 25px;
+      border-radius:50px;
+      color:var(--neonCyan);
+      font-weight:600;
+      font-size:15px;
+      transition:.3s;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .payment-badge i{
+      font-size:16px;
+    }
+    .payment-badge:hover{
+      background:rgba(64,224,208,0.2);
+      transform:translateY(-2px);
+    }
+
+    /* FAQ SECTION */
+    .faq-section{
+      background:rgba(20,30,50,0.6);
+      backdrop-filter:blur(10px);
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:40px;
+      margin:40px 0;
+    }
+    .faq-header{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:15px;
+      margin-bottom:30px;
+    }
+    .faq-header i{
+      font-size:40px;
+      color:var(--neonCyan);
+      animation:faqIcon 3s infinite;
+    }
+    @keyframes faqIcon{
+      0%{transform:rotate(0deg);}
+      25%{transform:rotate(10deg);}
+      75%{transform:rotate(-10deg);}
+      100%{transform:rotate(0deg);}
+    }
+    .faq-categories{
+      display:flex;
+      gap:15px;
+      margin-bottom:30px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .category-btn{
+      padding:12px 25px;
+      background:transparent;
+      border:1px solid var(--border);
+      border-radius:50px;
+      color:var(--muted);
+      cursor:pointer;
+      transition:.3s;
+      font-size:15px;
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .category-btn i{
+      font-size:16px;
+    }
+    .category-btn:hover{
+      background:rgba(64,224,208,0.1);
+      color:var(--neonCyan);
+    }
+    .category-btn.active{
+      background:linear-gradient(45deg,var(--neonBlue),var(--neonCyan));
+      color:white;
+      border-color:transparent;
+    }
+    .faq-search{
+      margin-bottom:30px;
+      position:relative;
+    }
+    .faq-search i{
+      position:absolute;
+      left:20px;
+      top:50%;
+      transform:translateY(-50%);
+      color:var(--muted);
+      font-size:18px;
+    }
+    .faq-search input{
+      width:100%;
+      padding:18px 25px 18px 55px;
+      background:rgba(0,0,0,0.3);
+      border:1px solid var(--border);
+      border-radius:50px;
+      color:var(--text);
+      font-size:16px;
+    }
+    .faq-search input:focus{
+      outline:none;
+      border-color:var(--neonCyan);
+      box-shadow:0 0 20px var(--neonCyan);
+    }
+    .faq-search input:focus + i{
+      color:var(--neonCyan);
+    }
+    .faq-item{
+      background:rgba(0,0,0,0.2);
+      border:1px solid var(--border);
+      border-radius:16px;
+      margin-bottom:15px;
+      overflow:hidden;
+      transition:.3s;
+    }
+    .faq-item:hover{
+      border-color:var(--neonCyan);
+      box-shadow:0 0 20px rgba(64,224,208,0.2);
+    }
+    .faq-question{
+      padding:20px 25px;
+      cursor:pointer;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-weight:600;
+      color:var(--neonCyan);
+    }
+    .faq-question span:first-child{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .faq-question i{
+      font-size:20px;
+      transition:.3s;
+    }
+    .faq-question .arrow{
+      transition:.3s;
+    }
+    .faq-item.active .faq-question .arrow{
+      transform:rotate(180deg);
+    }
+    .faq-answer{
+      padding:0 25px;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.3s, padding 0.3s;
+      color:var(--muted);
+      line-height:1.6;
+    }
+    .faq-answer i{
+      color:var(--neonCyan);
+      margin-right:5px;
+    }
+    .faq-item.active .faq-answer{
+      padding:0 25px 25px 25px;
+      max-height:500px;
+    }
+
+    /* QUICK CONTACT */
+    .quick-contact{
+      background:rgba(64,224,208,0.1);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:30px;
+      margin:40px 0 0;
+      text-align:center;
+    }
+    .quick-contact h3{
+      color:var(--neonCyan);
+      margin-bottom:20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+    .contact-buttons{
+      display:flex;
+      gap:15px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .contact-btn{
+      padding:12px 25px;
+      border-radius:50px;
+      text-decoration:none;
+      font-weight:600;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition:.3s;
+    }
+    .contact-btn.discord{
+      background:#5865F2;
+      color:white;
+    }
+    .contact-btn.discord:hover{
+      background:#4752C4;
+      transform:translateY(-3px);
+      box-shadow:0 10px 30px #5865F2;
+    }
+    .contact-btn.owner{
+      background:linear-gradient(45deg,#ffaa00,#ff5500);
+      color:white;
+    }
+    .contact-btn.owner:hover{
+      transform:translateY(-3px);
+      box-shadow:0 10px 30px #ffaa00;
+    }
+    .contact-btn.admin{
+      background:linear-gradient(45deg,var(--neonCyan),var(--neonBlue));
+      color:white;
+    }
+    .contact-btn.admin:hover{
+      transform:translateY(-3px);
+      box-shadow:0 10px 30px var(--neonCyan);
+    }
+
+    /* FOOTER */
+    .main-footer{
+      background:rgba(10,20,30,0.8);
+      backdrop-filter:blur(10px);
+      border-top:1px solid var(--border);
+      padding:60px 0 30px;
+      margin-top:60px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:40px;
+      margin-bottom:40px;
+    }
+    .footer-col h4{
+      color:var(--neonCyan);
+      margin-bottom:20px;
+      font-size:18px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .footer-col ul li{
+      list-style:none;
+      margin-bottom:12px;
+    }
+    .footer-col ul li a{
+      color:var(--muted);
+      text-decoration:none;
+      cursor:pointer;
+      transition:.2s;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .footer-col ul li a i{
+      width:16px;
+    }
+    .footer-col ul li a:hover{
+      color:var(--neonCyan);
+      padding-left:5px;
+    }
+    .footer-bottom{
+      text-align:center;
+      padding-top:30px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    /* TOAST */
+    .toast{
+      position:fixed;
+      bottom:30px;left:50%;
+      transform:translateX(-50%) translateY(100px);
+      background:linear-gradient(45deg,rgba(16,42,67,0.9),rgba(10,30,50,0.9));
+      border:1px solid var(--neonCyan);
+      border-radius:20px;
+      padding:16px 30px;
+      color:white;
+      z-index:10000;
+      opacity:0;
+      transition:.4s;
+      backdrop-filter:blur(10px);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .toast i{
+      color:var(--neonCyan);
+    }
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+    @media (max-width:768px){
+      .dashboard-menu{width:250px;}
+      .faq-categories{gap:10px;}
+      .category-btn{padding:10px 20px;}
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <canvas id="canvas-3d"></canvas>
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span></span>
+  </div>
+
+  <div class="app">
+    <header class="main-header">
+      <div class="menu-container">
+        <div class="logo">
+          <span class="logo-icon"><i class="fas fa-shield-halos"></i></span>
+          <div class="logo-text">
+            <h1>SecureNET</h1>
+            <span>VPN Solutions</span>
+          </div>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD MENU -->
+    <div class="dashboard-menu" id="dashboardMenu">
+      <div class="dashboard-header"><i class="fas fa-bars"></i> MENÚ PRINCIPAL</div>
+      
+      <a href="index.html" class="dashboard-item">
+        <i class="fas fa-home"></i> Inicio
+      </a>
+      <a href="about.html" class="dashboard-item">
+        <i class="fas fa-users"></i> Sobre Nosotros
+      </a>
+      <a href="locations.html" class="dashboard-item">
+        <i class="fas fa-globe-americas"></i> Ubicaciones
+      </a>
+      <a href="plans.html" class="dashboard-item">
+        <i class="fas fa-tags"></i> Planes
+      </a>
+      <a href="map.html" class="dashboard-item">
+        <i class="fas fa-map-marked-alt"></i> Mapa
+      </a>
+      <a href="faq.html" class="dashboard-item active">
+        <i class="fas fa-question-circle"></i> FAQ
+      </a>
+      <a href="tools.html" class="dashboard-item">
+        <i class="fas fa-tools"></i> Herramientas
+      </a>
+      <a href="social.html" class="dashboard-item">
+        <i class="fas fa-share-alt"></i> Redes Sociales
+      </a>
+      <a href="comparison.html" class="dashboard-item">
+        <i class="fas fa-chart-bar"></i> Comparativa
+      </a>
+      <a href="contact.html" class="dashboard-item">
+        <i class="fas fa-envelope"></i> Contacto
+      </a>
+      <a href="privacy-policy.html" class="dashboard-item">
+        <i class="fas fa-lock"></i> Privacidad
+      </a>
+      <a href="terms.html" class="dashboard-item">
+        <i class="fas fa-file-contract"></i> Términos
+      </a>
+
+      <div class="dashboard-footer">
+        <a href="https://discord.gg/ZSg4CrbEXR" target="_blank" class="dashboard-item" style="margin-bottom:10px;">
+          <i class="fab fa-discord"></i> Discord
+        </a>
+        <div class="theme-selector-dashboard">
+          <button class="theme-btn-dashboard active" onclick="setTheme('dark')"><i class="fas fa-moon"></i></button>
+          <button class="theme-btn-dashboard" onclick="setTheme('light')"><i class="fas fa-sun"></i></button>
+          <button class="theme-btn-dashboard" onclick="setTheme('hacker')"><i class="fas fa-code"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-spacer"></div>
+
+    <main class="container">
+      <div class="faq-section">
+        <div class="faq-header">
+          <i class="fas fa-question-circle"></i>
+          <h2 class="section-title" style="margin:0;">Preguntas Frecuentes</h2>
+          <i class="fas fa-question-circle"></i>
+        </div>
+        
+        <!-- MÉTODOS DE PAGO DESTACADOS -->
+        <div style="text-align:center;">
+          <div class="payment-methods">
+            <span class="payment-badge"><i class="fab fa-paypal"></i> PayPal</span>
+            <span class="payment-badge"><i class="fas fa-dollar-sign"></i> Cash App</span>
+            <span class="payment-badge"><i class="fab fa-apple-pay"></i> Apple Pay</span>
+            <span class="payment-badge"><i class="fab fa-bitcoin"></i> Bitcoin</span>
+          </div>
+        </div>
+        
+        <div class="faq-categories">
+          <button class="category-btn active" onclick="filterFAQ('all')"><i class="fas fa-list"></i> Todos</button>
+          <button class="category-btn" onclick="filterFAQ('pagos')"><i class="fas fa-credit-card"></i> Pagos</button>
+          <button class="category-btn" onclick="filterFAQ('configuracion')"><i class="fas fa-cog"></i> Configuración</button>
+          <button class="category-btn" onclick="filterFAQ('soporte')"><i class="fas fa-headset"></i> Soporte</button>
+        </div>
+
+        <div class="faq-search">
+          <i class="fas fa-search"></i>
+          <input type="text" id="faqSearch" placeholder="Buscar preguntas..." onkeyup="searchFAQ()">
+        </div>
+
+        <div id="faqList">
+          <!-- PAGOS -->
+          <div class="faq-item" data-category="pagos">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span><i class="fas fa-credit-card"></i> ¿Qué métodos de pago aceptan?</span>
+              <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <div class="faq-answer">
+              <p><i class="fas fa-check-circle" style="color:var(--neonCyan);"></i> Aceptamos <strong>PayPal, Cash App, Apple Pay y Bitcoin</strong>. Todos los pagos son procesados de forma segura. No aceptamos tarjetas de crédito/débito directamente.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-category="pagos">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span><i class="fas fa-undo-alt"></i> ¿Hay reembolsos?</span>
+              <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <div class="faq-answer">
+              <p><i class="fas fa-times-circle" style="color:#ff5555;"></i> <span style="color:#ff5555; font-weight:700;">No realizamos reembolsos.</span> Sin embargo, ofrecemos la posibilidad de <strong>cambiar de servidor 1 vez al mes sin costo adicional</strong>. Si tienes problemas con tu conexión, contacta a soporte para ayudarte a cambiar de ubicación.</p>
+            </div>
+          </div>
+
+          <!-- CONFIGURACIÓN -->
+          <div class="faq-item" data-category="configuracion">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span><i class="fas fa-desktop"></i> ¿Cómo configuro SecureNET en mi PC?</span>
+              <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <div class="faq-answer">
+              <ol style="margin-left:20px;">
+                <li><i class="fas fa-download"></i> Descarga nuestro cliente desde el área de miembros</li>
+                <li><i class="fas fa-cog"></i> Instala el programa (Windows/Mac/Linux)</li>
+                <li><i class="fas fa-sign-in-alt"></i> Inicia sesión con tu usuario y contraseña</li>
+                <li><i class="fas fa-map-pin"></i> Selecciona la ubicación deseada</li>
+                <li><i class="fas fa-plug"></i> Haz clic en "Conectar"</li>
+              </ol>
+              <p><i class="fas fa-check-circle" style="color:var(--neonCyan);"></i> ¡Listo! Tu conexión está protegida. Recuerda que puedes cambiar de servidor 1 vez al mes gratis.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-category="configuracion">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span><i class="fas fa-mobile-alt"></i> ¿Puedo usar SecureNET en mi celular?</span>
+              <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <div class="faq-answer">
+              <p><i class="fas fa-check-circle" style="color:var(--neonCyan);"></i> Sí, tenemos aplicaciones para <strong>iOS y Android</strong>. Puedes descargarlas desde la App Store o Google Play. También soportamos configuración manual con OpenVPN.</p>
+            </div>
+          </div>
+
+          <!-- SOPORTE -->
+          <div class="faq-item" data-category="soporte">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span><i class="fas fa-headset"></i> ¿Cómo contacto al soporte?</span>
+              <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <div class="faq-answer">
+              <p><i class="fab fa-discord" style="color:#5865F2;"></i> Puedes contactarnos a través de Discord con <strong>@xnetvpn</strong> (Owner) o <strong>@xxiizx</strong> (Admin). También tenemos tickets de soporte 24/7 en nuestro servidor. El tiempo de respuesta promedio es de <strong>5 minutos</strong>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-category="soporte">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span><i class="fas fa-exclamation-triangle"></i> ¿Qué hago si no puedo conectarme?</span>
+              <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <div class="faq-answer">
+              <ol style="margin-left:20px;">
+                <li><i class="fas fa-wifi"></i> Primero, verifica tu conexión a internet</li>
+                <li><i class="fas fa-sync-alt"></i> Intenta cambiar de servidor (recuerda que tienes 1 cambio gratis por mes)</li>
+                <li><i class="fas fa-headset"></i> Si el problema persiste, contacta a soporte con tu nombre de usuario y el error que recibes</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- NUEVA PREGUNTA: VELOCIDAD -->
+          <div class="faq-item" data-category="configuracion">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span><i class="fas fa-tachometer-alt"></i> ¿Qué velocidad puedo esperar?</span>
+              <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <div class="faq-answer">
+              <p><i class="fas fa-bolt" style="color:var(--neonCyan);"></i> Nuestros servidores están optimizados para ofrecer <strong>hasta 1 Gbps</strong> de velocidad. La velocidad real puede variar según tu ubicación y proveedor de internet. Los servidores en Dallas y Los Angeles ofrecen la mejor latencia para gaming.</p>
+            </div>
+          </div>
+
+          <!-- NUEVA PREGUNTA: PRIVACIDAD -->
+          <div class="faq-item" data-category="soporte">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+              <span><i class="fas fa-lock"></i> ¿Guardan registros de mi actividad?</span>
+              <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <div class="faq-answer">
+              <p><i class="fas fa-check-circle" style="color:var(--neonCyan);"></i> <strong>No guardamos ningún registro</strong> de tu actividad en línea. Tenemos una política estricta de cero logs. Solo almacenamos información necesaria para la gestión de tu cuenta (correo y método de pago).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTACTO RÁPIDO -->
+        <div class="quick-contact">
+          <h3><i class="fas fa-headset"></i> ¿No encuentras lo que buscas?</h3>
+          <div class="contact-buttons">
+            <a href="https://discord.gg/ZSg4CrbEXR" target="_blank" class="contact-btn discord">
+              <i class="fab fa-discord"></i> Discord 24/7
+            </a>
+            <a href="contact.html" class="contact-btn owner">
+              <i class="fas fa-crown"></i> @xnetvpn
+            </a>
+            <a href="contact.html" class="contact-btn admin">
+              <i class="fas fa-shield-halos"></i> @xxiizx
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4><i class="fas fa-shield-halos"></i> SecureNET</h4>
+            <ul>
+              <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+              <li><a href="about.html"><i class="fas fa-users"></i> Sobre Nosotros</a></li>
+              <li><a href="locations.html"><i class="fas fa-globe-americas"></i> Ubicaciones</a></li>
+              <li><a href="plans.html"><i class="fas fa-tags"></i> Planes</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4><i class="fas fa-link"></i> Recursos</h4>
+            <ul>
+              <li><a href="map.html"><i class="fas fa-map-marked-alt"></i> Mapa</a></li>
+              <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+              <li><a href="tools.html"><i class="fas fa-tools"></i> Herramientas</a></li>
+              <li><a href="comparison.html"><i class="fas fa-chart-bar"></i> Comparativa</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4><i class="fas fa-share-alt"></i> Redes</h4>
+            <ul>
+              <li><a href="social.html"><i class="fab fa-instagram"></i> Instagram</a></li>
+              <li><a href="https://discord.gg/ZSg4CrbEXR" target="_blank"><i class="fab fa-discord"></i> Discord</a></li>
+              <li><a href="contact.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+              <li><a href="privacy-policy.html"><i class="fas fa-lock"></i> Privacidad</a></li>
+              <li><a href="terms.html"><i class="fas fa-file-contract"></i> Términos</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2024 SecureNET • <i class="fas fa-bolt"></i> VPN de alto rendimiento • <i class="fas fa-ban" style="color:#ff5555;"></i> Sin reembolsos • <i class="fas fa-sync-alt"></i> 1 cambio de servidor gratis/mes</p>
+          <p style="margin-top:10px;font-size:12px;">Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // 3D ANIMATION
+    const canvas=document.getElementById('canvas-3d'),ctx=canvas.getContext('2d');
+    canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+    const particles=[];
+    for(let i=0;i<70;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,z:Math.random()*1000,size:Math.random()*2+1,speed:Math.random()*2+1});
+    function animate3D(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      const theme=document.body.dataset.theme,color=theme==='hacker'?'#0f0':theme==='light'?'#06f':'#0ff';
+      particles.forEach(p=>{
+        p.z-=p.speed;if(p.z<=0){p.z=1000;p.x=Math.random()*canvas.width;p.y=Math.random()*canvas.height;}
+        const scale=500/p.z,x2d=(p.x-canvas.width/2)*scale+canvas.width/2,y2d=(p.y-canvas.height/2)*scale+canvas.height/2;
+        ctx.beginPath();ctx.arc(x2d,y2d,p.size*scale,0,Math.PI*2);ctx.fillStyle=color;ctx.shadowColor=color;ctx.shadowBlur=10;ctx.fill();
+      });requestAnimationFrame(animate3D);
+    }
+    animate3D();
+    window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+    function toggleMenu(){
+      document.getElementById('hamburger').classList.toggle('active');
+      document.getElementById('dashboardMenu').classList.toggle('open');
+    }
+    
+    function setTheme(theme){
+      document.body.dataset.theme = theme;
+      localStorage.setItem('securenet-theme', theme);
+      document.querySelectorAll('.theme-btn-dashboard').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.theme-btn-dashboard[onclick*="${theme}"]`).classList.add('active');
+    }
+    
+    // FAQ FUNCTIONS
+    window.toggleFAQ = function(element){
+      const item = element.closest('.faq-item');
+      item.classList.toggle('active');
+    }
+
+    window.filterFAQ = function(category){
+      document.querySelectorAll('.category-btn').forEach(btn=>btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      const items = document.querySelectorAll('.faq-item');
+      items.forEach(item=>{
+        if(category==='all' || item.dataset.category===category){
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    window.searchFAQ = function(){
+      const search = document.getElementById('faqSearch').value.toLowerCase();
+      const items = document.querySelectorAll('.faq-item');
+      
+      items.forEach(item=>{
+        const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+        
+        if(question.includes(search) || answer.includes(search)){
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function copyUsername(username){
+      navigator.clipboard.writeText(username).then(()=>showToast(`Copiado: ${username}`));
+    }
+    function showToast(m){
+      const t=document.getElementById('toast');
+      t.querySelector('span').textContent = m;
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'),2000);
+    }
+
+    window.onload=()=>{
+      // Cargar tema guardado
+      const savedTheme = localStorage.getItem('securenet-theme') || 'dark';
+      document.body.dataset.theme = savedTheme;
+      
+      // Actualizar botones activos
+      document.querySelectorAll('.theme-btn-dashboard').forEach(b => {
+        b.classList.remove('active');
+        if(b.textContent.toLowerCase().includes(savedTheme) || 
+           (savedTheme==='dark' && b.innerHTML.includes('moon')) ||
+           (savedTheme==='light' && b.innerHTML.includes('sun')) ||
+           (savedTheme==='hacker' && b.innerHTML.includes('code'))) {
+          b.classList.add('active');
+        }
+      });
+
+      document.querySelectorAll('.dashboard-item').forEach(i=>i.addEventListener('click',()=>{if(window.innerWidth<768)toggleMenu();}));
+      window.toggleMenu=toggleMenu;window.setTheme=setTheme;
+      window.copyUsername=copyUsername;
+    };
+  </script>
+</body>
+</html>
