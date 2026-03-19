@@ -44,7 +44,7 @@
   --neonBlue: #0d0;
   --neonPurple: #0c0;
   --neonPink: #0e0;
-  font-family: 'Courier New', monospace;
+  /* font-family removed to unify style across themes */
 }
 
 [data-theme="hacker"] button {
@@ -61,6 +61,8 @@ body {
   transition: 0.3s;
   overflow-x: hidden;
 }
+
+/* ... (resto de los estilos sin cambios) ... */
 
 #canvas-3d {
   position: fixed;
