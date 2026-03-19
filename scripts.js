@@ -1,20 +1,19 @@
 const DISCORD_LINK = "https://discord.gg/ZSg4CrbEXR";
 
 // Planes con precios numéricos para poder calcular descuentos
+// Updated with new names, removed 'users' and 'gaming'
 const planTypes = [
-  { name: "BASIC", class: "basic", icon: "fa-circle", iconColor: "var(--neonBlue)", price: 5.99, users: "1 conexión", gaming: "COD/RDR/GTA friendly" },
-  { name: "STANDARD", class: "standard", icon: "fa-star", iconColor: "var(--neonCyan)", price: 12.99, users: "Hasta 3", gaming: "Optimizado gaming" },
-  { name: "PREMIUM", class: "premium", icon: "fa-gem", iconColor: "var(--neonPurple)", price: 19.99, users: "Hasta 6", gaming: "Máximo rendimiento" },
-  { name: "DUAL", class: "dual", icon: "fa-globe", iconColor: "var(--neonPink)", price: 24.99, users: "Hasta 4", gaming: "Doble ubicación" }
+  { name: "Secure Connect", class: "connect", icon: "fa-circle", price: 5.99, desc: "Conexión esencial y segura" },
+  { name: "Private Tunnel", class: "tunnel", icon: "fa-star", price: 12.99, desc: "Equilibrio perfecto para gaming" },
+  { name: "Stealth Shield", class: "shield", icon: "fa-gem", price: 19.99, desc: "Máximo anonimato y velocidad" },
+  { name: "GeoFreedom", class: "freedom", icon: "fa-globe", price: 24.99, desc: "Acceso a dos ubicaciones" }
 ];
 
+// Updated locations: only the three requested, all available
 const locations = [
-  { id: "los-angeles", displayName: "LOS ANGELES", flag: "🇺🇸", description: "Costa Oeste USA - Ideal para gaming", ping: 45, comingSoon: false, host: "Akamai" },
-  { id: "dallas", displayName: "DALLAS", flag: "🇺🇸", description: "Centro USA - Latencia ultra baja", ping: 35, comingSoon: false, host: "OVH" },
-  { id: "miami", displayName: "MIAMI", flag: "🇺🇸", description: "Conectividad con Latinoamérica", ping: 60, comingSoon: true, host: "Akamai" },
-  { id: "paris", displayName: "PARIS", flag: "🇫🇷", description: "Primera ubicación europea", ping: 90, comingSoon: true, host: "OVH" },
-  { id: "new-york", displayName: "NEW YORK", flag: "🇺🇸", description: "Costa Este - Negocios", ping: 50, comingSoon: true, host: "Akamai" },
-  { id: "chicago", displayName: "CHICAGO", flag: "🇺🇸", description: "Medio Oeste - Gaming", ping: 40, comingSoon: true, host: "OVH" }
+  { id: "los-angeles", displayName: "LOS ANGELES", flag: "🇺🇸", description: "Costa Oeste USA - Baja latencia para gaming", ping: 45, comingSoon: false, host: "Akamai" },
+  { id: "dallas", displayName: "DALLAS", flag: "🇺🇸", description: "Centro de USA - Conectividad óptima", ping: 35, comingSoon: false, host: "Akamai" },
+  { id: "beauharnois", displayName: "BEAUHARNOIS", flag: "🇨🇦", description: "Canadá - Servidores OVH de alto rendimiento", ping: 55, comingSoon: false, host: "OVH" }
 ];
 
 let currentPeriod = 'monthly';
@@ -51,7 +50,7 @@ function getTotalPriceForPeriod(basePrice, period) {
 // Función para formatear precio con badge de descuento
 function formatPrice(price, period, planName) {
   let formatted = '$' + price.toFixed(2);
-  if (planName === 'DUAL' && period !== 'monthly') {
+  if (planName === 'GeoFreedom' && period !== 'monthly') {
     formatted += ' <span class="dual-discount"><i class="fas fa-tag"></i> -20%</span>';
   }
   return formatted;
@@ -193,26 +192,28 @@ function renderLocationPlans(location) {
   const grid = document.getElementById('location-plans-grid');
   if (!grid) return;
   
+  const periodText = currentPeriod === 'monthly' ? '1 mes' : currentPeriod === 'quarterly' ? '3 meses' : currentPeriod === 'semesterly' ? '6 meses' : '12 meses';
+  
   grid.innerHTML = planTypes.map(p => {
-    const periodPrice = getPriceForPeriod(p.price, currentPeriod);
     const totalPrice = getTotalPriceForPeriod(p.price, currentPeriod);
     const formattedPrice = formatPrice(totalPrice, currentPeriod, p.name);
+    const isRecommended = (p.name === 'Private Tunnel') ? 'recommended' : '';
     
     return `
-      <div class="plan-card ${p.class} ${p.name === 'STANDARD' ? 'recommended' : ''}">
+      <div class="plan-card ${p.class} ${isRecommended}">
         <div class="plan-header">
-          <div class="plan-name"><i class="fas ${p.icon}" style="color:${p.iconColor};"></i> ${p.name}</div>
+          <div class="plan-name"><i class="fas ${p.icon}"></i> ${p.name}</div>
           <div class="plan-price price-${currentPeriod}">${formattedPrice}</div>
+          <div style="color:var(--muted); font-size:14px; margin-top:5px;">${periodText}</div>
         </div>
         <div class="plan-features">
-          <div class="feature-item"><i class="fas fa-users"></i><div><div>Usuarios</div><small>${p.users}</small></div></div>
           <div class="feature-item"><i class="fas fa-map-pin"></i><div><div>Ubicación</div><small>${location.displayName}</small></div></div>
-          <div class="feature-item"><i class="fas fa-shield-virus"></i><div><div>Protección</div><small>Anti-DDoS</small></div></div>
-          <div class="feature-item"><i class="fas fa-gamepad"></i><div><div>Gaming</div><small>${p.gaming}</small></div></div>
+          <div class="feature-item"><i class="fas fa-calendar-alt"></i><div><div>Período</div><small>${periodText}</small></div></div>
+          <div class="feature-item"><i class="fas fa-shield-virus"></i><div><div>Protección</div><small>Anti-DDoS Enterprise</small></div></div>
           <div class="feature-item"><i class="fas fa-cloud"></i><div><div>Infraestructura</div><small>${location.host}</small></div></div>
         </div>
         ${!location.comingSoon 
-          ? `<a href="${DISCORD_LINK}" target="_blank" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR ${p.name}</a>`
+          ? `<a href="${DISCORD_LINK}" target="_blank" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR</a>`
           : `<button class="plan-button" disabled><i class="fas fa-clock"></i> PRÓXIMAMENTE</button>`}
       </div>
     `;
@@ -260,25 +261,26 @@ function renderPlans() {
 
     <div class="plans-grid">
       ${planTypes.map(plan => {
-        const periodPrice = getPriceForPeriod(plan.price, currentPeriod);
         const totalPrice = getTotalPriceForPeriod(plan.price, currentPeriod);
         const formattedPrice = formatPrice(totalPrice, currentPeriod, plan.name);
+        const isRecommended = (plan.name === 'Private Tunnel') ? 'recommended' : '';
+        const periodText = currentPeriod === 'monthly' ? '1 mes' : currentPeriod === 'quarterly' ? '3 meses' : currentPeriod === 'semesterly' ? '6 meses' : '12 meses';
         
         return `
-          <div class="plan-card ${plan.class} ${plan.name === 'STANDARD' ? 'recommended' : ''}">
+          <div class="plan-card ${plan.class} ${isRecommended}">
             <div class="plan-header">
-              <div class="plan-name"><i class="fas ${plan.icon}" style="color:${plan.iconColor};"></i> ${plan.name}</div>
+              <div class="plan-name"><i class="fas ${plan.icon}"></i> ${plan.name}</div>
               <div class="plan-price price-${currentPeriod}">${formattedPrice}</div>
+              <div style="color:var(--muted); font-size:14px; margin-top:5px;">${periodText}</div>
             </div>
             <div class="plan-features">
-              <div class="feature-item"><i class="fas fa-users"></i><div><div>Usuarios</div><small>${plan.users}</small></div></div>
               <div class="feature-item"><i class="fas fa-map-pin"></i><div><div>Ubicación</div><small>${loc.displayName}</small></div></div>
-              <div class="feature-item"><i class="fas fa-shield-virus"></i><div><div>Protección</div><small>Anti-DDoS</small></div></div>
-              <div class="feature-item"><i class="fas fa-gamepad"></i><div><div>Gaming</div><small>${plan.gaming}</small></div></div>
+              <div class="feature-item"><i class="fas fa-calendar-alt"></i><div><div>Período</div><small>${periodText}</small></div></div>
+              <div class="feature-item"><i class="fas fa-shield-virus"></i><div><div>Protección</div><small>Anti-DDoS Enterprise</small></div></div>
               <div class="feature-item"><i class="fas fa-cloud"></i><div><div>Infraestructura</div><small>${loc.host}</small></div></div>
             </div>
             ${!loc.comingSoon 
-              ? `<a href="${DISCORD_LINK}" target="_blank" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR ${plan.name}</a>`
+              ? `<a href="${DISCORD_LINK}" target="_blank" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR</a>`
               : `<button class="plan-button" disabled><i class="fas fa-clock"></i> PRÓXIMAMENTE</button>`}
           </div>
         `;
