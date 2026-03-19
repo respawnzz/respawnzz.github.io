@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHsSURBVHgB7VdLUhtBEH1dCiU+xiHYBhu8Ihdw7AuYq7AiyQ1wbpBwA3MDcgNwA3MDcgNwA+QGhC9gK5w9M1I1X6m7p4eR0CReqVZTUz3T/fq9HuB/giQG/G8A/tw+eL14fP2ZEpbXj4/vr/bn01eccA6T0Nk9/z34+Xj3+U2A2QPdA3jP9Y+7396eHq4/rYqA42SNN2c/XgIAIPgJZLK2+qbLwE1xH/C09Qj3dH1zCW0JAIlJEQDLFwFIygoAvCQAkD6Izz9W12ZNi+bxW+PcCAAVq0gWpBEAJEsJAMksjYAkmSVlS2ZxXgYg3v0qAiDJFwFIMk8EgFciE5enJp4qjQYgSc4TASi/JwJQfE8EoPSeiL8AvKcCkFp3CyjX3YoANM8lAkB+kAhAfiERgPxKIgD5rUQA8j4RgHxIBCD3RADyP4kA5EMiALknApCfSAQg90QA8p4IQO6JAORHIgC5JwKQeyIAeU8EIPdEAPJDBPCeu0p2EfkRAshu5b2n7iZ1K+89Wzcq+T4CeJ4EMl3d83zrA34g+fHlA7wN0J7n2x1wD/7Fe54PTYC2PN/uAB/Aw/v8jYl2PqANz7c7wJ9AAK15vu2BvuH5dgc8/7pzZ9uugW14vt2R7Rq2AUyGzw8f9eZqAAAAAElFTkSuQmCC" />
   <style>
+    /* --- ESTILOS (sin cambios, se mantienen igual) --- */
     *{margin:0;padding:0;box-sizing:border-box;}
     :root{
       --bg:#0a0e17;
@@ -49,7 +50,6 @@
       --neonBlue:#0d0;
       --neonPurple:#0c0;
       --neonPink:#0e0;
-      font-family:'Courier New',monospace;
     }
     body{
       font-family:'Inter',sans-serif;
@@ -116,7 +116,6 @@
       cursor:pointer;
       transition:.3s;
       z-index:10000;
-      position:relative;
     }
     .hamburger:hover{
       background:rgba(64,224,208,0.2);
@@ -336,6 +335,7 @@
       font-weight:600;
     }
 
+    /* NUEVA SECCIÓN: INFRAESTRUCTURA ACTUALIZADA */
     .hosting-section{
       background:rgba(20,30,50,0.6);
       backdrop-filter:blur(10px);
@@ -673,7 +673,7 @@
               <i class="fas fa-calendar-alt"></i> Fundada en 2026
             </div>
             <div style="background:rgba(64,224,208,0.1);padding:10px 20px;border-radius:50px;border:1px solid var(--border);">
-              <i class="fas fa-globe"></i> 6+ Ubicaciones
+              <i class="fas fa-globe"></i> 3+ Ubicaciones
             </div>
             <div style="background:rgba(64,224,208,0.1);padding:10px 20px;border-radius:50px;border:1px solid var(--border);">
               <i class="fas fa-users"></i> Equipo de 4+ profesionales
@@ -692,7 +692,7 @@
         <div class="mission-author">— Equipo Fundador de SecureNET</div>
       </section>
 
-      <!-- NUEVA SECCIÓN: INFRAESTRUCTURA OVH Y AKAMAI -->
+      <!-- SECCIÓN: INFRAESTRUCTURA ACTUALIZADA -->
       <section class="hosting-section">
         <h2 class="section-title"><i class="fas fa-server"></i> Infraestructura de Clase Mundial</h2>
         <p class="section-subtitle">Nuestros servidores están hosteados por los líderes de la industria</p>
@@ -700,13 +700,13 @@
         <div class="hosting-grid">
           <div class="hosting-card">
             <div class="hosting-logo"><i class="fas fa-cloud"></i></div>
-            <div class="hosting-name">OVHcloud</div>
-            <div class="hosting-desc">Servidores dedicados en Norteamérica y Europa con protección Anti-DDoS enterprise</div>
+            <div class="hosting-name">Akamai</div>
+            <div class="hosting-desc">Servidores dedicados en Los Angeles y Dallas con protección Anti-DDoS enterprise y baja latencia para gaming.</div>
           </div>
           <div class="hosting-card">
             <div class="hosting-logo"><i class="fas fa-globe"></i></div>
-            <div class="hosting-name">Akamai</div>
-            <div class="hosting-desc">Red de entrega de contenido y edge computing para latencia ultra baja</div>
+            <div class="hosting-name">OVHcloud</div>
+            <div class="hosting-desc">Data center en Beauharnois, Canadá. Red de alto rendimiento para máxima velocidad y seguridad.</div>
           </div>
         </div>
         <p style="text-align:center; color:var(--muted); margin-top:30px;">
@@ -724,8 +724,8 @@
           <div class="stat-label"><i class="fas fa-chart-line"></i> Uptime</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">6</div>
-          <div class="stat-label"><i class="fas fa-map-pin"></i> Países</div>
+          <div class="stat-number">3</div>
+          <div class="stat-label"><i class="fas fa-map-pin"></i> Ubicaciones</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">24/7</div>
@@ -836,7 +836,7 @@
         </div>
         <div class="footer-bottom">
           <p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-bolt"></i> Gaming Optimized</p>
-          <p style="margin-top:10px;">Infraestructura: <i class="fas fa-cloud"></i> OVHcloud + <i class="fas fa-globe"></i> Akamai</p>
+          <p style="margin-top:10px;">Infraestructura: <i class="fas fa-cloud"></i> Akamai (USA) + <i class="fas fa-globe"></i> OVHcloud (Canadá)</p>
           <p style="margin-top:10px;">Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p>
         </div>
       </div>
