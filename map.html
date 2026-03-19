@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Mapa de Servidores | SecureNET VPN</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mapa interactivo de servidores SecureNET VPN - OVH + Akamai">
+  <meta name="description" content="Mapa interactivo de servidores SecureNET VPN - Akamai + OVHcloud">
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#070b12" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -49,7 +49,6 @@
       --neonBlue:#0d0;
       --neonPurple:#0c0;
       --neonPink:#0e0;
-      font-family:'Courier New',monospace;
     }
     body{
       font-family:'Inter',sans-serif;
@@ -240,6 +239,7 @@
       justify-content:center;
       gap:5px;
     }
+    .theme-btn-dashboard i{font-size:14px;}
     .theme-btn-dashboard.active{
       background:var(--neonCyan);
       color:var(--bg);
@@ -343,12 +343,12 @@
       animation:pulse 2s infinite;
     }
 
-    /* MAPA REALISTA CON SVG MEJORADO */
+    /* MAPA REALISTA CON SILUETAS DE CONTINENTES */
     .map-container{
       position:relative;
       width:100%;
       height:550px;
-      background: linear-gradient(145deg, #0b1a2a 0%, #1a2f3f 100%);
+      background: linear-gradient(145deg, #0a1a2a 0%, #1a3345 100%);
       border-radius:30px;
       overflow:hidden;
       border:1px solid var(--border);
@@ -358,27 +358,57 @@
       z-index:1;
     }
 
-    /* MAPA DE FONDO - CONTINENTES ESTILIZADOS */
-    .map-background{
-      position:absolute;
-      top:0;left:0;width:100%;height:100%;
-      opacity:0.8;
+    /* EFECTO DE ESTRELLAS DE FONDO */
+    .map-stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 10px 20px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 150px 80px, #fff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 300px 150px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 450px 220px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 600px 90px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 750px 300px, #fff, rgba(0,0,0,0)),
+        radial-gradient(3px 3px at 880px 180px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 920px 400px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 200px 450px, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 550px 520px, #fff, rgba(0,0,0,0));
+      background-repeat: no-repeat;
+      opacity: 0.6;
+      z-index: 2;
+      pointer-events: none;
+      animation: twinkle 4s infinite alternate;
     }
-    .continent{
-      fill:none;
-      stroke:var(--neonCyan);
-      stroke-width:2;
-      stroke-dasharray:5,5;
-      filter:drop-shadow(0 0 8px var(--neonCyan));
-      animation:glowPulse 4s infinite;
+    @keyframes twinkle {
+      0% { opacity: 0.4; }
+      100% { opacity: 0.8; }
     }
-    .continent:nth-child(2){animation-delay:0.5s;}
-    .continent:nth-child(3){animation-delay:1s;}
-    .continent:nth-child(4){animation-delay:1.5s;}
-    @keyframes glowPulse{
-      0%{stroke-opacity:0.3; stroke-width:1;}
-      50%{stroke-opacity:1; stroke-width:2.5; filter:drop-shadow(0 0 15px var(--neonCyan));}
-      100%{stroke-opacity:0.3; stroke-width:1;}
+
+    /* SILUETAS DE CONTINENTES (SVG REALISTA) */
+    .map-continents {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      opacity: 0.5;
+      filter: drop-shadow(0 0 10px rgba(64, 224, 208, 0.3));
+    }
+    .continent {
+      fill: rgba(255, 255, 255, 0.05);
+      stroke: var(--neonCyan);
+      stroke-width: 1.5;
+      stroke-dasharray: 5 5;
+      transition: all 0.3s ease;
+    }
+    .continent:hover {
+      fill: rgba(64, 224, 208, 0.1);
+      stroke-width: 2;
+      filter: drop-shadow(0 0 15px var(--neonCyan));
     }
 
     /* MAPA GRID */
@@ -386,14 +416,34 @@
       position:absolute;
       top:0;left:0;width:100%;height:100%;
       background-image: 
-        linear-gradient(rgba(64,224,208,0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(64,224,208,0.1) 1px, transparent 1px);
+        linear-gradient(rgba(64,224,208,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(64,224,208,0.05) 1px, transparent 1px);
       background-size: 50px 50px;
-      animation:gridMove 20s linear infinite;
+      animation:gridMove 30s linear infinite;
+      z-index: 4;
+      pointer-events: none;
     }
     @keyframes gridMove{
       0%{transform:translate(0,0);}
       100%{transform:translate(50px,50px);}
+    }
+
+    /* EFECTO DE ATMÓSFERA */
+    .map-atmosphere {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 40%, rgba(64, 224, 208, 0.1) 0%, transparent 40%),
+                  radial-gradient(circle at 70% 60%, rgba(0, 180, 255, 0.1) 0%, transparent 40%);
+      z-index: 5;
+      pointer-events: none;
+      animation: atmospherePulse 8s infinite alternate;
+    }
+    @keyframes atmospherePulse {
+      0% { opacity: 0.3; }
+      100% { opacity: 0.7; }
     }
 
     /* PUNTOS DE SERVIDOR MEJORADOS */
@@ -467,7 +517,7 @@
       animation:glowPulse 2s infinite;
     }
 
-    /* TOOLTIP MEJORADO */
+    /* TOOLTIP SIN USUARIOS */
     .server-tooltip{
       position:absolute;
       background:rgba(10,20,30,0.98);
@@ -475,7 +525,7 @@
       border:1px solid var(--neonCyan);
       border-radius:20px;
       padding:20px;
-      min-width:260px;
+      min-width:240px;
       z-index:200;
       display:none;
       box-shadow:0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(64,224,208,0.3);
@@ -553,10 +603,6 @@
       border-radius:3px;
       animation:progressFill 1s ease;
     }
-    @keyframes progressFill{
-      from{width:0;}
-      to{width:var(--width);}
-    }
     .tooltip-badge{
       display:inline-flex;
       align-items:center;
@@ -572,13 +618,14 @@
     /* LÍNEAS DE CONEXIÓN ANIMADAS */
     .connection-line{
       position:absolute;
-      height:3px;
+      height:2px;
       background:linear-gradient(90deg, transparent, var(--neonCyan), var(--neonBlue), var(--neonCyan), transparent);
       background-size:200% 100%;
-      animation:flowMove 3s linear infinite, glowPulse 2s infinite;
-      z-index:5;
+      animation:flowMove 4s linear infinite;
+      z-index:10;
       filter:drop-shadow(0 0 10px var(--neonCyan));
       transform-origin:left;
+      opacity:0.6;
     }
     @keyframes flowMove{
       0%{background-position:0% 0%;}
@@ -594,7 +641,7 @@
       border-radius:50%;
       filter:drop-shadow(0 0 5px var(--neonCyan));
       animation:dataFlow 4s linear infinite;
-      z-index:6;
+      z-index:11;
     }
     @keyframes dataFlow{
       0%{opacity:0; transform:translate(0,0);}
@@ -840,7 +887,7 @@
       </div>
 
       <div style="text-align:center; margin-bottom:20px;">
-        <span class="hosting-badge"><i class="fas fa-cloud"></i> Infraestructura: OVHcloud + Akamai</span>
+        <span class="hosting-badge"><i class="fas fa-cloud"></i> Infraestructura: Akamai (USA) + OVHcloud (Canadá)</span>
       </div>
 
       <div class="map-section">
@@ -852,34 +899,49 @@
         <p class="section-subtitle"><i class="fas fa-mouse-pointer"></i> Haz hover sobre los puntos para ver información en tiempo real</p>
         
         <div class="map-container" id="liveMap">
-          <!-- MAPA DE FONDO MEJORADO -->
-          <svg class="map-background" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
-            <!-- Continentes estilizados -->
-            <path class="continent" d="M150,200 Q200,150 250,180 T350,170 T450,190 T550,180 T650,200 T750,190 T850,210" />
-            <path class="continent" d="M200,300 Q250,250 300,280 T400,270 T500,290 T600,280 T700,300" />
-            <path class="continent" d="M100,350 Q150,320 200,340 T300,330 T400,350" />
-            <path class="continent" d="M700,150 Q750,120 800,140 T900,130" />
-            <!-- Líneas de latitud/longitud -->
-            <line x1="0" y1="250" x2="1000" y2="250" stroke="var(--neonCyan)" stroke-width="1" opacity="0.2" stroke-dasharray="5,5" />
-            <line x1="500" y1="0" x2="500" y2="500" stroke="var(--neonCyan)" stroke-width="1" opacity="0.2" stroke-dasharray="5,5" />
+          <!-- FONDO DE ESTRELLAS -->
+          <div class="map-stars"></div>
+          
+          <!-- SILUETAS DE CONTINENTES -->
+          <svg class="map-continents" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+            <!-- América del Norte -->
+            <path class="continent" d="M200,120 L230,100 L280,90 L320,100 L360,120 L380,150 L390,200 L370,240 L330,260 L290,270 L250,260 L210,240 L180,200 L170,170 L180,140 L200,120" />
+            <!-- América del Sur -->
+            <path class="continent" d="M300,280 L330,290 L360,310 L370,340 L360,370 L330,390 L300,400 L270,390 L250,370 L240,340 L250,310 L270,290 L300,280" />
+            <!-- Europa -->
+            <path class="continent" d="M600,150 L620,140 L650,140 L670,150 L680,170 L670,190 L650,200 L620,200 L600,190 L590,170 L600,150" />
+            <!-- África -->
+            <path class="continent" d="M620,220 L640,210 L670,210 L690,230 L700,260 L690,290 L670,310 L640,310 L620,290 L610,260 L610,240 L620,220" />
+            <!-- Asia -->
+            <path class="continent" d="M720,130 L750,120 L780,130 L800,150 L820,180 L830,220 L820,260 L800,290 L770,300 L740,290 L720,260 L710,220 L710,180 L720,130" />
+            <!-- Oceanía -->
+            <path class="continent" d="M850,350 L870,340 L890,350 L900,370 L890,390 L870,400 L850,390 L840,370 L850,350" />
           </svg>
+
+          <!-- EFECTO DE ATMÓSFERA -->
+          <div class="map-atmosphere"></div>
 
           <!-- GRID ANIMADO -->
           <div class="map-grid"></div>
 
-          <!-- LÍNEAS DE CONEXIÓN ANIMADAS -->
-          <div class="connection-line" style="width:220px; left:15%; top:30%; transform:rotate(35deg);"></div>
-          <div class="connection-line" style="width:280px; left:22%; top:33%; transform:rotate(25deg);"></div>
-          <div class="connection-line" style="width:190px; left:28%; top:40%; transform:rotate(45deg);"></div>
-          <div class="connection-line" style="width:310px; left:35%; top:32%; transform:rotate(15deg);"></div>
-          <div class="connection-line" style="width:250px; left:70%; top:28%; transform:rotate(-20deg);"></div>
+          <!-- LÍNEAS DE CONEXIÓN ANIMADAS (MEJORADAS) -->
+          <div class="connection-line" style="width:180px; left:20%; top:25%; transform:rotate(25deg);"></div>
+          <div class="connection-line" style="width:220px; left:25%; top:30%; transform:rotate(15deg);"></div>
+          <div class="connection-line" style="width:250px; left:30%; top:35%; transform:rotate(5deg);"></div>
+          <div class="connection-line" style="width:200px; left:35%; top:40%; transform:rotate(-5deg);"></div>
+          <div class="connection-line" style="width:280px; left:40%; top:28%; transform:rotate(10deg);"></div>
+          <div class="connection-line" style="width:240px; left:45%; top:32%; transform:rotate(20deg);"></div>
+          <div class="connection-line" style="width:210px; left:50%; top:38%; transform:rotate(30deg);"></div>
+          <div class="connection-line" style="width:190px; left:55%; top:42%; transform:rotate(40deg);"></div>
+          <div class="connection-line" style="width:300px; left:60%; top:25%; transform:rotate(-15deg);"></div>
+          <div class="connection-line" style="width:260px; left:65%; top:35%; transform:rotate(-25deg);"></div>
 
           <!-- PARTÍCULAS DE DATOS (se generan con JS) -->
           <div id="data-particles"></div>
 
-          <!-- SERVIDORES CON CLASES ESPECÍFICAS -->
-          <!-- LOS ANGELES - AKAMAI (azul) -->
-          <div class="server-point akamai" style="left:15%; top:30%;" data-city="Los Angeles" data-ping="45" data-users="234" data-host="Akamai" data-load="65">
+          <!-- SERVIDORES ACTUALIZADOS (SIN USUARIOS EN TOOLTIPS) -->
+          <!-- LOS ANGELES - AKAMAI -->
+          <div class="server-point akamai" style="left:17%; top:28%;" data-city="Los Angeles" data-ping="45" data-host="Akamai" data-load="65">
             <div class="server-dot"></div>
             <div class="server-ring"></div>
             <div class="server-glow"></div>
@@ -890,7 +952,6 @@
               </div>
               <div class="tooltip-stats">
                 <div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: <span class="stat-value">45ms</span></div>
-                <div class="tooltip-stat"><i class="fas fa-users"></i> Usuarios: <span class="stat-value">234</span></div>
                 <div class="tooltip-stat">
                   <i class="fas fa-chart-line"></i> Carga: 65%
                   <div class="tooltip-progress"><div class="tooltip-progress-fill" style="width:65%"></div></div>
@@ -901,8 +962,8 @@
             </div>
           </div>
           
-          <!-- DALLAS - OVH (púrpura) -->
-          <div class="server-point ovh" style="left:25%; top:35%;" data-city="Dallas" data-ping="35" data-users="189" data-host="OVH" data-load="45">
+          <!-- DALLAS - AKAMAI -->
+          <div class="server-point akamai" style="left:27%; top:32%;" data-city="Dallas" data-ping="35" data-host="Akamai" data-load="45">
             <div class="server-dot"></div>
             <div class="server-ring"></div>
             <div class="server-glow"></div>
@@ -913,121 +974,50 @@
               </div>
               <div class="tooltip-stats">
                 <div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: <span class="stat-value">35ms</span></div>
-                <div class="tooltip-stat"><i class="fas fa-users"></i> Usuarios: <span class="stat-value">189</span></div>
                 <div class="tooltip-stat">
                   <i class="fas fa-chart-line"></i> Carga: 45%
                   <div class="tooltip-progress"><div class="tooltip-progress-fill" style="width:45%"></div></div>
                 </div>
-                <div class="tooltip-stat"><i class="fas fa-server"></i> Host: <span class="stat-value">OVH</span></div>
+                <div class="tooltip-stat"><i class="fas fa-server"></i> Host: <span class="stat-value">Akamai</span></div>
               </div>
               <div class="tooltip-badge"><i class="fas fa-bolt"></i> Ultra Low Latency</div>
             </div>
           </div>
           
-          <!-- MIAMI - AKAMAI (azul) -->
-          <div class="server-point akamai" style="left:30%; top:45%;" data-city="Miami" data-ping="60" data-users="156" data-host="Akamai" data-load="35">
+          <!-- BEAUHARNOIS, CANADÁ - OVH -->
+          <div class="server-point ovh" style="left:22%; top:22%;" data-city="Beauharnois" data-ping="55" data-host="OVH" data-load="22">
             <div class="server-dot"></div>
             <div class="server-ring"></div>
             <div class="server-glow"></div>
             <div class="server-tooltip right">
               <div class="tooltip-header">
                 <i class="fas fa-map-pin"></i>
-                <h3>Miami</h3>
+                <h3>Beauharnois, QC</h3>
               </div>
               <div class="tooltip-stats">
-                <div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: <span class="stat-value">60ms</span></div>
-                <div class="tooltip-stat"><i class="fas fa-users"></i> Usuarios: <span class="stat-value">156</span></div>
-                <div class="tooltip-stat">
-                  <i class="fas fa-chart-line"></i> Carga: 35%
-                  <div class="tooltip-progress"><div class="tooltip-progress-fill" style="width:35%"></div></div>
-                </div>
-                <div class="tooltip-stat"><i class="fas fa-server"></i> Host: <span class="stat-value">Akamai</span></div>
-              </div>
-              <div class="tooltip-badge"><i class="fas fa-globe"></i> Latam Gateway</div>
-            </div>
-          </div>
-          
-          <!-- NEW YORK - AKAMAI (azul) -->
-          <div class="server-point akamai" style="left:40%; top:30%;" data-city="New York" data-ping="50" data-users="278" data-host="Akamai" data-load="72">
-            <div class="server-dot"></div>
-            <div class="server-ring"></div>
-            <div class="server-glow"></div>
-            <div class="server-tooltip">
-              <div class="tooltip-header">
-                <i class="fas fa-map-pin"></i>
-                <h3>New York</h3>
-              </div>
-              <div class="tooltip-stats">
-                <div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: <span class="stat-value">50ms</span></div>
-                <div class="tooltip-stat"><i class="fas fa-users"></i> Usuarios: <span class="stat-value">278</span></div>
-                <div class="tooltip-stat">
-                  <i class="fas fa-chart-line"></i> Carga: 72%
-                  <div class="tooltip-progress"><div class="tooltip-progress-fill" style="width:72%"></div></div>
-                </div>
-                <div class="tooltip-stat"><i class="fas fa-server"></i> Host: <span class="stat-value">Akamai</span></div>
-              </div>
-              <div class="tooltip-badge"><i class="fas fa-building"></i> Business Hub</div>
-            </div>
-          </div>
-          
-          <!-- CHICAGO - OVH (púrpura) -->
-          <div class="server-point ovh" style="left:32%; top:33%;" data-city="Chicago" data-ping="40" data-users="145" data-host="OVH" data-load="28">
-            <div class="server-dot"></div>
-            <div class="server-ring"></div>
-            <div class="server-glow"></div>
-            <div class="server-tooltip">
-              <div class="tooltip-header">
-                <i class="fas fa-map-pin"></i>
-                <h3>Chicago</h3>
-              </div>
-              <div class="tooltip-stats">
-                <div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: <span class="stat-value">40ms</span></div>
-                <div class="tooltip-stat"><i class="fas fa-users"></i> Usuarios: <span class="stat-value">145</span></div>
-                <div class="tooltip-stat">
-                  <i class="fas fa-chart-line"></i> Carga: 28%
-                  <div class="tooltip-progress"><div class="tooltip-progress-fill" style="width:28%"></div></div>
-                </div>
-                <div class="tooltip-stat"><i class="fas fa-server"></i> Host: <span class="stat-value">OVH</span></div>
-              </div>
-              <div class="tooltip-badge"><i class="fas fa-gauge-high"></i> Low Load</div>
-            </div>
-          </div>
-          
-          <!-- PARIS - OVH (púrpura) -->
-          <div class="server-point ovh" style="left:75%; top:25%;" data-city="Paris" data-ping="90" data-users="98" data-host="OVH" data-load="22">
-            <div class="server-dot"></div>
-            <div class="server-ring"></div>
-            <div class="server-glow"></div>
-            <div class="server-tooltip right">
-              <div class="tooltip-header">
-                <i class="fas fa-map-pin"></i>
-                <h3>Paris</h3>
-              </div>
-              <div class="tooltip-stats">
-                <div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: <span class="stat-value">90ms</span></div>
-                <div class="tooltip-stat"><i class="fas fa-users"></i> Usuarios: <span class="stat-value">98</span></div>
+                <div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: <span class="stat-value">55ms</span></div>
                 <div class="tooltip-stat">
                   <i class="fas fa-chart-line"></i> Carga: 22%
                   <div class="tooltip-progress"><div class="tooltip-progress-fill" style="width:22%"></div></div>
                 </div>
-                <div class="tooltip-stat"><i class="fas fa-server"></i> Host: <span class="stat-value">OVH</span></div>
+                <div class="tooltip-stat"><i class="fas fa-server"></i> Host: <span class="stat-value">OVHcloud</span></div>
               </div>
-              <div class="tooltip-badge"><i class="fas fa-wine-glass"></i> Europe Gateway</div>
+              <div class="tooltip-badge"><i class="fas fa-snowflake"></i> Canada Gateway</div>
             </div>
           </div>
         </div>
 
         <div class="map-legend">
           <div class="legend-item">
-            <span class="legend-dot"></span>
-            <span style="color:var(--muted);"><i class="fas fa-server"></i> Akamai (Costa)</span>
+            <span class="legend-dot akamai"></span>
+            <span style="color:var(--muted);"><i class="fas fa-server"></i> Akamai (USA)</span>
           </div>
           <div class="legend-item">
             <span class="legend-dot ovh"></span>
-            <span style="color:var(--muted);"><i class="fas fa-server"></i> OVH (Centro/Europa)</span>
+            <span style="color:var(--muted);"><i class="fas fa-server"></i> OVHcloud (Canadá)</span>
           </div>
           <div class="legend-item">
-            <span class="legend-line" style="width:30px;"></span>
+            <span class="legend-line" style="width:30px; height:2px; background:var(--neonCyan);"></span>
             <span style="color:var(--muted);"><i class="fas fa-project-diagram"></i> Data Flow</span>
           </div>
         </div>
@@ -1035,8 +1025,8 @@
         <div class="server-stats">
           <div class="server-stat-card">
             <i class="fas fa-server"></i>
-            <h4>6 Servidores</h4>
-            <p>3 Akamai • 3 OVH</p>
+            <h4>3 Servidores</h4>
+            <p>2 Akamai • 1 OVH</p>
           </div>
           <div class="server-stat-card">
             <i class="fas fa-tachometer-alt"></i>
@@ -1044,14 +1034,14 @@
             <p>Latencia promedio</p>
           </div>
           <div class="server-stat-card">
-            <i class="fas fa-users"></i>
-            <h4>1,100+</h4>
-            <p>Usuarios activos</p>
+            <i class="fas fa-globe"></i>
+            <h4>99.9%</h4>
+            <p>Uptime garantizado</p>
           </div>
           <div class="server-stat-card">
             <i class="fas fa-check-circle"></i>
-            <h4>99.9%</h4>
-            <p>Uptime garantizado</p>
+            <h4>24/7</h4>
+            <p>Soporte activo</p>
           </div>
         </div>
       </div>
@@ -1090,7 +1080,7 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <p>© 2026 SecureNET • <i class="fas fa-bolt"></i> VPN de alto rendimiento • <i class="fas fa-cloud"></i> OVH + Akamai</p>
+          <p>© 2026 SecureNET • <i class="fas fa-bolt"></i> VPN de alto rendimiento • <i class="fas fa-cloud"></i> Akamai (USA) + OVHcloud (Canadá)</p>
           <p style="margin-top:10px;font-size:12px;">Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p>
         </div>
       </div>
@@ -1118,7 +1108,7 @@
     animate3D();
     window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
 
-    // GENERAR PARTÍCULAS DE DATOS
+    // GENERAR PARTÍCULAS DE DATOS (MEJORADO)
     function createDataParticles() {
       const container = document.getElementById('data-particles');
       if (!container) return;
@@ -1126,54 +1116,46 @@
       container.innerHTML = '';
       const lines = document.querySelectorAll('.connection-line');
       
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 30; i++) {
         const particle = document.createElement('div');
         particle.className = 'data-particle';
         
-        const line = lines[Math.floor(Math.random() * lines.length)];
-        if (line) {
-          const rect = line.getBoundingClientRect();
-          const mapRect = document.getElementById('liveMap').getBoundingClientRect();
-          
-          const startX = Math.random() * 100;
-          const startY = Math.random() * 100;
-          const endX = startX + (Math.random() * 40 - 20);
-          const endY = startY + (Math.random() * 40 - 20);
-          
-          particle.style.left = startX + '%';
-          particle.style.top = startY + '%';
-          particle.style.setProperty('--tx', (endX - startX) + '%');
-          particle.style.setProperty('--ty', (endY - startY) + '%');
-          particle.style.animationDelay = (i * 0.2) + 's';
-        }
+        const startX = Math.random() * 100;
+        const startY = Math.random() * 100;
+        const endX = startX + (Math.random() * 30 - 15);
+        const endY = startY + (Math.random() * 30 - 15);
+        
+        particle.style.left = startX + '%';
+        particle.style.top = startY + '%';
+        particle.style.setProperty('--tx', (endX - startX) + '%');
+        particle.style.setProperty('--ty', (endY - startY) + '%');
+        particle.style.animationDelay = (i * 0.1) + 's';
+        particle.style.animationDuration = (3 + Math.random() * 3) + 's';
         
         container.appendChild(particle);
       }
     }
 
-    // ACTUALIZAR ESTADÍSTICAS EN TIEMPO REAL (SIMULACIÓN)
+    // ACTUALIZAR ESTADÍSTICAS EN TIEMPO REAL (SOLO CARGA)
     function updateStats() {
       const serverPoints = document.querySelectorAll('.server-point');
       serverPoints.forEach(point => {
         const tooltip = point.querySelector('.tooltip-stats');
         if (!tooltip) return;
         
-        const usersSpan = tooltip.querySelector('.tooltip-stat:nth-child(2) .stat-value');
         const loadBar = tooltip.querySelector('.tooltip-progress-fill');
-        
-        if (usersSpan) {
-          let users = parseInt(usersSpan.textContent);
-          // Simular cambio de usuarios
-          users += Math.floor(Math.random() * 10) - 3;
-          users = Math.max(50, Math.min(400, users));
-          usersSpan.textContent = users;
-        }
         
         if (loadBar) {
           let load = parseInt(loadBar.style.width);
-          load += Math.random() * 5 - 2.5;
-          load = Math.max(10, Math.min(90, load));
+          load += Math.random() * 4 - 2;
+          load = Math.max(10, Math.min(90, Math.round(load)));
           loadBar.style.width = load + '%';
+          
+          // Actualizar también el texto del porcentaje si existe
+          const loadText = tooltip.querySelector('.tooltip-stat:nth-child(2) .stat-value');
+          if (loadText) {
+            loadText.textContent = load + '%';
+          }
         }
       });
     }
@@ -1220,8 +1202,8 @@
       // INICIALIZAR PARTÍCULAS
       createDataParticles();
 
-      // ACTUALIZAR ESTADÍSTICAS CADA 5 SEGUNDOS
-      setInterval(updateStats, 5000);
+      // ACTUALIZAR ESTADÍSTICAS CADA 4 SEGUNDOS
+      setInterval(updateStats, 4000);
 
       window.toggleMenu=toggleMenu;window.setTheme=setTheme;
       window.copyUsername=copyUsername;
