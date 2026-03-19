@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Planes | SecureNET VPN</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Planes SecureNET VPN - Basic, Standard, Premium y Dual - OVH + Akamai">
+  <meta name="description" content="Planes SecureNET VPN - Secure Connect, Private Tunnel, Stealth Shield, GeoFreedom - Akamai + OVHcloud">
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#070b12" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -49,7 +49,7 @@
       --neonBlue:#0d0;
       --neonPurple:#0c0;
       --neonPink:#0e0;
-      font-family:'Courier New',monospace;
+      /* font-family unificado */
     }
     body{
       font-family:'Inter',sans-serif;
@@ -434,7 +434,7 @@
       display:flex;
       flex-direction:column;
       height:100%;
-      min-height:580px;
+      min-height:500px; /* Ajustado para nuevo contenido */
     }
     .plan-card:hover{
       transform:translateY(-10px);
@@ -476,10 +476,10 @@
       gap:8px;
     }
     .plan-name i{font-size:28px;}
-    .plan-card.basic .plan-name{color:var(--neonBlue);}
-    .plan-card.standard .plan-name{color:var(--neonCyan);}
-    .plan-card.premium .plan-name{color:var(--neonPurple);}
-    .plan-card.dual .plan-name{color:var(--neonPink);}
+    .plan-card.connect .plan-name{color:var(--neonBlue);} /* Secure Connect */
+    .plan-card.tunnel .plan-name{color:var(--neonCyan);} /* Private Tunnel */
+    .plan-card.shield .plan-name{color:var(--neonPurple);} /* Stealth Shield */
+    .plan-card.freedom .plan-name{color:var(--neonPink);} /* GeoFreedom */
     .plan-price{
       background:rgba(0,0,0,0.4);
       border:1px solid var(--border);
@@ -730,25 +730,25 @@
         </div>
       </div>
 
-      <!-- HOSTING INFO -->
+      <!-- HOSTING INFO ACTUALIZADA -->
       <div style="text-align:center; margin-bottom:20px;">
-        <span class="hosting-badge"><i class="fas fa-cloud"></i> Infraestructura: OVHcloud + Akamai</span>
+        <span class="hosting-badge"><i class="fas fa-cloud"></i> Infraestructura: Akamai (USA) + OVHcloud (Canadá)</span>
       </div>
 
-      <!-- SHOWCASE DE INFRAESTRUCTURA (NUEVO) -->
+      <!-- SHOWCASE DE INFRAESTRUCTURA (ACTUALIZADO) -->
       <div class="infra-showcase">
         <div class="infra-card">
           <i class="fas fa-cloud"></i>
           <div>
-            <h4>OVHcloud</h4>
-            <p>Dallas • Chicago • París</p>
+            <h4>Akamai</h4>
+            <p>Los Angeles • Dallas</p>
           </div>
         </div>
         <div class="infra-card">
           <i class="fas fa-globe"></i>
           <div>
-            <h4>Akamai</h4>
-            <p>Los Angeles • Miami • New York</p>
+            <h4>OVHcloud</h4>
+            <p>Beauharnois, Canadá</p>
           </div>
         </div>
       </div>
@@ -762,8 +762,8 @@
 
       <div class="recommendation-banner">
         <span><i class="fas fa-star"></i> RECOMENDACIÓN DEL DÍA:</span>
-        <span class="highlight">PLAN STANDARD + UBICACIÓN DALLAS</span>
-        <span class="subtext"><i class="fas fa-bolt"></i> Mejor latencia para gaming • <i class="fas fa-users"></i> 3 conexiones simultáneas</span>
+        <span class="highlight">PRIVATE TUNNEL + DALLAS</span>
+        <span class="subtext"><i class="fas fa-bolt"></i> El equilibrio perfecto para gaming • Anti-DDos Incluido</span>
       </div>
 
       <div id="all-locations-plans"></div>
@@ -809,7 +809,7 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <p>© 2026 SecureNET • <i class="fas fa-bolt"></i> VPN de alto rendimiento • <i class="fas fa-cloud"></i> OVH + Akamai</p>
+          <p>© 2026 SecureNET • <i class="fas fa-bolt"></i> VPN de alto rendimiento • <i class="fas fa-cloud"></i> Akamai (USA) + OVHcloud (Canadá)</p>
           <p style="margin-top:10px;font-size:12px;">Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p>
         </div>
       </div>
@@ -818,19 +818,18 @@
 
   <script>
     const DISCORD_LINK='https://discord.gg/ZSg4CrbEXR';
+    // Planes con nuevos nombres (como en los otros archivos)
     const planTypes=[
-      {name:'BASIC',class:'basic',icon:'fa-circle',price:5.99,users:'1 conexión',gaming:'COD/RDR/GTA friendly'},
-      {name:'STANDARD',class:'standard',icon:'fa-star',price:12.99,users:'Hasta 3',gaming:'Optimizado gaming'},
-      {name:'PREMIUM',class:'premium',icon:'fa-gem',price:19.99,users:'Hasta 6',gaming:'Máximo rendimiento'},
-      {name:'DUAL',class:'dual',icon:'fa-globe',price:24.99,users:'Hasta 4',gaming:'Doble ubicación'}
+      {name:'Secure Connect', class:'connect', icon:'fa-circle', price:5.99, desc:'Conexión esencial y segura'},
+      {name:'Private Tunnel', class:'tunnel', icon:'fa-star', price:12.99, desc:'Equilibrio perfecto para gaming'},
+      {name:'Stealth Shield', class:'shield', icon:'fa-gem', price:19.99, desc:'Máximo anonimato y velocidad'},
+      {name:'GeoFreedom', class:'freedom', icon:'fa-globe', price:24.99, desc:'Acceso a dos ubicaciones'}
     ];
+    // Ubicaciones actualizadas (solo las 3 disponibles)
     const locations=[
-      {id:'los-angeles',name:'Los Angeles, CA',displayName:'LOS ANGELES',flag:'🇺🇸',description:'Costa Oeste USA - Ideal para gaming',status:'available',ping:45,comingSoon:false,host:'Akamai'},
-      {id:'dallas',name:'Dallas, Texas',displayName:'DALLAS',flag:'🇺🇸',description:'Centro USA - Latencia ultra baja',status:'available',ping:35,comingSoon:false,host:'OVH'},
-      {id:'miami',name:'Miami, Florida',displayName:'MIAMI',flag:'🇺🇸',description:'Conectividad con Latinoamérica',status:'soon',ping:60,comingSoon:true,host:'Akamai'},
-      {id:'paris',name:'Paris, Francia',displayName:'PARIS',flag:'🇫🇷',description:'Primera ubicación europea',status:'soon',ping:90,comingSoon:true,host:'OVH'},
-      {id:'new-york',name:'New York, NY',displayName:'NEW YORK',flag:'🇺🇸',description:'Costa Este - Negocios',status:'soon',ping:50,comingSoon:true,host:'Akamai'},
-      {id:'chicago',name:'Chicago, Illinois',displayName:'CHICAGO',flag:'🇺🇸',description:'Medio Oeste - Gaming',status:'soon',ping:40,comingSoon:true,host:'OVH'}
+      {id:'los-angeles',name:'Los Angeles, CA',displayName:'LOS ANGELES',flag:'🇺🇸',description:'Costa Oeste USA - Baja latencia para gaming',ping:45,comingSoon:false,host:'Akamai'},
+      {id:'dallas',name:'Dallas, Texas',displayName:'DALLAS',flag:'🇺🇸',description:'Centro de USA - Conectividad óptima',ping:35,comingSoon:false,host:'Akamai'},
+      {id:'beauharnois',name:'Beauharnois, QC',displayName:'BEAUHARNOIS',flag:'🇨🇦',description:'Canadá - Servidores OVH de alto rendimiento',ping:55,comingSoon:false,host:'OVH'}
     ];
     let currentPeriod = 'monthly';
 
@@ -871,6 +870,14 @@
       return '$' + total.toFixed(2);
     }
 
+    function formatPrice(price, period, planName) {
+      let formatted = price;
+      if (planName === 'GeoFreedom' && period !== 'monthly') {
+        formatted += ' <span class="dual-discount"><i class="fas fa-tag"></i> 20% OFF</span>';
+      }
+      return formatted;
+    }
+
     function setPeriod(period, btn){
       currentPeriod = period;
       document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
@@ -898,22 +905,23 @@
         </div>
         <div class="plans-grid">${planTypes.map(p=>{
           let totalPrice = getTotalPriceForPeriod(p.price, currentPeriod);
+          let formattedPrice = formatPrice(totalPrice, currentPeriod, p.name);
+          let isRecommended = (p.name === 'Private Tunnel') ? 'recommended' : '';
           return `
-          <div class="plan-card ${p.class} ${p.name==='STANDARD'?'recommended':''}">
+          <div class="plan-card ${p.class} ${isRecommended}">
             <div class="plan-header">
               <div class="plan-name"><i class="fas ${p.icon}"></i> ${p.name}</div>
-              <div class="plan-price price-${currentPeriod}">${totalPrice}</div>
-              ${p.name === 'DUAL' && currentPeriod !== 'monthly' ? '<div class="dual-discount"><i class="fas fa-tag"></i> 20% OFF</div>' : ''}
+              <div class="plan-price price-${currentPeriod}">${formattedPrice}</div>
               <div style="color:var(--muted); font-size:14px; margin-top:5px;">${periodText}</div>
             </div>
             <div class="plan-features">
-              <div class="feature-item"><i class="fas fa-users"></i><div><div>Usuarios</div><small>${p.users}</small></div></div>
+              <!-- Eliminadas las características de usuarios, ahora solo: -->
               <div class="feature-item"><i class="fas fa-map-pin"></i><div><div>Ubicación</div><small>${l.displayName}</small></div></div>
-              <div class="feature-item"><i class="fas fa-shield-virus"></i><div><div>Protección</div><small>Anti-DDoS</small></div></div>
-              <div class="feature-item"><i class="fas fa-gamepad"></i><div><div>Gaming</div><small>${p.gaming}</small></div></div>
+              <div class="feature-item"><i class="fas fa-calendar-alt"></i><div><div>Período</div><small>${periodText}</small></div></div>
+              <div class="feature-item"><i class="fas fa-shield-virus"></i><div><div>Protección</div><small>Anti-DDoS Enterprise</small></div></div>
               <div class="feature-item"><i class="fas fa-cloud"></i><div><div>Infraestructura</div><small>${l.host}</small></div></div>
             </div>
-            ${!l.comingSoon?`<a href="${DISCORD_LINK}" target="_blank" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR ${p.name}</a>`:'<button class="plan-button" disabled><i class="fas fa-clock"></i> PRÓXIMAMENTE</button>'}
+            ${!l.comingSoon?`<a href="${DISCORD_LINK}" target="_blank" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR</a>`:'<button class="plan-button" disabled><i class="fas fa-clock"></i> PRÓXIMAMENTE</button>'}
           </div>`}).join('')}</div>`).join('');
     }
 
