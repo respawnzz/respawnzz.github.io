@@ -49,7 +49,6 @@
       --neonBlue:#0d0;
       --neonPurple:#0c0;
       --neonPink:#0e0;
-      font-family:'Courier New',monospace;
     }
     body{
       font-family:'Inter',sans-serif;
@@ -336,46 +335,167 @@
       padding:40px;
       margin:40px 0;
     }
-    .comparison-table{
-      width:100%;
-      border-collapse:collapse;
-      background:rgba(0,0,0,0.2);
-      border-radius:20px;
-      overflow:hidden;
-      margin-top:30px;
+
+    .plans-comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin: 30px 0;
     }
-    .comparison-table th{
-      background:linear-gradient(90deg,var(--neonBlue),var(--neonCyan));
-      padding:20px;
-      color:white;
-      font-size:16px;
-      font-weight:700;
-      text-align:left;
+
+    @media (max-width: 1100px) {
+      .plans-comparison-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
-    .comparison-table td{
-      padding:15px 20px;
-      border-bottom:1px solid var(--border);
-      color:var(--muted);
-      font-size:15px;
+
+    @media (max-width: 700px) {
+      .plans-comparison-grid {
+        grid-template-columns: 1fr;
+      }
     }
-    .comparison-table tr:last-child td{border-bottom:none;}
-    .comparison-table tr:hover td{
-      background:rgba(64,224,208,0.05);
-      color:var(--text);
+
+    .comparison-plan-card {
+      background: rgba(20, 30, 50, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 25px 20px;
+      transition: all 0.3s var(--ease);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
-    .price-cell{font-weight:700;}
-    .price-monthly{color:var(--neonBlue);}
-    .price-quarterly{color:var(--neonCyan);}
-    .price-semesterly{color:var(--neonPurple);}
-    .price-yearly{color:var(--neonPink);}
-    .dual-discount{
-      background:rgba(255,85,255,0.2);
-      border-radius:20px;
-      padding:2px 8px;
-      font-size:12px;
-      margin-left:5px;
-      color:var(--neonPink);
-      font-weight:600;
+
+    .comparison-plan-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--neonCyan);
+      box-shadow: 0 20px 40px rgba(64, 224, 208, 0.3);
+    }
+
+    .comparison-plan-card.recommended {
+      border: 2px solid var(--neonPurple);
+      background: rgba(30, 20, 60, 0.9);
+    }
+
+    .comparison-plan-card.recommended::before {
+      content: '⭐ MÁS POPULAR';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(45deg, var(--neonPurple), var(--neonPink));
+      color: white;
+      padding: 5px 20px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    .plan-card-header {
+      text-align: center;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .plan-card-header .plan-icon {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .plan-card-header .plan-name {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .plan-card-header .plan-price {
+      font-size: 32px;
+      font-weight: 800;
+      margin: 15px 0 5px;
+    }
+
+    .plan-price .price-currency {
+      font-size: 18px;
+      opacity: 0.7;
+    }
+
+    .plan-price .price-period {
+      font-size: 14px;
+      opacity: 0.6;
+      font-weight: 400;
+    }
+
+    .dual-discount-badge {
+      display: inline-block;
+      background: rgba(255, 85, 255, 0.2);
+      border: 1px solid var(--neonPink);
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--neonPink);
+      margin-top: 5px;
+    }
+
+    .plan-features-list {
+      flex: 1;
+      margin: 15px 0;
+    }
+
+    .feature-item-compare {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .feature-item-compare:last-child {
+      border-bottom: none;
+    }
+
+    .feature-item-compare i {
+      width: 20px;
+      color: var(--neonCyan);
+      font-size: 16px;
+    }
+
+    .feature-item-compare .feature-text {
+      flex: 1;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .feature-item-compare .feature-value {
+      font-weight: 600;
+      color: white;
+      font-size: 14px;
+    }
+
+    .plan-action-btn {
+      background: linear-gradient(45deg, var(--neonBlue), var(--neonCyan));
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      text-align: center;
+      display: block;
+      margin-top: 15px;
+    }
+
+    .plan-action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(64, 224, 208, 0.4);
     }
 
     .hosting-note{
@@ -457,8 +577,6 @@
 
     @media (max-width:768px){
       .dashboard-menu{width:250px;}
-      .comparison-table{font-size:14px;}
-      .comparison-table th,.comparison-table td{padding:12px;}
       .period-selector{gap:5px;}
       .period-btn{padding:10px 15px; font-size:13px;}
     }
@@ -475,7 +593,7 @@
     <header class="main-header">
       <div class="menu-container">
         <div class="logo">
-          <span class="logo-icon"><i class="fas fa-shield-halos"></i></span>
+          <span class="logo-icon"><i class="fas fa-shield-halved"></i></span>
           <div class="logo-text">
             <h1>SecureNET</h1>
             <span>VPN Solutions</span>
@@ -521,8 +639,8 @@
 
     <main class="container">
       <div class="comparison-section">
-        <h2 class="section-title"><i class="fas fa-chart-bar"></i> Tabla Comparativa</h2>
-        <p class="section-subtitle">Compara todos los planes y elige el que mejor se adapte a ti</p>
+        <h2 class="section-title"><i class="fas fa-chart-bar"></i> Comparativa de Planes</h2>
+        <p class="section-subtitle">Elige el plan perfecto para tus necesidades</p>
         
         <div style="text-align:center;">
           <div class="payment-methods">
@@ -535,113 +653,28 @@
 
         <div class="period-selector">
           <button class="period-btn active" onclick="setPeriod('monthly', this)"><i class="fas fa-calendar-alt"></i> Mensual</button>
-          <button class="period-btn" onclick="setPeriod('quarterly', this)"><i class="fas fa-calendar-plus"></i> Trimestral</button>
-          <button class="period-btn" onclick="setPeriod('semesterly', this)"><i class="fas fa-calendar-check"></i> Semestral</button>
-          <button class="period-btn" onclick="setPeriod('yearly', this)"><i class="fas fa-calendar-star"></i> Anual</button>
+          <button class="period-btn" onclick="setPeriod('quarterly', this)"><i class="fas fa-calendar-plus"></i> Trimestral <span style="opacity:0.7; margin-left:5px;">-10%</span></button>
+          <button class="period-btn" onclick="setPeriod('semesterly', this)"><i class="fas fa-calendar-check"></i> Semestral <span style="opacity:0.7; margin-left:5px;">-20%</span></button>
+          <button class="period-btn" onclick="setPeriod('yearly', this)"><i class="fas fa-calendar-star"></i> Anual <span style="opacity:0.7; margin-left:5px;">-30%</span></button>
         </div>
         
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th><i class="fas fa-list"></i> Característica</th>
-              <th><i class="fas fa-circle" style="color:var(--neonBlue);"></i> BASIC</th>
-              <th><i class="fas fa-star" style="color:var(--neonCyan);"></i> STANDARD</th>
-              <th><i class="fas fa-gem" style="color:var(--neonPurple);"></i> PREMIUM</th>
-              <th><i class="fas fa-globe" style="color:var(--neonPink);"></i> DUAL</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><i class="fas fa-tag"></i> <strong>Precio</strong></td>
-              <td class="price-cell price-monthly" data-monthly="$5.99" data-quarterly="$16.17" data-semesterly="$28.74" data-yearly="$47.88">$5.99</td>
-              <td class="price-cell price-monthly" data-monthly="$12.99" data-quarterly="$35.07" data-semesterly="$62.35" data-yearly="$103.92">$12.99</td>
-              <td class="price-cell price-monthly" data-monthly="$19.99" data-quarterly="$53.97" data-semesterly="$95.95" data-yearly="$159.92">$19.99</td>
-              <td class="price-cell price-monthly" data-monthly="$24.99" data-quarterly="$59.97" data-semesterly="$101.94" data-yearly="$167.90">
-                $24.99 <span class="dual-discount"><i class="fas fa-tag"></i> -20%</span>
-              </td>
-            </tr>
-            <tr>
-              <td><i class="fas fa-users"></i> <strong>Conexiones simultáneas</strong></td>
-              <td>1</td>
-              <td>3</td>
-              <td>6</td>
-              <td>4</td>
-            </tr>
-            <tr>
-              <td><i class="fas fa-map-pin"></i> <strong>Ubicaciones incluidas</strong></td>
-              <td>1 ciudad</td>
-              <td>1 ciudad</td>
-              <td>1 ciudad</td>
-              <td>2 ciudades</td>
-            </tr>
-            <tr>
-              <td><i class="fas fa-sync-alt"></i> <strong>Cambios de servidor</strong></td>
-              <td>1/mes gratis</td>
-              <td>1/mes gratis</td>
-              <td>1/mes gratis</td>
-              <td>No incluido</td>
-            </tr>
-            <tr>
-              <td><i class="fas fa-shield-virus"></i> <strong>Protección Anti-DDoS</strong></td>
-              <td><i class="fas fa-check-circle" style="color:var(--neonCyan);"></i> Completo</td>
-              <td><i class="fas fa-check-circle" style="color:var(--neonCyan);"></i> Completo</td>
-              <td><i class="fas fa-check-circle" style="color:var(--neonCyan);"></i> Completo</td>
-              <td><i class="fas fa-check-circle" style="color:var(--neonCyan);"></i> Completo</td>
-            </tr>
-            <tr>
-              <td><i class="fas fa-server"></i> <strong>Infraestructura</strong></td>
-              <td><i class="fas fa-cloud"></i> OVH + Akamai</td>
-              <td><i class="fas fa-cloud"></i> OVH + Akamai</td>
-              <td><i class="fas fa-cloud"></i> OVH + Akamai</td>
-              <td><i class="fas fa-cloud"></i> OVH + Akamai</td>
-            </tr>
-            <tr>
-              <td><i class="fas fa-headset"></i> <strong>Soporte prioritario 24/7</strong></td>
-              <td><i class="fas fa-times-circle" style="color:#ff5555;"></i></td>
-              <td><i class="fas fa-check-circle" style="color:var(--neonCyan);"></i></td>
-              <td><i class="fas fa-check-circle" style="color:var(--neonCyan);"></i></td>
-              <td><i class="fas fa-check-circle" style="color:var(--neonCyan);"></i></td>
-            </tr>
-            <tr>
-              <td><i class="fas fa-infinity"></i> <strong>Ancho de banda</strong></td>
-              <td>Ilimitado</td>
-              <td>Ilimitado</td>
-              <td>Ilimitado</td>
-              <td>Ilimitado</td>
-            </tr>
-          </tbody>
-        </table>
+        <div id="plans-comparison-container" class="plans-comparison-grid"></div>
 
-        <!-- NOTA DE HOSTING -->
         <div class="hosting-note">
-          <i class="fas fa-cloud"></i> <strong>Todos nuestros servidores están hosteados en OVHcloud y Akamai</strong>
-          <p style="color:var(--muted); margin-top:10px;">Garantizamos la mejor infraestructura para máxima velocidad y protección</p>
+          <i class="fas fa-cloud"></i> <strong>Todos nuestros servidores están hosteados en Akamai y OVHcloud </strong>
+          <p style="color:var(--muted); margin-top:10px;">Garantizamos la mejor infraestructura para máxima velocidad y protección Anti-DDoS enterprise</p>
         </div>
 
         <div style="margin-top:40px; padding:25px; background:rgba(140,85,255,0.1); border:1px solid var(--neonPurple); border-radius:20px; text-align:center;">
-          <h3 style="color:var(--neonCyan); margin-bottom:15px;"><i class="fas fa-lightbulb"></i> Recomendación</h3>
+          <h3 style="color:var(--neonCyan); margin-bottom:15px;"><i class="fas fa-lightbulb"></i> Recomendación del Experto</h3>
           <p style="color:var(--muted); line-height:1.8;">
-            <span style="color:white; font-weight:700;"><i class="fas fa-star"></i> PLAN STANDARD</span> es el más equilibrado: 3 conexiones, todas las características premium y el mejor precio por usuario.<br>
-            Si necesitas máximo rendimiento, elige <span style="color:var(--neonPurple); font-weight:700;"><i class="fas fa-gem"></i> PREMIUM</span>. Para dos ubicaciones, <span style="color:var(--neonPink); font-weight:700;"><i class="fas fa-globe"></i> DUAL</span> es ideal con <strong>20% de descuento</strong> en todos los períodos.
+            <span style="color:white; font-weight:700;"><i class="fas fa-star"></i> PRIVATE TUNNEL</span> es el más equilibrado: excelente precio, protección Anti-DDoS y rendimiento estable.<br>
+            Para mayor cobertura y una presencia más sólida, elige <span style="color:var(--neonPurple); font-weight:700;"><i class="fas fa-gem"></i> STEALTH SHIELD</span>.
+            Si necesitas dos ubicaciones, <span style="color:var(--neonPink); font-weight:700;"><i class="fas fa-globe"></i> GEOFREEDOM</span> es ideal con <strong>20% de descuento</strong>.
           </p>
           <p style="color:var(--muted); margin-top:15px; font-size:14px;">
-            <i class="fas fa-credit-card"></i> Pagos: PayPal, Cash App, Apple Pay, Bitcoin • <i class="fas fa-ban" style="color:#ff5555;"></i> No hay reembolsos
+            <i class="fas fa-credit-card"></i> Pagos: PayPal, Cash App, Apple Pay, Bitcoin • <i class="fas fa-ban" style="color:#ff5555;"></i> No reembolsos
           </p>
-        </div>
-
-        <div style="margin-top:30px; display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
-          <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:16px; border:1px solid var(--border);">
-            <i class="fas fa-calendar-alt" style="color:var(--neonBlue);"></i> Mensual: Precio regular
-          </div>
-          <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:16px; border:1px solid var(--border);">
-            <i class="fas fa-calendar-plus" style="color:var(--neonCyan);"></i> Trimestral: <strong>-10%</strong>
-          </div>
-          <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:16px; border:1px solid var(--border);">
-            <i class="fas fa-calendar-check" style="color:var(--neonPurple);"></i> Semestral: <strong>-20%</strong>
-          </div>
-          <div style="background:rgba(0,0,0,0.3); padding:15px; border-radius:16px; border:1px solid var(--border);">
-            <i class="fas fa-calendar-star" style="color:var(--neonPink);"></i> Anual: <strong>-30%</strong>
-          </div>
         </div>
       </div>
     </main>
@@ -650,7 +683,7 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-col">
-            <h4><i class="fas fa-shield-halos"></i> SecureNET</h4>
+            <h4><i class="fas fa-shield-halved"></i> SecureNET</h4>
             <ul>
               <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
               <li><a href="about.html"><i class="fas fa-users"></i> Sobre Nosotros</a></li>
@@ -680,7 +713,7 @@
         </div>
         <div class="footer-bottom">
           <p>© 2026 SecureNET • <i class="fas fa-bolt"></i> VPN de alto rendimiento • <i class="fas fa-credit-card"></i> PayPal, Cash App, Apple Pay, Bitcoin</p>
-          <p style="margin-top:10px;font-size:12px;">Infraestructura: <i class="fas fa-cloud"></i> OVHcloud + <i class="fas fa-globe"></i> Akamai</p>
+          <p style="margin-top:10px;font-size:12px;">Infraestructura: <i class="fas fa-cloud"></i> Akamai (USA) + <i class="fas fa-globe"></i> OVHcloud (Canadá)</p>
           <p style="margin-top:10px;font-size:12px;">Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx • <i class="fas fa-ban" style="color:#ff5555;"></i> No reembolsos</p>
         </div>
       </div>
@@ -688,81 +721,223 @@
   </div>
 
   <script>
-    const canvas=document.getElementById('canvas-3d'),ctx=canvas.getContext('2d');
-    canvas.width=window.innerWidth;canvas.height=window.innerHeight;
-    const particles=[];
-    for(let i=0;i<70;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,z:Math.random()*1000,size:Math.random()*2+1,speed:Math.random()*2+1});
-    function animate3D(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      const theme=document.body.dataset.theme,color=theme==='hacker'?'#0f0':theme==='light'?'#06f':'#0ff';
-      particles.forEach(p=>{
-        p.z-=p.speed;if(p.z<=0){p.z=1000;p.x=Math.random()*canvas.width;p.y=Math.random()*canvas.height;}
-        const scale=500/p.z,x2d=(p.x-canvas.width/2)*scale+canvas.width/2,y2d=(p.y-canvas.height/2)*scale+canvas.height/2;
-        ctx.beginPath();ctx.arc(x2d,y2d,p.size*scale,0,Math.PI*2);ctx.fillStyle=color;ctx.shadowColor=color;ctx.shadowBlur=10;ctx.fill();
-      });requestAnimationFrame(animate3D);
+    const DISCORD_LINK = 'https://discord.gg/ZSg4CrbEXR';
+    const canvas = document.getElementById('canvas-3d'), ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    const particles = [];
+    for (let i = 0; i < 70; i++) particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, z: Math.random() * 1000, size: Math.random() * 2 + 1, speed: Math.random() * 2 + 1 });
+    
+    function animate3D() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const theme = document.body.dataset.theme, color = theme === 'hacker' ? '#0f0' : theme === 'light' ? '#06f' : '#0ff';
+      particles.forEach(p => {
+        p.z -= p.speed;
+        if (p.z <= 0) {
+          p.z = 1000;
+          p.x = Math.random() * canvas.width;
+          p.y = Math.random() * canvas.height;
+        }
+        const scale = 500 / p.z,
+              x2d = (p.x - canvas.width / 2) * scale + canvas.width / 2,
+              y2d = (p.y - canvas.height / 2) * scale + canvas.height / 2;
+        ctx.beginPath();
+        ctx.arc(x2d, y2d, p.size * scale, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.shadowColor = color;
+        ctx.shadowBlur = 10;
+        ctx.fill();
+      });
+      requestAnimationFrame(animate3D);
     }
     animate3D();
-    window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
 
-    function toggleMenu(){
-      const h=document.getElementById('hamburger'),m=document.getElementById('dashboardMenu'),o=document.getElementById('menuOverlay');
-      h.classList.toggle('active');m.classList.toggle('open');o.classList.toggle('active');
-      document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    function toggleMenu() {
+      const h = document.getElementById('hamburger'),
+            m = document.getElementById('dashboardMenu'),
+            o = document.getElementById('menuOverlay');
+      h.classList.toggle('active');
+      m.classList.toggle('open');
+      o.classList.toggle('active');
+      document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
     }
-    document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&document.getElementById('dashboardMenu').classList.contains('open'))toggleMenu();});
-    
-    function setTheme(theme){
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('dashboardMenu').classList.contains('open')) toggleMenu();
+    });
+
+    function setTheme(theme) {
       document.body.dataset.theme = theme;
       localStorage.setItem('securenet-theme', theme);
       document.querySelectorAll('.theme-btn-dashboard').forEach(b => b.classList.remove('active'));
-      document.querySelector(`.theme-btn-dashboard[onclick*="${theme}"]`).classList.add('active');
+      const btn = document.querySelector(`.theme-btn-dashboard[onclick*="${theme}"]`);
+      if (btn) btn.classList.add('active');
     }
-    
-    function copyUsername(username){
-      navigator.clipboard.writeText(username).then(()=>showToast(`Copiado: ${username}`));
+
+    function copyUsername(username) {
+      navigator.clipboard.writeText(username).then(() => showToast(`Copiado: ${username}`));
     }
-    function showToast(m){
-      const t=document.getElementById('toast');
+
+    function showToast(m) {
+      const t = document.getElementById('toast');
       t.querySelector('span').textContent = m;
       t.classList.add('show');
-      setTimeout(()=>t.classList.remove('show'),2000);
+      setTimeout(() => t.classList.remove('show'), 2000);
     }
 
-    function setPeriod(period, btn){
-      document.querySelectorAll('.period-btn').forEach(btn => btn.classList.remove('active'));
-      btn.classList.add('active');
-      
-      const prices = {
-        monthly: ['$5.99', '$12.99', '$19.99', '$24.99'],
-        quarterly: ['$16.17', '$35.07', '$53.97', '$59.97'],
-        semesterly: ['$28.74', '$62.35', '$95.95', '$101.94'],
-        yearly: ['$47.88', '$103.92', '$159.92', '$167.90']
-      };
-      
-      const priceCells = document.querySelectorAll('.price-cell');
-      priceCells.forEach((cell, index) => {
-        cell.textContent = prices[period][index];
-        cell.className = `price-cell price-${period}`;
-        if(index === 3){
-          cell.innerHTML = prices[period][index] + ' <span class="dual-discount"><i class="fas fa-tag"></i> -20%</span>';
+    function getPriceForPeriod(basePrice, period) {
+      const multipliers = { monthly: 1, quarterly: 3, semesterly: 6, yearly: 12 };
+      const discounts = { monthly: 1, quarterly: 0.9, semesterly: 0.8, yearly: 0.7 };
+      return (basePrice * multipliers[period] * discounts[period]).toFixed(2);
+    }
+
+    function renderComparisonCards(period) {
+      const container = document.getElementById('plans-comparison-container');
+      if (!container) return;
+
+      const plans = [
+        {
+          name: 'SECURE CONNECT',
+          icon: 'fa-circle',
+          color: 'var(--neonBlue)',
+          price: 5.99,
+          locations: 'Dallas',
+          time: 'Mensual / Trimestral / Semestral / Anual',
+          protocols: 'OpenVPN / WireGuard',
+          security: 'Anti-DDoS básico',
+          infrastructure: 'Akamai - USA',
+          recommended: false
+        },
+        {
+          name: 'PRIVATE TUNNEL',
+          icon: 'fa-star',
+          color: 'var(--neonCyan)',
+          price: 12.99,
+          locations: 'Los Angeles',
+          time: 'Mensual / Trimestral / Semestral / Anual',
+          protocols: 'OpenVPN / WireGuard',
+          security: 'Anti-DDoS avanzado',
+          infrastructure: 'Akamai - USA',
+          recommended: true
+        },
+        {
+          name: 'STEALTH SHIELD',
+          icon: 'fa-gem',
+          color: 'var(--neonPurple)',
+          price: 19.99,
+          locations: 'Beauharnois, Canadá',
+          time: 'Mensual / Trimestral / Semestral / Anual',
+          protocols: 'OpenVPN / WireGuard',
+          security: 'Anti-DDoS premium',
+          infrastructure: 'OVHcloud - Canadá',
+          recommended: false
+        },
+        {
+          name: 'GEOFREEDOM',
+          icon: 'fa-globe',
+          color: 'var(--neonPink)',
+          price: 24.99,
+          locations: 'Dallas + Beauharnois',
+          time: 'Mensual / Trimestral / Semestral / Anual',
+          protocols: 'OpenVPN / WireGuard',
+          security: 'Anti-DDoS premium',
+          infrastructure: 'Akamai + OVHcloud',
+          recommended: false
         }
-      });
+      ];
+
+      const periodText = {
+        monthly: 'por mes',
+        quarterly: 'por 3 meses',
+        semesterly: 'por 6 meses',
+        yearly: 'por 12 meses'
+      };
+
+      container.innerHTML = plans.map((plan) => {
+        const totalPrice = getPriceForPeriod(plan.price, period);
+        const isDual = plan.name === 'GEOFREEDOM';
+        const discountBadge = isDual && period !== 'monthly'
+          ? '<div class="dual-discount-badge"><i class="fas fa-tag"></i> 20% OFF</div>'
+          : '';
+
+        return `
+          <div class="comparison-plan-card ${plan.recommended ? 'recommended' : ''}">
+            <div class="plan-card-header">
+              <div class="plan-icon" style="color: ${plan.color}"><i class="fas ${plan.icon}"></i></div>
+              <div class="plan-name" style="color: ${plan.color}">${plan.name}</div>
+              <div class="plan-price">
+                <span class="price-currency">$</span>${totalPrice}
+                <span class="price-period">${periodText[period]}</span>
+              </div>
+              ${discountBadge}
+            </div>
+            
+            <div class="plan-features-list">
+              <div class="feature-item-compare">
+                <i class="fas fa-map-pin"></i>
+                <span class="feature-text">Ubicación</span>
+                <span class="feature-value">${plan.locations}</span>
+              </div>
+              <div class="feature-item-compare">
+                <i class="fas fa-calendar-alt"></i>
+                <span class="feature-text">Tiempo</span>
+                <span class="feature-value">${plan.time}</span>
+              </div>
+              <div class="feature-item-compare">
+                <i class="fas fa-network-wired"></i>
+                <span class="feature-text">Protocolos</span>
+                <span class="feature-value">${plan.protocols}</span>
+              </div>
+              <div class="feature-item-compare">
+                <i class="fas fa-shield-virus"></i>
+                <span class="feature-text">Protección</span>
+                <span class="feature-value">${plan.security}</span>
+              </div>
+              <div class="feature-item-compare">
+                <i class="fas fa-server"></i>
+                <span class="feature-text">Infraestructura</span>
+                <span class="feature-value">${plan.infrastructure}</span>
+              </div>
+            </div>
+
+            <a href="${DISCORD_LINK}" target="_blank" class="plan-action-btn">
+              <i class="fas fa-shopping-cart"></i> COMPRAR
+            </a>
+          </div>
+        `;
+      }).join('');
     }
 
-    window.onload=()=>{
+    function setPeriod(period, btn) {
+      document.querySelectorAll('.period-btn').forEach(button => button.classList.remove('active'));
+      btn.classList.add('active');
+      renderComparisonCards(period);
+    }
+
+    window.onload = () => {
       const savedTheme = localStorage.getItem('securenet-theme') || 'dark';
       document.body.dataset.theme = savedTheme;
       document.querySelectorAll('.theme-btn-dashboard').forEach(b => {
         b.classList.remove('active');
-        if(b.textContent.toLowerCase().includes(savedTheme) || 
-           (savedTheme==='dark' && b.innerHTML.includes('moon')) ||
-           (savedTheme==='light' && b.innerHTML.includes('sun')) ||
-           (savedTheme==='hacker' && b.innerHTML.includes('code'))) {
+        if (
+          (savedTheme === 'dark' && b.innerHTML.includes('moon')) ||
+          (savedTheme === 'light' && b.innerHTML.includes('sun')) ||
+          (savedTheme === 'hacker' && b.innerHTML.includes('code'))
+        ) {
           b.classList.add('active');
         }
       });
-      window.toggleMenu=toggleMenu;window.setTheme=setTheme;
-      window.copyUsername=copyUsername;window.setPeriod=setPeriod;
+
+      renderComparisonCards('monthly');
+
+      window.toggleMenu = toggleMenu;
+      window.setTheme = setTheme;
+      window.copyUsername = copyUsername;
+      window.setPeriod = setPeriod;
     };
   </script>
 </body>
