@@ -49,7 +49,6 @@
       --neonBlue:#0d0;
       --neonPurple:#0c0;
       --neonPink:#0e0;
-      font-family:'Courier New',monospace;
     }
     body{
       font-family:'Inter',sans-serif;
@@ -448,10 +447,11 @@
       align-items:center;
       gap:8px;
     }
-    .plan-card.basic .plan-name{color:var(--neonBlue);}
-    .plan-card.standard .plan-name{color:var(--neonCyan);}
-    .plan-card.premium .plan-name{color:var(--neonPurple);}
-    .plan-card.dual .plan-name{color:var(--neonPink);}
+    /* Updated plan colors for new names */
+    .plan-card.connect .plan-name{color:var(--neonBlue);} /* Secure Connect (antes BASIC) */
+    .plan-card.tunnel .plan-name{color:var(--neonCyan);} /* Private Tunnel (antes STANDARD) */
+    .plan-card.shield .plan-name{color:var(--neonPurple);} /* Stealth Shield (antes PREMIUM) */
+    .plan-card.freedom .plan-name{color:var(--neonPink);} /* GeoFreedom (antes DUAL) */
     .plan-price{
       background:rgba(0,0,0,0.4);
       border:1px solid var(--border);
@@ -779,19 +779,18 @@
 
   <script>
     const DISCORD_LINK='https://discord.gg/ZSg4CrbEXR';
+    // Updated plan types with new names and descriptions, removed 'users'
     const planTypes=[
-      {name:'BASIC',class:'basic',icon:'fa-circle',price:5.99,users:'1 conexión',gaming:'COD/RDR/GTA friendly'},
-      {name:'STANDARD',class:'standard',icon:'fa-star',price:12.99,users:'Hasta 3',gaming:'Optimizado gaming'},
-      {name:'PREMIUM',class:'premium',icon:'fa-gem',price:19.99,users:'Hasta 6',gaming:'Máximo rendimiento'},
-      {name:'DUAL',class:'dual',icon:'fa-globe',price:24.99,users:'Hasta 4',gaming:'Doble ubicación'}
+      {name:'Secure Connect', class:'connect', icon:'fa-circle', price:5.99, desc:'Conexión esencial y segura'}, // antes BASIC
+      {name:'Private Tunnel', class:'tunnel', icon:'fa-star', price:12.99, desc:'Equilibrio perfecto para gaming'}, // antes STANDARD
+      {name:'Stealth Shield', class:'shield', icon:'fa-gem', price:19.99, desc:'Máximo anonimato y velocidad'}, // antes PREMIUM
+      {name:'GeoFreedom', class:'freedom', icon:'fa-globe', price:24.99, desc:'Acceso a dos ubicaciones'}, // antes DUAL
     ];
+    // Updated locations: only the three requested, all available
     const locations=[
-      {id:'los-angeles',name:'Los Angeles, CA',displayName:'LOS ANGELES',flag:'🇺🇸',description:'Costa Oeste USA - Ideal para gaming',status:'available',ping:45,comingSoon:false},
-      {id:'dallas',name:'Dallas, Texas',displayName:'DALLAS',flag:'🇺🇸',description:'Centro USA - Latencia ultra baja',status:'available',ping:35,comingSoon:false},
-      {id:'miami',name:'Miami, Florida',displayName:'MIAMI',flag:'🇺🇸',description:'Conectividad con Latinoamérica',status:'soon',ping:60,comingSoon:true},
-      {id:'paris',name:'Paris, Francia',displayName:'PARIS',flag:'🇫🇷',description:'Primera ubicación europea',status:'soon',ping:90,comingSoon:true},
-      {id:'new-york',name:'New York, NY',displayName:'NEW YORK',flag:'🇺🇸',description:'Costa Este - Negocios',status:'soon',ping:50,comingSoon:true},
-      {id:'chicago',name:'Chicago, Illinois',displayName:'CHICAGO',flag:'🇺🇸',description:'Medio Oeste - Gaming',status:'soon',ping:40,comingSoon:true}
+      {id:'los-angeles',name:'Los Angeles, CA',displayName:'LOS ANGELES',flag:'🇺🇸',description:'Costa Oeste USA - Baja latencia para gaming',ping:45,comingSoon:false,host:'Akamai'},
+      {id:'dallas',name:'Dallas, Texas',displayName:'DALLAS',flag:'🇺🇸',description:'Centro de USA - Conectividad óptima',ping:35,comingSoon:false,host:'Akamai'},
+      {id:'beauharnois',name:'Beauharnois, QC',displayName:'BEAUHARNOIS',flag:'🇨🇦',description:'Canadá - Servidores OVH de alto rendimiento',ping:55,comingSoon:false,host:'OVH'}
     ];
     let selectedLocation=null;
     let currentPeriod = 'monthly';
@@ -831,9 +830,9 @@
         <div class="location-card ${selectedLocation===l.id?'selected':''}" onclick="selectLocation('${l.id}')">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
             <h3><i class="fas fa-map-pin"></i> ${l.flag} ${l.displayName}</h3>
-            <span class="status-badge ${l.status==='available'?'status-available':'status-soon'}">
-              <i class="fas ${l.status==='available'?'fa-check-circle':'fa-clock'}"></i>
-              ${l.status==='available'?'DISPONIBLE':'PRÓXIMAMENTE'}
+            <span class="status-badge ${l.comingSoon ? 'status-soon' : 'status-available'}">
+              <i class="fas ${l.comingSoon ? 'fa-clock' : 'fa-check-circle'}"></i>
+              ${l.comingSoon ? 'PRÓXIMAMENTE' : 'DISPONIBLE'}
             </span>
           </div>
           <p style="color:var(--muted);margin-bottom:20px;"><i class="fas fa-info-circle"></i> ${l.description}</p>
@@ -844,19 +843,28 @@
             </div>
           </div>
           <div style="margin-top:15px; font-size:12px; color:var(--muted);">
-            <i class="fas fa-cloud"></i> Host: OVH/Akamai
+            <i class="fas fa-cloud"></i> Host: ${l.host}
           </div>
         </div>`).join('');
     }
 
     function getPriceForPeriod(basePrice, period){
-      const prices = {
-        monthly: basePrice,
-        quarterly: basePrice * 0.9,
-        semesterly: basePrice * 0.8,
-        yearly: basePrice * 0.7
-      };
-      return prices[period] || basePrice;
+      const discounts = { monthly: 1, quarterly: 0.9, semesterly: 0.8, yearly: 0.7 };
+      return basePrice * (discounts[period] || 1);
+    }
+
+    function getTotalPriceForPeriod(basePrice, period){
+      const multipliers = { monthly: 1, quarterly: 3, semesterly: 6, yearly: 12 };
+      const discounts = { monthly: 1, quarterly: 0.9, semesterly: 0.8, yearly: 0.7 };
+      return basePrice * multipliers[period] * discounts[period];
+    }
+
+    function formatPrice(price, period, planName) {
+      let formatted = '$' + price.toFixed(2);
+      if (planName === 'GeoFreedom' && period !== 'monthly') {
+        formatted += ' <span class="dual-discount"><i class="fas fa-tag"></i> -20%</span>';
+      }
+      return formatted;
     }
 
     function selectLocation(id){
@@ -871,20 +879,24 @@
     function renderPlansForLocation(l){
       document.getElementById('location-plans-grid').innerHTML=planTypes.map(p=>{
         let periodPrice = getPriceForPeriod(p.price, currentPeriod);
+        let totalPrice = getTotalPriceForPeriod(p.price, currentPeriod);
+        let formattedPrice = formatPrice(totalPrice, currentPeriod, p.name);
+        // Determine if this plan is recommended (Private Tunnel)
+        let isRecommended = (p.name === 'Private Tunnel') ? 'recommended' : '';
         return `
-        <div class="plan-card ${p.class} ${p.name==='STANDARD'?'recommended':''}">
+        <div class="plan-card ${p.class} ${isRecommended}">
           <div class="plan-header">
             <div class="plan-name"><i class="fas ${p.icon}"></i> ${p.name}</div>
-            <div class="plan-price price-${currentPeriod}">$${periodPrice.toFixed(2)}</div>
+            <div class="plan-price price-${currentPeriod}">${formattedPrice}</div>
           </div>
           <div class="plan-features">
-            <div class="feature-item"><i class="fas fa-users"></i><div><div>Usuarios</div><small>${p.users}</small></div></div>
+            <!-- Removed users feature, added Time Period dynamically -->
             <div class="feature-item"><i class="fas fa-map-pin"></i><div><div>Ubicación</div><small>${l.displayName}</small></div></div>
-            <div class="feature-item"><i class="fas fa-shield-virus"></i><div><div>Protección</div><small>Anti-DDoS</small></div></div>
-            <div class="feature-item"><i class="fas fa-gamepad"></i><div><div>Gaming</div><small>${p.gaming}</small></div></div>
-            <div class="feature-item"><i class="fas fa-cloud"></i><div><div>Infraestructura</div><small>OVH + Akamai</small></div></div>
+            <div class="feature-item"><i class="fas fa-calendar-alt"></i><div><div>Período</div><small>${currentPeriod === 'monthly' ? '1 mes' : currentPeriod === 'quarterly' ? '3 meses' : currentPeriod === 'semesterly' ? '6 meses' : '12 meses'}</small></div></div>
+            <div class="feature-item"><i class="fas fa-shield-virus"></i><div><div>Protección</div><small>Anti-DDoS Enterprise</small></div></div>
+            <div class="feature-item"><i class="fas fa-cloud"></i><div><div>Infraestructura</div><small>${l.host}</small></div></div>
           </div>
-          ${!l.comingSoon?`<a href="${DISCORD_LINK}" target="_blank" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR ${p.name}</a>`:'<button class="plan-button" disabled><i class="fas fa-clock"></i> PRÓXIMAMENTE</button>'}
+          ${!l.comingSoon?`<a href="${DISCORD_LINK}" target="_blank" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR</a>`:'<button class="plan-button" disabled><i class="fas fa-clock"></i> PRÓXIMAMENTE</button>'}
         </div>`}).join('');
     }
 
