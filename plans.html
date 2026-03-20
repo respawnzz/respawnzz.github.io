@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <title>Planes | SecureNET VPN</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Planes SecureNET VPN - Secure Connect, Private Tunnel, Stealth Shield, GeoFreedom - Akamai + OVHcloud">
+  <meta name="description" content="Planes SecureNET VPN - Secure Connect - Akamai + OVHcloud">
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#070b12" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHsSURBVHgB7VdLUhtBEH1dCiU+xiHYBhu8Ihdw7AuYq7AiyQ1wbpBwA3MDcgNwA3MDcgNwA+QGhC9gK5w9M1I1X6m7p4eR0CReqVZTUz3T/fq9HuB/giQG/G8A/tw+eL14fP2ZEpbXj4/vr/bn01eccA6T0Nk9/z34+Xj3+U2A2QPdA3jP9Y+7396eHq4/rYqA42SNN2c/XgIAIPgJZLK2+qbLwE1xH/C09Qj3dH1zCW0JAIlJEQDLFwFIygoAvCQAkD6Izz9W12ZNi+bxW+PcCAAVq0gWpBEAJEsJAMksjYAkmSVlS2ZxXgYg3v0qAiDJFwFIMk8EgFciE5enJp4qjQYgSc4TASi/JwJQfE8EoPSeiL8AvKcCkFp3CyjX3YoANM8lAkB+kAhAfiERgPxKIgD5rUQA8j4RgHxIBCD3RADyP4kA5EMiALknApCfSAQg90QA8p4IQO6JAORHIgC5JwKQeyIAeU8EIPdEAPJDBPCeu0p2EfkRAshu5b2n7iZ1K+89Wzcq+T4CeJ4EMl3d83zrA34g+fHlA7wN0J7n2x1wD/7Fe54PTYC2PN/uAB/Aw/v8jYl2PqANz7c7wJ9AAK15vu2BvuH5dgc8/7pzZ9uugW14vt2R7Rq2AUyGzw8f9eZqAAAAAElFTkSuQmCC" />
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHsSURBVHgB7VdLUhtBEH1dCiU+xiHYBhu8Ihdw7AuYq7AiyQ1wbpBwA3MDcgNwA3MDcgNwA+QGhC9gK5w9M1I1X6m7p4eR0CReqVZTUz3T/fq9HuB/giQG/G8A/tw+eL14fP2ZEpbXj4/vr/bn01eccA6T0Nk9/z34+Xj3+U2A2QPdA3jP9Y+7396eHq4/rYqA42SNN2c/XgIAIPgJZLK2+qbLwE1xH/C09Qj3dH1zCW0JAIlJEQDLFwFIygoAvCQAkD6Izz9W12ZNi+bxW+PcCAAVq0gWpBEAJEsJAMksjYAkmSVlS2ZxXgYg3v0qAiDJFwFIMk8EgFciE5enJp4qjQYgSc4TASi/JwJQfE8EoPSeiL8AvKcCkFp3CyjX3YoANM8lAkB+kAhAfiERgPxKIgD5rUQA8j4RgHxIBCD3RADyP4kA5EMiALknApCfSAQg90QA8p4IQO6JAORHIgC5JwKQeyIAeU8EIPdEAPJDBPCeu0p2EfkRAshu5b2n7iZ1K+89Wzcq+T4CeJ4EMl3d83zrA34g+fHlA7wN0J7n2x1wD/7Fe54PTYC2PNvuAB/Aw/v8jYl2PqANz7c7wJ9AAK15vu2BvuH5dgc8/7pzZ9uugW14vt2R7Rq2AUyGzw8f9eZqAAAAAElFTkSuQmCC" />
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
     :root{
@@ -49,7 +49,6 @@
       --neonBlue:#0d0;
       --neonPurple:#0c0;
       --neonPink:#0e0;
-      /* font-family unificado */
     }
     body{
       font-family:'Inter',sans-serif;
@@ -253,175 +252,213 @@
       width:100%;
     }
     .section-title{
-      font-size:32px;
+      font-size:42px;
       margin:30px 0 20px;
       text-align:center;
-      background:linear-gradient(45deg,var(--neonCyan),var(--neonBlue),var(--neonPurple));
+      background:linear-gradient(45deg,var(--neonCyan),var(--neonBlue),var(--neonPurple),var(--neonPink));
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
+      gap:15px;
+      text-shadow:0 0 20px rgba(64,224,208,0.3);
     }
     .section-subtitle{
       text-align:center;
       color:var(--muted);
-      margin-bottom:30px;
-      font-size:16px;
+      margin-bottom:40px;
+      font-size:18px;
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
+      gap:10px;
     }
 
     .payment-banner{
       background:rgba(64,224,208,0.1);
       border:1px solid var(--border);
-      border-radius:20px;
-      padding:15px 25px;
+      border-radius:30px;
+      padding:20px 30px;
       margin:30px 0;
       display:flex;
       flex-wrap:wrap;
-      gap:20px;
+      gap:25px;
       justify-content:center;
       align-items:center;
+      backdrop-filter:blur(10px);
     }
     .payment-banner span{
       color:var(--muted);
-      font-size:14px;
+      font-size:15px;
       display:flex;
       align-items:center;
-      gap:8px;
+      gap:10px;
     }
-    .payment-banner span i{color:var(--neonCyan);}
+    .payment-banner span i{color:var(--neonCyan);font-size:18px;}
     .payment-icons{
       display:flex;
-      gap:15px;
+      gap:20px;
     }
     .payment-icons i{
-      font-size:24px;
+      font-size:28px;
       color:var(--neonCyan);
       transition:.3s;
     }
     .payment-icons i:hover{
-      transform:translateY(-3px);
+      transform:translateY(-5px);
       color:var(--neonBlue);
     }
 
     .hosting-badge{
-      background:linear-gradient(135deg,rgba(0,150,255,0.1),rgba(100,100,255,0.1));
+      background:linear-gradient(135deg,rgba(0,150,255,0.15),rgba(100,100,255,0.15));
       border:1px solid var(--neonBlue);
       border-radius:50px;
-      padding:8px 20px;
+      padding:10px 25px;
       display:inline-flex;
       align-items:center;
-      gap:8px;
+      gap:12px;
       color:var(--neonCyan);
-      font-size:14px;
-      margin:10px 0;
+      font-size:15px;
+      margin:15px 0;
+      backdrop-filter:blur(5px);
     }
 
     .period-selector{
       display:flex;
       justify-content:center;
-      gap:10px;
-      margin:30px 0;
+      gap:15px;
+      margin:40px 0;
       flex-wrap:wrap;
     }
     .period-btn{
-      padding:12px 25px;
+      padding:14px 30px;
       background:transparent;
       border:1px solid var(--border);
       border-radius:50px;
       color:var(--muted);
       cursor:pointer;
       transition:.3s;
-      font-size:14px;
+      font-size:15px;
       font-weight:600;
       display:flex;
       align-items:center;
-      gap:8px;
+      gap:10px;
+      backdrop-filter:blur(5px);
     }
     .period-btn i{font-size:16px;}
     .period-btn:hover{
       background:rgba(64,224,208,0.1);
       color:var(--neonCyan);
+      border-color:var(--neonCyan);
+      transform:translateY(-2px);
     }
     .period-btn.active{
       background:linear-gradient(45deg,var(--neonBlue),var(--neonCyan));
       color:white;
       border-color:transparent;
-    }
-
-    .recommendation-banner{
-      background:rgba(140,85,255,0.2);
-      border:1px solid var(--neonPurple);
-      border-radius:20px;
-      padding:20px;
-      margin-bottom:30px;
-      text-align:center;
-    }
-    .recommendation-banner i{color:var(--neonCyan);}
-    .recommendation-banner .highlight{
-      color:var(--neonCyan);
-      font-size:20px;
-      font-weight:800;
-      display:inline-block;
-      margin:0 10px;
-    }
-    .recommendation-banner .subtext{
-      color:var(--muted);
-      display:block;
-      margin-top:10px;
+      box-shadow:0 5px 20px rgba(64,224,208,0.3);
     }
 
     .infra-showcase{
       display:flex;
-      gap:20px;
+      gap:25px;
       justify-content:center;
-      margin:30px 0 40px;
+      margin:30px 0 50px;
       flex-wrap:wrap;
     }
     .infra-card{
-      background:rgba(20,30,50,0.6);
+      background:rgba(20,30,50,0.7);
       border:1px solid var(--border);
-      border-radius:20px;
-      padding:20px 30px;
+      border-radius:30px;
+      padding:25px 40px;
       display:flex;
       align-items:center;
-      gap:15px;
+      gap:20px;
       transition:.3s;
+      backdrop-filter:blur(10px);
     }
     .infra-card:hover{
-      transform:translateY(-5px);
+      transform:translateY(-8px);
       border-color:var(--neonCyan);
+      box-shadow:0 20px 30px rgba(64,224,208,0.15);
     }
     .infra-card i{
-      font-size:40px;
+      font-size:48px;
       color:var(--neonCyan);
     }
     .infra-card div h4{
       color:white;
-      font-size:18px;
+      font-size:20px;
       margin-bottom:5px;
     }
     .infra-card div p{
       color:var(--muted);
-      font-size:14px;
+      font-size:15px;
     }
 
-    .plans-grid{
-      display:grid;
-      grid-template-columns:repeat(4, 1fr);
-      gap:20px;
-      margin:40px 0;
+    .locations-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+      margin: 40px 0;
     }
-    @media (max-width: 1200px) {
-      .plans-grid { grid-template-columns:repeat(2, 1fr); }
+
+    .location-section {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 40px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
     }
-    @media (max-width: 768px) {
-      .plans-grid { grid-template-columns:1fr; }
+
+    .location-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .location-flag {
+      font-size: 48px;
+    }
+
+    .location-title {
+      flex: 1;
+    }
+
+    .location-title h2 {
+      font-size: 32px;
+      color: var(--neonCyan);
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .location-title p {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .location-host {
+      background: rgba(64,224,208,0.1);
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      color: var(--neonCyan);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .plans-grid-location {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
     }
     
     .plan-card{
@@ -434,30 +471,12 @@
       display:flex;
       flex-direction:column;
       height:100%;
-      min-height:500px; /* Ajustado para nuevo contenido */
+      min-height:380px;
     }
     .plan-card:hover{
       transform:translateY(-10px);
       border-color:var(--neonCyan);
       box-shadow:0 30px 50px rgba(64,224,208,0.2);
-    }
-    .plan-card.recommended{
-      border:2px solid var(--neonPurple);
-      position:relative;
-    }
-    .plan-card.recommended::before{
-      content:'⭐ RECOMENDADO';
-      position:absolute;
-      top:-12px;left:50%;
-      transform:translateX(-50%);
-      background:linear-gradient(45deg,var(--neonPurple),var(--neonPink));
-      color:white;
-      padding:5px 20px;
-      border-radius:50px;
-      font-size:12px;
-      font-weight:700;
-      white-space:nowrap;
-      z-index:10;
     }
     .plan-header{
       display:flex;
@@ -468,18 +487,15 @@
       text-align:center;
     }
     .plan-name{
-      font-size:28px;
+      font-size:26px;
       font-weight:800;
       display:flex;
       align-items:center;
       justify-content:center;
       gap:8px;
+      color:var(--neonBlue);
     }
-    .plan-name i{font-size:28px;}
-    .plan-card.connect .plan-name{color:var(--neonBlue);} /* Secure Connect */
-    .plan-card.tunnel .plan-name{color:var(--neonCyan);} /* Private Tunnel */
-    .plan-card.shield .plan-name{color:var(--neonPurple);} /* Stealth Shield */
-    .plan-card.freedom .plan-name{color:var(--neonPink);} /* GeoFreedom */
+    .plan-name i{font-size:26px;}
     .plan-price{
       background:rgba(0,0,0,0.4);
       border:1px solid var(--border);
@@ -496,23 +512,11 @@
     .price-quarterly{color:var(--neonCyan);}
     .price-semesterly{color:var(--neonPurple);}
     .price-yearly{color:var(--neonPink);}
-    .dual-discount{
-      background:rgba(255,85,255,0.2);
-      border-radius:20px;
-      padding:3px 10px;
-      font-size:12px;
-      margin-top:5px;
-      color:var(--neonPink);
-      font-weight:600;
-      display:inline-flex;
-      align-items:center;
-      gap:5px;
-    }
     .plan-features{
       flex:1;
       display:flex;
       flex-direction:column;
-      gap:8px;
+      gap:10px;
       margin:20px 0;
     }
     .feature-item{
@@ -522,6 +526,10 @@
       padding:12px 15px;
       background:rgba(0,0,0,0.2);
       border-radius:16px;
+      transition:.2s;
+    }
+    .feature-item:hover{
+      background:rgba(64,224,208,0.05);
     }
     .feature-item i{
       width:20px;
@@ -569,21 +577,26 @@
 
     .discount-note{
       display:flex;
-      gap:20px;
+      gap:25px;
       justify-content:center;
       flex-wrap:wrap;
-      margin:40px 0;
+      margin:50px 0;
     }
     .discount-item{
       background:rgba(0,0,0,0.3);
-      padding:15px 20px;
+      padding:15px 25px;
       border-radius:50px;
       border:1px solid var(--border);
       display:flex;
       align-items:center;
-      gap:8px;
+      gap:10px;
+      backdrop-filter:blur(5px);
     }
-    .discount-item i{color:var(--neonCyan);}
+    .discount-item i{color:var(--neonCyan);font-size:18px;}
+    .discount-item:hover{
+      border-color:var(--neonCyan);
+      transform:translateY(-2px);
+    }
 
     .main-footer{
       background:rgba(10,20,30,0.8);
@@ -636,9 +649,9 @@
       position:fixed;
       bottom:30px;left:50%;
       transform:translateX(-50%) translateY(100px);
-      background:linear-gradient(45deg,rgba(16,42,67,0.9),rgba(10,30,50,0.9));
+      background:linear-gradient(45deg,rgba(16,42,67,0.95),rgba(10,30,50,0.95));
       border:1px solid var(--neonCyan);
-      border-radius:20px;
+      border-radius:30px;
       padding:16px 30px;
       color:white;
       z-index:10000;
@@ -658,6 +671,7 @@
       .plan-price{width:100%;}
       .period-selector{gap:5px;}
       .period-btn{padding:10px 15px; font-size:13px;}
+      .location-header{flex-direction:column;align-items:flex-start;}
     }
   </style>
 </head>
@@ -717,11 +731,11 @@
     <div class="header-spacer"></div>
 
     <main class="container">
-      <h2 class="section-title"><i class="fas fa-tags"></i> Todos los Planes</h2>
-      <p class="section-subtitle"><i class="fas fa-map-pin"></i> Explora todos nuestros planes por ubicación</p>
+      <h2 class="section-title"><i class="fas fa-crown"></i> Planes Premium</h2>
+      <p class="section-subtitle"><i class="fas fa-map-pin"></i> Elige tu ubicación y el plan Secure Connect</p>
 
       <div class="payment-banner">
-        <span><i class="fas fa-credit-card"></i> Métodos de pago aceptados:</span>
+        <span><i class="fas fa-shield-check"></i> Pago 100% seguro con:</span>
         <div class="payment-icons">
           <i class="fab fa-paypal" title="PayPal"></i>
           <i class="fas fa-dollar-sign" title="Cash App"></i>
@@ -730,43 +744,35 @@
         </div>
       </div>
 
-      <!-- HOSTING INFO ACTUALIZADA -->
       <div style="text-align:center; margin-bottom:20px;">
-        <span class="hosting-badge"><i class="fas fa-cloud"></i> Infraestructura: Akamai (USA) + OVHcloud (Canadá)</span>
+        <span class="hosting-badge"><i class="fas fa-cloud"></i> Infraestructura: Akamai + OVHcloud</span>
       </div>
 
-      <!-- SHOWCASE DE INFRAESTRUCTURA (ACTUALIZADO) -->
       <div class="infra-showcase">
         <div class="infra-card">
           <i class="fas fa-cloud"></i>
           <div>
             <h4>Akamai</h4>
-            <p>Los Angeles • Dallas</p>
+            <p>Servidores globales</p>
           </div>
         </div>
         <div class="infra-card">
           <i class="fas fa-globe"></i>
           <div>
             <h4>OVHcloud</h4>
-            <p>Beauharnois, Canadá</p>
+            <p>Servidores globales</p>
           </div>
         </div>
       </div>
       
       <div class="period-selector">
         <button class="period-btn active" onclick="setPeriod('monthly', this)"><i class="fas fa-calendar-alt"></i> Mensual</button>
-        <button class="period-btn" onclick="setPeriod('quarterly', this)"><i class="fas fa-calendar-plus"></i> Trimestral</button>
-        <button class="period-btn" onclick="setPeriod('semesterly', this)"><i class="fas fa-calendar-check"></i> Semestral</button>
-        <button class="period-btn" onclick="setPeriod('yearly', this)"><i class="fas fa-calendar-star"></i> Anual</button>
+        <button class="period-btn" onclick="setPeriod('quarterly', this)"><i class="fas fa-calendar-plus"></i> Trimestral <span style="font-size:11px; background:rgba(64,224,208,0.2); padding:2px 8px; border-radius:20px;">-10%</span></button>
+        <button class="period-btn" onclick="setPeriod('semesterly', this)"><i class="fas fa-calendar-check"></i> Semestral <span style="font-size:11px; background:rgba(140,85,255,0.2); padding:2px 8px; border-radius:20px;">-20%</span></button>
+        <button class="period-btn" onclick="setPeriod('yearly', this)"><i class="fas fa-calendar-star"></i> Anual <span style="font-size:11px; background:rgba(255,85,255,0.2); padding:2px 8px; border-radius:20px;">-30%</span></button>
       </div>
 
-      <div class="recommendation-banner">
-        <span><i class="fas fa-star"></i> RECOMENDACIÓN DEL DÍA:</span>
-        <span class="highlight">PRIVATE TUNNEL + DALLAS</span>
-        <span class="subtext"><i class="fas fa-bolt"></i> El equilibrio perfecto para gaming • Anti-DDos Incluido</span>
-      </div>
-
-      <div id="all-locations-plans"></div>
+      <div id="all-locations-plans" class="locations-grid"></div>
 
       <div class="discount-note">
         <div class="discount-item"><i class="fas fa-calendar-alt"></i> Mensual: Precio regular</div>
@@ -809,7 +815,7 @@
           </div>
         </div>
         <div class="footer-bottom">
-          <p>© 2026 SecureNET • <i class="fas fa-bolt"></i> VPN de alto rendimiento • <i class="fas fa-cloud"></i> Akamai (USA) + OVHcloud (Canadá)</p>
+          <p>© 2026 SecureNET • <i class="fas fa-bolt"></i> VPN de alto rendimiento • <i class="fas fa-cloud"></i> Akamai + OVHcloud</p>
           <p style="margin-top:10px;font-size:12px;">Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p>
         </div>
       </div>
@@ -818,19 +824,25 @@
 
   <script>
     const DISCORD_LINK='https://discord.gg/ZSg4CrbEXR';
-    // Planes con nuevos nombres (como en los otros archivos)
-    const planTypes=[
-      {name:'Secure Connect', class:'connect', icon:'fa-circle', price:5.99, desc:'Conexión esencial y segura'},
-      {name:'Private Tunnel', class:'tunnel', icon:'fa-star', price:12.99, desc:'Equilibrio perfecto para gaming'},
-      {name:'Stealth Shield', class:'shield', icon:'fa-gem', price:19.99, desc:'Máximo anonimato y velocidad'},
-      {name:'GeoFreedom', class:'freedom', icon:'fa-globe', price:24.99, desc:'Acceso a dos ubicaciones'}
-    ];
-    // Ubicaciones actualizadas (solo las 3 disponibles)
+    
+    // SOLO PLAN SECURE CONNECT
+    const secureConnectPlan = {
+      name:'Secure Connect', 
+      class:'connect', 
+      icon:'fa-circle', 
+      priceUSA:10, 
+      priceCanada:12, 
+      desc:'Conexión esencial y segura'
+    };
+    
+    // Ubicaciones
     const locations=[
-      {id:'los-angeles',name:'Los Angeles, CA',displayName:'LOS ANGELES',flag:'🇺🇸',description:'Costa Oeste USA - Baja latencia para gaming',ping:45,comingSoon:false,host:'Akamai'},
-      {id:'dallas',name:'Dallas, Texas',displayName:'DALLAS',flag:'🇺🇸',description:'Centro de USA - Conectividad óptima',ping:35,comingSoon:false,host:'Akamai'},
-      {id:'beauharnois',name:'Beauharnois, QC',displayName:'BEAUHARNOIS',flag:'🇨🇦',description:'Canadá - Servidores OVH de alto rendimiento',ping:55,comingSoon:false,host:'OVH'}
+      {id:'los-angeles',name:'Los Angeles, CA',displayName:'LOS ANGELES',flag:'🇺🇸',description:'Costa Oeste USA - Baja latencia',ping:45,comingSoon:false,host:'Akamai',color:'#00b4ff', country:'USA'},
+      {id:'dallas',name:'Dallas, Texas',displayName:'DALLAS',flag:'🇺🇸',description:'Centro de USA - Conectividad óptima',ping:35,comingSoon:false,host:'Akamai',color:'#40e0d0', country:'USA'},
+      {id:'beauharnois',name:'Beauharnois, QC',displayName:'BEAUHARNOIS',flag:'🇨🇦',description:'Canadá - Servidores OVHcloud',ping:55,comingSoon:false,host:'OVHcloud',color:'#8c55ff', country:'Canada'}
+      // Aquí puedes agregar más ubicaciones después
     ];
+    
     let currentPeriod = 'monthly';
 
     const canvas=document.getElementById('canvas-3d'),ctx=canvas.getContext('2d');
@@ -867,15 +879,7 @@
       const multipliers = {monthly:1, quarterly:3, semesterly:6, yearly:12};
       const discounts = {monthly:1, quarterly:0.9, semesterly:0.8, yearly:0.7};
       const total = basePrice * multipliers[period] * discounts[period];
-      return '$' + total.toFixed(2);
-    }
-
-    function formatPrice(price, period, planName) {
-      let formatted = price;
-      if (planName === 'GeoFreedom' && period !== 'monthly') {
-        formatted += ' <span class="dual-discount"><i class="fas fa-tag"></i> 20% OFF</span>';
-      }
-      return formatted;
+      return total.toFixed(2);
     }
 
     function setPeriod(period, btn){
@@ -895,34 +899,48 @@
       else if(currentPeriod === 'semesterly') periodText = '6 meses';
       else if(currentPeriod === 'yearly') periodText = '12 meses';
       
-      container.innerHTML=locations.map(l=>`
-        <div style="margin:50px 0 30px;">
-          <h2 style="color:var(--neonCyan);font-size:28px; display:flex; align-items:center; gap:10px;">
-            <i class="fas fa-map-pin"></i> ${l.flag} ${l.displayName}
-          </h2>
-          <p style="color:var(--muted);"><i class="fas fa-info-circle"></i> ${l.description}</p>
-          <p style="color:var(--muted); font-size:12px; margin-top:5px;"><i class="fas fa-cloud"></i> Host: ${l.host}</p>
-        </div>
-        <div class="plans-grid">${planTypes.map(p=>{
-          let totalPrice = getTotalPriceForPeriod(p.price, currentPeriod);
-          let formattedPrice = formatPrice(totalPrice, currentPeriod, p.name);
-          let isRecommended = (p.name === 'Private Tunnel') ? 'recommended' : '';
-          return `
-          <div class="plan-card ${p.class} ${isRecommended}">
-            <div class="plan-header">
-              <div class="plan-name"><i class="fas ${p.icon}"></i> ${p.name}</div>
-              <div class="plan-price price-${currentPeriod}">${formattedPrice}</div>
-              <div style="color:var(--muted); font-size:14px; margin-top:5px;">${periodText}</div>
+      container.innerHTML=locations.map(l=> {
+        // Seleccionar precio base según país
+        let basePrice;
+        if (l.country === 'USA') {
+          basePrice = secureConnectPlan.priceUSA;
+        } else if (l.country === 'Canada') {
+          basePrice = secureConnectPlan.priceCanada;
+        } else {
+          basePrice = 10; // valor por defecto
+        }
+        
+        let totalPrice = getTotalPriceForPeriod(basePrice, currentPeriod);
+        
+        return `
+        <div class="location-section">
+          <div class="location-header">
+            <div class="location-flag">${l.flag}</div>
+            <div class="location-title">
+              <h2><i class="fas fa-map-pin" style="color:${l.color};"></i> ${l.displayName}</h2>
+              <p><i class="fas fa-info-circle"></i> ${l.description} • Ping: ${l.ping}ms</p>
             </div>
-            <div class="plan-features">
-              <!-- Eliminadas las características de usuarios, ahora solo: -->
-              <div class="feature-item"><i class="fas fa-map-pin"></i><div><div>Ubicación</div><small>${l.displayName}</small></div></div>
-              <div class="feature-item"><i class="fas fa-calendar-alt"></i><div><div>Período</div><small>${periodText}</small></div></div>
-              <div class="feature-item"><i class="fas fa-shield-virus"></i><div><div>Protección</div><small>Anti-DDoS Enterprise</small></div></div>
-              <div class="feature-item"><i class="fas fa-cloud"></i><div><div>Infraestructura</div><small>${l.host}</small></div></div>
+            <div class="location-host">
+              <i class="fas fa-cloud"></i> ${l.host}
             </div>
-            ${!l.comingSoon?`<a href="${DISCORD_LINK}" target="_blank" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR</a>`:'<button class="plan-button" disabled><i class="fas fa-clock"></i> PRÓXIMAMENTE</button>'}
-          </div>`}).join('')}</div>`).join('');
+          </div>
+          <div class="plans-grid-location">
+            <div class="plan-card connect">
+              <div class="plan-header">
+                <div class="plan-name"><i class="fas ${secureConnectPlan.icon}"></i> ${secureConnectPlan.name}</div>
+                <div class="plan-price price-${currentPeriod}">$${totalPrice}</div>
+                <div style="color:var(--muted); font-size:14px; margin-top:5px;">${periodText}</div>
+              </div>
+              <div class="plan-features">
+                <div class="feature-item"><i class="fas fa-map-pin"></i><div><div>Ubicación</div><small>${l.displayName} (${l.ping}ms)</small></div></div>
+                <div class="feature-item"><i class="fas fa-calendar-alt"></i><div><div>Período</div><small>${periodText}</small></div></div>
+                <div class="feature-item"><i class="fas fa-shield-virus"></i><div><div>Protección</div><small>Anti-DDoS Enterprise</small></div></div>
+                <div class="feature-item"><i class="fas fa-cloud"></i><div><div>Infraestructura</div><small>${l.host}</small></div></div>
+              </div>
+              ${!l.comingSoon?`<a href="${DISCORD_LINK}" target="_blank" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR</a>`:'<button class="plan-button" disabled><i class="fas fa-clock"></i> PRÓXIMAMENTE</button>'}
+            </div>
+          </div>
+        </div>`}).join('');
     }
 
     function copyUsername(username){
