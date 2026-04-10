@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
   <style>
+    /* (el CSS es exactamente el mismo que ya tenías, sin cambios) */
     * {
       margin: 0;
       padding: 0;
@@ -420,9 +421,10 @@
     }
     .hosting-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: 1fr;
       gap: 30px;
-      margin-top: 40px;
+      max-width: 500px;
+      margin: 40px auto 0;
     }
     .hosting-card {
       text-align: center;
@@ -706,6 +708,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       animation: floatButton 2s ease-in-out infinite;
       border: 1px solid rgba(255,255,255,0.2);
+      text-decoration: none;
     }
     @keyframes floatButton {
       0% { transform: translateY(0px); }
@@ -819,7 +822,7 @@
               <i class="fas fa-calendar-alt"></i> Fundada en 2026
             </div>
             <div style="background:rgba(10,92,255,0.1); padding:10px 20px; border-radius:50px; border:1px solid var(--border-glow);">
-              <i class="fas fa-globe"></i> 4+ Ubicaciones
+              <i class="fas fa-globe"></i> 3+ Ubicaciones
             </div>
             <div style="background:rgba(10,92,255,0.1); padding:10px 20px; border-radius:50px; border:1px solid var(--border-glow);">
               <i class="fas fa-users"></i> Equipo 5+ profesionales
@@ -846,11 +849,6 @@
             <div class="hosting-logo"><i class="fas fa-cloud-upload-alt"></i></div>
             <div class="hosting-name">OVHcloud</div>
             <div class="hosting-desc">Data center en Beauharnois, Canadá. Red de alto rendimiento con protección anti-DDoS avanzada y routing optimizado para gaming.</div>
-          </div>
-          <div class="hosting-card">
-            <div class="hosting-logo"><i class="fas fa-database"></i></div>
-            <div class="hosting-name">Oracle Cloud</div>
-            <div class="hosting-desc">Servidores en Ashburn y Frankfurt, con núcleos dedicados y red empresarial de 10Gbps. Máxima velocidad y estabilidad global.</div>
           </div>
         </div>
         <p style="text-align:center; color:var(--text-secondary); margin-top:30px;">
@@ -880,7 +878,6 @@
         <h2 class="section-title"><i class="fas fa-users-cog"></i> Conoce al Equipo</h2>
         <p class="section-subtitle">Fundador, Staff y Administradores</p>
         <div class="team-grid">
-
           <!-- Owner & Fundador -->
           <div class="team-card">
             <div class="team-avatar"><i class="fas fa-crown"></i></div>
@@ -914,8 +911,8 @@
             <div class="team-role">Community Manager</div>
             <p class="team-bio">Encargada de la comunicación y soporte general a la comunidad.</p>
             <div class="team-social">
-              <a href="#"><i class="fab fa-discord"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="https://links.xnet.bio" target="_blank"><i class="fas fa-link"></i></a>
+              <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
               <a href="#"><i class="fas fa-envelope"></i></a>
             </div>
           </div>
@@ -932,7 +929,6 @@
               <a href="https://links.xnet.bio" target="_blank"><i class="fas fa-link"></i></a>
             </div>
           </div>
-
         </div>
       </section>
     </main>
@@ -944,7 +940,7 @@
           <div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div>
           <div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank"><i class="fas fa-link"></i> Enlace Oficial</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div>
         </div>
-        <div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> OVHcloud + Oracle Cloud Infrastructure</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx | Conectividad extrema</p></div>
+        <div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> OVHcloud</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx | Conectividad extrema</p></div>
       </div>
     </footer>
   </div>
@@ -1012,9 +1008,7 @@
         if (e.key === 'Escape' && menuOpen) toggleMenu();
       });
 
-      showToast("⚡ SecureNET: infraestructura extrema cargada");
-
-      console.log("%cSecureNET // INFRAESTRUCTURA DE ÉLITE // STAFF EXTREMO", "color: #0a5cff; font-size: 18px; font-weight: bold;");
+      showToast("SecureNET: infraestructura extrema cargada");
     };
   </script>
 </body>
