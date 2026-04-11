@@ -687,6 +687,11 @@
       container.innerHTML = locationsData.map(loc => {
         const totalPrice = getPriceForPeriod(loc.basePrice, currentPeriod);
         const isOVH = loc.host === 'OVHcloud';
+        // Enlace específico para Canadá (Beauharnois), los demás usan el enlace por defecto de Francia/global
+        const purchaseLink = (loc.city === 'BEAUHARNOIS' || loc.flagCode === 'ca') 
+          ? 'https://xnet.bio/shop/cavpn' 
+          : 'https://xnet.bio/shop/frvpn';
+        
         return `
           <div class="location-comparison-card">
             <div class="location-header">
@@ -708,7 +713,7 @@
               <div class="feature-item"><i class="fas fa-shield-virus"></i><span class="feature-text">Protección</span><span class="feature-value">${loc.protection}</span></div>
             </div>
             ${isOVH && loc.protectionNote ? `<div class="ovh-protection"><i class="fas fa-star"></i><span><strong>OVHcloud Premium:</strong> ${loc.protectionNote}</span></div>` : ''}
-            <a href="https://xnet.bio/shop/frvpn" target="_blank" class="plan-action-btn"><i class="fas fa-shopping-cart"></i> COMPRAR SECURE CONNECT</a>
+            <a href="${purchaseLink}" target="_blank" class="plan-action-btn"><i class="fas fa-shopping-cart"></i> COMPRAR SECURE CONNECT</a>
           </div>
         `;
       }).join('');
