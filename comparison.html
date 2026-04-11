@@ -18,7 +18,6 @@
       padding: 0;
       box-sizing: border-box;
     }
-
     :root {
       --bg-dark: #0a0e1a;
       --bg-card: #0f1422e6;
@@ -32,7 +31,6 @@
       --transition: all 0.25s cubic-bezier(0.2, 0.95, 0.4, 1.05);
       --glass-bg: rgba(15, 20, 34, 0.75);
     }
-
     [data-theme="light"] {
       --bg-dark: #f1f5f9;
       --bg-card: #ffffff;
@@ -45,7 +43,6 @@
       --shadow-card: 0 12px 28px rgba(0, 0, 0, 0.08);
       --glass-bg: rgba(255, 255, 255, 0.85);
     }
-
     [data-theme="professional"] {
       --bg-dark: #0f172a;
       --bg-card: #1e293bc9;
@@ -58,7 +55,6 @@
       --shadow-card: 0 20px 35px -10px rgba(0, 0, 0, 0.5);
       --glass-bg: rgba(30, 41, 59, 0.8);
     }
-
     [data-contrast="high"] {
       --bg-dark: #000000;
       --bg-card: #000000;
@@ -70,7 +66,6 @@
       --accent-soft: #ffff66;
       --glass-bg: #000000;
     }
-
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg-dark);
@@ -79,8 +74,6 @@
       transition: background 0.2s ease, color 0.2s;
       overflow-x: hidden;
     }
-
-    /* fondo de cuadrícula animada */
     body::before {
       content: '';
       position: fixed;
@@ -93,13 +86,11 @@
       z-index: -2;
       animation: driftGrid 25s linear infinite;
     }
-
     @keyframes driftGrid {
       0% { background-position: 0 0; }
       100% { background-position: 48px 48px; }
     }
 
-    /* header + navegación */
     .main-header {
       position: sticky;
       top: 0;
@@ -109,7 +100,6 @@
       border-bottom: 1px solid var(--card-border);
       padding: 0.9rem 2rem;
     }
-
     .menu-container {
       max-width: 1400px;
       margin: 0 auto;
@@ -117,21 +107,16 @@
       justify-content: space-between;
       align-items: center;
     }
-
     .logo {
       display: flex;
       align-items: center;
       gap: 12px;
     }
-
     .logo img {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: var(--accent-strong);
-      object-fit: cover;
+      height: 46px;
+      width: auto;
+      filter: drop-shadow(0 0 6px var(--accent-strong));
     }
-
     .logo-text h1 {
       font-size: 1.6rem;
       font-weight: 700;
@@ -141,7 +126,6 @@
       color: transparent;
       letter-spacing: -0.3px;
     }
-
     .logo-text span {
       font-size: 0.75rem;
       color: var(--text-secondary);
@@ -156,7 +140,6 @@
       cursor: pointer;
       z-index: 120;
     }
-
     .hamburger span {
       width: 100%;
       height: 3px;
@@ -164,16 +147,10 @@
       border-radius: 6px;
       transition: 0.25s;
     }
-
-    .hamburger.active span:nth-child(1) {
-      transform: translateY(10px) rotate(45deg);
-    }
+    .hamburger.active span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
     .hamburger.active span:nth-child(2) { opacity: 0; }
-    .hamburger.active span:nth-child(3) {
-      transform: translateY(-10px) rotate(-45deg);
-    }
+    .hamburger.active span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
 
-    /* menu lateral */
     .menu-overlay {
       position: fixed;
       inset: 0;
@@ -188,29 +165,25 @@
       opacity: 1;
       visibility: visible;
     }
-
     .dashboard-menu {
       position: fixed;
       top: 0;
-      left: 0;
-      width: min(300px, 80%);
+      right: -320px;
+      width: 280px;
       height: 100vh;
       background: var(--bg-card);
       backdrop-filter: blur(20px);
-      border-right: 1px solid var(--accent-strong);
+      border-left: 1px solid var(--accent-strong);
       z-index: 201;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
+      transition: right 0.3s ease;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      box-shadow: 4px 0 30px rgba(0, 0, 0, 0.4);
+      box-shadow: -4px 0 30px rgba(0, 0, 0, 0.4);
     }
-
     .dashboard-menu.open {
-      transform: translateX(0);
+      right: 0;
     }
-
     .dashboard-header {
       font-size: 1.3rem;
       font-weight: 700;
@@ -218,12 +191,10 @@
       border-bottom: 1px solid var(--card-border);
       color: var(--accent-strong);
     }
-
     .dashboard-items {
       flex: 1;
       padding: 1rem 0;
     }
-
     .dashboard-item {
       display: flex;
       align-items: center;
@@ -235,26 +206,22 @@
       transition: 0.2s;
       border-left: 3px solid transparent;
     }
-
     .dashboard-item i { width: 24px; color: var(--accent-soft); }
     .dashboard-item:hover, .dashboard-item.active {
       background: rgba(10, 92, 255, 0.15);
       border-left-color: var(--accent-strong);
       color: var(--accent-strong);
     }
-
     .dashboard-footer {
       padding: 1.5rem;
       border-top: 1px solid var(--card-border);
     }
-
     .theme-selector-dashboard {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 16px;
     }
-
     .theme-btn-dashboard, .contrast-btn {
       background: rgba(255,255,255,0.08);
       border: none;
@@ -266,19 +233,16 @@
       cursor: pointer;
       transition: 0.2s;
     }
-
     .theme-btn-dashboard.active, .contrast-btn.active {
       background: var(--accent-strong);
       color: white;
     }
 
-    /* main container */
     .container {
       max-width: 1300px;
       margin: 0 auto;
       padding: 2rem 1.8rem 3rem;
     }
-
     .section-title {
       font-size: 2rem;
       font-weight: 700;
@@ -288,7 +252,6 @@
       color: transparent;
       margin-bottom: 0.5rem;
     }
-
     .section-subtitle {
       color: var(--text-secondary);
       margin-bottom: 2rem;
@@ -302,7 +265,6 @@
       gap: 1rem;
       margin: 1.5rem 0;
     }
-
     .payment-badge {
       background: var(--bg-card);
       padding: 6px 14px;
@@ -311,7 +273,6 @@
       font-weight: 500;
       border: 1px solid var(--card-border);
     }
-
     .period-selector {
       display: flex;
       flex-wrap: wrap;
@@ -319,7 +280,6 @@
       gap: 12px;
       margin: 30px 0 40px;
     }
-
     .period-btn {
       background: transparent;
       border: 1.5px solid var(--card-border);
@@ -331,7 +291,6 @@
       transition: 0.2s;
       font-size: 0.9rem;
     }
-
     .period-btn.active {
       background: var(--accent-strong);
       border-color: var(--accent-strong);
@@ -339,14 +298,12 @@
       box-shadow: 0 4px 12px rgba(10,92,255,0.3);
     }
 
-    /* Grid de tarjetas */
     .locations-comparison-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 2rem;
       margin: 1rem 0;
     }
-
     .location-comparison-card {
       background: var(--bg-card);
       backdrop-filter: blur(4px);
@@ -356,102 +313,24 @@
       transition: var(--transition);
       box-shadow: var(--shadow-card);
     }
-
     .location-comparison-card:hover {
       transform: translateY(-6px);
       border-color: var(--accent-strong);
     }
-
-    .location-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .flag-icon {
-      font-size: 48px;
-      border-radius: 12px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
-    }
-
-    .location-name h3 {
-      font-size: 1.7rem;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .host-badge {
-      display: inline-block;
-      background: rgba(10,92,255,0.15);
-      padding: 4px 10px;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      margin-top: 6px;
-    }
-
-    .price-tag {
-      background: linear-gradient(135deg, rgba(10,92,255,0.2), transparent);
-      border-radius: 28px;
-      padding: 0.8rem;
-      text-align: center;
-      margin: 1rem 0;
-    }
-
-    .price-number {
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-
-    .price-number .currency {
-      font-size: 1.4rem;
-      vertical-align: super;
-    }
-
-    .price-period {
-      color: var(--text-secondary);
-      font-size: 0.8rem;
-    }
-
-    .feature-list {
-      margin: 1.5rem 0;
-    }
-
-    .feature-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.6rem 0;
-      border-bottom: 1px dashed var(--card-border);
-      font-size: 0.9rem;
-    }
-
-    .feature-text {
-      font-weight: 500;
-    }
-
-    .feature-value {
-      font-weight: 600;
-      color: var(--accent-soft);
-    }
-
-    .ovh-protection {
-      margin-top: 14px;
-      background: rgba(0,200,150,0.1);
-      padding: 10px 12px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .ovh-protection i {
-      color: #00c896;
-    }
-
+    .location-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .flag-icon { font-size: 48px; border-radius: 12px; box-shadow: 0 6px 14px rgba(0,0,0,0.2); }
+    .location-name h3 { font-size: 1.7rem; font-weight: 800; margin-bottom: 4px; }
+    .host-badge { display: inline-block; background: rgba(10,92,255,0.15); padding: 4px 10px; border-radius: 30px; font-size: 0.7rem; font-weight: 600; margin-top: 6px; }
+    .price-tag { background: linear-gradient(135deg, rgba(10,92,255,0.2), transparent); border-radius: 28px; padding: 0.8rem; text-align: center; margin: 1rem 0; }
+    .price-number { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
+    .price-number .currency { font-size: 1.4rem; vertical-align: super; }
+    .price-period { color: var(--text-secondary); font-size: 0.8rem; }
+    .feature-list { margin: 1.5rem 0; }
+    .feature-item { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px dashed var(--card-border); font-size: 0.9rem; }
+    .feature-text { font-weight: 500; }
+    .feature-value { font-weight: 600; color: var(--accent-soft); }
+    .ovh-protection { margin-top: 14px; background: rgba(0,200,150,0.1); padding: 10px 12px; border-radius: 20px; font-size: 0.8rem; display: flex; gap: 8px; align-items: center; }
+    .ovh-protection i { color: #00c896; }
     .plan-action-btn {
       display: flex;
       align-items: center;
@@ -465,23 +344,19 @@
       text-decoration: none;
       transition: 0.2s;
       margin-top: 18px;
-      border: none;
       cursor: pointer;
     }
-
     .plan-action-btn:hover {
       background: var(--accent-dark);
       transform: scale(0.98);
     }
 
-    /* footer */
     .main-footer {
       background: var(--glass-bg);
       border-top: 1px solid var(--card-border);
       padding: 2rem 1rem 1rem;
       margin-top: 3rem;
     }
-
     .footer-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -489,30 +364,15 @@
       max-width: 1300px;
       margin: 0 auto;
     }
-
-    .footer-col h4 {
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
-
-    .footer-col ul {
-      list-style: none;
-    }
-
-    .footer-col li {
-      margin: 0.6rem 0;
-    }
-
+    .footer-col h4 { margin-bottom: 1rem; font-size: 1.1rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin: 0.6rem 0; }
     .footer-col a {
       color: var(--text-secondary);
       text-decoration: none;
       transition: 0.2s;
     }
-
-    .footer-col a:hover {
-      color: var(--accent-strong);
-    }
-
+    .footer-col a:hover { color: var(--accent-strong); }
     .footer-bottom {
       text-align: center;
       margin-top: 2rem;
@@ -521,7 +381,6 @@
       font-size: 0.8rem;
       color: var(--text-secondary);
     }
-
     .floating-link {
       position: fixed;
       bottom: 24px;
@@ -540,11 +399,7 @@
       z-index: 99;
       text-decoration: none;
     }
-
-    .floating-link:hover {
-      transform: scale(1.08);
-      background: var(--accent-dark);
-    }
+    .floating-link:hover { transform: scale(1.08); background: var(--accent-dark); }
 
     .toast {
       position: fixed;
@@ -565,7 +420,6 @@
       opacity: 0;
       pointer-events: none;
     }
-
     .toast.show {
       transform: translateX(-50%) translateY(0);
       opacity: 1;
@@ -578,37 +432,42 @@
     }
   </style>
 </head>
-<body>
+<body data-theme="dark">
+
   <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span></span></div>
 
   <div class="app">
     <header class="main-header">
       <div class="menu-container">
         <div class="logo">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a5cff'/%3E%3Ctext x='50%25' y='50%25' font-size='48' fill='white' text-anchor='middle' dy='.3em'%3ESN%3C/text%3E%3C/svg%3E" alt="SecureNET">
-          <div class="logo-text"><h1>SecureNET</h1><span>VPN Solutions</span></div>
+          <img src="scnet.png" alt="SecureNET Logo" onerror="this.src='https://placehold.co/46x46?text=SN'">
+          <div class="logo-text">
+            <h1>SecureNET</h1>
+            <span>VPN Solutions</span>
+          </div>
         </div>
         <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
       </div>
     </header>
 
     <div class="menu-overlay" id="menuOverlay"></div>
+
     <div class="dashboard-menu" id="dashboardMenu">
       <div class="dashboard-header"><i class="fas fa-bars"></i> MENÚ</div>
       <div class="dashboard-items">
-        <a href="#" class="dashboard-item"><i class="fas fa-home"></i> Inicio</a>
-        <a href="#" class="dashboard-item"><i class="fas fa-users"></i> Sobre Nosotros</a>
-        <a href="#" class="dashboard-item"><i class="fas fa-globe-americas"></i> Ubicaciones</a>
-        <a href="#" class="dashboard-item"><i class="fas fa-tags"></i> Planes VPN</a>
-        <a href="#" class="dashboard-item"><i class="fas fa-bullseye"></i> C2 Pricing</a>
-        <a href="#" class="dashboard-item"><i class="fas fa-map-marked-alt"></i> Mapa</a>
-        <a href="#" class="dashboard-item"><i class="fas fa-question-circle"></i> FAQ</a>
-        <a href="#" class="dashboard-item"><i class="fas fa-tools"></i> Herramientas</a>
-        <a href="#" class="dashboard-item"><i class="fas fa-share-alt"></i> Redes Sociales</a>
+        <a href="index.html" class="dashboard-item"><i class="fas fa-home"></i> Inicio</a>
+        <a href="about.html" class="dashboard-item"><i class="fas fa-users"></i> Sobre Nosotros</a>
+        <a href="locations.html" class="dashboard-item"><i class="fas fa-globe-americas"></i> Ubicaciones</a>
+        <a href="plans.html" class="dashboard-item"><i class="fas fa-tags"></i> Planes VPN</a>
+        <a href="C2Pricing.html" class="dashboard-item"><i class="fas fa-bullseye"></i> C2 Pricing</a>
+        <a href="map.html" class="dashboard-item"><i class="fas fa-map-marked-alt"></i> Mapa</a>
+        <a href="faq.html" class="dashboard-item"><i class="fas fa-question-circle"></i> FAQ</a>
+        <a href="tools.html" class="dashboard-item"><i class="fas fa-tools"></i> Herramientas</a>
+        <a href="social.html" class="dashboard-item"><i class="fas fa-share-alt"></i> Redes Sociales</a>
         <a href="comparison.html" class="dashboard-item active"><i class="fas fa-chart-bar"></i> Comparativa</a>
-        <a href="#" class="dashboard-item"><i class="fas fa-envelope"></i> Contacto</a>
-        <a href="#" class="dashboard-item"><i class="fas fa-lock"></i> Privacidad</a>
-        <a href="#" class="dashboard-item"><i class="fas fa-file-contract"></i> Términos</a>
+        <a href="contact.html" class="dashboard-item"><i class="fas fa-envelope"></i> Contacto</a>
+        <a href="privacy-policy.html" class="dashboard-item"><i class="fas fa-lock"></i> Privacidad</a>
+        <a href="terms.html" class="dashboard-item"><i class="fas fa-file-contract"></i> Términos</a>
       </div>
       <div class="dashboard-footer">
         <a href="https://links.xnet.bio" target="_blank" class="dashboard-item"><i class="fas fa-link"></i> Enlaces Oficiales</a>
@@ -624,6 +483,7 @@
     <main class="container">
       <h2 class="section-title"><i class="fas fa-chart-line"></i> Secure Connect</h2>
       <p class="section-subtitle">Comparativa de ubicaciones y precios · OVHcloud Enterprise</p>
+
       <div class="payment-methods">
         <span class="payment-badge"><i class="fab fa-paypal"></i> PayPal</span>
         <span class="payment-badge"><i class="fas fa-dollar-sign"></i> Cash App</span>
@@ -648,18 +508,19 @@
     <footer class="main-footer">
       <div class="container">
         <div class="footer-grid">
-          <div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="#">Inicio</a></li><li><a href="#">Sobre Nosotros</a></li><li><a href="#">Ubicaciones</a></li><li><a href="#">Planes VPN</a></li></ul></div>
-          <div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="#">Mapa</a></li><li><a href="#">FAQ</a></li><li><a href="#">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div>
-          <div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="#">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank"><i class="fas fa-link"></i> Enlace Oficial</a></li><li><a href="#">Contacto</a></li><li><a href="#">Privacidad</a></li><li><a href="#">Términos</a></li></ul></div>
+          <div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Sobre Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li></ul></div>
+          <div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div>
+          <div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank"><i class="fas fa-link"></i> Enlace Oficial</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div>
         </div>
         <div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> OVHcloud Global</p><p>Desarrollado por @xnetvpn & @xxiizx • <i class="fas fa-ban"></i> No reembolsos</p></div>
       </div>
     </footer>
   </div>
+
   <a href="https://links.xnet.bio" target="_blank" class="floating-link"><i class="fas fa-link"></i></a>
 
   <script>
-    // Datos de ubicaciones (Secure Connect)
+    // Datos de ubicaciones
     const locationsData = [
       { city: 'OREGON', flagCode: 'us', country: 'USA', host: 'OVHcloud', ping: '45ms', basePrice: 12.99, protection: 'Anti-DDoS Enterprise', color: '#0a5cff' },
       { city: 'FRANCIA', flagCode: 'fr', country: 'France', host: 'OVHcloud', ping: '80ms', basePrice: 12.99, protection: 'Anti-DDoS Enterprise', color: '#0a5cff' },
@@ -677,25 +538,23 @@
 
     function renderLocationCards() {
       const container = document.getElementById('locations-comparison-container');
-      if (!container) return;
       const periodText = {
         monthly: 'por mes',
         quarterly: 'cada 3 meses',
         semesterly: 'cada 6 meses',
         yearly: 'por 12 meses'
       };
+
       container.innerHTML = locationsData.map(loc => {
         const totalPrice = getPriceForPeriod(loc.basePrice, currentPeriod);
-        const isOVH = loc.host === 'OVHcloud';
-        // Enlace específico para Canadá (Beauharnois), los demás usan el enlace por defecto de Francia/global
-        const purchaseLink = (loc.city === 'BEAUHARNOIS' || loc.flagCode === 'ca') 
-          ? 'https://xnet.bio/shop/cavpn' 
+        const purchaseLink = (loc.city === 'BEAUHARNOIS' || loc.flagCode === 'ca')
+          ? 'https://xnet.bio/shop/cavpn'
           : 'https://xnet.bio/shop/frvpn';
-        
+
         return `
           <div class="location-comparison-card">
             <div class="location-header">
-              <span class="flag-icon fi fi-${loc.flagCode} fis" style="font-size: 52px;"></span>
+              <span class="flag-icon fi fi-${loc.flagCode} fis"></span>
               <div class="location-name">
                 <h3 style="color: ${loc.color};">${loc.city}</h3>
                 <p><i class="fas fa-clock"></i> Ping: ${loc.ping}</p>
@@ -707,12 +566,12 @@
               <div class="price-period">${periodText[currentPeriod]}</div>
             </div>
             <div class="feature-list">
-              <div class="feature-item"><i class="fas fa-map-pin"></i><span class="feature-text">Ubicación</span><span class="feature-value">${loc.city}</span></div>
-              <div class="feature-item"><i class="fas fa-flag"></i><span class="feature-text">País</span><span class="feature-value">${loc.country}</span></div>
-              <div class="feature-item"><i class="fas fa-tachometer-alt"></i><span class="feature-text">Latencia</span><span class="feature-value">${loc.ping}</span></div>
-              <div class="feature-item"><i class="fas fa-shield-virus"></i><span class="feature-text">Protección</span><span class="feature-value">${loc.protection}</span></div>
+              <div class="feature-item"><span class="feature-text">Ubicación</span><span class="feature-value">${loc.city}</span></div>
+              <div class="feature-item"><span class="feature-text">País</span><span class="feature-value">${loc.country}</span></div>
+              <div class="feature-item"><span class="feature-text">Latencia</span><span class="feature-value">${loc.ping}</span></div>
+              <div class="feature-item"><span class="feature-text">Protección</span><span class="feature-value">${loc.protection}</span></div>
             </div>
-            ${isOVH && loc.protectionNote ? `<div class="ovh-protection"><i class="fas fa-star"></i><span><strong>OVHcloud Premium:</strong> ${loc.protectionNote}</span></div>` : ''}
+            ${loc.protectionNote ? `<div class="ovh-protection"><i class="fas fa-star"></i><span><strong>OVHcloud Premium:</strong> ${loc.protectionNote}</span></div>` : ''}
             <a href="${purchaseLink}" target="_blank" class="plan-action-btn"><i class="fas fa-shopping-cart"></i> COMPRAR SECURE CONNECT</a>
           </div>
         `;
@@ -723,25 +582,15 @@
       currentPeriod = period;
       renderLocationCards();
       document.querySelectorAll('.period-btn').forEach(btn => {
-        if (btn.getAttribute('data-period') === period) btn.classList.add('active');
-        else btn.classList.remove('active');
+        btn.classList.toggle('active', btn.getAttribute('data-period') === period);
       });
     }
 
-    // gestión de temas + contraste alto
     function setTheme(theme) {
       document.body.setAttribute('data-theme', theme);
       localStorage.setItem('securenet-theme', theme);
-      // Si se cambia tema, desactivar contraste alto automáticamente
-      if (document.body.hasAttribute('data-contrast')) {
-        document.body.removeAttribute('data-contrast');
-        localStorage.setItem('securenet-highcontrast', 'false');
-        const contrastBtn = document.getElementById('highContrastBtn');
-        if (contrastBtn) contrastBtn.classList.remove('active');
-      }
       document.querySelectorAll('.theme-btn-dashboard').forEach(btn => {
-        if (btn.getAttribute('data-theme-val') === theme) btn.classList.add('active');
-        else btn.classList.remove('active');
+        btn.classList.toggle('active', btn.getAttribute('data-theme-val') === theme);
       });
     }
 
@@ -749,16 +598,13 @@
       const isHigh = document.body.getAttribute('data-contrast') === 'high';
       if (isHigh) {
         document.body.removeAttribute('data-contrast');
-        localStorage.setItem('securenet-highcontrast', 'false');
-        document.getElementById('highContrastBtn')?.classList.remove('active');
+        document.getElementById('highContrastBtn').classList.remove('active');
       } else {
         document.body.setAttribute('data-contrast', 'high');
-        localStorage.setItem('securenet-highcontrast', 'true');
-        document.getElementById('highContrastBtn')?.classList.add('active');
+        document.getElementById('highContrastBtn').classList.add('active');
       }
     }
 
-    // Menu hamburguesa
     let menuOpen = false;
     function toggleMenu() {
       const hamburger = document.getElementById('hamburger');
@@ -778,44 +624,28 @@
       setTimeout(() => toast.classList.remove('show'), 2600);
     }
 
-    // eventos
     document.addEventListener('DOMContentLoaded', () => {
-      // Cargar tema guardado
       const savedTheme = localStorage.getItem('securenet-theme') || 'dark';
       setTheme(savedTheme);
-      const savedHighContrast = localStorage.getItem('securenet-highcontrast') === 'true';
-      if (savedHighContrast) {
-        document.body.setAttribute('data-contrast', 'high');
-        document.getElementById('highContrastBtn')?.classList.add('active');
-      } else {
-        document.body.removeAttribute('data-contrast');
-      }
 
       renderLocationCards();
 
-      // period buttons
       document.querySelectorAll('.period-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const period = btn.getAttribute('data-period');
-          if (period) setPeriod(period);
-        });
+        btn.addEventListener('click', () => setPeriod(btn.getAttribute('data-period')));
       });
 
-      // theme buttons del menú
       document.querySelectorAll('.theme-btn-dashboard').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const themeVal = btn.getAttribute('data-theme-val');
-          if (themeVal) setTheme(themeVal);
-        });
+        btn.addEventListener('click', () => setTheme(btn.getAttribute('data-theme-val')));
       });
 
-      const contrastBtn = document.getElementById('highContrastBtn');
-      if (contrastBtn) contrastBtn.addEventListener('click', toggleHighContrast);
+      document.getElementById('highContrastBtn').addEventListener('click', toggleHighContrast);
 
-      // hamburguesa y overlay
-      document.getElementById('hamburger')?.addEventListener('click', toggleMenu);
-      document.getElementById('menuOverlay')?.addEventListener('click', toggleMenu);
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) toggleMenu(); });
+      document.getElementById('hamburger').addEventListener('click', toggleMenu);
+      document.getElementById('menuOverlay').addEventListener('click', toggleMenu);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menuOpen) toggleMenu();
+      });
 
       showToast("🔐 SecureNET - Comparativa de ubicaciones cargada");
     });
