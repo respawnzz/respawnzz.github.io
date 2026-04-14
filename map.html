@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Mapa de Servidores | SecureNET VPN</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Mapa interactivo de servidores SecureNET VPN - OVHcloud Global">
+  <meta name="description" content="Mapa interactivo de servidores SecureNET VPN - Akamai + OVHcloud Global">
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#0a0f1a" />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -13,7 +13,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    /* mismo CSS base (grid, header, temas) que en las otras páginas */
     *{margin:0;padding:0;box-sizing:border-box;}
     :root{--bg-dark:#0a0e1a;--bg-card:#0f1422;--border-glow:rgba(10,92,255,0.4);--text-primary:#ffffff;--text-secondary:#b0c4ff;--accent-strong:#0a5cff;--accent-dark:#004ecc;--accent-soft:#3a7cff;--shadow-card:0 20px 35px -10px rgba(0,0,0,0.4);--transition:all 0.3s cubic-bezier(0.2,0.95,0.4,1.05);}
     [data-theme="light"]{--bg-dark:#f4f7fc;--bg-card:#ffffff;--border-glow:rgba(10,92,255,0.25);--text-primary:#0a2540;--text-secondary:#2c3e66;--accent-strong:#0a5cff;--accent-dark:#004ecc;--accent-soft:#4c82ff;--shadow-card:0 10px 30px rgba(0,0,0,0.08);}
@@ -125,20 +124,28 @@
     <div class="header-spacer"></div>
     <main class="container">
       <div class="payment-banner"><span><i class="fas fa-credit-card"></i> Métodos de pago aceptados:</span><div class="payment-icons"><i class="fab fa-paypal"></i><i class="fas fa-dollar-sign"></i><i class="fab fa-apple-pay"></i><i class="fab fa-bitcoin"></i></div></div>
-      <div style="text-align:center;"><span class="hosting-badge"><i class="fas fa-cloud"></i> Infraestructura OVHcloud Global</span></div>
+      <div style="text-align:center;"><span class="hosting-badge"><i class="fas fa-cloud"></i> Infraestructura Akamai + OVHcloud Global</span></div>
       <div class="map-section">
         <h2 class="section-title" style="margin-bottom:10px;"><i class="fas fa-map-marked-alt"></i> Mapa de Servidores</h2>
         <p class="section-subtitle">Haz hover sobre los puntos para ver información</p>
         <div class="map-container">
           <div class="map-stars"></div>
-          <div class="server-point" style="left:18%; top:30%;"><div class="server-dot"></div><div class="server-tooltip"><div class="tooltip-header"><i class="fas fa-map-pin"></i> Oregon, USA</div><div class="tooltip-stats"><div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: 45ms</div><div class="tooltip-stat"><i class="fas fa-chart-line"></i> Carga: 32%</div><div class="tooltip-stat"><i class="fas fa-server"></i> Host: OVHcloud</div></div></div></div>
+          <!-- Los Ángeles (Akamai) - posición ajustada al suroeste de USA -->
+          <div class="server-point" style="left:14%; top:32%;"><div class="server-dot"></div><div class="server-tooltip"><div class="tooltip-header"><i class="fas fa-map-pin"></i> Los Ángeles, USA</div><div class="tooltip-stats"><div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: 38ms</div><div class="tooltip-stat"><i class="fas fa-chart-line"></i> Carga: 27%</div><div class="tooltip-stat"><i class="fas fa-server"></i> Host: Akamai</div></div></div></div>
+          <!-- Francia (OVHcloud) -->
           <div class="server-point" style="left:55%; top:25%;"><div class="server-dot"></div><div class="server-tooltip"><div class="tooltip-header"><i class="fas fa-map-pin"></i> Francia</div><div class="tooltip-stats"><div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: 80ms</div><div class="tooltip-stat"><i class="fas fa-chart-line"></i> Carga: 18%</div><div class="tooltip-stat"><i class="fas fa-server"></i> Host: OVHcloud</div></div></div></div>
-          <div class="server-point" style="left:30%; top:20%;"><div class="server-dot"></div><div class="server-tooltip"><div class="tooltip-header"><i class="fas fa-map-pin"></i> Beauharnois, Canadá</div><div class="tooltip-stats"><div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: 55ms</div><div class="tooltip-stat"><i class="fas fa-chart-line"></i> Carga: 22%</div><div class="tooltip-stat"><i class="fas fa-server"></i> Host: OVHcloud</div></div></div></div>
+          <!-- Beauharnois, Canadá (OVHcloud) -->
+          <div class="server-point" style="left:28%; top:20%;"><div class="server-dot"></div><div class="server-tooltip"><div class="tooltip-header"><i class="fas fa-map-pin"></i> Beauharnois, Canadá</div><div class="tooltip-stats"><div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: 55ms</div><div class="tooltip-stat"><i class="fas fa-chart-line"></i> Carga: 22%</div><div class="tooltip-stat"><i class="fas fa-server"></i> Host: OVHcloud</div></div></div></div>
         </div>
-        <div class="server-stats"><div class="server-stat-card"><i class="fas fa-server"></i><h4>3 Servidores</h4><p>OVHcloud</p></div><div class="server-stat-card"><i class="fas fa-tachometer-alt"></i><h4>60ms</h4><p>Latencia promedio</p></div><div class="server-stat-card"><i class="fas fa-globe"></i><h4>99.9%</h4><p>Uptime</p></div><div class="server-stat-card"><i class="fas fa-headset"></i><h4>24/7</h4><p>Soporte</p></div></div>
+        <div class="server-stats">
+          <div class="server-stat-card"><i class="fas fa-server"></i><h4>3 Servidores</h4><p>Akamai + OVHcloud</p></div>
+          <div class="server-stat-card"><i class="fas fa-tachometer-alt"></i><h4>57ms</h4><p>Latencia promedio</p></div>
+          <div class="server-stat-card"><i class="fas fa-globe"></i><h4>99.99%</h4><p>Uptime</p></div>
+          <div class="server-stat-card"><i class="fas fa-headset"></i><h4>24/7</h4><p>Soporte</p></div>
+        </div>
       </div>
     </main>
-    <footer class="main-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> OVHcloud Global</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div></div></footer>
+    <footer class="main-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> Akamai + OVHcloud Global</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div></div></footer>
   </div>
   <a href="https://links.xnet.bio" target="_blank" class="floating-contact"><i class="fas fa-link"></i></a>
   <script>
@@ -184,6 +191,7 @@
     window.onload = () => {
       const savedTheme = localStorage.getItem('securenet-theme') || 'dark';
       setTheme(savedTheme);
+      showToast("📍 Mapa de servidores actualizado: Los Ángeles (Akamai)");
     };
   </script>
 </body>
