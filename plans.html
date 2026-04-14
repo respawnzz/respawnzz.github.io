@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Planes | SecureNET VPN</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Planes SecureNET VPN - Secure Connect - OVHcloud Global">
+  <meta name="description" content="Planes SecureNET VPN - Secure Connect - Akamai + OVHcloud Global">
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#0a0f1a" />
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/css/flag-icons.min.css">
   <style>
-    /* (el CSS es exactamente el mismo que ya tenías, no se modifica) */
+    /* (CSS base original intacto, solo se añade estilo para status-led que faltaba) */
     *{margin:0;padding:0;box-sizing:border-box;}
     :root{--bg-dark:#0a0e1a;--bg-card:#0f1422;--border-glow:rgba(10,92,255,0.4);--text-primary:#ffffff;--text-secondary:#b0c4ff;--accent-strong:#0a5cff;--accent-dark:#004ecc;--accent-soft:#3a7cff;--shadow-card:0 20px 35px -10px rgba(0,0,0,0.4);--transition:all 0.3s cubic-bezier(0.2,0.95,0.4,1.05);}
     [data-theme="light"]{--bg-dark:#f4f7fc;--bg-card:#ffffff;--border-glow:rgba(10,92,255,0.25);--text-primary:#0a2540;--text-secondary:#2c3e66;--accent-strong:#0a5cff;--accent-dark:#004ecc;--accent-soft:#4c82ff;--shadow-card:0 10px 30px rgba(0,0,0,0.08);}
@@ -54,6 +54,9 @@
     @keyframes titleGlow{0%{opacity:0.95;text-shadow:0 0 0px transparent;}50%{opacity:1;text-shadow:0 0 8px var(--accent-soft);}100%{opacity:0.95;text-shadow:0 0 0px transparent;}}
     .section-subtitle{text-align:center;color:var(--text-secondary);font-size:18px;margin-bottom:40px;}
     .server-status-widget,.offer-banner,.payment-banner,.currency-selector{background:rgba(0,0,0,0.25);border:1px solid var(--border-glow);border-radius:60px;padding:12px 24px;margin:20px 0;display:flex;flex-wrap:wrap;justify-content:center;gap:30px;backdrop-filter:blur(4px);}
+    /* Corrección: estilo para el indicador LED de estado del servidor (faltaba) */
+    .status-led{display:inline-block;width:10px;height:10px;border-radius:50%;background-color:#2ecc71;box-shadow:0 0 4px #2ecc71;margin-right:8px;vertical-align:middle;}
+    .server-status-widget .status-item{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,0.3);padding:6px 14px;border-radius:40px;font-size:13px;color:var(--text-secondary);}
     .offer-banner{background:linear-gradient(95deg,var(--accent-dark),var(--accent-strong));border:none;justify-content:space-between;animation:pulseBg 2s infinite;}
     @keyframes pulseBg{0%{opacity:1;}50%{opacity:0.92;}100%{opacity:1;}}
     .offer-text{font-weight:700;display:flex;align-items:center;gap:10px;}
@@ -160,13 +163,13 @@
       <div class="server-status-widget" id="serverStatus"></div>
       <div class="currency-selector"><button class="currency-btn active" data-currency="usd">USD</button><button class="currency-btn" data-currency="eur">EUR</button><button class="currency-btn" data-currency="btc">BTC</button></div>
       <div class="payment-banner"><span><i class="fas fa-shield-alt"></i> Pago 100% seguro</span><div class="payment-icons"><i class="fab fa-paypal"></i><i class="fas fa-dollar-sign"></i><i class="fab fa-apple-pay"></i><i class="fab fa-bitcoin"></i><i class="fab fa-ethereum"></i></div></div>
-      <div style="text-align:center;"><span class="hosting-badge"><i class="fas fa-cloud-upload-alt"></i> Infraestructura OVHcloud Global</span></div>
+      <div style="text-align:center;"><span class="hosting-badge"><i class="fas fa-cloud-upload-alt"></i> Infraestructura Akamai + OVHcloud Global</span></div>
       <div class="period-selector"><button class="period-btn" data-period="monthly"><i class="fas fa-calendar-alt"></i> Mensual</button><button class="period-btn" data-period="quarterly"><i class="fas fa-calendar-plus"></i> Trimestral -10%</button><button class="period-btn" data-period="semesterly"><i class="fas fa-calendar-check"></i> Semestral -20%</button><button class="period-btn" data-period="yearly"><i class="fas fa-calendar-star"></i> Anual -30%</button></div>
       <div id="plans-container" class="plans-grid"></div>
       <div class="solutions-section"><h3><i class="fas fa-globe"></i> Secure Network Solutions</h3><p style="color: var(--text-secondary); max-width: 700px; margin: 0 auto;">Infraestructura de red de siguiente generación</p><div class="solutions-grid"><div class="solutions-card"><i class="fas fa-bolt"></i><h4>Ultra Velocidad</h4><p>Conectividad optimizada con enrutamiento inteligente</p></div><div class="solutions-card"><i class="fas fa-shield-alt"></i><h4>Seguridad Cuántica</h4><p>Cifrado de última generación para máxima privacidad</p></div><div class="solutions-card"><i class="fas fa-chart-line"></i><h4>99.99% Uptime</h4><p>Infraestructura redundante global</p></div></div></div>
       <div class="discount-note" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 20px 0;"><div class="discount-badge" style="background:rgba(0,0,0,0.2); padding:6px 18px; border-radius:40px;"><i class="fas fa-calendar-alt"></i> Mensual: precio regular</div><div class="discount-badge" style="background:rgba(0,0,0,0.2); padding:6px 18px; border-radius:40px;"><i class="fas fa-calendar-plus"></i> Trimestral: -10%</div><div class="discount-badge" style="background:rgba(0,0,0,0.2); padding:6px 18px; border-radius:40px;"><i class="fas fa-calendar-check"></i> Semestral: -20%</div><div class="discount-badge" style="background:rgba(0,0,0,0.2); padding:6px 18px; border-radius:40px;"><i class="fas fa-calendar-star"></i> Anual: -30%</div></div>
     </main>
-    <footer class="main-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> OVHcloud Global</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div></div></footer>
+    <footer class="main-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> Akamai + OVHcloud Global</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div></div></footer>
   </div>
   <a href="https://links.xnet.bio" target="_blank" class="floating-contact"><i class="fas fa-link"></i></a>
   <script>
@@ -176,8 +179,9 @@
     let currentCurrency = 'usd';
     let exchangeRates = { usd: 1, eur: 0.92, btc: 0.000015 };
     let highContrast = false;
+    // Ubicaciones actualizadas: Los Angeles (Akamai), Francia (OVHcloud), Canadá (OVHcloud)
     const locationsData = [
-      { id: 'oregon', name: 'OREGON', flagCode: 'us', ping: '45ms', host: 'OVHcloud' },
+      { id: 'losangeles', name: 'LOS ANGELES', flagCode: 'us', ping: '38ms', host: 'Akamai' },
       { id: 'france', name: 'FRANCIA', flagCode: 'fr', ping: '80ms', host: 'OVHcloud' },
       { id: 'canada', name: 'BEAUHARNOIS', flagCode: 'ca', ping: '55ms', host: 'OVHcloud' }
     ];
@@ -238,10 +242,11 @@
       });
     }
     function updateServerStatus() {
+      // Estado actualizado con Los Angeles (Akamai)
       const statuses = [
-        { name: 'Oregon', ping: 45, load: Math.floor(Math.random() * 40 + 20) },
-        { name: 'Francia', ping: 80, load: Math.floor(Math.random() * 30 + 10) },
-        { name: 'Canadá', ping: 55, load: Math.floor(Math.random() * 35 + 15) }
+        { name: 'Los Angeles (Akamai)', ping: 38, load: Math.floor(Math.random() * 35 + 15) },
+        { name: 'Francia (OVHcloud)', ping: 80, load: Math.floor(Math.random() * 30 + 10) },
+        { name: 'Canadá (OVHcloud)', ping: 55, load: Math.floor(Math.random() * 35 + 15) }
       ];
       const container = document.getElementById('serverStatus');
       if (container) {
@@ -292,7 +297,8 @@
       highContrast = !highContrast;
       if (highContrast) document.body.setAttribute('data-contrast', 'high');
       else document.body.removeAttribute('data-contrast');
-      document.getElementById('highContrastBtn').classList.toggle('active', highContrast);
+      const contrastBtn = document.getElementById('highContrastBtn');
+      if (contrastBtn) contrastBtn.classList.toggle('active', highContrast);
     }
     let menuOpen = false;
     function toggleMenu() {

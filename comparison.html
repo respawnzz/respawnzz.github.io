@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Comparativa de ubicaciones SecureNET VPN - Plan Secure Connect con OVHcloud">
+  <meta name="description" content="Comparativa de ubicaciones SecureNET VPN - Plan Secure Connect con Akamai + OVHcloud">
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#0a0f1a">
   <title>SecureNET VPN | Comparativa de ubicaciones</title>
@@ -482,7 +482,7 @@
 
     <main class="container">
       <h2 class="section-title"><i class="fas fa-chart-line"></i> Secure Connect</h2>
-      <p class="section-subtitle">Comparativa de ubicaciones y precios · OVHcloud Enterprise</p>
+      <p class="section-subtitle">Comparativa de ubicaciones y precios · Akamai + OVHcloud Enterprise</p>
 
       <div class="payment-methods">
         <span class="payment-badge"><i class="fab fa-paypal"></i> PayPal</span>
@@ -512,7 +512,7 @@
           <div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div>
           <div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank"><i class="fas fa-link"></i> Enlace Oficial</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div>
         </div>
-        <div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> OVHcloud Global</p><p>Desarrollado por @xnetvpn & @xxiizx • <i class="fas fa-ban"></i> No reembolsos</p></div>
+        <div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> Akamai + OVHcloud Global</p><p>Desarrollado por @xnetvpn & @xxiizx • <i class="fas fa-ban"></i> No reembolsos</p></div>
       </div>
     </footer>
   </div>
@@ -520,11 +520,11 @@
   <a href="https://links.xnet.bio" target="_blank" class="floating-link"><i class="fas fa-link"></i></a>
 
   <script>
-    // Datos de ubicaciones
+    // Datos de ubicaciones actualizados: Los Ángeles (Akamai), Francia (OVHcloud), Beauharnois (OVHcloud)
     const locationsData = [
-      { city: 'OREGON', flagCode: 'us', country: 'USA', host: 'OVHcloud', ping: '45ms', basePrice: 12.99, protection: 'Anti-DDoS Enterprise', color: '#0a5cff' },
-      { city: 'FRANCIA', flagCode: 'fr', country: 'France', host: 'OVHcloud', ping: '80ms', basePrice: 12.99, protection: 'Anti-DDoS Enterprise', color: '#0a5cff' },
-      { city: 'BEAUHARNOIS', flagCode: 'ca', country: 'Canadá', host: 'OVHcloud', ping: '55ms', basePrice: 12.99, protection: 'Anti-DDoS Avanzado', protectionNote: 'Protección premium + análisis en tiempo real', color: '#0a5cff' }
+      { city: 'LOS ÁNGELES', flagCode: 'us', country: 'USA', host: 'Akamai', ping: '38ms', basePrice: 12.99, protection: 'Anti-DDoS Enterprise', protectionNote: 'Red Akamai con enrutamiento inteligente + DDoS mitigación', color: '#0a5cff' },
+      { city: 'FRANCIA', flagCode: 'fr', country: 'France', host: 'OVHcloud', ping: '80ms', basePrice: 12.99, protection: 'Anti-DDoS Enterprise', protectionNote: 'Protección VAC de OVHcloud con análisis en tiempo real', color: '#0a5cff' },
+      { city: 'BEAUHARNOIS', flagCode: 'ca', country: 'Canadá', host: 'OVHcloud', ping: '55ms', basePrice: 12.99, protection: 'Anti-DDoS Avanzado', protectionNote: 'Centro de datos canadiense con redundancia total', color: '#0a5cff' }
     ];
 
     let currentPeriod = 'monthly';
@@ -547,9 +547,10 @@
 
       container.innerHTML = locationsData.map(loc => {
         const totalPrice = getPriceForPeriod(loc.basePrice, currentPeriod);
-        const purchaseLink = (loc.city === 'BEAUHARNOIS' || loc.flagCode === 'ca')
-          ? 'https://xnet.bio/shop/cavpn'
-          : 'https://xnet.bio/shop/frvpn';
+        // Enlaces por ubicación (mantenemos coherencia con planes anteriores)
+        let purchaseLink = 'https://xnet.bio/shop/frvpn';
+        if (loc.city === 'BEAUHARNOIS') purchaseLink = 'https://xnet.bio/shop/cavpn';
+        if (loc.city === 'LOS ÁNGELES') purchaseLink = 'https://xnet.bio/shop/frvpn'; // mismo link general
 
         return `
           <div class="location-comparison-card">
@@ -571,7 +572,7 @@
               <div class="feature-item"><span class="feature-text">Latencia</span><span class="feature-value">${loc.ping}</span></div>
               <div class="feature-item"><span class="feature-text">Protección</span><span class="feature-value">${loc.protection}</span></div>
             </div>
-            ${loc.protectionNote ? `<div class="ovh-protection"><i class="fas fa-star"></i><span><strong>OVHcloud Premium:</strong> ${loc.protectionNote}</span></div>` : ''}
+            ${loc.protectionNote ? `<div class="ovh-protection"><i class="fas fa-star"></i><span><strong>${loc.host} Edge:</strong> ${loc.protectionNote}</span></div>` : ''}
             <a href="${purchaseLink}" target="_blank" class="plan-action-btn"><i class="fas fa-shopping-cart"></i> COMPRAR SECURE CONNECT</a>
           </div>
         `;
@@ -627,7 +628,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       const savedTheme = localStorage.getItem('securenet-theme') || 'dark';
       setTheme(savedTheme);
-
       renderLocationCards();
 
       document.querySelectorAll('.period-btn').forEach(btn => {
@@ -639,15 +639,13 @@
       });
 
       document.getElementById('highContrastBtn').addEventListener('click', toggleHighContrast);
-
       document.getElementById('hamburger').addEventListener('click', toggleMenu);
       document.getElementById('menuOverlay').addEventListener('click', toggleMenu);
-
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && menuOpen) toggleMenu();
       });
 
-      showToast("🔐 SecureNET - Comparativa de ubicaciones cargada");
+      showToast("🔐 SecureNET - Comparativa con Akamai + OVHcloud cargada");
     });
   </script>
 </body>
