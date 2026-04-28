@@ -4,16 +4,22 @@
   <meta charset="UTF-8">
   <title>C2 Pricing | SecureNET</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Planes C2 - Axion Network - SecureNET">
+  <meta name="description" content="Planes C2 - Axion Network - SecureNET. Métodos de ataque avanzados y paneles de control.">
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#0a0f1a" />
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="C2 Pricing | SecureNET">
+  <meta property="og:description" content="Planes C2 con métodos exclusivos, add-ons y alta disponibilidad.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630?text=SecureNET+C2">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    /* CSS base (igual al original, solo añadimos estilos para modales de video) */
+    /* CSS base (igual al original, solo añadimos estilos para modales de video y mejoras de accesibilidad) */
     * {
       margin: 0;
       padding: 0;
@@ -68,6 +74,16 @@
       --accent-soft: #ffff33;
     }
 
+    [data-contrast="high"] .btn-primary,
+    [data-contrast="high"] .buy-button {
+      background: black;
+      border: 2px solid yellow;
+      color: yellow;
+    }
+    [data-contrast="high"] .buy-button:hover {
+      background: #222;
+    }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--bg-dark);
@@ -76,26 +92,35 @@
       overflow-x: hidden;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(var(--border-glow) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border-glow) 1px, transparent 1px);
-      background-size: 50px 50px;
-      opacity: 0.08;
-      pointer-events: none;
-      z-index: -1;
-      animation: gridMove 20s linear infinite;
-    }
-
-    @keyframes gridMove {
-      0% { background-position: 0 0; }
-      100% { background-position: 50px 50px; }
+    @media (prefers-reduced-motion: no-preference) {
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(var(--border-glow) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border-glow) 1px, transparent 1px);
+        background-size: 50px 50px;
+        opacity: 0.08;
+        pointer-events: none;
+        z-index: -1;
+        animation: gridMove 20s linear infinite;
+      }
+      @keyframes gridMove {
+        0% { background-position: 0 0; }
+        100% { background-position: 50px 50px; }
+      }
+      .floating-contact {
+        animation: floatButton 2s ease-in-out infinite;
+      }
+      @keyframes floatButton {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-5px); }
+        100% { transform: translateY(0px); }
+      }
     }
 
     /* Header y menú (igual) */
@@ -184,6 +209,7 @@
       border: 1px solid var(--border-glow); border-radius: 40px; cursor: pointer;
       display: flex; align-items: center; justify-content: center; gap: 6px;
       font-size: 12px; color: var(--text-secondary);
+      transition: 0.2s;
     }
     .theme-btn-dashboard.active, .contrast-btn.active { background: var(--accent-strong); color: white; border-color: transparent; }
 
@@ -192,7 +218,8 @@
       font-size: 42px; font-weight: 800; text-align: center;
       background: linear-gradient(135deg, var(--accent-strong), var(--accent-dark));
       -webkit-background-clip: text; background-clip: text; color: transparent;
-      margin: 30px 0 15px; animation: titleGlow 3s ease-in-out infinite;
+      margin: 30px 0 15px;
+      animation: titleGlow 3s ease-in-out infinite;
     }
     @keyframes titleGlow {
       0% { opacity: 0.95; text-shadow: 0 0 0px transparent; }
@@ -221,9 +248,9 @@
     .media-card:hover { transform: translateY(-5px); border-color: var(--accent-strong); }
     .media-card img, .media-card video {
       width: 100%; max-height: 200px; object-fit: cover; border-radius: 20px;
-      background: rgba(0,0,0,0.3); pointer-events: none; /* para que el click lo maneje la tarjeta */
+      background: rgba(0,0,0,0.3);
     }
-    .media-card video { pointer-events: none; } /* evita que los controles del video interfieran */
+    .media-card video { pointer-events: none; background: #000; } /* evita controles nativos */
     .media-card h4 { margin-top: 15px; color: var(--accent-strong); font-size: 18px; }
     .media-card p { color: var(--text-secondary); font-size: 14px; margin-top: 5px; }
 
@@ -317,6 +344,7 @@
       color: white; cursor: pointer; transition: var(--transition); width: 100%; margin-top: 8px;
     }
     .buy-button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(10,92,255,0.5); }
+    .buy-button:disabled { opacity: 0.6; cursor: not-allowed; }
 
     .addons-section {
       background: linear-gradient(135deg, rgba(10, 92, 255, 0.05), rgba(0, 78, 204, 0.08));
@@ -351,6 +379,7 @@
       background: var(--bg-card); border: 1px solid var(--accent-strong); border-radius: 50px;
       padding: 12px 24px; color: var(--text-primary); z-index: 1100; opacity: 0;
       transition: 0.3s; display: flex; align-items: center; gap: 10px;
+      white-space: nowrap;
     }
     .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     .floating-contact {
@@ -358,9 +387,8 @@
       width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center;
       justify-content: center; font-size: 28px; color: white; cursor: pointer;
       transition: 0.2s; z-index: 1001; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      animation: floatButton 2s ease-in-out infinite; text-decoration: none;
+      text-decoration: none;
     }
-    @keyframes floatButton { 0% { transform: translateY(0px); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0px); } }
     .floating-contact:hover { transform: scale(1.05); background: var(--accent-dark); }
     @media (max-width: 768px) {
       .menu-container { padding: 0 20px; }
@@ -369,6 +397,7 @@
       .plan-card { padding: 24px 20px; }
       .methods-table { font-size: 11px; }
       .media-card { max-width: 100%; }
+      .toast { white-space: normal; text-align: center; }
     }
   </style>
 </head>
@@ -378,7 +407,9 @@
     <header class="main-header">
       <div class="menu-container">
         <div class="logo"><img src="scnet.png" alt="SecureNET Logo" onerror="this.src='https://placehold.co/48x48?text=SN'"><div class="logo-text"><h1>SecureNET</h1><span>C2 Solutions</span></div></div>
-        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        <div class="hamburger" id="hamburger" aria-label="Menú de navegación" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </div>
       </div>
     </header>
     <div class="menu-overlay" id="menuOverlay"></div>
@@ -399,12 +430,12 @@
         <a href="terms.html" class="dashboard-item"><i class="fas fa-file-contract"></i> Términos</a>
       </div>
       <div class="dashboard-footer">
-        <a href="https://links.xnet.bio" target="_blank" class="dashboard-item"><i class="fas fa-link"></i> Enlaces Oficiales</a>
+        <a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer" class="dashboard-item"><i class="fas fa-link"></i> Enlaces Oficiales</a>
         <div class="theme-selector-dashboard">
-          <button class="theme-btn-dashboard" data-theme="dark" onclick="setTheme('dark')"><i class="fas fa-moon"></i> Oscuro</button>
-          <button class="theme-btn-dashboard" data-theme="light" onclick="setTheme('light')"><i class="fas fa-sun"></i> Claro</button>
-          <button class="theme-btn-dashboard" data-theme="professional" onclick="setTheme('professional')"><i class="fas fa-briefcase"></i> Pro</button>
-          <button class="contrast-btn" id="highContrastBtn" onclick="toggleHighContrast()"><i class="fas fa-adjust"></i> Contraste</button>
+          <button class="theme-btn-dashboard" data-theme="dark"><i class="fas fa-moon"></i> Oscuro</button>
+          <button class="theme-btn-dashboard" data-theme="light"><i class="fas fa-sun"></i> Claro</button>
+          <button class="theme-btn-dashboard" data-theme="professional"><i class="fas fa-briefcase"></i> Pro</button>
+          <button class="contrast-btn" id="highContrastBtn"><i class="fas fa-adjust"></i> Contraste</button>
         </div>
       </div>
     </div>
@@ -414,38 +445,38 @@
       <p class="section-subtitle">Elige tu plan de ataque y potencia tus operaciones</p>
       <div class="payment-banner">
         <span><i class="fas fa-shield-alt"></i> Métodos de pago aceptados</span>
-        <div class="payment-icons"><i class="fab fa-paypal"></i><i class="fas fa-dollar-sign"></i><i class="fab fa-apple-pay"></i><i class="fab fa-bitcoin"></i></div>
+        <div class="payment-icons"><i class="fab fa-paypal" title="PayPal"></i><i class="fas fa-dollar-sign" title="Tarjeta"></i><i class="fab fa-apple-pay" title="Apple Pay"></i><i class="fab fa-bitcoin" title="Bitcoin"></i></div>
       </div>
 
       <!-- Sección de imágenes y videos (2 imágenes + 3 videos) -->
       <div class="images-showcase">
         <!-- Imagen 1 -->
-        <div class="media-card" onclick="openImageModal('c2.png')">
+        <div class="media-card" data-media-type="image" data-src="c2.png">
           <img src="c2.png" alt="Panel C2" onerror="this.src='https://placehold.co/500x300?text=C2+Panel'">
           <h4><i class="fas fa-tachometer-alt"></i> Interfaz C2</h4>
           <p>Panel de control centralizado</p>
         </div>
         <!-- Imagen 2 -->
-        <div class="media-card" onclick="openImageModal('c2methods.png')">
+        <div class="media-card" data-media-type="image" data-src="c2methods.png">
           <img src="c2methods.png" alt="Métodos C2" onerror="this.src='https://placehold.co/500x300?text=Métodos+C2'">
           <h4><i class="fas fa-bolt"></i> Métodos Avanzados</h4>
           <p>Múltiples vectores de ataque</p>
         </div>
         <!-- Video 1 -->
-        <div class="media-card" onclick="openVideoModal('powerproof1.mp4')">
-          <video src="powerproof1.mp4" muted preload="metadata"></video>
+        <div class="media-card" data-media-type="video" data-src="powerproof1.mp4">
+          <video src="powerproof1.mp4" muted preload="metadata" poster="https://placehold.co/500x300?text=PowerProof+1"></video>
           <h4><i class="fas fa-play-circle"></i> PowerProof 1</h4>
           <p>Demostración de potencia</p>
         </div>
         <!-- Video 2 -->
-        <div class="media-card" onclick="openVideoModal('powerproof2.mp4')">
-          <video src="powerproof2.mp4" muted preload="metadata"></video>
+        <div class="media-card" data-media-type="video" data-src="powerproof2.mp4">
+          <video src="powerproof2.mp4" muted preload="metadata" poster="https://placehold.co/500x300?text=PowerProof+2"></video>
           <h4><i class="fas fa-play-circle"></i> PowerProof 2</h4>
           <p>Estrés test en vivo</p>
         </div>
         <!-- Video 3 -->
-        <div class="media-card" onclick="openVideoModal('powerproof3.mp4')">
-          <video src="powerproof3.mp4" muted preload="metadata"></video>
+        <div class="media-card" data-media-type="video" data-src="powerproof3.mp4">
+          <video src="powerproof3.mp4" muted preload="metadata" poster="https://placehold.co/500x300?text=PowerProof+3"></video>
           <h4><i class="fas fa-play-circle"></i> PowerProof 3</h4>
           <p>Métodos exclusivos</p>
         </div>
@@ -462,7 +493,7 @@
               <tr><th>MÉTODO</th><th>SLOTS</th><th>VIP</th><th>HABILITADO</th></tr>
             </thead>
             <tbody id="methods-tbody"></tbody>
-          </table>
+           </table>
         </div>
         <p style="margin-top: 15px; font-size: 13px; color: var(--text-secondary);"><i class="fas fa-info-circle"></i> Los métodos marcados como <span class="vip-true">VIP</span> solo están disponibles en planes OMEGA o con el add-on VIP.</p>
       </div>
@@ -474,22 +505,31 @@
       </div>
     </main>
 
-    <footer class="main-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 SecureNET • C2 Infrastructure • <i class="fas fa-bolt"></i> Alto rendimiento</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div></div></footer>
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div>
+          <div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li></ul></div>
+          <div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>© 2025 SecureNET • C2 Infrastructure • <i class="fas fa-bolt"></i> Alto rendimiento</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div>
+      </div>
+    </footer>
   </div>
-  <a href="https://links.xnet.bio" target="_blank" class="floating-contact"><i class="fas fa-link"></i></a>
+  <a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer" class="floating-contact"><i class="fas fa-link"></i></a>
 
   <!-- Modales -->
-  <div id="imageModal" class="modal" onclick="closeImageModal()">
-    <span class="close-modal" onclick="closeImageModal()">&times;</span>
+  <div id="imageModal" class="modal">
+    <span class="close-modal" id="closeImageModalBtn">&times;</span>
     <img class="modal-content-img" id="modalImage">
   </div>
-  <div id="videoModal" class="modal" onclick="closeVideoModal()">
-    <span class="close-modal" onclick="closeVideoModal()">&times;</span>
-    <video id="modalVideo" class="modal-content-video" controls autoplay></video>
+  <div id="videoModal" class="modal">
+    <span class="close-modal" id="closeVideoModalBtn">&times;</span>
+    <video id="modalVideo" class="modal-content-video" controls></video>
   </div>
 
   <script>
-    // Datos de los métodos (extraídos de la tabla ASCII proporcionada)
+    // ---------- DATOS (sin modificar precios ni nombres) ----------
     const methodsData = [
       { name: "UDP", slots: 8, vip: false, enabled: true },
       { name: "DNS", slots: 8, vip: false, enabled: true },
@@ -544,20 +584,6 @@
       { name: "HTTP-BYPASS", slots: 8, vip: true, enabled: true }
     ];
 
-    function renderMethodsTable() {
-      const tbody = document.getElementById('methods-tbody');
-      if (!tbody) return;
-      tbody.innerHTML = methodsData.map(m => `
-        <tr>
-          <td class="method-name">${m.name}</td>
-          <td>${m.slots}</td>
-          <td class="${m.vip ? 'vip-true' : 'vip-false'}">${m.vip ? '✅ Sí' : '❌ No'}</td>
-          <td class="enabled-true">✅ Sí</td>
-        </tr>
-      `).join('');
-    }
-
-    // Planes C2
     const c2Plans = [
       { name: 'BASIC', price: 30, concurrents: 1, time: 60, cooldown: 60, vip: false, vipMethods: false },
       { name: 'ESENSIAL', price: 55, concurrents: 2, time: 120, cooldown: 60, vip: false, vipMethods: false },
@@ -577,6 +603,20 @@
     ];
 
     const BEACONS_LINK = 'https://xnet.bio/shop/frvpn';
+
+    // ---------- Funciones de renderizado (sin cambios en datos) ----------
+    function renderMethodsTable() {
+      const tbody = document.getElementById('methods-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = methodsData.map(m => `
+        <tr>
+          <td class="method-name">${m.name}</td>
+          <td>${m.slots}</td>
+          <td class="${m.vip ? 'vip-true' : 'vip-false'}">${m.vip ? '✅ Sí' : '❌ No'}</td>
+          <td class="enabled-true">✅ Sí</td>
+        </tr>
+      `).join('');
+    }
 
     function renderPlans() {
       const container = document.getElementById('plans-container');
@@ -616,41 +656,46 @@
 
     function attachBuyEvents() {
       document.querySelectorAll('.buy-button').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const planName = btn.getAttribute('data-plan');
-          btn.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> Redirigiendo...`;
-          btn.disabled = true;
-          setTimeout(() => {
-            window.open(BEACONS_LINK, '_blank');
-            showToast(`Redirigiendo a pago para plan ${planName}`);
-            btn.innerHTML = `<i class="fas fa-shopping-cart"></i> Contratar ${planName}`;
-            btn.disabled = false;
-          }, 600);
-        });
+        btn.removeEventListener('click', buyHandler);
+        btn.addEventListener('click', buyHandler);
       });
     }
 
-    // Funciones para modales de imagen
-    function openImageModal(imgSrc) {
+    function buyHandler(e) {
+      const btn = e.currentTarget;
+      const planName = btn.getAttribute('data-plan');
+      btn.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> Redirigiendo...`;
+      btn.disabled = true;
+      setTimeout(() => {
+        window.open(BEACONS_LINK, '_blank', 'noopener,noreferrer');
+        showToast(`Redirigiendo a pago para plan ${planName}`);
+        btn.innerHTML = `<i class="fas fa-shopping-cart"></i> Contratar ${planName}`;
+        btn.disabled = false;
+      }, 600);
+    }
+
+    // ---------- Modales de imagen y video mejorados ----------
+    function openImageModal(src) {
       const modal = document.getElementById('imageModal');
       const modalImg = document.getElementById('modalImage');
       modal.style.display = 'flex';
-      modalImg.src = imgSrc;
-    }
-    function closeImageModal() {
-      document.getElementById('imageModal').style.display = 'none';
+      modalImg.src = src;
     }
 
-    // Funciones para modales de video
-    function openVideoModal(videoSrc) {
+    function closeImageModal() {
+      document.getElementById('imageModal').style.display = 'none';
+      document.getElementById('modalImage').src = '';
+    }
+
+    function openVideoModal(src) {
       const modal = document.getElementById('videoModal');
       const videoElem = document.getElementById('modalVideo');
       modal.style.display = 'flex';
-      videoElem.src = videoSrc;
+      videoElem.src = src;
       videoElem.load();
-      videoElem.play().catch(e => console.log("Autoplay bloqueado, el usuario debe hacer clic"));
+      videoElem.play().catch(e => console.log("Autoplay bloqueado, el usuario debe hacer clic en play"));
     }
+
     function closeVideoModal() {
       const videoElem = document.getElementById('modalVideo');
       videoElem.pause();
@@ -658,7 +703,23 @@
       document.getElementById('videoModal').style.display = 'none';
     }
 
-    // Temas y menú
+    // Cerrar modales al hacer clic fuera del contenido
+    document.getElementById('imageModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('imageModal')) closeImageModal();
+    });
+    document.getElementById('videoModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('videoModal')) closeVideoModal();
+    });
+    document.getElementById('closeImageModalBtn').addEventListener('click', closeImageModal);
+    document.getElementById('closeVideoModalBtn').addEventListener('click', closeVideoModal);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeImageModal();
+        closeVideoModal();
+      }
+    });
+
+    // ---------- Gestión de temas (sin onclick inline) ----------
     function setTheme(theme) {
       document.body.setAttribute('data-theme', theme);
       localStorage.setItem('securenet-theme', theme);
@@ -667,6 +728,7 @@
         if (btn.getAttribute('data-theme') === theme) btn.classList.add('active');
       });
     }
+
     function toggleHighContrast() {
       const btn = document.getElementById('highContrastBtn');
       const isHigh = document.body.getAttribute('data-contrast') === 'high';
@@ -678,6 +740,18 @@
         btn.classList.add('active');
       }
     }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('securenet-theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(prefersDark ? 'dark' : 'light');
+      }
+    }
+
+    // ---------- Menú hamburguesa con accesibilidad ----------
     let menuOpen = false;
     function toggleMenu() {
       const h = document.getElementById('hamburger');
@@ -688,31 +762,68 @@
       m.classList.toggle('open', menuOpen);
       o.classList.toggle('active', menuOpen);
       document.body.style.overflow = menuOpen ? 'hidden' : '';
+      h.setAttribute('aria-expanded', menuOpen);
     }
+
     function showToast(msg) {
       const toast = document.getElementById('toast');
       toast.querySelector('span').textContent = msg;
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2500);
+      setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
-    document.getElementById('hamburger').addEventListener('click', toggleMenu);
-    document.getElementById('menuOverlay').addEventListener('click', toggleMenu);
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) toggleMenu(); });
-    window.onload = () => {
-      const savedTheme = localStorage.getItem('securenet-theme') || 'dark';
-      setTheme(savedTheme);
+    // ---------- Año dinámico en footer ----------
+    function setFooterYear() {
+      const footerP = document.querySelector('.footer-bottom p:first-child');
+      if (footerP) {
+        const currentYear = new Date().getFullYear();
+        footerP.innerHTML = footerP.innerHTML.replace('2025', currentYear);
+      }
+    }
+
+    // ---------- Eventos de los media cards (imagen/video) ----------
+    function setupMediaCards() {
+      document.querySelectorAll('.media-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          // Evitar que si se hace clic en el video/imagen se duplique
+          e.stopPropagation();
+          const type = card.getAttribute('data-media-type');
+          const src = card.getAttribute('data-src');
+          if (type === 'image') {
+            openImageModal(src);
+          } else if (type === 'video') {
+            openVideoModal(src);
+          }
+        });
+      });
+    }
+
+    // ---------- Inicialización ----------
+    document.addEventListener('DOMContentLoaded', () => {
       renderPlans();
       renderAddons();
       renderMethodsTable();
-    };
-    // Exponer funciones globales para los onclick inline
-    window.openImageModal = openImageModal;
-    window.closeImageModal = closeImageModal;
-    window.openVideoModal = openVideoModal;
-    window.closeVideoModal = closeVideoModal;
-    window.setTheme = setTheme;
-    window.toggleHighContrast = toggleHighContrast;
+      setupMediaCards();
+      initTheme();
+      setFooterYear();
+      
+      // Eventos de menú y teclado
+      document.getElementById('hamburger').addEventListener('click', toggleMenu);
+      document.getElementById('menuOverlay').addEventListener('click', toggleMenu);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) toggleMenu(); });
+      
+      // Eventos de temas (sin onclick inline)
+      document.querySelectorAll('.theme-btn-dashboard').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const theme = btn.getAttribute('data-theme');
+          if (theme) setTheme(theme);
+        });
+      });
+      document.getElementById('highContrastBtn').addEventListener('click', toggleHighContrast);
+      
+      showToast("SecureNET C2 - Panel listo");
+    });
   </script>
 </body>
 </html>
