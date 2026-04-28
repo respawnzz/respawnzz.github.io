@@ -7,6 +7,11 @@
   <meta name="description" content="Mapa interactivo de servidores SecureNET VPN - Akamai + OVHcloud Global">
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#0a0f1a" />
+  <meta property="og:title" content="Mapa de Servidores | SecureNET VPN">
+  <meta property="og:description" content="Ubicaciones físicas de nuestros servidores: Los Ángeles (Akamai), Francia y Canadá (OVHcloud).">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630?text=SecureNET+Map">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,8 +24,12 @@
     [data-theme="professional"]{--bg-dark:#121826;--bg-card:#1a1f2e;--border-glow:rgba(0,200,150,0.3);--text-primary:#eef2ff;--text-secondary:#9aa8c5;--accent-strong:#00c896;--accent-dark:#00997a;--accent-soft:#2de0a8;--shadow-card:0 20px 35px -10px rgba(0,0,0,0.5);}
     [data-contrast="high"]{--bg-dark:#000000;--bg-card:#000000;--border-glow:#ffff00;--text-primary:#ffff00;--text-secondary:#ffffaa;--accent-strong:#ffff00;--accent-dark:#cccc00;--accent-soft:#ffff33;}
     body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-primary);min-height:100vh;overflow-x:hidden;}
-    body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(var(--border-glow) 1px, transparent 1px),linear-gradient(90deg, var(--border-glow) 1px, transparent 1px);background-size:50px 50px;opacity:0.08;pointer-events:none;z-index:-1;animation:gridMove 20s linear infinite;}
-    @keyframes gridMove{0%{background-position:0 0;}100%{background-position:50px 50px;}}
+    @media (prefers-reduced-motion: no-preference) {
+      body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(var(--border-glow) 1px, transparent 1px),linear-gradient(90deg, var(--border-glow) 1px, transparent 1px);background-size:50px 50px;opacity:0.08;pointer-events:none;z-index:-1;animation:gridMove 20s linear infinite;}
+      @keyframes gridMove{0%{background-position:0 0;}100%{background-position:50px 50px;}}
+      .floating-contact{animation:floatButton 2s ease-in-out infinite;}
+      @keyframes floatButton{0%{transform:translateY(0px);}50%{transform:translateY(-5px);}100%{transform:translateY(0px);}}
+    }
     .main-header{background:rgba(10,14,26,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-glow);position:fixed;top:0;left:0;right:0;z-index:1000;padding:12px 0;}
     .header-spacer{height:80px;}
     .menu-container{display:flex;align-items:center;justify-content:space-between;padding:0 30px;max-width:1400px;margin:0 auto;}
@@ -78,19 +87,18 @@
     .footer-bottom{text-align:center;padding-top:30px;border-top:1px solid var(--border-glow);color:var(--text-secondary);font-size:13px;}
     .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg-card);border:1px solid var(--accent-strong);border-radius:50px;padding:12px 24px;color:var(--text-primary);z-index:1100;opacity:0;transition:0.3s;display:flex;align-items:center;gap:10px;}
     .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-    .floating-contact{position:fixed;bottom:30px;right:30px;background:var(--accent-strong);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:white;cursor:pointer;transition:0.2s;z-index:1001;box-shadow:0 4px 12px rgba(0,0,0,0.3);animation:floatButton 2s ease-in-out infinite;text-decoration:none;}
-    @keyframes floatButton{0%{transform:translateY(0px);}50%{transform:translateY(-5px);}100%{transform:translateY(0px);}}
+    .floating-contact{position:fixed;bottom:30px;right:30px;background:var(--accent-strong);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:white;cursor:pointer;transition:0.2s;z-index:1001;box-shadow:0 4px 12px rgba(0,0,0,0.3);text-decoration:none;}
     .floating-contact:hover{transform:scale(1.05);background:var(--accent-dark);}
     @media (max-width:768px){.menu-container{padding:0 20px;}.map-container{height:300px;}}
   </style>
 </head>
 <body data-theme="dark">
-  <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span></span></div>
+  <div class="toast" id="toast" role="status"><i class="fas fa-check-circle"></i><span></span></div>
   <div class="app">
     <header class="main-header">
       <div class="menu-container">
         <div class="logo"><img src="scnet.png" alt="SecureNET Logo" onerror="this.src='https://placehold.co/48x48?text=SN'"><div class="logo-text"><h1>SecureNET</h1><span>VPN Solutions</span></div></div>
-        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        <div class="hamburger" id="hamburger" aria-label="Menú de navegación" aria-expanded="false"><span></span><span></span><span></span></div>
       </div>
     </header>
     <div class="menu-overlay" id="menuOverlay"></div>
@@ -112,25 +120,25 @@
         <a href="terms.html" class="dashboard-item"><i class="fas fa-file-contract"></i> Términos</a>
       </div>
       <div class="dashboard-footer">
-        <a href="https://links.xnet.bio" target="_blank" class="dashboard-item"><i class="fas fa-link"></i> Enlaces Oficiales</a>
+        <a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer" class="dashboard-item"><i class="fas fa-link"></i> Enlaces Oficiales</a>
         <div class="theme-selector-dashboard">
-          <button class="theme-btn-dashboard" data-theme="dark" onclick="setTheme('dark')"><i class="fas fa-moon"></i> Oscuro</button>
-          <button class="theme-btn-dashboard" data-theme="light" onclick="setTheme('light')"><i class="fas fa-sun"></i> Claro</button>
-          <button class="theme-btn-dashboard" data-theme="professional" onclick="setTheme('professional')"><i class="fas fa-briefcase"></i> Pro</button>
-          <button class="contrast-btn" id="highContrastBtn" onclick="toggleHighContrast()"><i class="fas fa-adjust"></i> Contraste</button>
+          <button class="theme-btn-dashboard" data-theme-val="dark"><i class="fas fa-moon"></i> Oscuro</button>
+          <button class="theme-btn-dashboard" data-theme-val="light"><i class="fas fa-sun"></i> Claro</button>
+          <button class="theme-btn-dashboard" data-theme-val="professional"><i class="fas fa-briefcase"></i> Pro</button>
+          <button class="contrast-btn" id="highContrastBtn"><i class="fas fa-adjust"></i> Contraste</button>
         </div>
       </div>
     </div>
     <div class="header-spacer"></div>
     <main class="container">
-      <div class="payment-banner"><span><i class="fas fa-credit-card"></i> Métodos de pago aceptados:</span><div class="payment-icons"><i class="fab fa-paypal"></i><i class="fas fa-dollar-sign"></i><i class="fab fa-apple-pay"></i><i class="fab fa-bitcoin"></i></div></div>
+      <div class="payment-banner"><span><i class="fas fa-credit-card"></i> Métodos de pago aceptados:</span><div class="payment-icons"><i class="fab fa-paypal" title="PayPal"></i><i class="fas fa-dollar-sign" title="Tarjeta"></i><i class="fab fa-apple-pay" title="Apple Pay"></i><i class="fab fa-bitcoin" title="Bitcoin"></i></div></div>
       <div style="text-align:center;"><span class="hosting-badge"><i class="fas fa-cloud"></i> Infraestructura Akamai + OVHcloud Global</span></div>
       <div class="map-section">
         <h2 class="section-title" style="margin-bottom:10px;"><i class="fas fa-map-marked-alt"></i> Mapa de Servidores</h2>
         <p class="section-subtitle">Haz hover sobre los puntos para ver información</p>
         <div class="map-container">
           <div class="map-stars"></div>
-          <!-- Los Ángeles (Akamai) - posición ajustada al suroeste de USA -->
+          <!-- Los Ángeles (Akamai) -->
           <div class="server-point" style="left:14%; top:32%;"><div class="server-dot"></div><div class="server-tooltip"><div class="tooltip-header"><i class="fas fa-map-pin"></i> Los Ángeles, USA</div><div class="tooltip-stats"><div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: 38ms</div><div class="tooltip-stat"><i class="fas fa-chart-line"></i> Carga: 27%</div><div class="tooltip-stat"><i class="fas fa-server"></i> Host: Akamai</div></div></div></div>
           <!-- Francia (OVHcloud) -->
           <div class="server-point" style="left:55%; top:25%;"><div class="server-dot"></div><div class="server-tooltip"><div class="tooltip-header"><i class="fas fa-map-pin"></i> Francia</div><div class="tooltip-stats"><div class="tooltip-stat"><i class="fas fa-signal"></i> Ping: 80ms</div><div class="tooltip-stat"><i class="fas fa-chart-line"></i> Carga: 18%</div><div class="tooltip-stat"><i class="fas fa-server"></i> Host: OVHcloud</div></div></div></div>
@@ -145,28 +153,37 @@
         </div>
       </div>
     </main>
-    <footer class="main-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> Akamai + OVHcloud Global</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div></div></footer>
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div>
+          <div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div>
+          <div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> Akamai + OVHcloud Global</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div>
+      </div>
+    </footer>
   </div>
-  <a href="https://links.xnet.bio" target="_blank" class="floating-contact"><i class="fas fa-link"></i></a>
+  <a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer" class="floating-contact"><i class="fas fa-link"></i></a>
   <script>
+    // Temas y menú (sin onclick inline)
     function setTheme(theme) {
       document.body.setAttribute('data-theme', theme);
       localStorage.setItem('securenet-theme', theme);
       document.querySelectorAll('.theme-btn-dashboard').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('data-theme') === theme) btn.classList.add('active');
+        btn.classList.toggle('active', btn.getAttribute('data-theme-val') === theme);
       });
+    }
+    function initTheme() {
+      const savedTheme = localStorage.getItem('securenet-theme');
+      if (savedTheme) setTheme(savedTheme);
+      else setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     }
     function toggleHighContrast() {
       const btn = document.getElementById('highContrastBtn');
       const isHigh = document.body.getAttribute('data-contrast') === 'high';
-      if (isHigh) {
-        document.body.removeAttribute('data-contrast');
-        btn.classList.remove('active');
-      } else {
-        document.body.setAttribute('data-contrast', 'high');
-        btn.classList.add('active');
-      }
+      document.body.setAttribute('data-contrast', isHigh ? 'normal' : 'high');
+      btn.classList.toggle('active', !isHigh);
     }
     let menuOpen = false;
     function toggleMenu() {
@@ -178,21 +195,30 @@
       m.classList.toggle('open', menuOpen);
       o.classList.toggle('active', menuOpen);
       document.body.style.overflow = menuOpen ? 'hidden' : '';
+      h.setAttribute('aria-expanded', menuOpen);
     }
     function showToast(msg) {
       const toast = document.getElementById('toast');
       toast.querySelector('span').textContent = msg;
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2500);
+      setTimeout(() => toast.classList.remove('show'), 2600);
     }
-    document.getElementById('hamburger').addEventListener('click', toggleMenu);
-    document.getElementById('menuOverlay').addEventListener('click', toggleMenu);
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) toggleMenu(); });
-    window.onload = () => {
-      const savedTheme = localStorage.getItem('securenet-theme') || 'dark';
-      setTheme(savedTheme);
-      showToast("📍 Mapa de servidores actualizado: Los Ángeles (Akamai)");
-    };
+    function setFooterYear() {
+      const footerP = document.querySelector('.footer-bottom p:first-child');
+      if (footerP) footerP.innerHTML = footerP.innerHTML.replace('2026', new Date().getFullYear());
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      setFooterYear();
+      document.getElementById('hamburger').addEventListener('click', toggleMenu);
+      document.getElementById('menuOverlay').addEventListener('click', toggleMenu);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) toggleMenu(); });
+      document.querySelectorAll('.theme-btn-dashboard').forEach(btn => {
+        btn.addEventListener('click', () => setTheme(btn.getAttribute('data-theme-val')));
+      });
+      document.getElementById('highContrastBtn').addEventListener('click', toggleHighContrast);
+      showToast("📍 Mapa de servidores actualizado con Akamai + OVHcloud");
+    });
   </script>
 </body>
 </html>

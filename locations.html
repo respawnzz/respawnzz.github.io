@@ -7,6 +7,11 @@
   <meta name="description" content="Servidores SecureNET VPN - Secure Connect en Akamai + OVHcloud Global">
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#0a0f1a" />
+  <meta property="og:title" content="Ubicaciones | SecureNET VPN">
+  <meta property="og:description" content="Elige tu servidor: Los Ángeles (Akamai), Francia o Canadá (OVHcloud). Precios desde $6.99/mes.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630?text=SecureNET+Locations">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,8 +25,12 @@
     [data-theme="professional"]{--bg-dark:#121826;--bg-card:#1a1f2e;--border-glow:rgba(0,200,150,0.3);--text-primary:#eef2ff;--text-secondary:#9aa8c5;--accent-strong:#00c896;--accent-dark:#00997a;--accent-soft:#2de0a8;--shadow-card:0 20px 35px -10px rgba(0,0,0,0.5);}
     [data-contrast="high"]{--bg-dark:#000000;--bg-card:#000000;--border-glow:#ffff00;--text-primary:#ffff00;--text-secondary:#ffffaa;--accent-strong:#ffff00;--accent-dark:#cccc00;--accent-soft:#ffff33;}
     body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-primary);min-height:100vh;overflow-x:hidden;}
-    body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(var(--border-glow) 1px, transparent 1px),linear-gradient(90deg, var(--border-glow) 1px, transparent 1px);background-size:50px 50px;opacity:0.08;pointer-events:none;z-index:-1;animation:gridMove 20s linear infinite;}
-    @keyframes gridMove{0%{background-position:0 0;}100%{background-position:50px 50px;}}
+    @media (prefers-reduced-motion: no-preference) {
+      body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(var(--border-glow) 1px, transparent 1px),linear-gradient(90deg, var(--border-glow) 1px, transparent 1px);background-size:50px 50px;opacity:0.08;pointer-events:none;z-index:-1;animation:gridMove 20s linear infinite;}
+      @keyframes gridMove{0%{background-position:0 0;}100%{background-position:50px 50px;}}
+      .floating-link{animation:floatButton 2s ease-in-out infinite;}
+      @keyframes floatButton{0%{transform:translateY(0px);}50%{transform:translateY(-5px);}100%{transform:translateY(0px);}}
+    }
     .main-header{background:rgba(10,14,26,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-glow);position:fixed;top:0;left:0;right:0;z-index:1000;padding:12px 0;}
     .header-spacer{height:80px;}
     .menu-container{display:flex;align-items:center;justify-content:space-between;padding:0 30px;max-width:1400px;margin:0 auto;}
@@ -87,7 +96,7 @@
     .feature-item i{width:22px;color:var(--accent-strong);}
     .plan-button{background:linear-gradient(95deg,var(--accent-dark),var(--accent-strong));border:none;padding:16px;border-radius:50px;font-weight:700;font-size:16px;color:white;cursor:pointer;transition:0.3s;text-align:center;text-decoration:none;display:block;}
     .plan-button:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(10,92,255,0.4);}
-    .selected-location-title{display:flex;align-items:center;gap:20px;margin-bottom:30px;padding:20px;background:rgba(16,42,67,0.5);border-radius:28px;}
+    .selected-location-title{display:flex;align-items:center;gap:20px;margin-bottom:30px;padding:20px;background:rgba(16,42,67,0.5);border-radius:28px;flex-wrap:wrap;}
     .back-button{background:transparent;border:1px solid var(--border-glow);color:var(--text-secondary);padding:10px 20px;border-radius:40px;cursor:pointer;transition:0.2s;display:flex;align-items:center;gap:8px;}
     .back-button:hover{background:rgba(10,92,255,0.1);color:var(--accent-strong);}
     .discount-note{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:40px 0;}
@@ -102,17 +111,16 @@
     .footer-bottom{text-align:center;padding-top:30px;border-top:1px solid var(--border-glow);color:var(--text-secondary);font-size:13px;}
     .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg-card);border:1px solid var(--accent-strong);border-radius:50px;padding:12px 24px;color:var(--text-primary);z-index:1100;opacity:0;transition:0.3s;display:flex;align-items:center;gap:10px;}
     .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-    .floating-link{position:fixed;bottom:30px;right:30px;background:var(--accent-strong);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:white;cursor:pointer;transition:0.2s;z-index:1001;box-shadow:0 4px 12px rgba(0,0,0,0.3);animation:floatButton 2s ease-in-out infinite;text-decoration:none;}
-    @keyframes floatButton{0%{transform:translateY(0px);}50%{transform:translateY(-5px);}100%{transform:translateY(0px);}}
+    .floating-link{position:fixed;bottom:30px;right:30px;background:var(--accent-strong);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:white;cursor:pointer;transition:0.2s;z-index:1001;box-shadow:0 4px 12px rgba(0,0,0,0.3);text-decoration:none;}
     .floating-link:hover{transform:scale(1.05);background:var(--accent-dark);}
     @media (max-width:768px){.menu-container{padding:0 20px;}.section-title{font-size:32px;}.period-selector{gap:5px;}.period-btn{padding:10px 15px;font-size:13px;}}
   </style>
 </head>
 <body data-theme="dark">
-  <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span></span></div>
+  <div class="toast" id="toast" role="status"><i class="fas fa-check-circle"></i><span></span></div>
   <div class="app">
     <header class="main-header">
-      <div class="menu-container"><div class="logo"><img src="scnet.png" alt="SecureNET Logo" onerror="this.src='https://placehold.co/48x48?text=SN'"><div class="logo-text"><h1>SecureNET</h1><span>VPN Solutions</span></div></div><div class="hamburger" id="hamburger"><span></span><span></span><span></span></div></div>
+      <div class="menu-container"><div class="logo"><img src="scnet.png" alt="SecureNET Logo" onerror="this.src='https://placehold.co/48x48?text=SN'"><div class="logo-text"><h1>SecureNET</h1><span>VPN Solutions</span></div></div><div class="hamburger" id="hamburger" aria-label="Menú de navegación" aria-expanded="false"><span></span><span></span><span></span></div></div>
     </header>
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="dashboard-menu" id="dashboardMenu">
@@ -133,12 +141,12 @@
         <a href="terms.html" class="dashboard-item"><i class="fas fa-file-contract"></i> Términos</a>
       </div>
       <div class="dashboard-footer">
-        <a href="https://links.xnet.bio" target="_blank" class="dashboard-item"><i class="fas fa-link"></i> Enlaces Oficiales</a>
+        <a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer" class="dashboard-item"><i class="fas fa-link"></i> Enlaces Oficiales</a>
         <div class="theme-selector-dashboard">
-          <button class="theme-btn-dashboard" data-theme="dark" onclick="setTheme('dark')"><i class="fas fa-moon"></i> Oscuro</button>
-          <button class="theme-btn-dashboard" data-theme="light" onclick="setTheme('light')"><i class="fas fa-sun"></i> Claro</button>
-          <button class="theme-btn-dashboard" data-theme="professional" onclick="setTheme('professional')"><i class="fas fa-briefcase"></i> Pro</button>
-          <button class="contrast-btn" id="highContrastBtn" onclick="toggleHighContrast()"><i class="fas fa-adjust"></i> Contraste</button>
+          <button class="theme-btn-dashboard" data-theme-val="dark"><i class="fas fa-moon"></i> Oscuro</button>
+          <button class="theme-btn-dashboard" data-theme-val="light"><i class="fas fa-sun"></i> Claro</button>
+          <button class="theme-btn-dashboard" data-theme-val="professional"><i class="fas fa-briefcase"></i> Pro</button>
+          <button class="contrast-btn" id="highContrastBtn"><i class="fas fa-adjust"></i> Contraste</button>
         </div>
       </div>
     </div>
@@ -146,67 +154,74 @@
     <main class="container">
       <h2 class="section-title"><i class="fas fa-globe-americas"></i> Nuestras Ubicaciones</h2>
       <p class="section-subtitle">Selecciona una ubicación para ver el plan Secure Connect</p>
-      <div class="payment-banner"><span><i class="fas fa-credit-card"></i> Métodos de pago:</span><div class="payment-icons"><i class="fab fa-paypal"></i><i class="fas fa-dollar-sign"></i><i class="fab fa-apple-pay"></i><i class="fab fa-bitcoin"></i></div></div>
+      <div class="payment-banner"><span><i class="fas fa-credit-card"></i> Métodos de pago:</span><div class="payment-icons"><i class="fab fa-paypal" title="PayPal"></i><i class="fas fa-dollar-sign" title="Tarjeta"></i><i class="fab fa-apple-pay" title="Apple Pay"></i><i class="fab fa-bitcoin" title="Bitcoin"></i></div></div>
       <div style="text-align:center;"><span class="hosting-badge"><i class="fas fa-cloud"></i> Infraestructura Akamai + OVHcloud Global</span></div>
       <div id="locations-grid" class="locations-grid"></div>
       <div id="selected-location-plans" style="display:none;">
-        <div class="selected-location-title"><button class="back-button" onclick="clearSelectedLocation()"><i class="fas fa-arrow-left"></i> Ver todas las ubicaciones</button><h3 id="selected-location-name" style="color:var(--accent-strong);"></h3></div>
-        <div class="period-selector"><button class="period-btn active" data-period="monthly"><i class="fas fa-calendar-alt"></i> Mensual</button><button class="period-btn" data-period="quarterly"><i class="fas fa-calendar-plus"></i> Trimestral -10%</button><button class="period-btn" data-period="semesterly"><i class="fas fa-calendar-check"></i> Semestral -20%</button><button class="period-btn" data-period="yearly"><i class="fas fa-calendar-star"></i> Anual -30%</button></div>
+        <div class="selected-location-title"><button class="back-button" id="backButton"><i class="fas fa-arrow-left"></i> Ver todas las ubicaciones</button><h3 id="selected-location-name" style="color:var(--accent-strong);"></h3></div>
+        <div class="period-selector">
+          <button class="period-btn active" data-period="monthly"><i class="fas fa-calendar-alt"></i> Mensual</button>
+          <button class="period-btn" data-period="quarterly"><i class="fas fa-calendar-plus"></i> Trimestral -10%</button>
+          <button class="period-btn" data-period="semesterly"><i class="fas fa-calendar-check"></i> Semestral -20%</button>
+          <button class="period-btn" data-period="yearly"><i class="fas fa-calendar-star"></i> Anual -30%</button>
+        </div>
         <div id="location-plan-container"></div>
         <div class="discount-note"><div class="discount-item"><i class="fas fa-calendar-alt"></i> Mensual: Precio regular</div><div class="discount-item"><i class="fas fa-calendar-plus" style="color:var(--accent-strong);"></i> Trimestral: -10%</div><div class="discount-item"><i class="fas fa-calendar-check" style="color:var(--accent-soft);"></i> Semestral: -20%</div><div class="discount-item"><i class="fas fa-calendar-star" style="color:var(--accent-strong);"></i> Anual: -30%</div></div>
       </div>
     </main>
-    <footer class="main-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Sobre Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> Akamai + OVHcloud Global</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div></div></footer>
+    <footer class="main-footer">
+      <div class="container"><div class="footer-grid"><div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Sobre Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> Akamai + OVHcloud Global</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div></div>
+    </footer>
   </div>
-  <a href="https://links.xnet.bio" target="_blank" class="floating-link"><i class="fas fa-link"></i></a>
+  <a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer" class="floating-link"><i class="fas fa-link"></i></a>
   <script>
+    // Precios base por ubicación (Akamai = 12.99, OVHcloud = 6.99)
+    const locationPrices = {
+      losangeles: 12.99,
+      france: 6.99,
+      canada: 6.99
+    };
     const BEACONS_LINK = 'https://xnet.bio/shop/frvpn';
-    const BASE_PRICE = 12.99;
     let currentPeriod = 'monthly';
     let selectedLocation = null;
-    // Ubicaciones actualizadas: Los Ángeles (Akamai), Francia (OVHcloud), Canadá (OVHcloud)
+
     const locations = [
       { id: 'losangeles', displayName: 'LOS ÁNGELES', flagCode: 'us', ping: '38ms', host: 'Akamai', color: '#0a5cff' },
       { id: 'france', displayName: 'FRANCIA', flagCode: 'fr', ping: '80ms', host: 'OVHcloud', color: '#0a5cff' },
       { id: 'canada', displayName: 'BEAUHARNOIS', flagCode: 'ca', ping: '55ms', host: 'OVHcloud', color: '#0a5cff' }
     ];
-    function getTotalPrice(period) {
+
+    function getTotalPrice(basePrice, period) {
       const mult = { monthly: 1, quarterly: 3, semesterly: 6, yearly: 12 };
       const disc = { monthly: 1, quarterly: 0.9, semesterly: 0.8, yearly: 0.7 };
-      return (BASE_PRICE * mult[period] * disc[period]).toFixed(2);
+      return (basePrice * mult[period] * disc[period]).toFixed(2);
     }
+
     function getPeriodText(period) {
       const texts = { monthly: '1 mes', quarterly: '3 meses', semesterly: '6 meses', yearly: '12 meses' };
       return texts[period];
     }
+
     function renderLocationsGrid() {
       const container = document.getElementById('locations-grid');
       if (!container) return;
       container.innerHTML = locations.map(l => `
-        <div class="location-card ${selectedLocation === l.id ? 'selected' : ''}" onclick="selectLocation('${l.id}')">
+        <div class="location-card ${selectedLocation === l.id ? 'selected' : ''}" data-loc-id="${l.id}">
           <div class="location-header"><span class="flag-icon fi fi-${l.flagCode} fis"></span><div class="location-name"><h3>${l.displayName}</h3><span class="location-host"><i class="fas fa-cloud"></i> ${l.host}</span></div></div>
           <p style="color:var(--text-secondary); margin:15px 0;">Servidor optimizado para baja latencia y máxima seguridad.</p>
           <div class="ping-indicator"><i class="fas fa-signal"></i><span>${l.ping}</span><div class="ping-bar"><div class="ping-fill" style="width:${Math.min(100, 100 - parseInt(l.ping)/2)}%"></div></div></div>
           <div class="ovh-badge"><i class="fas fa-shield-virus"></i><span>Protección Anti-DDoS avanzada</span></div>
           <div class="view-plans-btn"><i class="fas fa-eye"></i> VER PLAN SECURE CONNECT</div>
         </div>`).join('');
+      // Agregar eventos a las tarjetas
+      document.querySelectorAll('.location-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          const id = card.getAttribute('data-loc-id');
+          if (id) selectLocation(id);
+        });
+      });
     }
-    function renderPlanForLocation(l) {
-      const totalPrice = getTotalPrice(currentPeriod);
-      const periodText = getPeriodText(currentPeriod);
-      document.getElementById('location-plan-container').innerHTML = `
-        <div class="plan-card">
-          <div class="plan-header"><div class="plan-name"><i class="fas fa-circle"></i> Secure Connect</div></div>
-          <div class="price-box"><div class="price-number">$${totalPrice}</div><div class="price-period">${periodText}</div></div>
-          <div class="features">
-            <div class="feature-item"><i class="fas fa-map-pin"></i> Ubicación: ${l.displayName}</div>
-            <div class="feature-item"><i class="fas fa-tachometer-alt"></i> Latencia: ${l.ping}</div>
-            <div class="feature-item"><i class="fas fa-shield-virus"></i> Protección Anti-DDoS Enterprise</div>
-            <div class="feature-item"><i class="fas fa-cloud"></i> Infraestructura: ${l.host}</div>
-          </div>
-          <a href="${BEACONS_LINK}" target="_blank" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR SECURE CONNECT</a>
-        </div>`;
-    }
+
     function selectLocation(id) {
       selectedLocation = id;
       const loc = locations.find(l => l.id === id);
@@ -216,11 +231,34 @@
       renderLocationsGrid();
       showToast(`Plan Secure Connect para ${loc.displayName} cargado`);
     }
+
+    function renderPlanForLocation(loc) {
+      const basePrice = locationPrices[loc.id];
+      const totalPrice = getTotalPrice(basePrice, currentPeriod);
+      const periodText = getPeriodText(currentPeriod);
+      const container = document.getElementById('location-plan-container');
+      if (container) {
+        container.innerHTML = `
+          <div class="plan-card">
+            <div class="plan-header"><div class="plan-name"><i class="fas fa-circle"></i> Secure Connect</div></div>
+            <div class="price-box"><div class="price-number">$${totalPrice}</div><div class="price-period">${periodText}</div></div>
+            <div class="features">
+              <div class="feature-item"><i class="fas fa-map-pin"></i> Ubicación: ${loc.displayName}</div>
+              <div class="feature-item"><i class="fas fa-tachometer-alt"></i> Latencia: ${loc.ping}</div>
+              <div class="feature-item"><i class="fas fa-shield-virus"></i> Protección Anti-DDoS Enterprise</div>
+              <div class="feature-item"><i class="fas fa-cloud"></i> Infraestructura: ${loc.host}</div>
+            </div>
+            <a href="${BEACONS_LINK}" target="_blank" rel="noopener noreferrer" class="plan-button"><i class="fas fa-shopping-cart"></i> COMPRAR SECURE CONNECT</a>
+          </div>`;
+      }
+    }
+
     function clearSelectedLocation() {
       selectedLocation = null;
       document.getElementById('selected-location-plans').style.display = 'none';
       renderLocationsGrid();
     }
+
     function setPeriod(period) {
       currentPeriod = period;
       if (selectedLocation) {
@@ -228,61 +266,78 @@
         renderPlanForLocation(loc);
       }
       document.querySelectorAll('.period-btn').forEach(btn => {
-        if (btn.getAttribute('data-period') === period) btn.classList.add('active');
-        else btn.classList.remove('active');
+        btn.classList.toggle('active', btn.getAttribute('data-period') === period);
       });
     }
-    // Temas y menú (funcionalidades completas)
-    function setTheme(theme){
-      document.body.setAttribute('data-theme',theme);
-      localStorage.setItem('securenet-theme',theme);
-      document.querySelectorAll('.theme-btn-dashboard').forEach(btn=>{
-        btn.classList.remove('active');
-        if(btn.getAttribute('data-theme')===theme) btn.classList.add('active');
+
+    // --- Temas y menú (sin onclick inline) ---
+    function setTheme(theme) {
+      document.body.setAttribute('data-theme', theme);
+      localStorage.setItem('securenet-theme', theme);
+      document.querySelectorAll('.theme-btn-dashboard').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-theme-val') === theme);
       });
     }
-    function toggleHighContrast(){
-      const btn=document.getElementById('highContrastBtn');
-      const isHigh=document.body.getAttribute('data-contrast')==='high';
-      if(isHigh){
-        document.body.removeAttribute('data-contrast');
-        btn.classList.remove('active');
-      }else{
-        document.body.setAttribute('data-contrast','high');
-        btn.classList.add('active');
-      }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('securenet-theme');
+      if (savedTheme) setTheme(savedTheme);
+      else setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     }
-    let menuOpen=false;
-    function toggleMenu(){
-      const h=document.getElementById('hamburger'),m=document.getElementById('dashboardMenu'),o=document.getElementById('menuOverlay');
-      menuOpen=!menuOpen;
-      h.classList.toggle('active',menuOpen);
-      m.classList.toggle('open',menuOpen);
-      o.classList.toggle('active',menuOpen);
-      document.body.style.overflow=menuOpen?'hidden':'';
+
+    function toggleHighContrast() {
+      const btn = document.getElementById('highContrastBtn');
+      const isHigh = document.body.getAttribute('data-contrast') === 'high';
+      document.body.setAttribute('data-contrast', isHigh ? 'normal' : 'high');
+      btn.classList.toggle('active', !isHigh);
     }
-    function showToast(msg){
-      const toast=document.getElementById('toast');
-      toast.querySelector('span').textContent=msg;
+
+    let menuOpen = false;
+    function toggleMenu() {
+      const h = document.getElementById('hamburger');
+      const m = document.getElementById('dashboardMenu');
+      const o = document.getElementById('menuOverlay');
+      menuOpen = !menuOpen;
+      h.classList.toggle('active', menuOpen);
+      m.classList.toggle('open', menuOpen);
+      o.classList.toggle('active', menuOpen);
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+      h.setAttribute('aria-expanded', menuOpen);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.querySelector('span').textContent = msg;
       toast.classList.add('show');
-      setTimeout(()=>toast.classList.remove('show'),2500);
+      setTimeout(() => toast.classList.remove('show'), 2600);
     }
-    document.getElementById('hamburger').addEventListener('click',toggleMenu);
-    document.getElementById('menuOverlay').addEventListener('click',toggleMenu);
-    document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&menuOpen)toggleMenu();});
-    document.querySelectorAll('.period-btn').forEach(btn=>btn.addEventListener('click',()=>setPeriod(btn.getAttribute('data-period'))));
-    window.onload=()=>{
-      const savedTheme=localStorage.getItem('securenet-theme')||'dark';
-      setTheme(savedTheme);
+
+    function setFooterYear() {
+      const footerP = document.querySelector('.footer-bottom p:first-child');
+      if (footerP) footerP.innerHTML = footerP.innerHTML.replace('2026', new Date().getFullYear());
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      setFooterYear();
       renderLocationsGrid();
-      showToast("Ubicaciones SecureNET actualizadas con Akamai");
-    };
-    // Exponer funciones globales para los onclick inline
-    window.selectLocation=selectLocation;
-    window.clearSelectedLocation=clearSelectedLocation;
-    window.setPeriod=setPeriod;
-    window.setTheme=setTheme;
-    window.toggleHighContrast=toggleHighContrast;
+      // Eventos del menú
+      document.getElementById('hamburger').addEventListener('click', toggleMenu);
+      document.getElementById('menuOverlay').addEventListener('click', toggleMenu);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) toggleMenu(); });
+      // Botones de tema
+      document.querySelectorAll('.theme-btn-dashboard').forEach(btn => {
+        btn.addEventListener('click', () => setTheme(btn.getAttribute('data-theme-val')));
+      });
+      document.getElementById('highContrastBtn').addEventListener('click', toggleHighContrast);
+      // Botón volver atrás
+      document.getElementById('backButton').addEventListener('click', clearSelectedLocation);
+      // Selectores de periodo
+      document.querySelectorAll('.period-btn').forEach(btn => {
+        btn.addEventListener('click', () => setPeriod(btn.getAttribute('data-period')));
+      });
+      showToast("🌍 Ubicaciones SecureNET actualizadas con precios diferenciados (Akamai $12.99 / OVH $6.99)");
+    });
   </script>
 </body>
 </html>

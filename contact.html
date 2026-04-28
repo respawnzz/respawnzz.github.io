@@ -4,9 +4,15 @@
   <meta charset="UTF-8">
   <title>Contacto | SecureNET VPN</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Contacto con el equipo de SecureNET VPN">
+  <meta name="description" content="Contacto con el equipo de SecureNET VPN. Soporte 24/7.">
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#0a0f1a" />
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Contacto | SecureNET VPN">
+  <meta property="og:description" content="Soporte directo 24/7 con el equipo de SecureNET VPN">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630?text=SecureNET+Contact">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,8 +27,12 @@
     [data-theme="professional"]{--bg-dark:#121826;--bg-card:#1a1f2e;--border-glow:rgba(0,200,150,0.3);--text-primary:#eef2ff;--text-secondary:#9aa8c5;--accent-strong:#00c896;--accent-dark:#00997a;--accent-soft:#2de0a8;--shadow-card:0 20px 35px -10px rgba(0,0,0,0.5);}
     [data-contrast="high"]{--bg-dark:#000000;--bg-card:#000000;--border-glow:#ffff00;--text-primary:#ffff00;--text-secondary:#ffffaa;--accent-strong:#ffff00;--accent-dark:#cccc00;--accent-soft:#ffff33;}
     body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-primary);min-height:100vh;overflow-x:hidden;}
-    body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(var(--border-glow) 1px, transparent 1px),linear-gradient(90deg, var(--border-glow) 1px, transparent 1px);background-size:50px 50px;opacity:0.08;pointer-events:none;z-index:-1;animation:gridMove 20s linear infinite;}
-    @keyframes gridMove{0%{background-position:0 0;}100%{background-position:50px 50px;}}
+    @media (prefers-reduced-motion: no-preference) {
+      body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(var(--border-glow) 1px, transparent 1px),linear-gradient(90deg, var(--border-glow) 1px, transparent 1px);background-size:50px 50px;opacity:0.08;pointer-events:none;z-index:-1;animation:gridMove 20s linear infinite;}
+      @keyframes gridMove{0%{background-position:0 0;}100%{background-position:50px 50px;}}
+      .floating-link{animation:floatButton 2s ease-in-out infinite;}
+      @keyframes floatButton{0%{transform:translateY(0px);}50%{transform:translateY(-5px);}100%{transform:translateY(0px);}}
+    }
     .main-header{background:rgba(10,14,26,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-glow);position:fixed;top:0;left:0;right:0;z-index:1000;padding:12px 0;}
     .header-spacer{height:80px;}
     .menu-container{display:flex;align-items:center;justify-content:space-between;padding:0 30px;max-width:1400px;margin:0 auto;}
@@ -82,17 +92,24 @@
     .footer-bottom{text-align:center;padding-top:30px;border-top:1px solid var(--border-glow);color:var(--text-secondary);font-size:13px;}
     .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg-card);border:1px solid var(--accent-strong);border-radius:50px;padding:12px 24px;color:var(--text-primary);z-index:1100;opacity:0;transition:0.3s;display:flex;align-items:center;gap:10px;}
     .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-    .floating-link{position:fixed;bottom:30px;right:30px;background:var(--accent-strong);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:white;cursor:pointer;transition:0.2s;z-index:1001;box-shadow:0 4px 12px rgba(0,0,0,0.3);animation:floatButton 2s ease-in-out infinite;text-decoration:none;}
-    @keyframes floatButton{0%{transform:translateY(0px);}50%{transform:translateY(-5px);}100%{transform:translateY(0px);}}
+    .floating-link{position:fixed;bottom:30px;right:30px;background:var(--accent-strong);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:white;cursor:pointer;transition:0.2s;z-index:1001;box-shadow:0 4px 12px rgba(0,0,0,0.3);text-decoration:none;}
     .floating-link:hover{transform:scale(1.05);background:var(--accent-dark);}
     @media (max-width:768px){.menu-container{padding:0 20px;}.contact-grid{grid-template-columns:1fr;}}
   </style>
 </head>
 <body data-theme="dark">
-  <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span></span></div>
+  <div class="toast" id="toast" role="status"><i class="fas fa-check-circle"></i><span></span></div>
   <div class="app">
     <header class="main-header">
-      <div class="menu-container"><div class="logo"><img src="scnet.png" alt="SecureNET Logo" onerror="this.src='https://placehold.co/48x48?text=SN'"><div class="logo-text"><h1>SecureNET</h1><span>VPN Solutions</span></div></div><div class="hamburger" id="hamburger"><span></span><span></span><span></span></div></div>
+      <div class="menu-container">
+        <div class="logo">
+          <img src="scnet.png" alt="SecureNET Logo" onerror="this.src='https://placehold.co/48x48?text=SN'">
+          <div class="logo-text"><h1>SecureNET</h1><span>VPN Solutions</span></div>
+        </div>
+        <div class="hamburger" id="hamburger" aria-label="Menú de navegación" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
     </header>
     <div class="menu-overlay" id="menuOverlay"></div>
     <div class="dashboard-menu" id="dashboardMenu">
@@ -113,12 +130,12 @@
         <a href="terms.html" class="dashboard-item"><i class="fas fa-file-contract"></i> Términos</a>
       </div>
       <div class="dashboard-footer">
-        <a href="https://links.xnet.bio" target="_blank" class="dashboard-item"><i class="fas fa-link"></i> Enlaces Oficiales</a>
+        <a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer" class="dashboard-item"><i class="fas fa-link"></i> Enlaces Oficiales</a>
         <div class="theme-selector-dashboard">
-          <button class="theme-btn-dashboard" data-theme="dark" onclick="setTheme('dark')"><i class="fas fa-moon"></i> Oscuro</button>
-          <button class="theme-btn-dashboard" data-theme="light" onclick="setTheme('light')"><i class="fas fa-sun"></i> Claro</button>
-          <button class="theme-btn-dashboard" data-theme="professional" onclick="setTheme('professional')"><i class="fas fa-briefcase"></i> Pro</button>
-          <button class="contrast-btn" id="highContrastBtn" onclick="toggleHighContrast()"><i class="fas fa-adjust"></i> Contraste</button>
+          <button class="theme-btn-dashboard" data-theme-val="dark"><i class="fas fa-moon"></i> Oscuro</button>
+          <button class="theme-btn-dashboard" data-theme-val="light"><i class="fas fa-sun"></i> Claro</button>
+          <button class="theme-btn-dashboard" data-theme-val="professional"><i class="fas fa-briefcase"></i> Pro</button>
+          <button class="contrast-btn" id="highContrastBtn"><i class="fas fa-adjust"></i> Contraste</button>
         </div>
       </div>
     </div>
@@ -126,30 +143,175 @@
     <main class="container">
       <h2 class="section-title"><i class="fas fa-envelope"></i> Contacto</h2>
       <p class="section-subtitle">Soporte directo 24/7 con nuestro equipo</p>
-      <div class="payment-banner"><span><i class="fas fa-credit-card"></i> Métodos de pago aceptados:</span><div class="payment-icons"><i class="fab fa-paypal"></i><i class="fas fa-dollar-sign"></i><i class="fab fa-apple-pay"></i><i class="fab fa-bitcoin"></i></div></div>
+      <div class="payment-banner">
+        <span><i class="fas fa-credit-card"></i> Métodos de pago aceptados:</span>
+        <div class="payment-icons">
+          <i class="fab fa-paypal" title="PayPal"></i>
+          <i class="fas fa-dollar-sign" title="Tarjeta"></i>
+          <i class="fab fa-apple-pay" title="Apple Pay"></i>
+          <i class="fab fa-bitcoin" title="Bitcoin"></i>
+        </div>
+      </div>
       <div style="text-align:center;"><span class="hosting-badge"><i class="fas fa-cloud"></i> Infraestructura OVHcloud Global</span></div>
       <div class="contact-grid">
-        <div class="contact-card"><div class="role-badge role-owner"><i class="fas fa-crown"></i> OWNER / FUNDADOR</div><h3 style="color:var(--accent-strong); font-size:28px;">@respawnzz</h3><div class="contact-badge"><i class="fas fa-code"></i> CREADOR DE SECURENET</div><div class="contact-username" onclick="copyUsername('@respawnzz')"><i class="fas fa-user"></i> @respawnzz</div><div class="contact-info"><p><i class="fas fa-clock"></i> Disponibilidad 24/7</p><p><i class="fas fa-bolt"></i> Soporte directo</p><p><i class="fas fa-stopwatch"></i> Tiempo de respuesta: &lt; 5 minutos</p></div></div>
-        <div class="contact-card"><div class="role-badge role-admin"><i class="fas fa-shield-halos"></i> ADMINISTRADOR</div><h3 style="color:var(--accent-strong); font-size:28px;">@xxiizx</h3><div class="contact-badge"><i class="fas fa-server"></i> SOPORTE TÉCNICO</div><div class="contact-username" onclick="copyUsername('@xxiizx')"><i class="fas fa-user-cog"></i> @xxiizx</div><div class="contact-info"><p><i class="fas fa-server"></i> Gestión de servidores OVHcloud</p><p><i class="fas fa-bolt"></i> Respuesta rápida</p><p><i class="fas fa-wrench"></i> Especialista en configuración</p></div></div>
-        <div class="contact-card"><div class="role-badge role-admin"><i class="fas fa-headset"></i> COMMUNITY MANAGER</div><h3 style="color:var(--accent-strong); font-size:28px;">@cryptosofi</h3><div class="contact-badge"><i class="fas fa-comments"></i> ATENCIÓN AL CLIENTE</div><div class="contact-username" onclick="copyUsername('@cryptosofi')"><i class="fas fa-user"></i> @cryptosofi</div><div class="contact-info"><p><i class="fas fa-clock"></i> Disponibilidad 24/7</p><p><i class="fas fa-heart"></i> Soporte amigable</p><p><i class="fas fa-stopwatch"></i> Respuesta en minutos</p></div></div>
+        <div class="contact-card">
+          <div class="role-badge role-owner"><i class="fas fa-crown"></i> OWNER / FUNDADOR</div>
+          <h3 style="color:var(--accent-strong); font-size:28px;">@respawnzz</h3>
+          <div class="contact-badge"><i class="fas fa-code"></i> CREADOR DE SECURENET</div>
+          <div class="contact-username" data-username="@respawnzz"><i class="fas fa-user"></i> @respawnzz</div>
+          <div class="contact-info">
+            <p><i class="fas fa-clock"></i> Disponibilidad 24/7</p>
+            <p><i class="fas fa-bolt"></i> Soporte directo</p>
+            <p><i class="fas fa-stopwatch"></i> Tiempo de respuesta: &lt; 5 minutos</p>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="role-badge role-admin"><i class="fas fa-shield-halos"></i> ADMINISTRADOR</div>
+          <h3 style="color:var(--accent-strong); font-size:28px;">@xxiizx</h3>
+          <div class="contact-badge"><i class="fas fa-server"></i> SOPORTE TÉCNICO</div>
+          <div class="contact-username" data-username="@xxiizx"><i class="fas fa-user-cog"></i> @xxiizx</div>
+          <div class="contact-info">
+            <p><i class="fas fa-server"></i> Gestión de servidores OVHcloud</p>
+            <p><i class="fas fa-bolt"></i> Respuesta rápida</p>
+            <p><i class="fas fa-wrench"></i> Especialista en configuración</p>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="role-badge role-admin"><i class="fas fa-headset"></i> COMMUNITY MANAGER</div>
+          <h3 style="color:var(--accent-strong); font-size:28px;">@cryptosofi</h3>
+          <div class="contact-badge"><i class="fas fa-comments"></i> ATENCIÓN AL CLIENTE</div>
+          <div class="contact-username" data-username="@cryptosofi"><i class="fas fa-user"></i> @cryptosofi</div>
+          <div class="contact-info">
+            <p><i class="fas fa-clock"></i> Disponibilidad 24/7</p>
+            <p><i class="fas fa-heart"></i> Soporte amigable</p>
+            <p><i class="fas fa-stopwatch"></i> Respuesta en minutos</p>
+          </div>
+        </div>
       </div>
       <div style="margin-top:40px; display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
-        <div style="background:rgba(0,0,0,0.2); backdrop-filter:blur(10px); border:1px solid var(--border-glow); border-radius:28px; padding:20px; text-align:center;"><i class="fas fa-clock" style="color:var(--accent-strong); font-size:28px;"></i><h4 style="color:white; margin:10px 0;">Horario de Atención</h4><p style="color:var(--text-secondary);">Lunes a Domingo • 24/7</p></div>
-        <div style="background:rgba(0,0,0,0.2); backdrop-filter:blur(10px); border:1px solid var(--border-glow); border-radius:28px; padding:20px; text-align:center;"><i class="fas fa-bolt" style="color:var(--accent-strong); font-size:28px;"></i><h4 style="color:white; margin:10px 0;">Tiempo de Respuesta</h4><p style="color:var(--text-secondary);">&lt; 5 minutos vía portal de enlaces</p></div>
+        <div style="background:rgba(0,0,0,0.2); backdrop-filter:blur(10px); border:1px solid var(--border-glow); border-radius:28px; padding:20px; text-align:center;">
+          <i class="fas fa-clock" style="color:var(--accent-strong); font-size:28px;"></i>
+          <h4 style="color:white; margin:10px 0;">Horario de Atención</h4>
+          <p style="color:var(--text-secondary);">Lunes a Domingo • 24/7</p>
+        </div>
+        <div style="background:rgba(0,0,0,0.2); backdrop-filter:blur(10px); border:1px solid var(--border-glow); border-radius:28px; padding:20px; text-align:center;">
+          <i class="fas fa-bolt" style="color:var(--accent-strong); font-size:28px;"></i>
+          <h4 style="color:white; margin:10px 0;">Tiempo de Respuesta</h4>
+          <p style="color:var(--text-secondary);">&lt; 5 minutos vía portal de enlaces</p>
+        </div>
       </div>
     </main>
-    <footer class="main-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Sobre Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> OVHcloud Global</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div></div></footer>
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Sobre Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div>
+          <div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div>
+          <div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> OVHcloud Global</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div>
+      </div>
+    </footer>
   </div>
-  <a href="https://links.xnet.bio" target="_blank" class="floating-link"><i class="fas fa-link"></i></a>
+  <a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer" class="floating-link"><i class="fas fa-link"></i></a>
+
   <script>
-    function setTheme(theme){document.body.setAttribute('data-theme',theme);localStorage.setItem('securenet-theme',theme);document.querySelectorAll('.theme-btn-dashboard').forEach(btn=>{btn.classList.remove('active');if(btn.getAttribute('data-theme')===theme)btn.classList.add('active');});}
-    function toggleHighContrast(){const btn=document.getElementById('highContrastBtn');const isHigh=document.body.getAttribute('data-contrast')==='high';if(isHigh){document.body.removeAttribute('data-contrast');btn.classList.remove('active');}else{document.body.setAttribute('data-contrast','high');btn.classList.add('active');}}
-    let menuOpen=false;function toggleMenu(){const h=document.getElementById('hamburger'),m=document.getElementById('dashboardMenu'),o=document.getElementById('menuOverlay');menuOpen=!menuOpen;h.classList.toggle('active',menuOpen);m.classList.toggle('open',menuOpen);o.classList.toggle('active',menuOpen);document.body.style.overflow=menuOpen?'hidden':'';}
-    function copyUsername(username){navigator.clipboard.writeText(username).then(()=>showToast(`Copiado: ${username}`));}
-    function showToast(msg){const toast=document.getElementById('toast');toast.querySelector('span').textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2500);}
-    document.getElementById('hamburger').addEventListener('click',toggleMenu);document.getElementById('menuOverlay').addEventListener('click',toggleMenu);document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&menuOpen)toggleMenu();});
-    window.onload=()=>{const savedTheme=localStorage.getItem('securenet-theme')||'dark';setTheme(savedTheme);showToast("Contacto SecureNET cargado");};
-    window.copyUsername=copyUsername;
+    // --- Gestión de temas (sin onclick inline, respeta preferencia del sistema) ---
+    function setTheme(theme) {
+      document.body.setAttribute('data-theme', theme);
+      localStorage.setItem('securenet-theme', theme);
+      document.querySelectorAll('.theme-btn-dashboard').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-theme-val') === theme) btn.classList.add('active');
+      });
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('securenet-theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(prefersDark ? 'dark' : 'light');
+      }
+    }
+
+    function toggleHighContrast() {
+      const btn = document.getElementById('highContrastBtn');
+      const isHigh = document.body.getAttribute('data-contrast') === 'high';
+      if (isHigh) {
+        document.body.removeAttribute('data-contrast');
+        btn.classList.remove('active');
+      } else {
+        document.body.setAttribute('data-contrast', 'high');
+        btn.classList.add('active');
+      }
+    }
+
+    // --- Menú hamburguesa con accesibilidad ---
+    let menuOpen = false;
+    function toggleMenu() {
+      const hamburger = document.getElementById('hamburger');
+      const menu = document.getElementById('dashboardMenu');
+      const overlay = document.getElementById('menuOverlay');
+      menuOpen = !menuOpen;
+      hamburger.classList.toggle('active', menuOpen);
+      menu.classList.toggle('open', menuOpen);
+      overlay.classList.toggle('active', menuOpen);
+      document.body.style.overflow = menuOpen ? 'hidden' : '';
+      hamburger.setAttribute('aria-expanded', menuOpen);
+    }
+
+    // --- Toast y copiado de usuario ---
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.querySelector('span').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    function copyUsername(username) {
+      navigator.clipboard.writeText(username).then(() => {
+        showToast(`✅ Copiado: ${username}`);
+      }).catch(() => {
+        showToast(`❌ No se pudo copiar ${username}`);
+      });
+    }
+
+    // --- Año dinámico en footer ---
+    function setFooterYear() {
+      const footerP = document.querySelector('.footer-bottom p:first-child');
+      if (footerP) {
+        const currentYear = new Date().getFullYear();
+        footerP.innerHTML = footerP.innerHTML.replace('2026', currentYear);
+      }
+    }
+
+    // --- Eventos ---
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      setFooterYear();
+
+      // Botones de tema
+      document.querySelectorAll('.theme-btn-dashboard').forEach(btn => {
+        btn.addEventListener('click', () => setTheme(btn.getAttribute('data-theme-val')));
+      });
+      document.getElementById('highContrastBtn').addEventListener('click', toggleHighContrast);
+
+      // Menú
+      document.getElementById('hamburger').addEventListener('click', toggleMenu);
+      document.getElementById('menuOverlay').addEventListener('click', toggleMenu);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) toggleMenu(); });
+
+      // Copiar nombre de usuario desde los divs con clase .contact-username
+      document.querySelectorAll('.contact-username').forEach(el => {
+        const username = el.getAttribute('data-username');
+        if (username) {
+          el.addEventListener('click', () => copyUsername(username));
+        }
+      });
+
+      showToast("📞 Contacto SecureNET cargado");
+    });
   </script>
 </body>
 </html>
