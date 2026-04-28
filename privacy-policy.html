@@ -4,24 +4,34 @@
   <meta charset="UTF-8">
   <title>Política de Privacidad | SecureNET</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Política de privacidad de SecureNET VPN - Fundada en 2026">
+  <meta name="description" content="Política de privacidad de SecureNET VPN - No registramos tu actividad - Fundada en 2026">
   <meta name="color-scheme" content="dark light" />
   <meta name="theme-color" content="#0a0f1a" />
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Política de Privacidad | SecureNET VPN">
+  <meta property="og:description" content="Protección total de tus datos. No almacenamos registros de navegación.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630?text=SecureNET+Privacy">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    /* mismo CSS base (grid, header, temas) que en plans.html, se omite por brevedad pero se incluye en la versión final */
+    /* mismo CSS base (grid, header, temas) que en las páginas mejoradas */
     *{margin:0;padding:0;box-sizing:border-box;}
     :root{--bg-dark:#0a0e1a;--bg-card:#0f1422;--border-glow:rgba(10,92,255,0.4);--text-primary:#ffffff;--text-secondary:#b0c4ff;--accent-strong:#0a5cff;--accent-dark:#004ecc;--accent-soft:#3a7cff;--shadow-card:0 20px 35px -10px rgba(0,0,0,0.4);--transition:all 0.3s cubic-bezier(0.2,0.95,0.4,1.05);}
     [data-theme="light"]{--bg-dark:#f4f7fc;--bg-card:#ffffff;--border-glow:rgba(10,92,255,0.25);--text-primary:#0a2540;--text-secondary:#2c3e66;--accent-strong:#0a5cff;--accent-dark:#004ecc;--accent-soft:#4c82ff;--shadow-card:0 10px 30px rgba(0,0,0,0.08);}
     [data-theme="professional"]{--bg-dark:#121826;--bg-card:#1a1f2e;--border-glow:rgba(0,200,150,0.3);--text-primary:#eef2ff;--text-secondary:#9aa8c5;--accent-strong:#00c896;--accent-dark:#00997a;--accent-soft:#2de0a8;--shadow-card:0 20px 35px -10px rgba(0,0,0,0.5);}
     [data-contrast="high"]{--bg-dark:#000000;--bg-card:#000000;--border-glow:#ffff00;--text-primary:#ffff00;--text-secondary:#ffffaa;--accent-strong:#ffff00;--accent-dark:#cccc00;--accent-soft:#ffff33;}
     body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-primary);min-height:100vh;overflow-x:hidden;}
-    body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(var(--border-glow) 1px, transparent 1px),linear-gradient(90deg, var(--border-glow) 1px, transparent 1px);background-size:50px 50px;opacity:0.08;pointer-events:none;z-index:-1;animation:gridMove 20s linear infinite;}
-    @keyframes gridMove{0%{background-position:0 0;}100%{background-position:50px 50px;}}
+    @media (prefers-reduced-motion: no-preference) {
+      body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(var(--border-glow) 1px, transparent 1px),linear-gradient(90deg, var(--border-glow) 1px, transparent 1px);background-size:50px 50px;opacity:0.08;pointer-events:none;z-index:-1;animation:gridMove 20s linear infinite;}
+      @keyframes gridMove{0%{background-position:0 0;}100%{background-position:50px 50px;}}
+      .floating-contact{animation:floatButton 2s ease-in-out infinite;}
+      @keyframes floatButton{0%{transform:translateY(0px);}50%{transform:translateY(-5px);}100%{transform:translateY(0px);}}
+    }
     .main-header{background:rgba(10,14,26,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-glow);position:fixed;top:0;left:0;right:0;z-index:1000;padding:12px 0;}
     .header-spacer{height:80px;}
     .menu-container{display:flex;align-items:center;justify-content:space-between;padding:0 30px;max-width:1400px;margin:0 auto;}
@@ -74,19 +84,18 @@
     .footer-bottom{text-align:center;padding-top:30px;border-top:1px solid var(--border-glow);color:var(--text-secondary);font-size:13px;}
     .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg-card);border:1px solid var(--accent-strong);border-radius:50px;padding:12px 24px;color:var(--text-primary);z-index:1100;opacity:0;transition:0.3s;display:flex;align-items:center;gap:10px;}
     .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
-    .floating-contact{position:fixed;bottom:30px;right:30px;background:var(--accent-strong);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:white;cursor:pointer;transition:0.2s;z-index:1001;box-shadow:0 4px 12px rgba(0,0,0,0.3);animation:floatButton 2s ease-in-out infinite;text-decoration:none;}
-    @keyframes floatButton{0%{transform:translateY(0px);}50%{transform:translateY(-5px);}100%{transform:translateY(0px);}}
+    .floating-contact{position:fixed;bottom:30px;right:30px;background:var(--accent-strong);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:white;cursor:pointer;transition:0.2s;z-index:1001;box-shadow:0 4px 12px rgba(0,0,0,0.3);text-decoration:none;}
     .floating-contact:hover{transform:scale(1.05);background:var(--accent-dark);}
     @media (max-width:768px){.menu-container{padding:0 20px;}.section-title{font-size:32px;}.policy-content{padding:25px;}}
   </style>
 </head>
 <body data-theme="dark">
-  <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span></span></div>
+  <div class="toast" id="toast" role="status"><i class="fas fa-check-circle"></i><span></span></div>
   <div class="app">
     <header class="main-header">
       <div class="menu-container">
         <div class="logo"><img src="scnet.png" alt="SecureNET Logo" onerror="this.src='https://placehold.co/48x48?text=SN'"><div class="logo-text"><h1>SecureNET</h1><span>VPN Solutions</span></div></div>
-        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        <div class="hamburger" id="hamburger" aria-label="Menú de navegación" aria-expanded="false"><span></span><span></span><span></span></div>
       </div>
     </header>
     <div class="menu-overlay" id="menuOverlay"></div>
@@ -108,12 +117,12 @@
         <a href="terms.html" class="dashboard-item"><i class="fas fa-file-contract"></i> Términos</a>
       </div>
       <div class="dashboard-footer">
-        <a href="https://links.xnet.bio" target="_blank" class="dashboard-item"><i class="fas fa-link"></i> Enlaces Oficiales</a>
+        <a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer" class="dashboard-item"><i class="fas fa-link"></i> Enlaces Oficiales</a>
         <div class="theme-selector-dashboard">
-          <button class="theme-btn-dashboard" data-theme="dark" onclick="setTheme('dark')"><i class="fas fa-moon"></i> Oscuro</button>
-          <button class="theme-btn-dashboard" data-theme="light" onclick="setTheme('light')"><i class="fas fa-sun"></i> Claro</button>
-          <button class="theme-btn-dashboard" data-theme="professional" onclick="setTheme('professional')"><i class="fas fa-briefcase"></i> Pro</button>
-          <button class="contrast-btn" id="highContrastBtn" onclick="toggleHighContrast()"><i class="fas fa-adjust"></i> Contraste</button>
+          <button class="theme-btn-dashboard" data-theme-val="dark"><i class="fas fa-moon"></i> Oscuro</button>
+          <button class="theme-btn-dashboard" data-theme-val="light"><i class="fas fa-sun"></i> Claro</button>
+          <button class="theme-btn-dashboard" data-theme-val="professional"><i class="fas fa-briefcase"></i> Pro</button>
+          <button class="contrast-btn" id="highContrastBtn"><i class="fas fa-adjust"></i> Contraste</button>
         </div>
       </div>
     </div>
@@ -121,29 +130,49 @@
     <main class="container">
       <h2 class="section-title"><i class="fas fa-lock"></i> Política de Privacidad</h2>
       <div class="policy-content">
-        <div style="text-align:center; margin-bottom:30px;"><h3 style="color:var(--accent-strong);"><i class="fas fa-credit-card"></i> Métodos de Pago Aceptados</h3><div class="payment-methods"><span class="payment-badge"><i class="fab fa-paypal"></i> PayPal</span><span class="payment-badge"><i class="fas fa-dollar-sign"></i> Cash App</span><span class="payment-badge"><i class="fab fa-apple-pay"></i> Apple Pay</span><span class="payment-badge"><i class="fab fa-bitcoin"></i> Bitcoin</span></div></div>
+        <div style="text-align:center; margin-bottom:30px;"><h3 style="color:var(--accent-strong);"><i class="fas fa-credit-card"></i> Métodos de Pago Aceptados</h3><div class="payment-methods"><span class="payment-badge"><i class="fab fa-paypal" title="PayPal"></i> PayPal</span><span class="payment-badge"><i class="fas fa-dollar-sign" title="Cash App"></i> Cash App</span><span class="payment-badge"><i class="fab fa-apple-pay" title="Apple Pay"></i> Apple Pay</span><span class="payment-badge"><i class="fab fa-bitcoin" title="Bitcoin"></i> Bitcoin</span></div></div>
         <div style="text-align:center; margin-bottom:30px;"><span class="hosting-badge"><i class="fas fa-cloud"></i> Infraestructura: OVHcloud Global</span></div>
         <p style="color:var(--text-secondary); text-align:center; margin-bottom:30px;"><i class="fas fa-shield-alt"></i> En SecureNET respetamos tu privacidad. No registramos tu actividad de navegación.</p>
         <div class="policy-section"><h3><i class="fas fa-database"></i> 1. Información que recopilamos</h3><p>Solo recopilamos datos necesarios para crear tu cuenta:</p><ul><li><i class="fas fa-envelope"></i> Correo electrónico</li><li><i class="fas fa-credit-card"></i> Método de pago (PayPal, Cash App, Apple Pay o Bitcoin)</li></ul><p><strong>No almacenamos registros de tu actividad en línea.</strong> No guardamos historial de navegación, IPs de destino, ni contenido de tus comunicaciones.</p></div>
         <div class="policy-section"><h3><i class="fas fa-chart-line"></i> 2. Uso de la información</h3><p>La información se utiliza únicamente para:</p><ul><li><i class="fas fa-user-cog"></i> Gestión de cuentas</li><li><i class="fas fa-file-invoice-dollar"></i> Facturación</li><li><i class="fas fa-headset"></i> Soporte técnico</li></ul><p><i class="fas fa-check-circle" style="color:var(--accent-strong);"></i> No compartimos tus datos con terceros.</p></div>
         <div class="policy-section"><h3><i class="fas fa-shield-virus"></i> 3. Seguridad</h3><p>Implementamos las siguientes medidas de seguridad:</p><ul><li><i class="fas fa-key"></i> Cifrado AES-256</li><li><i class="fas fa-shield-halos"></i> Protección Anti-DDoS (OVHcloud)</li><li><i class="fas fa-network-wired"></i> Firewalls de última generación</li><li><i class="fas fa-sync-alt"></i> Actualizaciones de seguridad constantes</li></ul></div>
         <div class="policy-section"><h3><i class="fas fa-handshake"></i> 4. Tus derechos</h3><p>Tienes derecho a:</p><ul><li><i class="fas fa-eye"></i> Acceder a tus datos personales</li><li><i class="fas fa-edit"></i> Rectificar información incorrecta</li><li><i class="fas fa-trash-alt"></i> Solicitar la eliminación de tu cuenta</li><li><i class="fas fa-file-export"></i> Exportar tus datos</li></ul></div>
-        <div class="policy-section"><h3><i class="fas fa-headset"></i> 5. Contacto</h3><p>Para cualquier consulta sobre privacidad, contáctanos:</p><div style="display:flex; justify-content:center;"><span class="contact-email" onclick="copyUsername('soporte@securenetvpn.com')"><i class="fas fa-envelope"></i> soporte@securenetvpn.com</span></div></div>
+        <div class="policy-section"><h3><i class="fas fa-headset"></i> 5. Contacto</h3><p>Para cualquier consulta sobre privacidad, contáctanos:</p><div style="display:flex; justify-content:center;"><span class="contact-email" id="contactEmail"><i class="fas fa-envelope"></i> soporte@securenetvpn.com</span></div></div>
         <div style="text-align:center; margin-top:40px; padding:20px; background:rgba(0,0,0,0.2); border-radius:28px;"><i class="fas fa-calendar-alt" style="color:var(--accent-strong);"></i><span style="color:var(--text-secondary); margin-left:10px;">Última actualización: 15 de marzo, 2026</span></div>
       </div>
     </main>
-    <footer class="main-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div><div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> OVHcloud Global</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div></div></footer>
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col"><h4><i class="fas fa-shield-alt"></i> SecureNET</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="about.html">Nosotros</a></li><li><a href="locations.html">Ubicaciones</a></li><li><a href="plans.html">Planes VPN</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li></ul></div>
+          <div class="footer-col"><h4><i class="fas fa-link"></i> Recursos</h4><ul><li><a href="map.html">Mapa</a></li><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Herramientas</a></li><li><a href="comparison.html">Comparativa</a></li></ul></div>
+          <div class="footer-col"><h4><i class="fas fa-share-alt"></i> Redes</h4><ul><li><a href="social.html">Instagram</a></li><li><a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer">Enlaces Oficiales</a></li><li><a href="contact.html">Contacto</a></li><li><a href="privacy-policy.html">Privacidad</a></li><li><a href="terms.html">Términos</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 SecureNET • VPN de alto rendimiento • <i class="fas fa-cloud"></i> OVHcloud Global</p><p>Desarrollado por <i class="fas fa-code"></i> @xnetvpn & @xxiizx</p></div>
+      </div>
+    </footer>
   </div>
-  <a href="https://links.xnet.bio" target="_blank" class="floating-contact"><i class="fas fa-link"></i></a>
+  <a href="https://links.xnet.bio" target="_blank" rel="noopener noreferrer" class="floating-contact"><i class="fas fa-link"></i></a>
   <script>
+    // --- Gestión de temas (sin onclick inline, respeta preferencia del sistema) ---
     function setTheme(theme) {
       document.body.setAttribute('data-theme', theme);
       localStorage.setItem('securenet-theme', theme);
       document.querySelectorAll('.theme-btn-dashboard').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.getAttribute('data-theme') === theme) btn.classList.add('active');
+        btn.classList.toggle('active', btn.getAttribute('data-theme-val') === theme);
       });
     }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('securenet-theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(prefersDark ? 'dark' : 'light');
+      }
+    }
+
     function toggleHighContrast() {
       const btn = document.getElementById('highContrastBtn');
       const isHigh = document.body.getAttribute('data-contrast') === 'high';
@@ -155,33 +184,70 @@
         btn.classList.add('active');
       }
     }
+
+    // --- Menú hamburguesa con accesibilidad ---
     let menuOpen = false;
     function toggleMenu() {
-      const h = document.getElementById('hamburger');
-      const m = document.getElementById('dashboardMenu');
-      const o = document.getElementById('menuOverlay');
+      const hamburger = document.getElementById('hamburger');
+      const menu = document.getElementById('dashboardMenu');
+      const overlay = document.getElementById('menuOverlay');
       menuOpen = !menuOpen;
-      h.classList.toggle('active', menuOpen);
-      m.classList.toggle('open', menuOpen);
-      o.classList.toggle('active', menuOpen);
+      hamburger.classList.toggle('active', menuOpen);
+      menu.classList.toggle('open', menuOpen);
+      overlay.classList.toggle('active', menuOpen);
       document.body.style.overflow = menuOpen ? 'hidden' : '';
+      hamburger.setAttribute('aria-expanded', menuOpen);
     }
-    function copyUsername(username) {
-      navigator.clipboard.writeText(username).then(() => showToast(`Copiado: ${username}`));
-    }
+
+    // --- Toast y copiado de email ---
     function showToast(msg) {
       const toast = document.getElementById('toast');
       toast.querySelector('span').textContent = msg;
       toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2500);
+      setTimeout(() => toast.classList.remove('show'), 2600);
     }
-    document.getElementById('hamburger').addEventListener('click', toggleMenu);
-    document.getElementById('menuOverlay').addEventListener('click', toggleMenu);
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) toggleMenu(); });
-    window.onload = () => {
-      const savedTheme = localStorage.getItem('securenet-theme') || 'dark';
-      setTheme(savedTheme);
-    };
+
+    function copyEmail(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`📧 Copiado: ${text}`);
+      }).catch(() => {
+        showToast(`❌ No se pudo copiar ${text}`);
+      });
+    }
+
+    // --- Año dinámico en footer ---
+    function setFooterYear() {
+      const footerP = document.querySelector('.footer-bottom p:first-child');
+      if (footerP) {
+        const currentYear = new Date().getFullYear();
+        footerP.innerHTML = footerP.innerHTML.replace('2026', currentYear);
+      }
+    }
+
+    // --- Eventos e inicialización ---
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      setFooterYear();
+
+      // Eventos de tema
+      document.querySelectorAll('.theme-btn-dashboard').forEach(btn => {
+        btn.addEventListener('click', () => setTheme(btn.getAttribute('data-theme-val')));
+      });
+      document.getElementById('highContrastBtn').addEventListener('click', toggleHighContrast);
+
+      // Eventos de menú
+      document.getElementById('hamburger').addEventListener('click', toggleMenu);
+      document.getElementById('menuOverlay').addEventListener('click', toggleMenu);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) toggleMenu(); });
+
+      // Copiar email
+      const emailSpan = document.getElementById('contactEmail');
+      if (emailSpan) {
+        emailSpan.addEventListener('click', () => copyEmail('soporte@securenetvpn.com'));
+      }
+
+      showToast("🔒 Política de privacidad SecureNET cargada");
+    });
   </script>
 </body>
 </html>
