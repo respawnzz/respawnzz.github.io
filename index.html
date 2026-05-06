@@ -6,899 +6,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="SecureNET VPN - Professional Network Security with Anti-DDoS protection and low latency">
   <meta name="theme-color" content="#0a0f1a">
-  <!-- Open Graph -->
-  <meta property="og:title" content="SecureNET | Professional Network Security">
-  <meta property="og:description" content="Professional VPN solutions with Anti-DDoS protection, low latency gaming network and global infrastructure.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://placehold.co/1200x630/0a0e1a/0a5cff?text=SecureNET">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    /* UN SOLO COLOR: #0a5cff - MODO OSCURO UNICO */
-    :root {
-      --bg-dark: #0a0e1a;
-      --bg-card: #0f1422;
-      --border-glow: rgba(10, 92, 255, 0.4);
-      --text-primary: #ffffff;
-      --text-secondary: #b0c4ff;
-      --accent: #0a5cff;
-      --accent-dark: #004ecc;
-      --accent-soft: #3a7cff;
-      --shadow-card: 0 20px 35px -10px rgba(0, 0, 0, 0.4);
-      --transition: all 0.3s cubic-bezier(0.2, 0.95, 0.4, 1.05);
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* Fondo con particulas estilo AXION */
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.5;
-    }
-
-    /* Preloader */
-    #preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--bg-dark);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 3px solid rgba(10, 92, 255, 0.2);
-      border-top: 3px solid var(--accent);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* Navbar estilo AXION - menu horizontal unificado */
-    .navbar {
-      background: rgba(10, 14, 26, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-glow);
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 18px 0;
-    }
-
-    .container {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 0 30px;
-    }
-
-    .navbar .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo i {
-      font-size: 32px;
-      color: var(--accent);
-      filter: drop-shadow(0 0 8px var(--accent));
-    }
-
-    .logo-text h1 {
-      font-size: 24px;
-      font-weight: 800;
-      background: linear-gradient(135deg, #fff, var(--accent));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .logo-text span {
-      font-size: 11px;
-      color: var(--text-secondary);
-      letter-spacing: 1px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 35px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: var(--transition);
-      font-size: 14px;
-      letter-spacing: 0.5px;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    /* Header principal */
-    #header {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      padding-top: 80px;
-    }
-
-    .intro-text {
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    .intro-lead-in {
-      font-size: 16px;
-      color: var(--accent);
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 20px;
-    }
-
-    .intro-heading {
-      font-size: 56px;
-      font-weight: 800;
-      display: block;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #fff, var(--accent), var(--accent-dark));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .intro-sub {
-      font-size: 20px;
-      color: var(--text-secondary);
-      margin-bottom: 40px;
-    }
-
-    .header-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin-bottom: 60px;
-    }
-
-    .btn-primary {
-      background: linear-gradient(95deg, var(--accent-dark), var(--accent));
-      border: none;
-      padding: 14px 35px;
-      border-radius: 50px;
-      color: white;
-      text-decoration: none;
-      font-weight: 700;
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(10, 92, 255, 0.4);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--accent);
-      padding: 14px 35px;
-      border-radius: 50px;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 700;
-      transition: var(--transition);
-    }
-
-    .btn-outline:hover {
-      background: var(--accent);
-      color: white;
-    }
-
-    .header-dashboard {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .dashboard-img {
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-      border: 1px solid var(--border-glow);
-    }
-
-    /* Secciones */
-    section {
-      padding: 100px 0;
-    }
-
-    .gray-bg {
-      background: rgba(10, 92, 255, 0.03);
-    }
-
-    .section-heading {
-      font-size: 42px;
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .separator {
-      display: block;
-      width: 70px;
-      height: 3px;
-      background: var(--accent);
-      margin: 20px auto;
-    }
-
-    .section-subheading {
-      text-align: center;
-      color: var(--text-secondary);
-      font-size: 18px;
-      margin-bottom: 50px;
-    }
-
-    /* Service boxes */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-    }
-
-    .service-box {
-      text-align: center;
-      padding: 40px 30px;
-      background: var(--bg-card);
-      border-radius: 20px;
-      border: 1px solid var(--border-glow);
-      transition: var(--transition);
-    }
-
-    .service-box:hover {
-      transform: translateY(-10px);
-      border-color: var(--accent);
-    }
-
-    .service-box i {
-      font-size: 48px;
-      color: var(--accent);
-      margin-bottom: 25px;
-    }
-
-    .service-box h4 {
-      font-size: 22px;
-      margin-bottom: 15px;
-    }
-
-    .service-box p {
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* Features Tabs estilo AXION */
-    .features-tabs {
-      position: relative;
-    }
-
-    .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 50px;
-      list-style: none;
-      flex-wrap: wrap;
-    }
-
-    .tab {
-      cursor: pointer;
-    }
-
-    .tab a {
-      display: block;
-      padding: 12px 35px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-glow);
-      border-radius: 50px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: var(--transition);
-      font-weight: 600;
-    }
-
-    .tab.active a {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-    }
-
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.5s ease;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .tab-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 50px;
-      align-items: center;
-    }
-
-    .tab-content ul {
-      list-style: none;
-      margin: 30px 0;
-    }
-
-    .tab-content li {
-      padding: 12px 0;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--text-secondary);
-    }
-
-    .tab-content li i {
-      color: var(--accent);
-      width: 22px;
-    }
-
-    .tab-content img {
-      width: 100%;
-      border-radius: 24px;
-      border: 1px solid var(--border-glow);
-    }
-
-    /* Pricing Cards con precios reales de VPNs */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-    }
-
-    .pricing-card {
-      background: var(--bg-card);
-      border-radius: 24px;
-      border: 1px solid var(--border-glow);
-      overflow: hidden;
-      transition: var(--transition);
-    }
-
-    .pricing-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent);
-    }
-
-    .pricing-card.active {
-      border-color: var(--accent);
-      box-shadow: 0 0 30px rgba(10, 92, 255, 0.2);
-    }
-
-    .pricing-title {
-      background: rgba(10, 92, 255, 0.1);
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: 700;
-    }
-
-    .pricing-body {
-      padding: 30px;
-    }
-
-    .pricing-price {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .price {
-      font-size: 48px;
-      font-weight: 800;
-      color: var(--accent);
-    }
-
-    .currency {
-      font-size: 24px;
-      vertical-align: super;
-    }
-
-    .period {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    .pricing-features {
-      list-style: none;
-      margin-bottom: 30px;
-    }
-
-    .pricing-features li {
-      padding: 12px 0;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--text-secondary);
-    }
-
-    .pricing-features li i {
-      color: var(--accent);
-      width: 22px;
-    }
-
-    .pricing-btn {
-      display: block;
-      text-align: center;
-      background: transparent;
-      border: 1px solid var(--accent);
-      padding: 14px;
-      border-radius: 50px;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 700;
-      transition: var(--transition);
-    }
-
-    .pricing-btn:hover {
-      background: var(--accent);
-      color: white;
-    }
-
-    .active .pricing-btn {
-      background: var(--accent);
-      color: white;
-    }
-
-    /* Parallax section */
-    .parallax {
-      background: linear-gradient(rgba(10, 14, 26, 0.92), rgba(10, 14, 26, 0.92));
-      text-align: center;
-      border-top: 1px solid var(--border-glow);
-      border-bottom: 1px solid var(--border-glow);
-    }
-
-    .parallax h3 {
-      font-size: 32px;
-      font-weight: 700;
-    }
-
-    /* Footer */
-    .main-footer {
-      background: rgba(8, 12, 22, 0.95);
-      border-top: 1px solid var(--border-glow);
-      padding: 60px 0 30px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-
-    .footer-col h4 {
-      color: var(--accent);
-      margin-bottom: 20px;
-      font-size: 18px;
-    }
-
-    .footer-col ul {
-      list-style: none;
-    }
-
-    .footer-col ul li {
-      margin-bottom: 12px;
-    }
-
-    .footer-col ul li a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-
-    .footer-col ul li a:hover {
-      color: var(--accent);
-      padding-left: 5px;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      padding-top: 30px;
-      border-top: 1px solid var(--border-glow);
-      color: var(--text-secondary);
-      font-size: 13px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .navbar .container {
-        flex-direction: column;
-        gap: 15px;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-      }
-      .intro-heading {
-        font-size: 32px;
-      }
-      .section-heading {
-        font-size: 32px;
-      }
-      .tab-inner {
-        grid-template-columns: 1fr;
-      }
-      .services-grid, .pricing-grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{--bg-dark:#0a0e1a;--bg-card:#0f1422;--border-glow:rgba(10,92,255,0.4);--text-primary:#ffffff;--text-secondary:#b0c4ff;--accent:#0a5cff;--accent-dark:#004ecc;--accent-soft:#3a7cff;--shadow-card:0 20px 35px -10px rgba(0,0,0,0.4);--transition:all 0.3s cubic-bezier(0.2,0.95,0.4,1.05);}
+    body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-primary);overflow-x:hidden;}
+    #particles-js{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;opacity:0.5;}
+    #preloader{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg-dark);z-index:9999;display:flex;align-items:center;justify-content:center;}
+    .spinner{width:50px;height:50px;border:3px solid rgba(10,92,255,0.2);border-top:3px solid var(--accent);border-radius:50%;animation:spin 1s linear infinite;}
+    @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+    .navbar{background:rgba(10,14,26,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-glow);position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 0;}
+    .container{max-width:1400px;margin:0 auto;padding:0 30px;}
+    .navbar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;}
+    .logo{display:flex;align-items:center;gap:12px;}
+    .logo i{font-size:32px;color:var(--accent);filter:drop-shadow(0 0 8px var(--accent));}
+    .logo-text h1{font-size:24px;font-weight:800;background:linear-gradient(135deg,#fff,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;}
+    .logo-text span{font-size:11px;color:var(--text-secondary);letter-spacing:1px;}
+    .nav-links{display:flex;gap:20px;list-style:none;flex-wrap:wrap;}
+    .nav-links a{color:var(--text-secondary);text-decoration:none;font-weight:500;transition:var(--transition);font-size:13px;letter-spacing:0.3px;}
+    .nav-links a:hover{color:var(--accent);}
+    .header-spacer{height:90px;}
+    #header{min-height:100vh;display:flex;align-items:center;padding-top:80px;}
+    .intro-text{text-align:center;}
+    .intro-lead-in{font-size:16px;color:var(--accent);letter-spacing:4px;text-transform:uppercase;display:block;margin-bottom:20px;}
+    .intro-heading{font-size:56px;font-weight:800;display:block;margin-bottom:20px;background:linear-gradient(135deg,#fff,var(--accent),var(--accent-dark));-webkit-background-clip:text;background-clip:text;color:transparent;}
+    .intro-sub{font-size:20px;color:var(--text-secondary);margin-bottom:40px;}
+    .header-buttons{display:flex;gap:20px;justify-content:center;margin-bottom:60px;}
+    .btn-primary{background:linear-gradient(95deg,var(--accent-dark),var(--accent));border:none;padding:14px 35px;border-radius:50px;color:white;text-decoration:none;font-weight:700;transition:var(--transition);display:inline-flex;align-items:center;gap:10px;}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(10,92,255,0.4);}
+    .btn-outline{background:transparent;border:1px solid var(--accent);padding:14px 35px;border-radius:50px;color:var(--accent);text-decoration:none;font-weight:700;transition:var(--transition);}
+    .btn-outline:hover{background:var(--accent);color:white;}
+    .dashboard-img{width:100%;border-radius:20px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);border:1px solid var(--border-glow);}
+    section{padding:100px 0;}
+    .gray-bg{background:rgba(10,92,255,0.03);}
+    .section-heading{font-size:42px;font-weight:800;text-align:center;margin-bottom:20px;}
+    .separator{display:block;width:70px;height:3px;background:var(--accent);margin:20px auto;}
+    .section-subheading{text-align:center;color:var(--text-secondary);font-size:18px;margin-bottom:50px;}
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;}
+    .service-box{text-align:center;padding:40px 30px;background:var(--bg-card);border-radius:20px;border:1px solid var(--border-glow);transition:var(--transition);}
+    .service-box:hover{transform:translateY(-10px);border-color:var(--accent);}
+    .service-box i{font-size:48px;color:var(--accent);margin-bottom:25px;}
+    .service-box h4{font-size:22px;margin-bottom:15px;}
+    .service-box p{color:var(--text-secondary);line-height:1.6;}
+    .tabs{display:flex;justify-content:center;gap:15px;margin-bottom:50px;flex-wrap:wrap;list-style:none;}
+    .tab a{display:block;padding:12px 35px;background:var(--bg-card);border:1px solid var(--border-glow);border-radius:50px;color:var(--text-secondary);text-decoration:none;transition:var(--transition);font-weight:600;}
+    .tab.active a{background:var(--accent);color:white;border-color:var(--accent);}
+    .tab-content{display:none;animation:fadeIn 0.5s ease;}
+    .tab-content.active{display:block;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .tab-inner{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+    .tab-content ul{list-style:none;margin:30px 0;}
+    .tab-content li{padding:12px 0;display:flex;align-items:center;gap:12px;color:var(--text-secondary);}
+    .tab-content li i{color:var(--accent);width:22px;}
+    .tab-content img{width:100%;border-radius:24px;border:1px solid var(--border-glow);}
+    .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;}
+    .pricing-card{background:var(--bg-card);border-radius:24px;border:1px solid var(--border-glow);overflow:hidden;transition:var(--transition);}
+    .pricing-card:hover{transform:translateY(-5px);border-color:var(--accent);}
+    .pricing-card.active{border-color:var(--accent);box-shadow:0 0 30px rgba(10,92,255,0.2);}
+    .pricing-title{background:rgba(10,92,255,0.1);padding:20px;text-align:center;font-size:24px;font-weight:700;}
+    .pricing-body{padding:30px;}
+    .pricing-price{text-align:center;margin-bottom:30px;}
+    .price{font-size:48px;font-weight:800;color:var(--accent);}
+    .currency{font-size:24px;vertical-align:super;}
+    .period{font-size:14px;color:var(--text-secondary);}
+    .pricing-features{list-style:none;margin-bottom:30px;}
+    .pricing-features li{padding:12px 0;display:flex;align-items:center;gap:12px;color:var(--text-secondary);}
+    .pricing-features li i{color:var(--accent);width:22px;}
+    .pricing-btn{display:block;text-align:center;background:transparent;border:1px solid var(--accent);padding:14px;border-radius:50px;color:var(--accent);text-decoration:none;font-weight:700;transition:var(--transition);}
+    .pricing-btn:hover{background:var(--accent);color:white;}
+    .active .pricing-btn{background:var(--accent);color:white;}
+    .parallax{background:linear-gradient(rgba(10,14,26,0.92),rgba(10,14,26,0.92));text-align:center;padding:80px 0;border-top:1px solid var(--border-glow);border-bottom:1px solid var(--border-glow);}
+    .parallax h3{font-size:32px;font-weight:700;}
+    .main-footer{background:rgba(8,12,22,0.95);border-top:1px solid var(--border-glow);padding:60px 0 30px;margin-top:60px;}
+    .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-bottom:40px;}
+    .footer-col h4{color:var(--accent);margin-bottom:20px;font-size:18px;}
+    .footer-col ul{list-style:none;}
+    .footer-col ul li{margin-bottom:12px;}
+    .footer-col ul li a{color:var(--text-secondary);text-decoration:none;transition:var(--transition);}
+    .footer-col ul li a:hover{color:var(--accent);padding-left:5px;}
+    .footer-bottom{text-align:center;padding-top:30px;border-top:1px solid var(--border-glow);color:var(--text-secondary);font-size:13px;}
+    .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bg-card);border:1px solid var(--accent);border-radius:50px;padding:12px 24px;z-index:1100;opacity:0;transition:0.3s;display:flex;align-items:center;gap:10px;}
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+    .floating-link{position:fixed;bottom:30px;right:30px;background:var(--accent);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;color:white;transition:var(--transition);z-index:1001;text-decoration:none;}
+    .floating-link:hover{transform:scale(1.05);background:var(--accent-dark);}
+    @media(max-width:768px){.navbar .container{flex-direction:column;gap:15px;}.nav-links{justify-content:center;}.intro-heading{font-size:32px;}.section-heading{font-size:32px;}.tab-inner{grid-template-columns:1fr;}}
   </style>
 </head>
 <body>
-  <div id="preloader">
-    <div class="spinner"></div>
-  </div>
-
+  <div id="preloader"><div class="spinner"></div></div>
   <div id="particles-js"></div>
-
-  <!-- NAVBAR UNIFICADA - MISMO MENU PARA TODOS LOS HTML -->
   <nav class="navbar">
     <div class="container">
-      <div class="logo">
-        <i class="fas fa-shield-haltered"></i>
-        <div class="logo-text">
-          <h1>SecureNET</h1>
-          <span>SECURE NETWORK SOLUTIONS</span>
-        </div>
-      </div>
+      <div class="logo"><i class="fas fa-shield-haltered"></i><div class="logo-text"><h1>SecureNET</h1><span>SECURE NETWORK SOLUTIONS</span></div></div>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="plans.html">Plans</a></li>
-        <li><a href="locations.html">Locations</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="index.html">Home</a></li><li><a href="#services">Services</a></li><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li>
+        <li><a href="plans.html">Plans</a></li><li><a href="locations.html">Locations</a></li><li><a href="map.html">Map</a></li><li><a href="about.html">About</a></li>
+        <li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Tools</a></li><li><a href="C2Pricing.html">C2 Pricing</a></li><li><a href="social.html">Social</a></li>
+        <li><a href="contact.html">Contact</a></li><li><a href="privacy-policy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li>
       </ul>
     </div>
   </nav>
-
-  <!-- Header principal -->
-  <header id="header">
-    <div class="container">
-      <div class="intro-text">
-        <span class="intro-lead-in">WELCOME TO SECURENET</span>
-        <span class="intro-heading">Professional Network Security Solutions</span>
-        <p class="intro-sub">High-performance VPN with Anti-DDoS protection, low latency and global infrastructure</p>
-        <div class="header-buttons">
-          <a href="plans.html" class="btn-primary">Get Started</a>
-          <a href="#features" class="btn-outline">Learn More</a>
-        </div>
-        <div class="header-dashboard">
-          <img src="https://placehold.co/1000x500/0f1422/0a5cff?text=SecureNET+Dashboard" class="dashboard-img" alt="SecureNET Dashboard">
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Services Section -->
-  <section id="services">
-    <div class="container">
-      <div class="section-heading">Why choose SecureNET</div>
-      <span class="separator"></span>
-      <div class="section-subheading">Premium features for professional users</div>
-      <div class="services-grid">
-        <div class="service-box">
-          <i class="fas fa-bolt"></i>
-          <h4>Dedicated Power</h4>
-          <p>Ultra-fast VPN connections with dedicated bandwidth, capable of handling gaming and streaming without lag.</p>
-        </div>
-        <div class="service-box">
-          <i class="fas fa-rocket"></i>
-          <h4>Instant Connect</h4>
-          <p>Connect to our global network in seconds with automatic optimal server selection.</p>
-        </div>
-        <div class="service-box">
-          <i class="fas fa-shield-haltered"></i>
-          <h4>Anti-DDoS Protection</h4>
-          <p>Enterprise-grade DDoS mitigation on all servers, keeping your connection stable and secure.</p>
-        </div>
-        <div class="service-box">
-          <i class="fas fa-headset"></i>
-          <h4>24/7 Support</h4>
-          <p>Our knowledgeable support team responds to tickets within 30 minutes, every day.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section con Tabs estilo AXION -->
-  <section id="features" class="gray-bg">
-    <div class="container">
-      <div class="section-heading">Premium Features</div>
-      <span class="separator"></span>
-      <div class="section-subheading">Everything you need for secure browsing</div>
-      <div class="features-tabs">
-        <ul class="tabs">
-          <li class="tab active" data-tab="tab1"><a href="#">VPN Tools</a></li>
-          <li class="tab" data-tab="tab2"><a href="#">Mobile Support</a></li>
-          <li class="tab" data-tab="tab3"><a href="#">Dedicated Support</a></li>
-        </ul>
-        <div id="tab1" class="tab-content active">
-          <div class="tab-inner">
-            <div>
-              <h3>Professional VPN Hub</h3>
-              <ul>
-                <li><i class="fas fa-check-circle"></i> Professional and easy-to-use hub</li>
-                <li><i class="fas fa-check-circle"></i> Available 24/7 for all your needs</li>
-                <li><i class="fas fa-check-circle"></i> Perfect for gaming and streaming</li>
-                <li><i class="fas fa-check-circle"></i> Get started in few seconds</li>
-              </ul>
-              <a href="plans.html" class="btn-primary">Get started now</a>
-            </div>
-            <div>
-              <img src="https://placehold.co/500x300/0f1422/0a5cff?text=VPN+Dashboard" alt="VPN Dashboard">
-            </div>
-          </div>
-        </div>
-        <div id="tab2" class="tab-content">
-          <div class="tab-inner">
-            <div>
-              <h3>Mobile Support</h3>
-              <ul>
-                <li><i class="fas fa-check-circle"></i> Professional and easy-to-use mobile app</li>
-                <li><i class="fas fa-check-circle"></i> Completely responsive design</li>
-                <li><i class="fas fa-check-circle"></i> Available 24/7 on all devices</li>
-                <li><i class="fas fa-check-circle"></i> Get started in few seconds</li>
-              </ul>
-              <a href="plans.html" class="btn-primary">Get started now</a>
-            </div>
-            <div>
-              <img src="https://placehold.co/500x300/0f1422/0a5cff?text=Mobile+App" alt="Mobile App">
-            </div>
-          </div>
-        </div>
-        <div id="tab3" class="tab-content">
-          <div class="tab-inner">
-            <div>
-              <h3>Dedicated Support</h3>
-              <ul>
-                <li><i class="fas fa-check-circle"></i> Support team dedicated to your account</li>
-                <li><i class="fas fa-check-circle"></i> 24x7x365 live support and expertise</li>
-                <li><i class="fas fa-check-circle"></i> Immediate response to tickets</li>
-                <li><i class="fas fa-check-circle"></i> Support team built to better assist you</li>
-              </ul>
-              <a href="plans.html" class="btn-primary">Get started now</a>
-            </div>
-            <div>
-              <img src="https://placehold.co/500x300/0f1422/0a5cff?text=Support+Team" alt="Support Team">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing Section con PRECIOS CORRECTOS DE VPNs -->
-  <section id="pricing">
-    <div class="container">
-      <div class="section-heading">Our Pricing</div>
-      <span class="separator"></span>
-      <div class="section-subheading">Select the best package based on your needs</div>
-      <div class="pricing-grid">
-        <!-- LOS ANGELES - Akamai $15.99 -->
-        <div class="pricing-card">
-          <div class="pricing-title">LOS ANGELES</div>
-          <div class="pricing-body">
-            <div class="pricing-price">
-              <span class="price"><span class="currency">$</span>15.99</span>
-              <span class="period">/month</span>
-            </div>
-            <ul class="pricing-features">
-              <li><i class="fas fa-check"></i> Akamai Infrastructure</li>
-              <li><i class="fas fa-check"></i> 38ms Latency</li>
-              <li><i class="fas fa-check"></i> Anti-DDoS Protection</li>
-              <li><i class="fas fa-check"></i> 1 Gbps Speed</li>
-              <li><i class="fas fa-check"></i> 24/7 Support</li>
-            </ul>
-            <a href="plans.html" class="pricing-btn">Get Started</a>
-          </div>
-        </div>
-        <!-- FRANCIA - OVHcloud $7.99 -->
-        <div class="pricing-card active">
-          <div class="pricing-title">FRANCE</div>
-          <div class="pricing-body">
-            <div class="pricing-price">
-              <span class="price"><span class="currency">$</span>7.99</span>
-              <span class="period">/month</span>
-            </div>
-            <ul class="pricing-features">
-              <li><i class="fas fa-check"></i> OVHcloud Infrastructure</li>
-              <li><i class="fas fa-check"></i> 80ms Latency</li>
-              <li><i class="fas fa-check"></i> Anti-DDoS Protection</li>
-              <li><i class="fas fa-check"></i> 1 Gbps Speed</li>
-              <li><i class="fas fa-check"></i> 24/7 Support</li>
-            </ul>
-            <a href="plans.html" class="pricing-btn">Get Started</a>
-          </div>
-        </div>
-        <!-- CANADA - OVHcloud $7.99 -->
-        <div class="pricing-card">
-          <div class="pricing-title">BEAUHARNOIS</div>
-          <div class="pricing-body">
-            <div class="pricing-price">
-              <span class="price"><span class="currency">$</span>7.99</span>
-              <span class="period">/month</span>
-            </div>
-            <ul class="pricing-features">
-              <li><i class="fas fa-check"></i> OVHcloud Infrastructure</li>
-              <li><i class="fas fa-check"></i> 55ms Latency</li>
-              <li><i class="fas fa-check"></i> Anti-DDoS Protection</li>
-              <li><i class="fas fa-check"></i> 1 Gbps Speed</li>
-              <li><i class="fas fa-check"></i> 24/7 Support</li>
-            </ul>
-            <a href="plans.html" class="pricing-btn">Get Started</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Parallax Section -->
-  <section class="parallax">
-    <div class="container">
-      <h3>SecureNET - The most reliable VPN service on the market</h3>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="main-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h4>SecureNET</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="locations.html">Locations</a></li>
-            <li><a href="plans.html">VPN Plans</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Resources</h4>
-          <ul>
-            <li><a href="faq.html">FAQ</a></li>
-            <li><a href="tools.html">Tools</a></li>
-            <li><a href="comparison.html">Comparison</a></li>
-            <li><a href="terms.html">Terms of Service</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Support</h4>
-          <ul>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-            <li><a href="https://links.xnet.bio" target="_blank">Official Links</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 SecureNET. All rights reserved. | Professional Network Security Solutions</p>
-        <p>Infrastructure: Akamai + OVHcloud Global</p>
-      </div>
-    </div>
-  </footer>
-
+  <div class="header-spacer"></div>
+  <header id="header"><div class="container"><div class="intro-text"><span class="intro-lead-in">WELCOME TO SECURENET</span><span class="intro-heading">Professional Network Security Solutions</span><p class="intro-sub">High-performance VPN with Anti-DDoS protection, low latency and global infrastructure</p><div class="header-buttons"><a href="plans.html" class="btn-primary">Get Started</a><a href="#features" class="btn-outline">Learn More</a></div><div class="header-dashboard"><img src="https://placehold.co/1000x500/0f1422/0a5cff?text=SecureNET+Dashboard" class="dashboard-img" alt="SecureNET Dashboard"></div></div></div></header>
+  <section id="services"><div class="container"><div class="section-heading">Why choose SecureNET</div><span class="separator"></span><div class="section-subheading">Premium features for professional users</div><div class="services-grid"><div class="service-box"><i class="fas fa-bolt"></i><h4>Dedicated Power</h4><p>Ultra-fast VPN connections with dedicated bandwidth.</p></div><div class="service-box"><i class="fas fa-rocket"></i><h4>Instant Connect</h4><p>Connect to our global network in seconds.</p></div><div class="service-box"><i class="fas fa-shield-haltered"></i><h4>Anti-DDoS Protection</h4><p>Enterprise-grade DDoS mitigation on all servers.</p></div><div class="service-box"><i class="fas fa-headset"></i><h4>24/7 Support</h4><p>Knowledgeable support team responds within 30 minutes.</p></div></div></div></section>
+  <section id="features" class="gray-bg"><div class="container"><div class="section-heading">Premium Features</div><span class="separator"></span><div class="section-subheading">Everything you need for secure browsing</div><div class="features-tabs"><ul class="tabs"><li class="tab active" data-tab="tab1"><a href="#">VPN Tools</a></li><li class="tab" data-tab="tab2"><a href="#">Mobile Support</a></li><li class="tab" data-tab="tab3"><a href="#">Dedicated Support</a></li></ul><div id="tab1" class="tab-content active"><div class="tab-inner"><div><h3>Professional VPN Hub</h3><ul><li><i class="fas fa-check-circle"></i> Professional and easy-to-use hub</li><li><i class="fas fa-check-circle"></i> Available 24/7 for all your needs</li><li><i class="fas fa-check-circle"></i> Perfect for gaming and streaming</li><li><i class="fas fa-check-circle"></i> Get started in few seconds</li></ul><a href="plans.html" class="btn-primary">Get started now</a></div><div><img src="https://placehold.co/500x300/0f1422/0a5cff?text=VPN+Dashboard" alt="VPN Dashboard"></div></div></div><div id="tab2" class="tab-content"><div class="tab-inner"><div><h3>Mobile Support</h3><ul><li><i class="fas fa-check-circle"></i> Professional mobile app</li><li><i class="fas fa-check-circle"></i> Completely responsive design</li><li><i class="fas fa-check-circle"></i> Available 24/7 on all devices</li></ul><a href="plans.html" class="btn-primary">Get started now</a></div><div><img src="https://placehold.co/500x300/0f1422/0a5cff?text=Mobile+App" alt="Mobile App"></div></div></div><div id="tab3" class="tab-content"><div class="tab-inner"><div><h3>Dedicated Support</h3><ul><li><i class="fas fa-check-circle"></i> Support team dedicated to your account</li><li><i class="fas fa-check-circle"></i> 24x7x365 live support</li><li><i class="fas fa-check-circle"></i> Immediate response to tickets</li></ul><a href="plans.html" class="btn-primary">Get started now</a></div><div><img src="https://placehold.co/500x300/0f1422/0a5cff?text=Support+Team" alt="Support Team"></div></div></div></div></div></section>
+  <section id="pricing"><div class="container"><div class="section-heading">Our Pricing</div><span class="separator"></span><div class="section-subheading">Select the best package based on your needs</div><div class="pricing-grid"><div class="pricing-card"><div class="pricing-title">LOS ANGELES</div><div class="pricing-body"><div class="pricing-price"><span class="price"><span class="currency">$</span>15.99</span><span class="period">/month</span></div><ul class="pricing-features"><li><i class="fas fa-check"></i> Akamai Infrastructure</li><li><i class="fas fa-check"></i> 38ms Latency</li><li><i class="fas fa-check"></i> Anti-DDoS Protection</li><li><i class="fas fa-check"></i> 1 Gbps Speed</li></ul><a href="plans.html" class="pricing-btn">Get Started</a></div></div><div class="pricing-card active"><div class="pricing-title">FRANCE</div><div class="pricing-body"><div class="pricing-price"><span class="price"><span class="currency">$</span>7.99</span><span class="period">/month</span></div><ul class="pricing-features"><li><i class="fas fa-check"></i> OVHcloud Infrastructure</li><li><i class="fas fa-check"></i> 80ms Latency</li><li><i class="fas fa-check"></i> Anti-DDoS Protection</li><li><i class="fas fa-check"></i> 1 Gbps Speed</li></ul><a href="plans.html" class="pricing-btn">Get Started</a></div></div><div class="pricing-card"><div class="pricing-title">BEAUHARNOIS</div><div class="pricing-body"><div class="pricing-price"><span class="price"><span class="currency">$</span>7.99</span><span class="period">/month</span></div><ul class="pricing-features"><li><i class="fas fa-check"></i> OVHcloud Infrastructure</li><li><i class="fas fa-check"></i> 55ms Latency</li><li><i class="fas fa-check"></i> Anti-DDoS Protection</li><li><i class="fas fa-check"></i> 1 Gbps Speed</li></ul><a href="plans.html" class="pricing-btn">Get Started</a></div></div></div></div></section>
+  <section class="parallax"><div class="container"><h3>SecureNET - The most reliable VPN service on the market</h3></div></section>
+  <footer class="main-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4>SecureNET</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="locations.html">Locations</a></li><li><a href="plans.html">VPN Plans</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="faq.html">FAQ</a></li><li><a href="tools.html">Tools</a></li><li><a href="comparison.html">Comparison</a></li><li><a href="terms.html">Terms of Service</a></li></ul></div><div class="footer-col"><h4>Support</h4><ul><li><a href="contact.html">Contact</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="https://links.xnet.bio" target="_blank">Official Links</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2025 SecureNET. All rights reserved. | Professional Network Security Solutions</p><p>Infrastructure: Akamai + OVHcloud Global</p></div></div></footer>
+  <a href="https://links.xnet.bio" target="_blank" class="floating-link"><i class="fas fa-link"></i></a>
+  <div class="toast" id="toast"><i class="fas fa-check-circle"></i><span></span></div>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
-    // Preloader
-    window.addEventListener('load', function() {
-      const preloader = document.getElementById('preloader');
-      if (preloader) {
-        preloader.style.display = 'none';
-      }
-    });
-
-    // Particles.js - fondo estilo AXION
-    if (typeof particlesJS !== 'undefined') {
-      particlesJS('particles-js', {
-        particles: {
-          number: { value: 80, density: { enable: true, value_area: 800 } },
-          color: { value: '#0a5cff' },
-          shape: { type: 'circle' },
-          opacity: { value: 0.3, random: true },
-          size: { value: 3, random: true },
-          line_linked: { enable: true, distance: 150, color: '#0a5cff', opacity: 0.2, width: 1 },
-          move: { enable: true, speed: 2, direction: 'none', random: true, straight: false, out_mode: 'out' }
-        },
-        interactivity: {
-          detect_on: 'canvas',
-          events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } }
-        }
-      });
-    }
-
-    // Tabs functionality
-    const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const tabId = tab.getAttribute('data-tab');
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        tabContents.forEach(content => content.classList.remove('active'));
-        const activeContent = document.getElementById(tabId);
-        if (activeContent) {
-          activeContent.classList.add('active');
-        }
-      });
-    });
-
-    // Smooth scroll para enlaces internos
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href');
-        if (targetId && targetId !== '#') {
-          const target = document.querySelector(targetId);
-          if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-      });
-    });
+    window.addEventListener('load',()=>{document.getElementById('preloader').style.display='none';});
+    if(typeof particlesJS!=='undefined'){particlesJS('particles-js',{particles:{number:{value:80,density:{enable:true,value_area:800}},color:{value:'#0a5cff'},shape:{type:'circle'},opacity:{value:0.3,random:true},size:{value:3,random:true},line_linked:{enable:true,distance:150,color:'#0a5cff',opacity:0.2,width:1},move:{enable:true,speed:2,direction:'none',random:true,straight:false,out_mode:'out'}},interactivity:{detect_on:'canvas',events:{onhover:{enable:true,mode:'repulse'},onclick:{enable:true,mode:'push'}}}});}
+    document.querySelectorAll('.tab').forEach(tab=>{tab.addEventListener('click',()=>{const tabId=tab.getAttribute('data-tab');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));tab.classList.add('active');document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));document.getElementById(tabId).classList.add('active');});});
+    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){const targetId=this.getAttribute('href');if(targetId&&targetId!=='#'){const target=document.querySelector(targetId);if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});}}});});
   </script>
 </body>
 </html>

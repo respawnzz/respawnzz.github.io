@@ -5,8 +5,7 @@
   <title>C2 Pricing | SecureNET</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Planes C2 - Axion Network - SecureNET. Métodos de ataque avanzados y paneles de control.">
-  <meta name="color-scheme" content="dark light" />
-  <meta name="theme-color" content="#0a0f1a" />
+  <meta name="theme-color" content="#0a0f1a">
   <!-- Open Graph / Social Media -->
   <meta property="og:title" content="C2 Pricing | SecureNET">
   <meta property="og:description" content="Planes C2 con métodos exclusivos, add-ons y alta disponibilidad.">
@@ -19,13 +18,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    /* (todo el CSS original se mantiene idéntico) */
     *{margin:0;padding:0;box-sizing:border-box;}
     :root{--bg-dark:#0a0e1a;--bg-card:#0f1422;--border-glow:rgba(10,92,255,0.4);--text-primary:#ffffff;--text-secondary:#b0c4ff;--accent-strong:#0a5cff;--accent-dark:#004ecc;--accent-soft:#3a7cff;--shadow-card:0 20px 35px -10px rgba(0,0,0,0.4);--transition:all 0.3s cubic-bezier(0.2,0.95,0.4,1.05);}
     [data-theme="light"]{--bg-dark:#f4f7fc;--bg-card:#ffffff;--border-glow:rgba(10,92,255,0.25);--text-primary:#0a2540;--text-secondary:#2c3e66;--accent-strong:#0a5cff;--accent-dark:#004ecc;--accent-soft:#4c82ff;--shadow-card:0 10px 30px rgba(0,0,0,0.08);}
     [data-theme="professional"]{--bg-dark:#121826;--bg-card:#1a1f2e;--border-glow:rgba(0,200,150,0.3);--text-primary:#eef2ff;--text-secondary:#9aa8c5;--accent-strong:#00c896;--accent-dark:#00997a;--accent-soft:#2de0a8;--shadow-card:0 20px 35px -10px rgba(0,0,0,0.5);}
     [data-contrast="high"]{--bg-dark:#000000;--bg-card:#000000;--border-glow:#ffff00;--text-primary:#ffff00;--text-secondary:#ffffaa;--accent-strong:#ffff00;--accent-dark:#cccc00;--accent-soft:#ffff33;}
-    [data-contrast="high"] .btn-primary,
     [data-contrast="high"] .buy-button{background:black;border:2px solid yellow;color:yellow;}
     [data-contrast="high"] .buy-button:hover{background:#222;}
     body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-primary);min-height:100vh;overflow-x:hidden;}
@@ -172,7 +169,7 @@
         <span><i class="fas fa-shield-alt"></i> Métodos de pago aceptados</span>
         <div class="payment-icons"><i class="fab fa-paypal" title="PayPal"></i><i class="fas fa-dollar-sign" title="Tarjeta"></i><i class="fab fa-apple-pay" title="Apple Pay"></i><i class="fab fa-bitcoin" title="Bitcoin"></i></div>
       </div>
-      <!-- Sección de imágenes y vídeos (igual que antes) -->
+      <!-- Sección de imágenes y vídeos -->
       <div class="images-showcase">
         <div class="media-card" data-media-type="image" data-src="c2.png"><img src="c2.png" alt="Panel C2" onerror="this.src='https://placehold.co/500x300?text=C2+Panel'"><h4><i class="fas fa-tachometer-alt"></i> Interfaz C2</h4><p>Panel de control centralizado</p></div>
         <div class="media-card" data-media-type="image" data-src="c2methods.png"><img src="c2methods.png" alt="Métodos C2" onerror="this.src='https://placehold.co/500x300?text=Métodos+C2'"><h4><i class="fas fa-bolt"></i> Métodos Avanzados</h4><p>Múltiples vectores de ataque</p></div>
@@ -181,7 +178,7 @@
         <div class="media-card" data-media-type="video" data-src="powerproof3.mp4"><video src="powerproof3.mp4" muted preload="metadata" poster="https://placehold.co/500x300?text=PowerProof+3"></video><h4><i class="fas fa-play-circle"></i> PowerProof 3</h4><p>Métodos exclusivos</p></div>
       </div>
       <div id="plans-container" class="plans-grid"></div>
-      <!-- Tabla de métodos ACTUALIZADA con tu lista definitiva -->
+      <!-- Tabla de métodos ACTUALIZADA -->
       <div class="methods-frame">
         <h3><i class="fas fa-code-branch"></i> Catálogo de Métodos de Ataque</h3>
         <div class="methods-scroll">
@@ -215,9 +212,8 @@
   <div id="videoModal" class="modal"><span class="close-modal" id="closeVideoModalBtn">&times;</span><video id="modalVideo" class="modal-content-video" controls></video></div>
 
   <script>
-    // ---------- NUEVA LISTA DE MÉTODOS (según tu arte ASCII) ----------
+    // Lista de métodos
     const methodsData = [
-      // === LAYER 4 UDP ===
       { name: "DNS", slots: 8, vip: false, enabled: true },
       { name: "UDP", slots: 8, vip: false, enabled: true },
       { name: "NTP", slots: 8, vip: false, enabled: true },
@@ -248,7 +244,6 @@
       { name: "OVH-PRIV", slots: 8, vip: true, enabled: true },
       { name: "TEMPEST", slots: 8, vip: true, enabled: true },
       { name: "PATH", slots: 8, vip: true, enabled: true },
-      // === LAYER 4 TCP ===
       { name: "TCP-STAR", slots: 8, vip: false, enabled: true },
       { name: "HANDSHAKE", slots: 8, vip: false, enabled: true },
       { name: "TCPMIX", slots: 8, vip: false, enabled: true },
@@ -265,7 +260,6 @@
       { name: "KILL-FLOOD", slots: 8, vip: true, enabled: true },
       { name: "TCP-FLOOD", slots: 8, vip: true, enabled: true },
       { name: "TCP-FIVEM", slots: 8, vip: true, enabled: true },
-      // === LAYER 7 METHODS ===
       { name: "HTTP-TLS", slots: 8, vip: false, enabled: true },
       { name: "HTTP-STAR", slots: 8, vip: false, enabled: true },
       { name: "CLOUDFLARE", slots: 8, vip: true, enabled: true },
@@ -280,13 +274,13 @@
       { name: "WEB-BYPASS", slots: 8, vip: true, enabled: true }
     ];
 
-    // Planes y add‑ons (sin cambios)
+    // PRECIOS ACTUALIZADOS SEGÚN TUS ESPECIFICACIONES
     const c2Plans = [
-      { name: 'BASIC', price: 30, concurrents: 1, time: 60, cooldown: 60, vip: false, vipMethods: false },
-      { name: 'ESENSIAL', price: 55, concurrents: 2, time: 120, cooldown: 60, vip: false, vipMethods: false },
-      { name: 'CORE', price: 70, concurrents: 2, time: 300, cooldown: 45, vip: false, vipMethods: false },
-      { name: 'NEXUS', price: 85, concurrents: 3, time: 500, cooldown: 45, vip: false, vipMethods: false },
-      { name: 'OMEGA', price: 105, concurrents: 4, time: 800, cooldown: 30, vip: false, vipMethods: true }
+      { name: 'BASIC', price: 35, concurrents: 1, time: 60, cooldown: 60, vip: false, vipMethods: false },
+      { name: 'ESENSIAL', price: 60, concurrents: 2, time: 120, cooldown: 60, vip: false, vipMethods: false },
+      { name: 'CORE', price: 80, concurrents: 2, time: 300, cooldown: 45, vip: false, vipMethods: false },
+      { name: 'NEXUS', price: 100, concurrents: 3, time: 500, cooldown: 45, vip: false, vipMethods: false },
+      { name: 'OMEGA', price: 130, concurrents: 4, time: 800, cooldown: 30, vip: false, vipMethods: true }
     ];
 
     const addons = [
@@ -301,7 +295,6 @@
 
     const BEACONS_LINK = 'https://xnet.bio/shop/frvpn';
 
-    // Funciones auxiliares (igual que antes)
     function renderMethodsTable() {
       const tbody = document.getElementById('methods-tbody');
       if (!tbody) return;
@@ -368,7 +361,7 @@
       }, 600);
     }
 
-    // Modales, temas, menú (todo igual)
+    // Modales
     function openImageModal(src) {
       document.getElementById('imageModal').style.display = 'flex';
       document.getElementById('modalImage').src = src;
@@ -397,6 +390,7 @@
     document.getElementById('closeVideoModalBtn').addEventListener('click', closeVideoModal);
     document.addEventListener('keydown', (e) => { if(e.key === 'Escape') { closeImageModal(); closeVideoModal(); } });
 
+    // Temas y menú
     function setTheme(theme) {
       document.body.setAttribute('data-theme', theme);
       localStorage.setItem('securenet-theme', theme);
@@ -472,7 +466,7 @@
         });
       });
       document.getElementById('highContrastBtn').addEventListener('click', toggleHighContrast);
-      showToast("SecureNET C2 - Métodos actualizados");
+      showToast("SecureNET C2 - Planes actualizados");
     });
   </script>
 </body>
